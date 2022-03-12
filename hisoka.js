@@ -2584,33 +2584,9 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ┊       *Attention!*
 ┊  Harap baca *rules*
 ╰┄┄┄┄┄┄┄┄┄┄┄┄┄╯`
-                let btnz = [{
-                                urlButton: {
-                                    displayText: 'Script',
-                                    url: 'https://github.com/DikaArdnt/Hisoka-Morou'
-                                }
-                            }, {
-                                callButton: {
-                                    displayText: 'Owner',
-                                    phoneNumber: '+62 882-9202-4190'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Info Bot',
-                                    id: 'ping'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Contact Owner',
-                                    id: 'owner'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Script',
-                                    id: 'sc'
-                                }
-                            }]
-                        hisoka.sendButtonText(m.chat, btnz, "Simpel Bot WhatsApp", anu)
+                let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
+                                  {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
+                       await hisoka.sendButtonText(m.chat, btnz, anu, "Simpel Bot WhatsApp", m)
 }
             break
             default:
