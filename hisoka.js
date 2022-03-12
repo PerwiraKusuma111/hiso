@@ -1462,7 +1462,7 @@ break
 	    case 'play': case 'ytplay': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
-                { yta } = require('./lib/y2mate')
+                yta = require('./lib/y2mate')
                 let search = await yts(text)
                 let anu = `${search.videos[0].url}`/*search.videos[Math.floor(Math.random() * search.videos.length)]*/
                 let media = await yta(`${anu}`)
