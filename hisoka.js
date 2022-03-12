@@ -1467,7 +1467,7 @@ break
                 let media = await yta(`${search.videos[0].url}`)
                 get_img = await getBuffer(media.thumb)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                hisoka.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m, contextInfo: {externalAdReply: {title: `${media.title}`, body: `Simpel Bot WhatsApp`,mediaType: 1 ,mediaUrl: `${anu}`, sourceUrl: `${anu}`, thumbnail: get_img}} })
+                hisoka.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m, contextInfo: {externalAdReply: {title: `${media.title}`, body: `Simpel Bot WhatsApp`,mediaType: 1 ,mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, thumbnail: get_img}} })
              /*   let quality = args[1] ? args[1] : '128kbps'*/
                 
                 /*hisoka.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)*/
