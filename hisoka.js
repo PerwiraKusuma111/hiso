@@ -1462,12 +1462,13 @@ break
 	    case 'play': case 'ytplay': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
+                let { yta } = require('./lib/y2mate')
                 let search = await yts(text)
                 let anu = `${search.videos[0].url}`/*search.videos[Math.floor(Math.random() * search.videos.length)]*/
-                let { yta } = require('./lib/y2mate')
                 
-                let quality = args[1] ? args[1] : '128kbps'
-                let media = await yta(`${anu.url}`, quality)
+                
+             /*   let quality = args[1] ? args[1] : '128kbps'*/
+                let media = await yta(`${anu.url}`)
                 get_img = await getBuffer(media.thumb)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
                 /*hisoka.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)*/
