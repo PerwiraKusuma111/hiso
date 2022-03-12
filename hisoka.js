@@ -1462,17 +1462,17 @@ break
 	    case 'play': case 'ytplay': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")
-                let { yta } = require('./lib/y2mate')
+                { yta } = require('./lib/y2mate')
                 let search = await yts(text)
                 let anu = `${search.videos[0].url}`/*search.videos[Math.floor(Math.random() * search.videos.length)]*/
-                
-                
-             /*   let quality = args[1] ? args[1] : '128kbps'*/
-                let media = await yta(`${anu.url}`)
+                let media = await yta(`${anu}`)
                 get_img = await getBuffer(media.thumb)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                hisoka.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m, contextInfo: {externalAdReply: {title: `${media.title}`, body: `${NamaBot}`,mediaType: 1 ,mediaUrl: `${anu}`, sourceUrl: `${anu}`, thumbnail: get_img}} })
+             /*   let quality = args[1] ? args[1] : '128kbps'*/
+                
                 /*hisoka.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)*/
-                hisoka.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m, contextInfo: {externalAdReply: {title: `${media.title}`, body: `${NamaBot}`,mediaType: 1 ,mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, thumbnail: get_img}} })
+                
 
 
     /*  let buttons = [
