@@ -20,7 +20,7 @@ const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
-
+const { yta } = require('./lib/y2mate')
 // read database
 global.db = JSON.parse(fs.readFileSync('./src/database.json'))
 if (global.db) global.db = {
@@ -1461,11 +1461,10 @@ break
         break*/
 	    case 'play': case 'ytplay': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
-                let yts = require("yt-search")
-                let yta = require('./lib/y2mate')
+                let yts = require("yt-search")           
                 let search = await yts(text)
-                let anu = `${search.videos[0].url}`/*search.videos[Math.floor(Math.random() * search.videos.length)]*/
-                let media = await yta(`${anu}`)
+                /*search.videos[Math.floor(Math.random() * search.videos.length)]*/
+                let media = await yta(`${search.videos[0].url}`)
                 get_img = await getBuffer(media.thumb)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
                 hisoka.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m, contextInfo: {externalAdReply: {title: `${media.title}`, body: `${NamaBot}`,mediaType: 1 ,mediaUrl: `${anu}`, sourceUrl: `${anu}`, thumbnail: get_img}} })
@@ -1500,7 +1499,7 @@ break
             }
             break
 	    case 'ytmp3': case 'ytaudio': {
-                let { yta } = require('./lib/y2mate')
+                
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
                 let quality = args[1] ? args[1] : '128kbps'
                 let media = await yta(text, quality)
