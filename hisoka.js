@@ -1144,17 +1144,17 @@ break
                     await sleep(1500)
                     let btn = [{
                                 urlButton: {
-                                    displayText: 'Source Code',
+                                    displayText: 'Script',
                                     url: 'https://github.com/DikaArdnt/Hisoka-Morou'
                                 }
                             }, {
                                 callButton: {
-                                    displayText: 'Number Phone Owner',
+                                    displayText: 'Owner',
                                     phoneNumber: '+62 882-9202-4190'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Status Bot',
+                                    displayText: 'Info Bot',
                                     id: 'ping'
                                 }
                             }, {
@@ -1183,17 +1183,17 @@ break
 		    await sleep(1500)
 		    let btn = [{
                                 urlButton: {
-                                    displayText: 'Source Code',
+                                    displayText: 'Script',
                                     url: 'https://github.com/DikaArdnt/Hisoka-Morou'
                                 }
                             }, {
                                 callButton: {
-                                    displayText: 'Number Phone Owner',
+                                    displayText: 'Owner',
                                     phoneNumber: '+62 882-9202-4190'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Status Bot',
+                                    displayText: 'Info Bot',
                                     id: 'ping'
                                 }
                             }, {
@@ -2599,32 +2599,29 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ╰┄┄┄┄┄┄┄┄┄┄┄┄┄╯`
                 let btnz = [{
                                 urlButton: {
-                                    displayText: 'Source Code',
+                                    displayText: 'Script',
                                     url: 'https://github.com/DikaArdnt/Hisoka-Morou'
                                 }
                             }, {
                                 callButton: {
-                                    displayText: 'Number Phone Owner',
+                                    displayText: 'Owner',
                                     phoneNumber: '+62 882-9202-4190'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Status Bot',
+                                    displayText: 'Info Bot',
                                     id: 'ping'
-                                },
-                                "index": 0
+                                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Contact Owner',
                                     id: 'owner'
-                                },
-                                "index": 1
+                                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Script',
                                     id: 'sc'
-                                },
-                                "index": 2
+                                }
                             }]
                         hisoka.sendButtonText(m.chat, btnz, "Simpel Bot WhatsApp", anu)
                      } else if (!isCreator && m.isGroup) {
@@ -2691,32 +2688,29 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ╰┄┄┄┄┄┄┄┄┄┄┄┄┄╯`
                 let btnz = [{
                                 urlButton: {
-                                    displayText: 'Source Code',
+                                    displayText: 'Script',
                                     url: 'https://github.com/DikaArdnt/Hisoka-Morou'
                                 }
                             }, {
                                 callButton: {
-                                    displayText: 'Number Phone Owner',
+                                    displayText: 'Owner',
                                     phoneNumber: '+62 882-9202-4190'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Status Bot',
+                                    displayText: 'Info Bot',
                                     id: 'ping'
-                                },
-                                "index": 0
+                                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Contact Owner',
                                     id: 'owner'
-                                },
-                                "index": 1
+                                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Script',
                                     id: 'sc'
-                                },
-                                "index": 2
+                                }
                             }]
                         hisoka.sendButtonText(m.chat, btnz, "Simpel Bot WhatsApp", anu)
                      } else if (isCreator && !m.isGroup) {
@@ -2767,32 +2761,29 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ╰┄┄┄┄┄┄┄┄┄┄┄┄┄╯`
                 let btnz = [{
                                 urlButton: {
-                                    displayText: 'Source Code',
+                                    displayText: 'Script',
                                     url: 'https://github.com/DikaArdnt/Hisoka-Morou'
                                 }
                             }, {
                                 callButton: {
-                                    displayText: 'Number Phone Owner',
+                                    displayText: 'Owner',
                                     phoneNumber: '+62 882-9202-4190'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Status Bot',
+                                    displayText: 'Info Bot',
                                     id: 'ping'
-                                },
-                                "index": 0
+                                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Contact Owner',
                                     id: 'owner'
-                                },
-                                "index": 1
+                                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Script',
                                     id: 'sc'
-                                },
-                                "index": 2
+                                }
                             }]
                         hisoka.sendButtonText(m.chat, btnz, "Simpel Bot WhatsApp", anu)
                      } else if (!isCreator && !m.isGroup) {
@@ -2843,32 +2834,29 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ╰┄┄┄┄┄┄┄┄┄┄┄┄┄╯`
                 let btnz = [{
                                 urlButton: {
-                                    displayText: 'Source Code',
+                                    displayText: 'Github',
                                     url: 'https://github.com/DikaArdnt/Hisoka-Morou'
                                 }
                             }, {
                                 callButton: {
-                                    displayText: 'Number Phone Owner',
+                                    displayText: 'Developer',
                                     phoneNumber: '+62 882-9202-4190'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Status Bot',
+                                    displayText: 'Info Bot',
                                     id: 'ping'
-                                },
-                                "index": 0
+                                }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Contact Owner',
+                                    displayText: 'Owner',
                                     id: 'owner'
-                                },
-                                "index": 1
+                                }
                             }, {
                                 quickReplyButton: {
                                     displayText: 'Script',
                                     id: 'sc'
-                                },
-                                "index": 2
+                                }
                             }]
                         hisoka.sendButtonText(m.chat, btnz, "Simpel Bot WhatsApp", anu)
                      }
