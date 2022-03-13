@@ -200,6 +200,21 @@ async function startHisoka() {
             hisoka.relayMessage(jid, template.message, { messageId: template.key.id })
     }
 
+hisoka.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options = {}) =>{
+       /* let message = await prepareWAMessageMedia({ image: img }, { upload: hisoka.waUploadToServer })*/
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+        /*imageMessage: message.imageMessage,*/
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            hisoka.relayMessage(jid, template.message, { messageId: template.key.id })
+    }
+    
     /**
      * 
      * @param {*} jid 
