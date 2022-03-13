@@ -1622,23 +1622,23 @@ await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(e
             }
             break*/
             case 'ytmp3': case 'ytaudio': {
-                let { ytv } = require('./lib/y2mate')
+                let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                 /*let quality = args[1] ? args[1] : '360p'*/
-                yta(text).then(async res => {
+               let res = await yta(text)
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
                 hisoka.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`}, { quoted: m })
-                }).catch(err => m.reply(util.format(err)))
+                
             }
             break
             case 'ytmp4': case 'ytvideo': {
                 let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                 /*let quality = args[1] ? args[1] : '360p'*/
-                ytv(text).then(async res => {
+               let res = await ytv(text)
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
                 hisoka.sendMessage(m.chat, { video: { url: res.dl_link }, mimetype: 'video/mp4', fileName: `${res.title}.mp4`}, { quoted: m })
-                }).catch(err => m.reply(util.format(err)))
+                
             }
             break
 	   /* case 'getmusic': {
