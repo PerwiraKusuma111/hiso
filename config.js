@@ -19,12 +19,12 @@ global.APIKeys = {
 
 // Other
 global.chatDB = []
-global.owner = ['6281232646925']
+global.owner = ['6281232646925@s.whatsapp.net']
 global.premium = ['6288292024190']
 global.packname = 'Perwira'
 global.author = 'WhatsApp Bot'
 global.sessionName = 'hisoka'
-global.prefa = ['','!','.','🐦','🐤','🗿']
+global.prefa = ['','!','.','?','#','/']
 global.sp = '⭔'
 global.mess = {
     success: 'Success',
