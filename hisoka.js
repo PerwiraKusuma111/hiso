@@ -5,7 +5,17 @@
 */
 
 require('./config')
-const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require('@adiwajshing/baileys')
+const { BufferJSON, 
+WA_DEFAULT_EPHEMERAL, 
+generateWAMessageFromContent, 
+proto, generateWAMessageContent, 
+generateWAMessage, 
+prepareWAMessageMedia, 
+areJidsSameUser, 
+MessageType,
+MessageOptions, 
+Mimetype,
+getContentType } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const util = require('util')
 const chalk = require('chalk')
@@ -89,17 +99,17 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
             }
     */
             let chats = global.db.chats[m.chat]
-            if (typeof chats !== 'object') global.db.chats[m.chat] = {}
+            /*if (typeof chats !== 'object') global.db.chats[m.chat] = {}
             if (chats) {
                 if (!('mute' in chats)) chats.mute = false
                 if (!('antilink' in chats)) chats.antilink = false
             } else global.db.chats[m.chat] = {
                 mute: false,
                 antilink: false,
-            }
+            }*/
 		
 	    let setting = global.db.settings[botNumber]
-            if (typeof setting !== 'object') global.db.settings[botNumber] = {}
+        /*if (typeof setting !== 'object') global.db.settings[botNumber] = {}
 	    if (setting) {
 		if (!isNumber(setting.status)) setting.status = 0
 		if (!('autobio' in setting)) setting.autobio = false
@@ -107,7 +117,7 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
 		status: 0,
 		autobio: false,
 	    }
-	    
+	    */
         } catch (err) {
             console.error(err)
         }
@@ -1459,26 +1469,110 @@ break
         })
         }
         break*/
-	    case 'play': case 'ytplay': {
+        case 'tes':
+        let sections = [
+    {
+    title: "Section 1",
+    rows: [
+        {title: "Option 1", rowId: "option1"},
+        {title: "Option 2", rowId: "option2", description: "This is a description"}
+    ]
+    },
+   {
+    title: "Section 2",
+    rows: [
+        {title: "Option 3", rowId: "option3"},
+        {title: "Option 4", rowId: "option4", 
+        description: "This is a description V2"}
+    ]
+    },
+]
+
+let listMessage = {
+  text: "This is a list",
+  footer: "nice footer, link: https://google.com",
+  title: "Amazing boldfaced list title",
+  buttonText: "Required, text on the button to view the list",
+  sections
+}
+
+await hisoka.sendMessage(m.chat, listMessage)
+            break
+	    case 'play': case 'ytplay': 
                 if (!text) throw `Example : ${prefix + command} story wa anime`
                 let yts = require("yt-search")           
                 let { yta } = require('./lib/y2mate')
                 let search = await yts(text)
+                let aramat = search.all
                 /*search.videos[Math.floor(Math.random() * search.videos.length)]*/
                 let media = await yta(`${search.videos[0].url}`)
                 get_img = await getBuffer(media.thumb)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                hisoka.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m})
-             /*   let quality = args[1] ? args[1] : '128kbps'*/
-                /*hisoka.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)*/
+                hisoka.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m}).catch(err => m.reply(util.format(err))).then(() => {
+let kunnu = []
+let no = 1
+for(let i of aramat) {
+kunnu.push({
+                              "title": `${no++}. ${i.title}`,
+                              "description": `• Upload: ${i.ago}\n• Duration: ${i.timestamp}`,
+                              "rowId": `ytmp3 ${i.url}`                         
+                           })
+                           
+                           }
+let listMessage = {
+text: 'Hasil penelusuran lain',
+ footer: `Perwira Bot WhatsApp`,
+ title: `*YouTube Play*\n\nJika hasil diatas salah berikut\nadalah hasil penelusuran\nyang berbeda`,
+ buttonText: "Hasil Penelusuran",
+ sections: [{
+ "title": `Hasil penelusuran`,
+ "rows": kunnu
+}],
+}
+hisoka.sendMessage(m.chat, listMessage)
+                
+                	})
+                
+/*let kunnu = []
+let no = 1
+for(let i of aramat) {
+kunnu.push({
+                              "title": `${search.videos[0].title}`,
+                              "description": `• Upload: ${search.videos[0].ago}\n• Duration: ${search.videos[0].timestamp}`,
+                              "rowId": `ytmp3 ${search.videos[0].url}`                         
+                           })
+                           
+                           }*/                           
+/*let listMessage = {
+buttonText: 'Hasil penelusuran lain',
+ footerText: `Perwira Bot WhatsApp`,
+ description: `*YouTube Play*\n\nJika hasil diatas salah berikut\nadalah hasil penelusuran\nyang berbeda`,
+ sections: [{
+ "title": `Hasil penelusuran`,
+ "rows": [{
+                              "title": `Yess`,
+                              "description": `Yesss`,
+                              "rowId": `Yess`
+                           }]
+}],
+}                     
+await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(err)))
+                */
+
+           /*.then(() => {
+           sendButMessage(from, `Jika menginginkan dalam bentuk document klik tombol dibawah\n_Disarankan untuk iPhone_`, `${NamaBot}`, [{buttonId: `ytmp3doc ${aramas.videos[0].url}`, buttonText: {displayText: `Document Type`}, type:1}], {quoted: mek})
+	       })*/
+           /*}}).catch(err => reply(util.format(err)))*/
+          /*   let quality = args[1] ? args[1] : '128kbps'*/
+          /*hisoka.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)*/
                 
 
 
-    /*  let buttons = [
-                    {buttonId: `ytmp3 ${anu}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-                    {buttonId: `ytmp4 ${anu}`, buttonText: {displayText: '► Video'}, type: 1}
-                ]
-                let buttonMessage = {
+                     /*  let buttons = [
+                     {buttonId: `ytmp3 ${anu}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+                     {buttonId: `ytmp4 ${anu}`, buttonText: {displayText: '► Video'}, type: 1}
+                     ]
+                    let buttonMessage = {
                     image: { url: anu.thumbnail },
                     caption: `
 ⭔ Title : ${anu.title}
@@ -1494,9 +1588,9 @@ break
                     footer: hisoka.user.name,
                     buttons: buttons,
                     headerType: 4
-                }
-                hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })*/
-            }
+                    }
+                   hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })*/
+                 
             break
 	    case 'ytmp3': case 'ytaudio': {
                 let { yta } = require('./lib/y2mate')
@@ -2594,9 +2688,35 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ┊       *Attention!*
 ┊  Harap baca *rules*
 ╰┄┄┄┄┄┄┄┄┄┄┄┄┄╯`
+let btn = [{
+                                urlButton: {
+                                    displayText: 'Script',
+                                    url: 'https://github.com/DikaArdnt/Hisoka-Morou'
+                                }
+                            }, {
+                                callButton: {
+                                    displayText: 'Owner',
+                                    phoneNumber: '+62 882-9202-4190'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Info Bot',
+                                    id: 'ping'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Script',
+                                    id: 'sc'
+                                }
+                            }]
                 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
-                       await hisoka.sendButtonText(m.chat, btnz, anu, "Simpel Bot WhatsApp", m)
+                       await hisoka.sendButtonText2(m.chat, anu, "Simpel Bot WhatsApp", btn, m)
 }
             break
             default:
