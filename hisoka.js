@@ -2254,9 +2254,9 @@ if(text.includes("tiktok.com")) {
 	let res = await downloader(text)
 	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
 	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command} https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix}tiktok2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
 		}
-	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
+	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
 case 'tiktokaudio2':
@@ -2266,9 +2266,9 @@ if(text.includes("tiktok.com")) {
 	try {
 	let { downloader } = require(`./lib/scraper`)
 	let res = await downloader(text)
-	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
+	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
 	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command} https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix}tiktok2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
 		}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
@@ -2283,7 +2283,7 @@ case 'tiktokmp3': {
             let media = await getBuffer(res.result.nowatermark)
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
-            conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', fileName: `Convert By ${conn.user.name}.mp3`})
+            conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}})
             } catch (err) {
 		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
 		}
