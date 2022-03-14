@@ -2156,7 +2156,7 @@ await conn.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(err
             case 'tiktoknowm2':{
 if (text.includes("tiktok.com")) {
 let { TiktokDownloader } = require('./lib/scraper')
-res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
+let res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
 console.log(res)
 got_vid = await getBuffer(res.result.nowatermark)
 conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m}).catch(err => m.reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
@@ -2169,8 +2169,8 @@ case 'tiktokdl':
 case 'tiktoknowm':{
 if(text.includes("tiktok.com")) {
 	let { downloader } = require(`./lib/scraper`)
-	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
-	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
+	let res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
+	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m}).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
@@ -2179,8 +2179,8 @@ case 'ttmp3':
 case 'tiktokmp3': {
 if(text.includes("tiktok.com")) {
 	let { downloader } = require(`./lib/scraper`)
-	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
-	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
+	let res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
+	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {}).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
@@ -2189,7 +2189,7 @@ case 'ttmp32':
 case 'tiktokmp32': {
             if (text.includes("tiktok.com")) {
             let { TiktokDownloader } = require('./lib/scraper')
-            res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
+            let res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
             console.log(res)
             m.reply(mess.wait)
             let media = await getBuffer(res.result.nowatermark)
@@ -2204,8 +2204,8 @@ case 'igdl':
 case 'instagram':
 if (text.includes("instagram.com")) {
 let { downloader } = require('./lib/scraper')
-res = await downloader(text)/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
-conn.sendMedia(m.chat, {video: {url: `${medias.url}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+let res = await downloader(text)/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+conn.sendMedia(m.chat, {video: {url: `${res.medias.url}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
