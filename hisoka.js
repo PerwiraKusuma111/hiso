@@ -59,7 +59,8 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
-        var prefix = prefa ? /^[!?#$/.,]/gi.test(body) ? body.match(/^[!?#$/.,]/gi)[0] : "" : prefa ?? global.prefix
+        /*var prefix = prefa ? /^[!?#$/.,]/gi.test(body) ? body.match(/^[!?#$/.,]/gi)[0] : "" : prefa ?? global.prefix*/
+        var prefix = /^[!?#$/.,]/gi.test(body) ? body.match(/^[!?#$/.,]/gi) : "."
         const isCmd = body.startsWith(prefix)
         const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
         const args = body.trim().split(/ +/).slice(1)
@@ -2161,6 +2162,20 @@ conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: '
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
 break
+case 'tiktoktes':
+if(text.includes("tiktok.com")) {
+	let { downloader } = require(`./lib/scraper`)
+	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
+	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
+	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
+	break
+case 'tiktok3tes':
+if(text.includes("tiktok.com")) {
+	let { downloader } = require(`./lib/scraper`)
+	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
+	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*'}, {quoted: m})
+	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
+	break
 case 'tiktokaudio':
 case 'ttmp3':
 case 'tiktokmp3': {
