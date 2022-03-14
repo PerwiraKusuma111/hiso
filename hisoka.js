@@ -1462,13 +1462,13 @@ break
                 for (let i of search.all) {
                 kunn.push({
                 "title": `${no++}.${i.title}`,
-                "description": `• *Channel :* ${i.author.name}\n• *Duration :* ${i.timestamp}`,
-                "rowid": `ytmp3 ${i.url}`
+                "description": `•Upload : ${i.ago}\n•Duration : ${i.timestamp}`,
+                "rowId": `ytmp3 ${i.url}`
                 })
                 kunni.push({
                 "title": `${po++}.${i.title}`,
-                "description": `• *Channel :* ${i.author.name}\n• *Duration :* ${i.timestamp}`,
-                "rowid": `ytmp4 ${i.url}`
+                "description": `•Upload : ${i.ago}\n•Duration : ${i.timestamp}`,
+                "rowId": `ytmp4 ${i.url}`
                 })
                 }
 let listMessage = {
