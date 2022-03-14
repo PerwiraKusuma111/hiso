@@ -2199,13 +2199,13 @@ case 'tiktokmp32': {
             }
             }
             break
-case 'ig':
-case 'igdl':
-case 'instagram':
+case 'igmp4':
+case 'igvideo':
+case 'instagramvideo':
 if (text.includes("instagram.com")) {
 let { downloader } = require('./lib/scraper')
-let res = await downloader(text)/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
-conn.sendMedia(m.chat, {video: {url: `${res.medias.url}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+downloader(text)
+conn.sendMedia(m.chat, {video: {url: `${res.medias[0].url}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
@@ -2764,7 +2764,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 │⊳ ${prefix}ytsearch
 │⊳ ${prefix}ytmp3
 │⊳ ${prefix}ytmp4
-│⊳ ${prefix}igdl
+│⊳ ${prefix}igmp4
 │⊳ ${prefix}ttdl
 │⊳ ${prefix}ttmp3
 │⊳ ${prefix}telesticker
@@ -2819,9 +2819,12 @@ let btn = [{
                             }]
                 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
-                       await conn.sendButtonText2(m.chat, anu, "Simpel Bot WhatsApp", btn, m)
+                       await conn.sendButtonText2(m.chat, "*Simpel Bot WhatsApp*", `${anu}\n\n*Perwira Bot WhatsApp*`, btn, m)
 }
             break
+case 'rules':
+m.reply("*Rules Bot*\n\n/> Dilarang spam\n/Dilarang menelfon\nFitur error? chat owner!\n\nMelanggar? block")
+break
             default:
             
             
