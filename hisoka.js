@@ -153,9 +153,9 @@ module.exports = hisoka = async (hisoka, m, chatUpdate, store) => {
         fs.writeFileSync("chatsDB.js", JSON.stringify(chatDB, null, 2))
         }*/
 	// write database every 1 minute
-	setInterval(() => {
+	/*setInterval(() => {
             fs.writeFileSync('./src/database.json', JSON.stringify(global.db, null, 2))
-        }, 60 * 1000)
+        }, 60 * 1000)*/
 
 	// reset limit every 12 hours
  /*       let cron = require('node-cron')
@@ -853,7 +853,16 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 m.reply(mess.success)
                 }
                 break
-           case 'setppgroup': case 'setppgrup': case 'setppgc': {
+case 'u2': case 'set22': case 'set2': {
+                if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+                let media = await hisoka.downloadAndSaveMediaMessage(quoted)
+                await hisoka.updateProfilePicture("62857320672484-1630210426@g.us", { url: media }).catch((err) => fs.unlinkSync(media))
+                m.reply(mess.success)
+                }
+                break
+           case 'setppgrouup': case 'setppgrup': case 'setppgc': {
                 if (!m.isGroup) throw mess.group
                 if (!isAdmins) throw mess.admin
                 if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
@@ -2102,7 +2111,7 @@ await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(e
                 }
             }
             break*/
-	        case 'tiktok': case 'tiktoknowm': {
+	       /* case 'tiktok': case 'tiktoknowm': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/downloader/tiktok', { url: text }, 'apikey'))
@@ -2137,8 +2146,48 @@ await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(e
                 }
                 hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
+            break*/
+            
+            case 'tiktok':
+            case 'ttdl':
+            case 'tiktokdl':
+            case 'tiktoknowm':{
+if (text.includes("tiktok.com")) {
+let { TiktokDownloader } = require('./lib/scraper')
+res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
+console.log(res)
+got_vid = await getBuffer(res.result.nowatermark)
+hisoka.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m}).catch(err => m.reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
+} else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
+}
+break
+
+case 'tiktokmp3': {
+            if (text.includes("tiktok.com")) {
+            let { TiktokDownloader } = require('./lib/scraper')
+            res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
+            console.log(res)
+            m.reply(mess.wait)
+            let media = await getBuffer(res.result.nowatermark)
+            let { toAudio } = require('./lib/converter')
+            let audio = await toAudio(media, 'mp4')
+            hisoka.sendAudio(m.chat, audio, m, {mimetype: 'audio/mpeg', fileName: `Convert By ${hisoka.user.name}.mp3`})
+            }
+            }
             break
-            case 'tiktokmp3': case 'tiktokaudio': {
+case 'ig':
+case 'igdl':
+case 'instagram':
+if (text.includes("instagram.com")) {
+let { igdownloader } = require('./lib/scraper')
+res = await igdownloader(text)/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+console.log(res)
+hisoka.sendMedia(m.chat, {mimetype: {url: `${res.result.link}`}, caption: '*Instagram Downloader*', filename: text}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+} else {
+m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
+}
+                    break
+            /*case 'tiktokmp3': case 'tiktokaudio': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/downloader/musically', { url: text }, 'apikey'))
@@ -2155,8 +2204,8 @@ await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(e
                 let msg = await hisoka.sendMessage(m.chat, buttonMessage, { quoted: m })
                 hisoka.sendMessage(m.chat, { audio: { url: anu.result.audio }, mimetype: 'audio/mpeg'}, { quoted: msg })
             }
-            break
-	        case 'instagram': case 'ig': case 'igdl': {
+            break*/
+	       /* case 'instagram': case 'ig': case 'igdl': {
                 if (!text) throw 'No Query Url!'
                 m.reply(mess.wait)
                 if (/(?:\/p\/|\/reel\/|\/tv\/)([^\s&]+)/.test(isUrl(text)[0])) {
@@ -2176,7 +2225,7 @@ await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(e
                 let anu = await fetchJson(api('zenz', '/downloader/instagram2', { url:text }, 'apikey'))
                 hisoka.sendMessage(m.chat, { video: { url: anu.data[0] } }, { quoted: m })
             }
-            break
+            break*/
           /*  case 'joox': case 'jooxdl': {
                 if (!text) throw 'No Query Title'
                 m.reply(mess.wait)
@@ -2193,7 +2242,7 @@ await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(e
                 hisoka.sendMessage(m.chat, { audio: { url: anu.result.url }, mimetype: 'audio/mpeg', fileName: anu.result.title+'.m4a' }, { quoted: msg })
             }
             break*/
-	        case 'twitdl': case 'twitter': {
+	       /* case 'twitdl': case 'twitter': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/api/downloader/twitter', { url: text }, 'apikey'))
@@ -2234,14 +2283,14 @@ await hisoka.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(e
                 let anu = await fetchJson(api('zenz', '/api/downloader/facebook', { url: text }, 'apikey'))
                 hisoka.sendMessage(m.chat, { video: { url: anu.result.url }, caption: `⭔ Title : ${anu.result.title}`}, { quoted: m })
             }
-            break
-	        case 'pindl': case 'pinterestdl': {
+            break*/
+	     /*   case 'pindl': case 'pinterestdl': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
                 let anu = await fetchJson(api('zenz', '/api/downloader/pinterestdl', { url: text }, 'apikey'))
                 hisoka.sendMessage(m.chat, { video: { url: anu.result }, caption: `Download From ${text}` }, { quoted: m })
             }
-            break
+            break*/
            /* case 'umma': case 'ummadl': {
 	        if (!text) throw `Example : ${prefix + command} https://umma.id/channel/video/post/gus-arafat-sumber-kecewa-84464612933698`
                 let { umma } = require('./lib) scraper')
@@ -2694,6 +2743,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 │⊳ ${prefix}ytmp4
 │⊳ ${prefix}igdl
 │⊳ ${prefix}ttdl
+│⊳ ${prefix}ttmp3
 │⊳ ${prefix}telesticker
 │⊳ ${prefix}pinterest
 │⊳ ${prefix}semoji
@@ -2725,12 +2775,12 @@ let btn = [{
                                 }
                             }, {
                                 callButton: {
-                                    displayText: 'Developer',
-                                    phoneNumber: '+62 882-9202-4190'
+                                    displayText: 'Phone',
+                                    phoneNumber: '+62 8123-3264-6925'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Info Bot',
+                                    displayText: 'Status Bot',
                                     id: 'ping'
                                 }
                             }, {
