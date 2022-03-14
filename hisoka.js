@@ -2171,7 +2171,7 @@ case 'tiktokmp3': {
             let media = await getBuffer(res.result.nowatermark)
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
-            hisoka.sendAudio(m.chat, audio, m, {mimetype: 'audio/mpeg', fileName: `Convert By ${hisoka.user.name}.mp3`})
+            hisoka.sendAudio(m.chat, audio, m, ptt: false, {mimetype: 'audio/mpeg', fileName: `Convert By ${hisoka.user.name}.mp3`})
             }
             }
             break
