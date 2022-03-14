@@ -3,8 +3,60 @@
    * Contact Me on wa.me/6288292024190
    * Follow https://github.com/DikaArdnt
 */
+/**
+   * Create By Dika Ardnt.
+   * Contact Me on wa.me/6288292024190
+   * Follow https://github.com/DikaArdnt
+*/
 
-require('./config')
+const fs = require('fs')
+const chalk = require('chalk')
+
+// Website Api
+global.APIs = {
+	zenz: 'https://zenzapi.xyz',
+}
+
+// Apikey Website Api
+global.APIKeys = {
+	'https://zenzapi.xyz': 'Your Key',
+}
+
+// Other
+global.chatDB = []
+global.owner = ["6281232646925",'6281232646925@s.whatsapp.net']
+global.premium = ['6288292024190']
+global.packname = 'Perwira'
+global.author = 'WhatsApp Bot'
+global.sessionName = 'hisoka'
+global.prefa = [',','!','.','?','#','/']
+global.sp = 'тнФ'
+global.mess = {
+    success: 'Success',
+    admin: 'Fitur Khusus Admin Group!',
+    botAdmin: 'Bot Harus Menjadi Admin Terlebih Dahulu!',
+    owner: 'Fitur Khusus Owner Bot',
+    group: 'Fitur Digunakan Hanya Untuk Group!',
+    private: 'Fitur Digunakan Hanya Untuk Private Chat!',
+    bot: 'Fitur Khusus Pengguna Nomor Bot',
+    wait: 'Loading...',
+    endLimit: 'Limit Harian Anda Telah Habis, Limit Akan Direset Setiap Jam 12',
+}
+global.limitawal = {
+    premium: "Infinity",
+    free: 100
+}
+global.thumb = fs.readFileSync('./lib/hisoka.jpg')
+
+/*let file = require.resolve(__filename)
+fs.watchFile(file, () => {
+	fs.unwatchFile(file)
+	console.log(chalk.redBright(`Update'${__filename}'`))
+	delete require.cache[file]
+	require(file)
+})
+
+require('./config')*/
 const { BufferJSON, 
 WA_DEFAULT_EPHEMERAL, 
 generateWAMessageFromContent, 
@@ -16,9 +68,9 @@ MessageType,
 MessageOptions, 
 Mimetype,
 getContentType } = require('@adiwajshing/baileys')
-const fs = require('fs')
+/*const fs = require('fs')*/
 const util = require('util')
-const chalk = require('chalk')
+/*const chalk = require('chalk')*/
 const { exec, spawn, execSync } = require("child_process")
 const axios = require('axios')
 const path = require('path')
@@ -1106,7 +1158,7 @@ break
             }
             }
             break
-            case 'antilink': {
+            /*case 'antilink': {
                 if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
@@ -1126,7 +1178,7 @@ break
                     await conn.sendButtonText(m.chat, buttons, `Mode Antilink`, conn.user.name, m)
                 }
              }
-             break
+             break*/
              /*case 'mute': {
                 if (!m.isGroup) throw mess.group
                 if (!isBotAdmins) throw mess.botAdmin
