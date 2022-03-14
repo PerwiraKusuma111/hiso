@@ -2203,10 +2203,9 @@ case 'igmp4':
 case 'igvideo':
 case 'instagramvideo':
 if (text.includes("instagram.com")) {
-let { downloader } = require('./lib/scraper')
-downloader(text).then(async res => {
-	
-conn.sendMessage(m.chat, {video: {url: `${res.medias[0].url}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+let { igdownloader } = require('./lib/igdown')
+igdownloader(text).then(async res => {
+conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
 })
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
@@ -2825,7 +2824,9 @@ let btn = [{
 }
             break
 case 'rules':
-m.reply("*Rules Bot*\n\n/> Dilarang spam\n/Dilarang menelfon\nFitur error? chat owner!\n\nMelanggar? block")
+anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\nFitur error? chat owner!\n\nMelanggar? block")
+let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
+await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 break
             default:
             
