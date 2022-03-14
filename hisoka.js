@@ -2204,8 +2204,9 @@ case 'igvideo':
 case 'instagramvideo':
 if (text.includes("instagram.com")) {
 let { downloader } = require('./lib/scraper')
-downloader(text)
+downloader(text).then(async res => {
 conn.sendMedia(m.chat, {video: {url: `${res.medias[0].url}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+})
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
@@ -2819,7 +2820,7 @@ let btn = [{
                             }]
                 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
-                       await conn.sendButtonText2(m.chat, "*Simpel Bot WhatsApp*", `${anu}\n\n*Perwira Bot WhatsApp*`, btn, m)
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, m)
 }
             break
 case 'rules':
