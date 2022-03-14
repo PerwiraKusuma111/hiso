@@ -60,7 +60,7 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
         /*var prefix = prefa ? /^[!?#$/.,]/gi.test(body) ? body.match(/^[!?#$/.,]/gi)[0] : "" : prefa ?? global.prefix*/
-        var prefix = /^[!?#$/.,]/gi.test(body) ? body.match(/^[!?#$/.,]/gi) : "."
+        var prefix = /^[!?#$/.,]/.test(body) ? body.match(/^[!?#$/.,]/gi) : "."
         const isCmd = body.startsWith(prefix)
         const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
         const args = body.trim().split(/ +/).slice(1)
@@ -1302,7 +1302,6 @@ break
              break
             case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
                     if (/image/.test(mime)) {
                 let media = await quoted.download()
                 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
@@ -1383,7 +1382,7 @@ break
             if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
             if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
+           
             let media = await quoted.download()
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
@@ -1393,7 +1392,7 @@ break
             case 'tovn': case 'toptt': {
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
             if (!quoted) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
+           
             let media = await quoted.download()
             let { toPTT } = require('./lib/converter')
             let audio = await toPTT(media, 'mp4')
@@ -1403,7 +1402,7 @@ break
             case 'togif': {
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                
 		let { webp2mp4File } = require('./lib/uploader')
                 let media = await conn.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
@@ -1456,10 +1455,37 @@ break
                 let search = await yts(text)
                 let teks = 'YouTube Search\n\n Result From '+text+'\n\n'
                 let no = 1
+                let po = 1
+                let kunn = []
+                let kunni = []
                 for (let i of search.all) {
-                    teks += `⭔ No : ${no++}\n⭔ Type : ${i.type}\n⭔ Video ID : ${i.videoId}\n⭔ Title : ${i.title}\n⭔ Views : ${i.views}\n⭔ Duration : ${i.timestamp}\n⭔ Upload At : ${i.ago}\n⭔ Author : ${i.author.name}\n⭔ Url : ${i.url}\n\n─────────────────\n\n`
+                kunn.push({
+                "title": `${no++}.${i.title}`,
+                "description": `• *Channel :* ${i.author.name}\n• *Duration :* ${i.timestamp}`,
+                "rowid": `ytmp3 ${i.url}`
+                })
+                kunni.push({
+                "title": `${po++}.${i.title}`,
+                "description": `• *Channel :* ${i.author.name}\n• *Duration :* ${i.timestamp}`,
+                "rowid": `ytmp4 ${i.url}`
+                })
                 }
-                conn.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
+let listMessage = {
+text: 'Hasil penelusuran lain',
+footer: `Perwira Bot WhatsApp`,
+title: `*YouTube Play*\n\nJika hasil diatas salah berikut\nadalah hasil penelusuran\nyang berbeda`,
+buttonText: "Hasil Penelusuran",
+sections: [{
+"title": `Hasil penelusuran dalam bentuk Audio`,
+"rows": kunn}, {
+"title": `Hasil penelusuran dalam bentuk Video`,
+"rows": kunni
+}],
+}
+conn.sendMessage(m.chat, listMessage)
+              /*teks += `⭔ No : ${no++}\n⭔ Type : ${i.type}\n⭔ Video ID : ${i.videoId}\n⭔ Title : ${i.title}\n⭔ Views : ${i.views}\n⭔ Duration : ${i.timestamp}\n⭔ Upload At : ${i.ago}\n⭔ Author : ${i.author.name}\n⭔ Url : ${i.url}\n\n─────────────────\n\n`*/
+                
+               /* conn.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })*/
             }
             break
         /*case 'google': {
@@ -1680,7 +1706,6 @@ await conn.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(err
             }
             break*/
             case 'pinterest': {
-                m.reply(mess.wait)
 		let { pinterest } = require('./lib/scraper')
                 anu = await pinterest(text)
                 result = anu[Math.floor(Math.random() * anu.length)]
@@ -2150,52 +2175,65 @@ await conn.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(err
             }
             break*/
             
-            case 'tiktok2':
-            case 'ttdl2':
-            case 'tiktokdl2':
-            case 'tiktoknowm2':{
+            case 'tiktok':
+            case 'ttdl':
+            case 'tiktokdl':
+            case 'tiktoknowm':{
 if (text.includes("tiktok.com")) {
+	try {
 let { TiktokDownloader } = require('./lib/scraper')
-let res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
-console.log(res)
+let res = await TiktokDownloader(text)
 got_vid = await getBuffer(res.result.nowatermark)
-conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m}).catch(err => m.reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
+conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m})
+} catch (err) {
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		}
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
 break
-case 'tiktok':
-case 'ttdl':
-case 'tiktokdl':
-case 'tiktoknowm':{
+case 'tiktok2':
+case 'ttdl2':
+case 'tiktokdl2':
+case 'tiktoknowm2':{
 if(text.includes("tiktok.com")) {
+	try {
 	let { downloader } = require(`./lib/scraper`)
-	let res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
-	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m}).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
-	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
-	}
-break
-case 'tiktokaudio':
-case 'ttmp3':
-case 'tiktokmp3': {
-if(text.includes("tiktok.com")) {
-	let { downloader } = require(`./lib/scraper`)
-	let res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
-	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {}).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
+	let res = await downloader(text)
+	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
+	} catch (err) {
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command} https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
 case 'tiktokaudio2':
 case 'ttmp32':
 case 'tiktokmp32': {
+if(text.includes("tiktok.com")) {
+	try {
+	let { downloader } = require(`./lib/scraper`)
+	let res = await downloader(text)
+	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
+	} catch (err) {
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command} https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		}
+	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
+	}
+break
+case 'tiktokaudio':
+case 'ttmp3':
+case 'tiktokmp3': {
             if (text.includes("tiktok.com")) {
+            	try {
             let { TiktokDownloader } = require('./lib/scraper')
-            let res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
-            console.log(res)
-            m.reply(mess.wait)
+            let res = await TiktokDownloader(text)
             let media = await getBuffer(res.result.nowatermark)
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
             conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', fileName: `Convert By ${conn.user.name}.mp3`})
+            } catch (err) {
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		}
             }
             }
             break
@@ -2814,7 +2852,7 @@ let btn = [{
                                 }  
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'Staus Bot',
+                                    displayText: 'Speed',
                                     id: 'ping'
                                 }
                             }]
@@ -2824,7 +2862,7 @@ let btn = [{
 }
             break
 case 'rules':
-anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\nFitur error? chat owner!\n\nMelanggar? block"
+anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 break
@@ -2903,7 +2941,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
 		    conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		   }
            } catch (err) {
-           m.reply(util.format(err))
+           m.reply(`Untuk saat ini fitur _*${prefix+command}*_ sedang error, coba beberapa saat lagi atau bertanya kepada owner.\n\n*Detail Error :*\n${util.format(err)}`)
            }
            }
 
