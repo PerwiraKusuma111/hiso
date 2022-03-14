@@ -2824,7 +2824,7 @@ let btn = [{
 }
             break
 case 'rules':
-anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\nFitur error? chat owner!\n\nMelanggar? block")
+anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\nFitur error? chat owner!\n\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 break
