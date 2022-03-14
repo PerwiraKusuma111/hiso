@@ -1537,7 +1537,7 @@ await conn.sendMessage(m.chat, listMessage)
                 let res = await yta(`${search.videos[0].url}`)
                 let get_img = await getBuffer(res.thumb)
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: get_img}}}, {}).catch(err => m.reply(util.format(err))).then(() => {
+                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 1, thumbnail: get_img}}}, {}).catch(err => m.reply(util.format(err))).then(() => {
 let kunnu = []
 let no = 1
 for(let i of aramat) {
