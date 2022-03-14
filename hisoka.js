@@ -1300,7 +1300,7 @@ break
                     conn.sendText(m.chat, 'List Online:\n\n' + online.map(v => '⭔ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
              }
              break
-            case 'sticker': case 's': case 'stickergif': case 'sgif': {
+            case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
             if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
             m.reply(mess.wait)
                     if (/image/.test(mime)) {
@@ -1534,10 +1534,10 @@ await conn.sendMessage(m.chat, listMessage)
                 let search = await yts(text)
                 let aramat = search.all
                 /*search.videos[Math.floor(Math.random() * search.videos.length)]*/
-                let media = await yta(`${search.videos[0].url}`)
-                get_img = await getBuffer(media.thumb)
+                let res = await yta(`${search.videos[0].url}`)
+                let get_img = await getBuffer(res.thumb)
                 if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                conn.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg' }, { quoted: m}).catch(err => m.reply(util.format(err))).then(() => {
+                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: get_img}}}, {}).catch(err => m.reply(util.format(err))).then(() => {
 let kunnu = []
 let no = 1
 for(let i of aramat) {
@@ -1636,8 +1636,9 @@ await conn.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(err
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                 /*let quality = args[1] ? args[1] : '360p'*/
                let res = await yta(text)
+               let ythumb = await getBuffer(res.thumb)
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg'}, { quoted: m })
+                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: ythumb}}}, {})
                 
             }
             break
@@ -2149,10 +2150,10 @@ await conn.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(err
             }
             break*/
             
-            case 'tiktok':
-            case 'ttdl':
-            case 'tiktokdl':
-            case 'tiktoknowm':{
+            case 'tiktok2':
+            case 'ttdl2':
+            case 'tiktokdl2':
+            case 'tiktoknowm2':{
 if (text.includes("tiktok.com")) {
 let { TiktokDownloader } = require('./lib/scraper')
 res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
@@ -2162,25 +2163,30 @@ conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: '
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
 break
-case 'tiktoktes':{
+case 'tiktok':
+case 'ttdl':
+case 'tiktokdl':
+case 'tiktoknowm':{
 if(text.includes("tiktok.com")) {
 	let { downloader } = require(`./lib/scraper`)
-	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
+	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`))
 	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
-	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
-	}
-break
-case 'tiktok3tes':{
-if(text.includes("tiktok.com")) {
-	let { downloader } = require(`./lib/scraper`)
-	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
-	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*'}, {quoted: m})
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
 case 'tiktokaudio':
 case 'ttmp3':
 case 'tiktokmp3': {
+if(text.includes("tiktok.com")) {
+	let { downloader } = require(`./lib/scraper`)
+	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
+	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
+	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
+	}
+break
+case 'tiktokaudio2':
+case 'ttmp32':
+case 'tiktokmp32': {
             if (text.includes("tiktok.com")) {
             let { TiktokDownloader } = require('./lib/scraper')
             res = await TiktokDownloader(text).catch(err => reply(`*Error*\nGunakan fitur ${prefix+command}2\n${util.format(err)}`))
@@ -2197,10 +2203,9 @@ case 'ig':
 case 'igdl':
 case 'instagram':
 if (text.includes("instagram.com")) {
-let { igdownloader } = require('./lib/scraper')
-res = await igdownloader(text)/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
-console.log(res)
-conn.sendMedia(m.chat, {mimetype: {url: `${res.result.link}`}, caption: '*Instagram Downloader*', filename: text}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+let { downloader } = require('./lib/scraper')
+res = await downloader(text)/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+conn.sendMedia(m.chat, {video: {url: `${medias.url}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
@@ -2764,7 +2769,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 │⊳ ${prefix}ttmp3
 │⊳ ${prefix}telesticker
 │⊳ ${prefix}pinterest
-│⊳ ${prefix}semoji
+│⊳ ${prefix}emojimix
 ╰━━┬┬━━━━┬┬━━⚬
 ╭┄┄┴┴┄┄┄┄┴┴┄┄┒
 ┊ *Maker Menu*
