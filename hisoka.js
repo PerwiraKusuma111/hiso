@@ -2162,20 +2162,22 @@ conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: '
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
 break
-case 'tiktoktes':
+case 'tiktoktes':{
 if(text.includes("tiktok.com")) {
 	let { downloader } = require(`./lib/scraper`)
 	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
 	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
-	break
-case 'tiktok3tes':
+	}
+break
+case 'tiktok3tes':{
 if(text.includes("tiktok.com")) {
 	let { downloader } = require(`./lib/scraper`)
 	res = await downloader(text).catch(err => reply(`*Saat ini fitur sedang error*\n\n*Detail Error :*\n${util.format(err)}`))
 	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', caption: '*Tiktok Downloader*'}, {quoted: m})
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
-	break
+	}
+break
 case 'tiktokaudio':
 case 'ttmp3':
 case 'tiktokmp3': {
