@@ -9,54 +9,8 @@
    * Follow https://github.com/DikaArdnt
 */
 
-const fs = require('fs')
-const chalk = require('chalk')
 
-// Website Api
-global.APIs = {
-	zenz: 'https://zenzapi.xyz',
-}
-
-// Apikey Website Api
-global.APIKeys = {
-	'https://zenzapi.xyz': 'Your Key',
-}
-
-// Other
-global.chatDB = []
-global.owner = ["6281232646925",'6281232646925@s.whatsapp.net']
-global.premium = ['6288292024190']
-global.packname = 'Perwira'
-global.author = 'WhatsApp Bot'
-global.sessionName = 'hisoka'
-global.prefa = [',','!','.','?','#','/']
-global.sp = 'тнФ'
-global.mess = {
-    success: 'Success',
-    admin: 'Fitur Khusus Admin Group!',
-    botAdmin: 'Bot Harus Menjadi Admin Terlebih Dahulu!',
-    owner: 'Fitur Khusus Owner Bot',
-    group: 'Fitur Digunakan Hanya Untuk Group!',
-    private: 'Fitur Digunakan Hanya Untuk Private Chat!',
-    bot: 'Fitur Khusus Pengguna Nomor Bot',
-    wait: 'Loading...',
-    endLimit: 'Limit Harian Anda Telah Habis, Limit Akan Direset Setiap Jam 12',
-}
-global.limitawal = {
-    premium: "Infinity",
-    free: 100
-}
-global.thumb = fs.readFileSync('./lib/hisoka.jpg')
-
-/*let file = require.resolve(__filename)
-fs.watchFile(file, () => {
-	fs.unwatchFile(file)
-	console.log(chalk.redBright(`Update'${__filename}'`))
-	delete require.cache[file]
-	require(file)
-})
-
-require('./config')*/
+require('./index')
 const { BufferJSON, 
 WA_DEFAULT_EPHEMERAL, 
 generateWAMessageFromContent, 
@@ -68,9 +22,9 @@ MessageType,
 MessageOptions, 
 Mimetype,
 getContentType } = require('@adiwajshing/baileys')
-/*const fs = require('fs')*/
+const fs = require('fs')
 const util = require('util')
-/*const chalk = require('chalk')*/
+const chalk = require('chalk')
 const { exec, spawn, execSync } = require("child_process")
 const axios = require('axios')
 const path = require('path')
@@ -912,7 +866,7 @@ case 'u2': case 'set22': case 'set2': {
                 if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 let media = await conn.downloadAndSaveMediaMessage(quoted)
-                await conn.updateProfilePicture("120363020868538487@g.us", { url: media }).catch((err) => fs.unlinkSync(media))
+                await conn.updateProfilePicture("120363025593623282@g.us", { url: media }).catch((err) => fs.unlinkSync(media))
                 m.reply(mess.success)
                 }
                 break

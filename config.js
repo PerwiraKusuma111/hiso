@@ -3,7 +3,7 @@
    * Contact Me on wa.me/6288292024190
    * Follow https://github.com/DikaArdnt
 */
-
+/*
 const fs = require('fs')
 const chalk = require('chalk')
 
@@ -19,7 +19,7 @@ global.APIKeys = {
 
 // Other
 global.chatDB = []
-global.owner = ["6281232646925",'6281232646925@s.whatsapp.net']
+global.owner = ["6281232646925"]
 global.premium = ['6288292024190']
 global.packname = 'Perwira'
 global.author = 'WhatsApp Bot'
@@ -50,3 +50,4 @@ fs.watchFile(file, () => {
 	delete require.cache[file]
 	require(file)
 })
+*/

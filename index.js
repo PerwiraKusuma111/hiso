@@ -8,7 +8,6 @@
    * Contact Me on wa.me/6288292024190
    * Follow https://github.com/DikaArdnt
 */
-
 const fs = require('fs')
 const chalk = require('chalk')
 
@@ -55,9 +54,8 @@ fs.watchFile(file, () => {
 	delete require.cache[file]
 	require(file)
 })
+*/
 
-
-require('./config')*/
 const { default: connConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
 const pino = require('pino')
@@ -79,7 +77,7 @@ async function startHisoka() {
     const conn = connConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['Bot Multi Device','Safari'],
+        browser: ['Bot Multi Device','Safari','1.0.0'],
         auth: state,
         version
     })
