@@ -81,6 +81,8 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
 	    const isMedia = /image|video|sticker|audio/.test(mime)
+	    const smime = (m.msg).mimetype || ''
+	    const sisMedia = /image|video|sticker|audio/.test(smime)
 	
         // Group
         const groupMetadata = m.isGroup ? await conn.groupMetadata(m.chat).catch(e => {}) : ''
@@ -1596,7 +1598,7 @@ conn.sendMessage(m.chat, listMessage)
 	  
             case 'ytmp3': 
             case 'ytaudio': 
-            if(text.includes("youtube")) {
+            if(text.includes("youtu")) {
             let { yta } = require('./lib/y2mate')
             if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                            /*let quality = args[1] ? args[1] : '360p'*/
@@ -1612,7 +1614,7 @@ conn.sendMessage(m.chat, listMessage)
             
             case 'ytmp4': 
             case 'ytvideo': 
-            if(text.includes("youtube")) {
+            if(text.includes("youtu")) {
             let { ytv } = require('./lib/y2mate')
             if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                            /*let quality = args[1] ? args[1] : '360p'*/
@@ -2844,7 +2846,7 @@ case 'simi':
                                }
 			                   */
 if(isSimi) {
-if(isMedia) return
+if(sisMedia) return
 try {
 let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
 conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m, sendEphemeral: true})
