@@ -146,7 +146,7 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         deleteMSG = JSON.parse(fs.readFileSync('./chatsDB.js'))[msgChat]
         console.log(deleteMSG)
         let _teksDel = `⊙─❲ *ANTI DELETE MESSAGE* ❳`
-        _teksDel += `\n│`
+        _teksDel += `\n`
         _teksDel += `\n├⊙ Name : ${deleteMSG.pushName}`
         _teksDel += `\n├⊙ User : @${deleteMSG.sender.split("@")[0]}`
         _teksDel += `\n├⊙ Day : ${Tanggal}`
@@ -922,17 +922,17 @@ let teks = `*Pesan : ${q ? q : ''}*\n\n`
 *Alasan:* ${vote[m.chat][0]}
 
 ┌〔 UPVOTE 〕
-│ 
+ 
 ├ Total: ${vote[m.chat][1].length}
-│
-│ 
+
+ 
 └────
 
 ┌〔 DEVOTE 〕
-│ 
+ 
 ├ Total: ${vote[m.chat][2].length}
-│
-│ 
+
+ 
 └────
 
 *${prefix}hapusvote* - untuk menghapus vote`
@@ -963,17 +963,17 @@ let buttonsVote = [
 *Alasan:* ${vote[m.chat][0]}
 
 ┌〔 UPVOTE 〕
-│ 
+ 
 ├ Total: ${vote[m.chat][1].length}
 ${vote[m.chat][1].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
-│ 
+ 
 └────
 
 ┌〔 DEVOTE 〕
-│ 
+ 
 ├ Total: ${vote[m.chat][2].length}
 ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
-│ 
+ 
 └────
 
 *${prefix}hapusvote* - untuk menghapus vote`
@@ -1005,17 +1005,17 @@ ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
 *Alasan:* ${vote[m.chat][0]}
 
 ┌〔 UPVOTE 〕
-│ 
+ 
 ├ Total: ${vote[m.chat][1].length}
 ${vote[m.chat][1].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
-│ 
+ 
 └────
 
 ┌〔 DEVOTE 〕
-│ 
+ 
 ├ Total: ${vote[m.chat][2].length}
 ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
-│ 
+ 
 └────
 
 *${prefix}hapusvote* - untuk menghapus vote`
@@ -1043,17 +1043,17 @@ teks_vote = `*「 VOTE 」*
 *Alasan:* ${vote[m.chat][0]}
 
 ┌〔 UPVOTE 〕
-│ 
+ 
 ├ Total: ${upvote.length}
 ${vote[m.chat][1].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
-│ 
+ 
 └────
 
 ┌〔 DEVOTE 〕
-│ 
+ 
 ├ Total: ${devote.length}
 ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
-│ 
+ 
 └────
 
 *${prefix}hapusvote* - untuk menghapus vote
@@ -2707,66 +2707,55 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'list': case 'menu': case 'help': case '?': {
-                anu = `╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄┒
-┊ *Group Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
-│⊳ ${prefix}kick
-│⊳ ${prefix}add
-│⊳ ${prefix}promote
-│⊳ ${prefix}demote
-│⊳ ${prefix}group
-│⊳ ${prefix}linkgc
-│⊳ ${prefix}tagall
-│⊳ ${prefix}hidetag
-│⊳ ${prefix}sider
-│⊳ ${prefix}totag
-╰━━┬┬━━━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
-┊ *Tools Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
-│⊳ ${prefix}sticker
-│⊳ ${prefix}toimg
-│⊳ ${prefix}tomp3
-│⊳ ${prefix}tovideo
-│⊳ ${prefix}togif
-│⊳ ${prefix}tts [offline]
-│⊳ ${prefix}tourl
-│⊳ ${prefix}removebg
-╰━━┬┬━━━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
-┊ *Download Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
-│⊳ ${prefix}play
-│⊳ ${prefix}ytsearch
-│⊳ ${prefix}ytmp3
-│⊳ ${prefix}ytmp4
-│⊳ ${prefix}igmp4
-│⊳ ${prefix}ttdl
-│⊳ ${prefix}ttmp3
-│⊳ ${prefix}telesticker [offline]
-│⊳ ${prefix}pinterest
-│⊳ ${prefix}emojimix
-╰━━┬┬━━━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
-┊ *Maker Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
-│⊳ ${prefix}glitch [offline]
-│⊳ ${prefix}tahta [offline]
-│⊳ ${prefix}wolf [offline]
-│⊳ ${prefix}nulis [offline]
-│⊳ ${prefix}attp [offline]
-╰━━┬┬━━━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
-┊ *Other Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
-│⊳ ${prefix}bot [offline]
-│⊳ ${prefix}suit [offline]
-│⊳ ${prefix}delete
-╰━━━━━━━━━━━━━━⚬
-╭┄┄┄┄┄┄┄┄┄┄┄┄┄╮
-┊       *Attention!*
-┊  Harap baca *rules*
-╰┄┄┄┄┄┄┄┄┄┄┄┄┄╯`
+                anu = `*Group Menu*
+⊳ ${prefix}kick
+⊳ ${prefix}add
+⊳ ${prefix}promote
+⊳ ${prefix}demote
+⊳ ${prefix}group
+⊳ ${prefix}linkgc
+⊳ ${prefix}tagall
+⊳ ${prefix}hidetag
+⊳ ${prefix}sider
+⊳ ${prefix}totag
+
+*Tools Menu*
+⊳ ${prefix}sticker
+⊳ ${prefix}toimg
+⊳ ${prefix}tomp3
+⊳ ${prefix}tovideo
+⊳ ${prefix}togif
+⊳ ${prefix}tts [offline]
+⊳ ${prefix}tourl
+⊳ ${prefix}removebg
+
+*Download Menu*
+⊳ ${prefix}play
+⊳ ${prefix}ytsearch
+⊳ ${prefix}ytmp3
+⊳ ${prefix}ytmp4
+⊳ ${prefix}igmp4
+⊳ ${prefix}ttdl
+⊳ ${prefix}ttmp3
+⊳ ${prefix}telesticker [offline]
+⊳ ${prefix}pinterest
+⊳ ${prefix}emojimix
+
+*Maker Menu*
+⊳ ${prefix}glitch [offline]
+⊳ ${prefix}tahta [offline]
+⊳ ${prefix}wolf [offline]
+⊳ ${prefix}nulis [offline]
+⊳ ${prefix}attp [offline]
+
+*Other Menu*
+⊳ ${prefix}bot [offline]
+⊳ ${prefix}suit [offline]
+⊳ ${prefix}delete
+
+       *Attention!*
+  Harap baca *rules*
+`
 let btn = [{
                                 urlButton: {
                                     displayText: 'Script',
