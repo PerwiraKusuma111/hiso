@@ -74,7 +74,7 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         const pushname = m.pushName || "No Name"
         const botNumber = await conn.decodeJid(conn.user.id)
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
-        const isSimi = [...global.simi].map(v => v.replace(/[^0-9]/g, '') + '@g.us').includes(m.chat)
+        const isSimi = [...global.simi]/*.map(v => v.replace(/[^0-9]/g, '') + '@g.us')*/.includes(m.chat)
         const itsMe = m.sender == botNumber ? true : false
         const text = q = args.join(" ")
         const simo = args.join("")
@@ -2722,7 +2722,9 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             break
             case 'list': case 'menu': case 'help': case '?': 
 if(m.isGroup) {
-anu = `*Group Menu*
+anu = `*List Menu*
+
+*Group Menu*
 ⊳ ${prefix}kick
 ⊳ ${prefix}add
 ⊳ ${prefix}promote
