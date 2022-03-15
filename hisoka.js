@@ -2948,7 +2948,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
 		    conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		   }
            } catch (err) {
-           m.reply(`Untuk saat ini fitur _*${prefix+command}*_ sedang error, coba beberapa saat lagi atau bertanya kepada owner.\n\n*Detail Error :*\n${util.format(err)}`)
+           m.reply(`Untuk saat ini fitur ini sedang error, coba beberapa saat lagi atau bertanya kepada owner.\n\n*Detail Error :*\n${util.format(err)}`)
            }
            }
 
