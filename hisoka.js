@@ -887,7 +887,7 @@ case 'u2': case 'set22': case 'set2': {
                 break
             case 'tagall': {
                 if (!m.isGroup) return m.reply(mess.group)
-let teks = `*Pesan :* ${q ? q : ''}\n\n`
+let teks = `*Pesan :* ${q ? q : 'Tidak ada'}\n\n`
                 for (let mem of participants) {
                 teks += `@${mem.id.split('@')[0]} `
                 }
@@ -2869,11 +2869,11 @@ let btn = [{
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, m)
 	}
             break
-case 'rules':
+case 'rules':{
 anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
-break
+} break
 case 'bugpc':{
 if(!isCreator) return
 konn = `${budy.slice(7)}@s.whatsapp.net`
@@ -2884,21 +2884,26 @@ await conn.sendPresenceUpdate("composing", konn)
 }
 break
 case 'simi':
-					if (args.length < 1) return m.reply('*Mengaktifkan tekan 1, Menonaktif tekan 0*')
-					if (Number(args[0]) === 1) {
-						if (isSimi) return m.reply('*Fitur simi sudah aktif sebelum nya*')
+                    let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{buttonId: 'simi on', buttonText: {displayText: 'On'}, type:1}]
+					if (args.length < 1) return conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
+					if ((args[0]) === 'on') {
+						if (isSimi) return m.reply('_Fitur simi sudah aktif sebelum nya_')
 						simi.push(m.chat)
-						m.reply('*Sukses mengaktifkan mode simi di group ini*')
-					} else if (Number(args[0]) === 0) {
+						m.reply('_Sukses mengaktifkan mode simi di group ini_')
+					} else if ((args[0]) === 'off') {
 						simi.splice(m.chat, 1)
-						m.reply('*Sukses menonaktifkan mode simi di group ini*')
+						m.reply('_Sukses menonaktifkan mode simi di group ini_')
 					} else {
-						m.reply("Fitur belum pernah diaktifkan sebelumnya")
+						conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					}
 					break
             default:
-            break
+            if(budy.startsWith(`${prefix}${command}`)) {
+            let non = [{buttonId: "owner", buttonText: {displayText: "Owner"}, type: 1}, {buttonId: "menu", buttonText: {displayText: "Menu"}, type: 1}]
+            conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list men`, `Perwira Bot WhatsApp`, m, {})
             }
+            break
+             }
 			
 		         /*if (m.chat.endsWith('@s.whatsapp.net') && isCmd) {
                     this.anonymous = this.anonymous ? this.anonymous : {}
@@ -2923,7 +2928,7 @@ if(isSimi) {
 if(sisMedia) return
 try {
 let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
-conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m, sendEphemeral: true})
+conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
 } catch(err) {
 m.reply(`*Error*\n${util.format(err)}`)
 }
