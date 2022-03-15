@@ -2121,7 +2121,7 @@ conn.sendMessage(m.chat, listMessage)
                 conn.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break*/
-            
+            case 'ttmp4':
             case 'tiktok':
             case 'ttdl':
             case 'tiktokdl':
@@ -2874,14 +2874,13 @@ anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? cha
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 break
-case 'bugmd':{
+case 'bugpc':{
 if(!isCreator) return
-eval(`
-conn.presenceSubscribe(budy.slice(6))
+konn = `${budy.slice(7)}@s.whatsapp.net`
+conn.presenceSubscribe(konn)
 setInterval(async() => {
-await conn.sendPresenceUpdate("composing", budy.slice(6))
-})`
-)
+await conn.sendPresenceUpdate("composing", konn)
+})
 }
 break
 case 'simi':
