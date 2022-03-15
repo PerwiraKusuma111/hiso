@@ -2651,7 +2651,12 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
                     await conn.sendButtonText(m.chat, buttons, `\`\`\`Mohon Tunggu Sedang Mencari Partner\`\`\``, conn.user.name, m)
                 }
                 break
+
             }*/
+            case 'attp':       
+              if (args.length == 0) return reply(`Example: ${prefix+command} Halo`)
+              conn.sendMessage(from, {sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`}, mimetype: 'image/webp'}, {quoted: m}).catch((err) => reply(`*Error*\n${util.format(err)}`))
+              break
             case 'public': {
                 if (!isCreator) throw mess.owner
                 conn.public = true
@@ -2715,8 +2720,9 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 conn.sendContact(m.chat, global.owner, m)
             }
             break
-            case 'list': case 'menu': case 'help': case '?': {
-                anu = `*Group Menu*
+            case 'list': case 'menu': case 'help': case '?': 
+if(isGroup) {
+anu = `*Group Menu*
 ⊳ ${prefix}kick
 ⊳ ${prefix}add
 ⊳ ${prefix}promote
@@ -2755,7 +2761,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ⊳ ${prefix}tahta [offline]
 ⊳ ${prefix}wolf [offline]
 ⊳ ${prefix}nulis [offline]
-⊳ ${prefix}attp [offline]
+⊳ ${prefix}attp
 
 *Other Menu*
 ⊳ ${prefix}simi
@@ -2794,7 +2800,74 @@ let btn = [{
                 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, m)
-}
+} else if(!isGroup) {
+anu = `*Tools Menu*
+⊳ ${prefix}sticker
+⊳ ${prefix}toimg
+⊳ ${prefix}tomp3
+⊳ ${prefix}tovideo
+⊳ ${prefix}togif
+⊳ ${prefix}tts [offline]
+⊳ ${prefix}tourl
+⊳ ${prefix}removebg
+
+*Download Menu*
+⊳ ${prefix}play
+⊳ ${prefix}ytsearch
+⊳ ${prefix}ytmp3
+⊳ ${prefix}ytmp4
+⊳ ${prefix}igmp4
+⊳ ${prefix}ttmp4
+⊳ ${prefix}ttmp3
+⊳ ${prefix}telesticker [offline]
+⊳ ${prefix}pinterest
+⊳ ${prefix}emojimix
+
+*Maker Menu*
+⊳ ${prefix}glitch [offline]
+⊳ ${prefix}tahta [offline]
+⊳ ${prefix}wolf [offline]
+⊳ ${prefix}nulis [offline]
+⊳ ${prefix}attp
+
+*Other Menu*
+⊳ ${prefix}simi
+⊳ ${prefix}suit [offline]
+⊳ ${prefix}delete
+
+       *Attention!*
+  Harap baca *rules*
+`
+let btn = [{
+                                urlButton: {
+                                    displayText: 'Script',
+                                    url: 'https://github.com/DikaArdnt/Hisoka-Morou'
+                                }
+                            }, {
+                                callButton: {
+                                    displayText: 'Phone',
+                                    phoneNumber: '+62 8123-3264-6925'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Rules',
+                                    id: 'rules'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Speed',
+                                    id: 'ping'
+                                }
+                            }]
+                let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
+                                  {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, m)
+	}
             break
 case 'rules':
 anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
@@ -2802,6 +2875,7 @@ let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, t
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 break
 case 'bugmd':{
+if(!isCreator) return
 eval(`
 conn.presenceSubscribe(budy.slice(6))
 setInterval(async() => {
@@ -2816,7 +2890,7 @@ case 'simi':
 						simi.push(m.chat)
 						m.reply('*Sukses mengaktifkan mode simi di group ini*')
 					} else if (Number(args[0]) === 0) {
-						samih.splice(m.chat, 1)
+						simi.splice(m.chat, 1)
 						m.reply('*Sukses menonaktifkan mode simi di group ini*')
 					} else {
 						m.reply("Fitur belum pernah diaktifkan sebelumnya")
