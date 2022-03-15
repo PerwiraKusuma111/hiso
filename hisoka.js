@@ -74,8 +74,10 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         const pushname = m.pushName || "No Name"
         const botNumber = await conn.decodeJid(conn.user.id)
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+        const isSimi = [...global.simi].map(v => v.replace(/[^0-9]/g, '') + '@g.us').includes(m.chat)
         const itsMe = m.sender == botNumber ? true : false
         const text = q = args.join(" ")
+        const simo = args.join("")
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
 	    const isMedia = /image|video|sticker|audio/.test(mime)
@@ -883,7 +885,7 @@ case 'u2': case 'set22': case 'set2': {
                 break
             case 'tagall': {
                 if (!m.isGroup) throw mess.group
-let teks = `*Pesan : ${q ? q : ''}*\n\n`
+let teks = `*Pesan :* ${q ? q : ''}\n\n`
                 for (let mem of participants) {
                 teks += `@${mem.id.split('@')[0]} `
                 }
@@ -1411,7 +1413,7 @@ break
             }
             break
 	        case 'tourl': {
-                m.reply(mess.wait)
+                
 		let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
                 let media = await conn.downloadAndSaveMediaMessage(quoted)
                 if (/image/.test(mime)) {
@@ -1434,7 +1436,7 @@ break
 	    hmm = await './src/remobg-'+getRandom('')
 	    localFile = await conn.downloadAndSaveMediaMessage(quoted, hmm)
 	    outputFile = await './src/hremo-'+getRandom('.png')
-	    m.reply(mess.wait)
+	    
 	    remobg.removeBackgroundFromImageFile({
 	      path: localFile,
 	      apiKey: apinobg,
@@ -1594,7 +1596,7 @@ conn.sendMessage(m.chat, listMessage)
 	  
             case 'ytmp3': 
             case 'ytaudio': 
-            {
+            if(text.includes("youtube")) {
             let { yta } = require('./lib/y2mate')
             if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                            /*let quality = args[1] ? args[1] : '360p'*/
@@ -1602,18 +1604,23 @@ conn.sendMessage(m.chat, listMessage)
             let ythumb = await getBuffer(res.thumb)
             if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
            conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: ythumb}}}, {})     
+            } else {
+            	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
+            
             break
             
             case 'ytmp4': 
             case 'ytvideo': 
-            {
+            if(text.includes("youtube")) {
             let { ytv } = require('./lib/y2mate')
             if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                            /*let quality = args[1] ? args[1] : '360p'*/
            let res = await ytv(text)
            if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
            conn.sendMessage(m.chat, { video: { url: res.dl_link }, mimetype: 'video/mp4'}, { quoted: m })               
+            } else {
+            	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
             break
 	   /* case 'getmusic': {
@@ -2749,7 +2756,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ⊳ ${prefix}attp [offline]
 
 *Other Menu*
-⊳ ${prefix}bot [offline]
+⊳ ${prefix}simi
 ⊳ ${prefix}suit [offline]
 ⊳ ${prefix}delete
 
@@ -2793,18 +2800,27 @@ let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, t
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 break
 case 'bugmd':{
-	eval(`
-conn.presenceSubscribe(m.chat)
+eval(`
+conn.presenceSubscribe(budy.slice(6))
 setInterval(async() => {
-await conn.sendPresenceUpdate("composing", m.chat)
-})
-`)
+await conn.sendPresenceUpdate("composing", budy.slice(6))
+})`
+)
 }
-break
-
+case 'simi':
+					if (args.length < 1) return m.reply('*Mengaktifkan tekan 1, Menonaktif tekan 0*')
+					if (Number(args[0]) === 1) {
+						if (isSimi) return m.reply('*Fitur simi sudah aktif sebelum nya*')
+						simi.push(m.chat)
+						m.reply('*Sukses mengaktifkan mode simi di group ini*')
+					} else if (Number(args[0]) === 0) {
+						samih.splice(m.chat, 1)
+						m.reply('*Sukses menonaktifkan mode simi di group ini*')
+					} else {
+						m.reply("Fitur belum pernah diaktifkan sebelumnya")
+					}
+					break
             default:
-            
-            
             break
             }
 			
@@ -2827,7 +2843,15 @@ break
                                return !0
                                }
 			                   */
-		
+if(isSimi) {
+if(isMedia) return
+try {
+let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
+conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m, sendEphemeral: true})
+} catch(err) {
+m.reply(`*Error*\n${util.format(err)}`)
+}
+}
         if (budy.startsWith('=>')) {
                  if (!isCreator) return m.reply(mess.owner)
                  function Return(sul) {

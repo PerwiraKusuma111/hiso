@@ -23,6 +23,7 @@ global.APIKeys = {
 
 // Other
 global.chatDB = []
+global.simi = []
 global.owner = ["6281232646925"]
 global.premium = ['6288292024190']
 global.packname = 'Perwira'
