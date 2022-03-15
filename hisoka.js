@@ -1338,7 +1338,7 @@ break
         }
         break*/
             case 'emojimix': {
-	        if (!text) throw `Example : ${prefix + command} 😅+🤔`
+	        if (!text.includes("+")) return m.reply(`Example : ${prefix + command} 😅+🤔`)
 		let [emoji1, emoji2] = text.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
 		for (let res of anu.results) {
@@ -1390,7 +1390,7 @@ break
             let media = await quoted.download()
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
-            conn.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert By ${conn.user.name}.mp3`}, { quoted : m })
+            conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
             }
             break
             case 'tovn': case 'toptt': {
@@ -2883,6 +2883,7 @@ await conn.sendPresenceUpdate("composing", budy.slice(6))
 })`
 )
 }
+break
 case 'simi':
 					if (args.length < 1) return m.reply('*Mengaktifkan tekan 1, Menonaktif tekan 0*')
 					if (Number(args[0]) === 1) {
