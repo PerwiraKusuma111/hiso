@@ -743,7 +743,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             }
             break
             case 'jodohku': {
-            if (!m.isGroup) throw mess.group
+            if (!m.isGroup) return m.reply(mess.group)
             let member = participants.map(u => u.id)
             let me = m.sender
             let jodoh = member[Math.floor(Math.random() * member.length)]
@@ -758,7 +758,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             }
             break
             case 'jadian': {
-            if (!m.isGroup) throw mess.group
+            if (!m.isGroup) return m.reply(mess.group)
             let member = participants.map(u => u.id)
             let orang = member[Math.floor(Math.random() * member.length)]
             let jodoh = member[Math.floor(Math.random() * member.length)]
@@ -796,7 +796,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             break
 */
 	case 'kick': {
-		if (!m.isGroup) throw mess.group
+		if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -804,7 +804,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 	}
 	break
 	case 'add': {
-		if (!m.isGroup) throw mess.group
+		if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -812,7 +812,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 	}
 	break
 	case 'promote': {
-		if (!m.isGroup) throw mess.group
+		if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -820,7 +820,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 	}
 	break
 	case 'demote': {
-		if (!m.isGroup) throw mess.group
+		if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -840,7 +840,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 	}
 	break
 	    case 'setname': case 'setsubject': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (!text) throw 'Text ?'
@@ -848,7 +848,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             }
             break
           case 'setdesc': case 'setdesk': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (!text) throw 'Text ?'
@@ -875,7 +875,7 @@ case 'u2': case 'set22': case 'set2': {
                 }
                 break
            case 'setppgrouup': case 'setppgrup': case 'setppgc': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isAdmins) throw mess.admin
                 if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
@@ -886,7 +886,7 @@ case 'u2': case 'set22': case 'set2': {
                 }
                 break
             case 'tagall': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
 let teks = `*Pesan :* ${q ? q : ''}\n\n`
                 for (let mem of participants) {
                 teks += `@${mem.id.split('@')[0]} `
@@ -895,7 +895,7 @@ let teks = `*Pesan :* ${q ? q : ''}\n\n`
                 }
                 break
                 case 'hidetag': {
-            if (!m.isGroup) throw mess.group
+            if (!m.isGroup) return m.reply(mess.group)
             conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
             }
             break
@@ -913,7 +913,7 @@ let teks = `*Pesan :* ${q ? q : ''}\n\n`
 	    }
 	    break
                case 'vote': {
-            if (!m.isGroup) throw mess.group
+            if (!m.isGroup) return m.reply(mess.group)
             if (m.chat in vote) throw `_Masih ada vote di chat ini!_\n\n*${prefix}hapusvote* - untuk menghapus vote`
             if (!text) throw `Masukkan Alasan Melakukan Vote, Example: *${prefix + command} Owner Ganteng*`
             m.reply(`Vote dimulai!\n\n*${prefix}upvote* - untuk ya\n*${prefix}devote* - untuk tidak\n*${prefix}cekvote* - untuk mengecek vote\n*${prefix}hapusvote* - untuk menghapus vote`)
@@ -955,7 +955,7 @@ let buttonsVote = [
 	    }
             break
                case 'upvote': {
-            if (!m.isGroup) throw mess.group
+            if (!m.isGroup) return m.reply(mess.group)
             if (!(m.chat in vote)) throw `_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`
             isVote = vote[m.chat][1].concat(vote[m.chat][2])
             wasVote = isVote.includes(m.sender)
@@ -997,7 +997,7 @@ ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
 	    }
              break
                 case 'devote': {
-            if (!m.isGroup) throw mess.group
+            if (!m.isGroup) return m.reply(mess.group)
             if (!(m.chat in vote)) throw `_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`
             isVote = vote[m.chat][1].concat(vote[m.chat][2])
             wasVote = isVote.includes(m.sender)
@@ -1040,7 +1040,7 @@ ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
             break
                  
 case 'cekvote':
-if (!m.isGroup) throw mess.group
+if (!m.isGroup) return m.reply(mess.group)
 if (!(m.chat in vote)) throw `_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`
 teks_vote = `*「 VOTE 」*
 
@@ -1068,14 +1068,14 @@ ${vote[m.chat][2].map((v, i) => `├ ${i + 1}. @${v.split`@`[0]}`).join('\n')}
 conn.sendTextWithMentions(m.chat, teks_vote, m)
 break
 		case 'deletevote': case'delvote': case 'hapusvote': {
-            if (!m.isGroup) throw mess.group
+            if (!m.isGroup) return m.reply(mess.group)
             if (!(m.chat in vote)) throw `_*tidak ada voting digrup ini!*_\n\n*${prefix}vote* - untuk memulai vote`
             delete vote[m.chat]
             m.reply('Berhasil Menghapus Sesi Vote Di Grup Ini')
 	    }
             break*/
                case 'group': case 'grup': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (args[0] === 'close'){
@@ -1093,7 +1093,7 @@ break
             }
             break
             case 'editinfo': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
              if (args[0] === 'open'){
@@ -1111,7 +1111,7 @@ break
             }
             break
             /*case 'antilink': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (args[0] === "on") {
@@ -1132,7 +1132,7 @@ break
              }
              break*/
              /*case 'mute': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (args[0] === "on") {
@@ -1153,13 +1153,13 @@ break
              }
              break*/
             case 'linkgroup': case 'linkgc': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 let response = await conn.groupInviteCode(m.chat)
                 conn.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`, m, { detectLink: true })
             }
             break
         /*    case 'ephemeral': {
-                if (!m.isGroup) throw mess.group
+                if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (!text) throw 'Masukkan value enable/disable'
@@ -2721,7 +2721,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'list': case 'menu': case 'help': case '?': 
-if(isGroup) {
+if(m.isGroup) {
 anu = `*Group Menu*
 ⊳ ${prefix}kick
 ⊳ ${prefix}add
@@ -2800,7 +2800,7 @@ let btn = [{
                 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, m)
-} else if(!isGroup) {
+} else if(!m.isGroup) {
 anu = `*Tools Menu*
 ⊳ ${prefix}sticker
 ⊳ ${prefix}toimg
