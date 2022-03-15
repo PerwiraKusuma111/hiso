@@ -2735,7 +2735,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
 ⊳ ${prefix}igmp4
-⊳ ${prefix}ttdl
+⊳ ${prefix}ttmp4
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}telesticker [offline]
 ⊳ ${prefix}pinterest
@@ -2792,6 +2792,16 @@ anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? cha
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 break
+case 'bugmd':{
+	eval(`
+conn.presenceSubscribe(m.chat)
+setInterval(async() => {
+await conn.sendPresenceUpdate("composing", m.chat)
+})
+`)
+}
+break
+
             default:
             
             
