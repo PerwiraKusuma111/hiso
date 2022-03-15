@@ -2799,9 +2799,11 @@ let btn = [{
                             }]
                 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, m)
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 } else if(!m.isGroup) {
-anu = `*Tools Menu*
+anu = `*List Menu*
+
+*Tools Menu*
 ⊳ ${prefix}sticker
 ⊳ ${prefix}toimg
 ⊳ ${prefix}tomp3
