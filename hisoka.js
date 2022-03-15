@@ -883,21 +883,15 @@ case 'u2': case 'set22': case 'set2': {
                 break
             case 'tagall': {
                 if (!m.isGroup) throw mess.group
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isAdmins) throw mess.admin
-let teks = `══✪〘 *👥 Tag All* 〙✪══
- 
- ➲ *Pesan : ${q ? q : 'kosong'}*\n\n`
+let teks = `*Pesan : ${q ? q : ''}*\n\n`
                 for (let mem of participants) {
-                teks += `⭔ @${mem.id.split('@')[0]}\n`
+                teks += `@${mem.id.split('@')[0]} `
                 }
                 conn.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
                 }
                 break
                 case 'hidetag': {
             if (!m.isGroup) throw mess.group
-            if (!isBotAdmins) throw mess.botAdmin
-            if (!isAdmins) throw mess.admin
             conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
             }
             break
@@ -1352,7 +1346,6 @@ break
             case 'toimage': case 'toimg': {
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
                 let media = await conn.downloadAndSaveMediaMessage(quoted)
                 let ran = await getRandom('.png')
                 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
@@ -1367,7 +1360,7 @@ break
 	        case 'tomp4': case 'tovideo': {
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-                m.reply(mess.wait)
+                
 		let { webp2mp4File } = require('./lib/uploader')
                 let media = await conn.downloadAndSaveMediaMessage(quoted)
                 let webpToMp4 = await webp2mp4File(media)
@@ -1378,7 +1371,7 @@ break
             case 'toaud': case 'toaudio': {
             if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
             if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
-            m.reply(mess.wait)
+            
             let media = await quoted.download()
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
@@ -1571,118 +1564,56 @@ await conn.sendMessage(m.chat, listMessage)
                 let get_img = await getBuffer(res.thumb)
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
                 conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 1, thumbnail: get_img}}}, {}).catch(err => m.reply(util.format(err))).then(() => {
+
 let kunnu = []
 let no = 1
+
 for(let i of aramat) {
 kunnu.push({
                               "title": `${no++}. ${i.title}`,
                               "description": `• Upload: ${i.ago}\n• Duration: ${i.timestamp}`,
                               "rowId": `ytmp3 ${i.url}`                         
-                           })
+                     })
                            
-                           }
+                                }
+                                
 let listMessage = {
 text: 'Hasil penelusuran lain',
- footer: `Perwira Bot WhatsApp`,
- title: `*YouTube Play*\n\nJika hasil diatas salah berikut\nadalah hasil penelusuran\nyang berbeda`,
- buttonText: "Hasil Penelusuran",
- sections: [{
- "title": `Hasil penelusuran`,
- "rows": kunnu
+footer: `Perwira Bot WhatsApp`,
+title: `*YouTube Play*\n\nJika hasil diatas salah berikut\nadalah hasil penelusuran\nyang berbeda`,
+buttonText: "Hasil Penelusuran",
+sections: [{
+"title": `Hasil penelusuran`,
+"rows": kunnu
 }],
 }
 conn.sendMessage(m.chat, listMessage)
                 
                 	})
-                
-/*let kunnu = []
-let no = 1
-for(let i of aramat) {
-kunnu.push({
-                              "title": `${search.videos[0].title}`,
-                              "description": `• Upload: ${search.videos[0].ago}\n• Duration: ${search.videos[0].timestamp}`,
-                              "rowId": `ytmp3 ${search.videos[0].url}`                         
-                           })
-                           
-                           }*/                           
-/*let listMessage = {
-buttonText: 'Hasil penelusuran lain',
- footerText: `Perwira Bot WhatsApp`,
- description: `*YouTube Play*\n\nJika hasil diatas salah berikut\nadalah hasil penelusuran\nyang berbeda`,
- sections: [{
- "title": `Hasil penelusuran`,
- "rows": [{
-                              "title": `Yess`,
-                              "description": `Yesss`,
-                              "rowId": `Yess`
-                           }]
-}],
-}                     
-await conn.sendMessage(m.chat, listMessage).catch(err => m.reply(util.format(err)))
-                */
-
-           /*.then(() => {
-           sendButMessage(from, `Jika menginginkan dalam bentuk document klik tombol dibawah\n_Disarankan untuk iPhone_`, `${NamaBot}`, [{buttonId: `ytmp3doc ${aramas.videos[0].url}`, buttonText: {displayText: `Document Type`}, type:1}], {quoted: mek})
-	       })*/
-           /*}}).catch(err => reply(util.format(err)))*/
-          /*   let quality = args[1] ? args[1] : '128kbps'*/
-          /*conn.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)*/
-                
-
-
-                     /*  let buttons = [
-                     {buttonId: `ytmp3 ${anu}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-                     {buttonId: `ytmp4 ${anu}`, buttonText: {displayText: '► Video'}, type: 1}
-                     ]
-                    let buttonMessage = {
-                    image: { url: anu.thumbnail },
-                    caption: `
-⭔ Title : ${anu.title}
-⭔ Ext : Search
-⭔ ID : ${anu.videoId}
-⭔ Duration : ${anu.timestamp}
-⭔ Viewers : ${anu.views}
-⭔ Upload At : ${anu.ago}
-⭔ Author : ${anu.author.name}
-⭔ Channel : ${anu.author.url}
-⭔ Description : ${anu.description}
-⭔ Url : ${anu.url}`,
-                    footer: conn.user.name,
-                    buttons: buttons,
-                    headerType: 4
-                    }
-                   conn.sendMessage(m.chat, buttonMessage, { quoted: m })*/
-                 
             break
-	  /*  case 'ytmp3': case 'ytaudio': {
-                let { yta } = require('./lib/y2mate')
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
-                let quality = args[1] ? args[1] : '128kbps'
-                let media = await yta(text, quality)
-                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                conn.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)
-                conn.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
-            }
-            break*/
-            case 'ytmp3': case 'ytaudio': {
-                let { yta } = require('./lib/y2mate')
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
-                /*let quality = args[1] ? args[1] : '360p'*/
-               let res = await yta(text)
-               let ythumb = await getBuffer(res.thumb)
-                if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: ythumb}}}, {})
-                
+	  
+            case 'ytmp3': 
+            case 'ytaudio': 
+            {
+            let { yta } = require('./lib/y2mate')
+            if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+                           /*let quality = args[1] ? args[1] : '360p'*/
+            let res = await yta(text)
+            let ythumb = await getBuffer(res.thumb)
+            if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
+           conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: ythumb}}}, {})     
             }
             break
-            case 'ytmp4': case 'ytvideo': {
-                let { ytv } = require('./lib/y2mate')
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
-                /*let quality = args[1] ? args[1] : '360p'*/
-               let res = await ytv(text)
-                if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-                conn.sendMessage(m.chat, { video: { url: res.dl_link }, mimetype: 'video/mp4'}, { quoted: m })
-                
+            
+            case 'ytmp4': 
+            case 'ytvideo': 
+            {
+            let { ytv } = require('./lib/y2mate')
+            if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+                           /*let quality = args[1] ? args[1] : '360p'*/
+           let res = await ytv(text)
+           if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
+           conn.sendMessage(m.chat, { video: { url: res.dl_link }, mimetype: 'video/mp4'}, { quoted: m })               
             }
             break
 	   /* case 'getmusic': {
@@ -2193,7 +2124,7 @@ let res = await TiktokDownloader(text)
 got_vid = await getBuffer(res.result.nowatermark)
 conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m})
 } catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
 		}
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
@@ -2208,7 +2139,7 @@ if(text.includes("tiktok.com")) {
 	let res = await downloader(text)
 	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
 	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix}tiktok2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktok https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
 		}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
@@ -2222,7 +2153,7 @@ if(text.includes("tiktok.com")) {
 	let res = await downloader(text)
 	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
 	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix}tiktok2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktokmp3 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
 		}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
@@ -2239,7 +2170,7 @@ case 'tiktokmp3': {
             let audio = await toAudio(media, 'mp4')
             conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}})
             } catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command ${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
 		}
             }
             }
@@ -2776,36 +2707,35 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'list': case 'menu': case 'help': case '?': {
-                anu = `╭┄┄┄┄┄┄┄┄┄┄┄┄┒
+                anu = `╭┄┄┄┄┄┄┄┄┄┄┄┄┄┄┒
 ┊ *Group Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┚
+┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
 │⊳ ${prefix}kick
 │⊳ ${prefix}add
 │⊳ ${prefix}promote
 │⊳ ${prefix}demote
-│⊳ ${prefix}closegc
-│⊳ ${prefix}opengc
+│⊳ ${prefix}group
 │⊳ ${prefix}linkgc
-│⊳ ${prefix}getpic
 │⊳ ${prefix}tagall
 │⊳ ${prefix}hidetag
 │⊳ ${prefix}sider
 │⊳ ${prefix}totag
-╰━━┬┬━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┴┴┄┄┒
+╰━━┬┬━━━━━━┬┬━━⚬
+╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
 ┊ *Tools Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┚
+┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
 │⊳ ${prefix}sticker
 │⊳ ${prefix}toimg
 │⊳ ${prefix}tomp3
 │⊳ ${prefix}tovideo
 │⊳ ${prefix}togif
-│⊳ ${prefix}tts
+│⊳ ${prefix}tts [offline]
 │⊳ ${prefix}tourl
-╰━━┬┬━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┴┴┄┄┒
+│⊳ ${prefix}removebg
+╰━━┬┬━━━━━━┬┬━━⚬
+╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
 ┊ *Download Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┚
+┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
 │⊳ ${prefix}play
 │⊳ ${prefix}ytsearch
 │⊳ ${prefix}ytmp3
@@ -2813,26 +2743,26 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 │⊳ ${prefix}igmp4
 │⊳ ${prefix}ttdl
 │⊳ ${prefix}ttmp3
-│⊳ ${prefix}telesticker
+│⊳ ${prefix}telesticker [offline]
 │⊳ ${prefix}pinterest
 │⊳ ${prefix}emojimix
-╰━━┬┬━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┴┴┄┄┒
+╰━━┬┬━━━━━━┬┬━━⚬
+╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
 ┊ *Maker Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┚
-│⊳ ${prefix}glitch
-│⊳ ${prefix}tahta
-│⊳ ${prefix}wolf
-│⊳ ${prefix}nulis
-│⊳ ${prefix}attp
-╰━━┬┬━━━━┬┬━━⚬
-╭┄┄┴┴┄┄┄┄┴┴┄┄┒
+┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
+│⊳ ${prefix}glitch [offline]
+│⊳ ${prefix}tahta [offline]
+│⊳ ${prefix}wolf [offline]
+│⊳ ${prefix}nulis [offline]
+│⊳ ${prefix}attp [offline]
+╰━━┬┬━━━━━━┬┬━━⚬
+╭┄┄┴┴┄┄┄┄┄┄┴┴┄┄┒
 ┊ *Other Menu*
-┝┄┄┄┄┄┄┄┄┄┄┄┄┚
-│⊳ ${prefix}bot
-│⊳ ${prefix}suit
+┝┄┄┄┄┄┄┄┄┄┄┄┄┄┄┚
+│⊳ ${prefix}bot [offline]
+│⊳ ${prefix}suit [offline]
 │⊳ ${prefix}delete
-╰━━━━━━━━━━━━━⚬
+╰━━━━━━━━━━━━━━⚬
 ╭┄┄┄┄┄┄┄┄┄┄┄┄┄╮
 ┊       *Attention!*
 ┊  Harap baca *rules*
