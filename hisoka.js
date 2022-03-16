@@ -2671,6 +2671,32 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
                 m.reply('Sukses Change To Self Usage')
             }
             break
+ case 'nulis':{
+									if (args.length < 1) return m.reply(`Kirim perintah *${prefix+command}* teks`)
+									let tulisan = q
+									let splitText = tulisan.replace(/(\S+\s*){1,9}/g, '$&\n')
+									let fixHeight = splitText.split('\n').slice(0, 31).join('\n')
+									spawn('convert', [
+									'./src/snulis.jpg',
+									'-font',
+									'./src/Indie-Flower.ttf',
+									'-size',
+									'960x1280',
+									'-pointsize',
+									'22',
+									'-interline-spacing',
+									'2',
+									'-annotate',
+									'+140+153',
+									fixHeight,
+									'./src/buku.jpg'
+									])
+									.on('error', () => m.reply("Error"))
+									.on('exit', () => {
+									conn.sendMessage(from, {image: fs.readFileSync('./src/buku.jpg'), mimetype: "image/jpeg", caption: "_Done_"}, {quoted: m})
+									})
+									}
+									break
             case 'ping': case 'botstatus': case 'statusbot': {
                 const used = process.memoryUsage()
                 const cpus = os.cpus().map(cpu => {
@@ -2766,10 +2792,7 @@ anu = `*List Menu*
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}glitch [offline]
-⊳ ${prefix}tahta
-⊳ ${prefix}wolf [offline]
-⊳ ${prefix}nulis [offline]
+⊳ ${prefix}nulis
 ⊳ ${prefix}attp
 
 *Other Menu*
@@ -2835,10 +2858,7 @@ anu = `*List Menu*
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}glitch [offline]
-⊳ ${prefix}tahta
-⊳ ${prefix}wolf [offline]
-⊳ ${prefix}nulis [offline]
+⊳ ${prefix}nulis
 ⊳ ${prefix}attp
 
 *Other Menu*
