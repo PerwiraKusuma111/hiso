@@ -2660,7 +2660,7 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
               if (args.length == 0) return reply(`Example: ${prefix+command} Halo`)
               conn.sendMessage(m.chat, {sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`}, mimetype: 'image/webp'}, {quoted: m})
               } catch(err) {
-              	m.reply(`*Error*\n${util.format(err)}`))
+              	m.reply(`*Error*\n${util.format(err)}`)
               	}
               break
             case 'public': {
