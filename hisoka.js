@@ -2671,7 +2671,7 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
                 m.reply('Sukses Change To Self Usage')
             }
             break
- case 'nulis':{
+/* case 'nulis':{
  	try {
 									if (args.length < 1) return m.reply(`Kirim perintah *${prefix+command}* teks`)
 									let tulisan = q
@@ -2700,7 +2700,7 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
 										m.reply("Error")
 										}
 									}
-									break
+									break*/
             case 'ping': case 'botstatus': case 'statusbot': {
                 const used = process.memoryUsage()
                 const cpus = os.cpus().map(cpu => {
@@ -2779,7 +2779,7 @@ anu = `*List Menu*
 ⊳ ${prefix}tomp3
 ⊳ ${prefix}tovideo
 ⊳ ${prefix}togif
-⊳ ${prefix}tts [offline]
+⊳ ${prefix}tts [nonaktif]
 ⊳ ${prefix}tourl
 ⊳ ${prefix}removebg
 
@@ -2791,17 +2791,17 @@ anu = `*List Menu*
 ⊳ ${prefix}igmp4
 ⊳ ${prefix}ttmp4
 ⊳ ${prefix}ttmp3
-⊳ ${prefix}telesticker [offline]
+⊳ ${prefix}telesticker [nonaktif]
 ⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}nulis
+⊳ ${prefix}nulis [nonaktif]
 ⊳ ${prefix}attp
 
 *Other Menu*
 ⊳ ${prefix}simi
-⊳ ${prefix}suit [offline]
+⊳ ${prefix}suit [nonaktif]
 ⊳ ${prefix}delete
 
        *Attention!*
@@ -2845,7 +2845,7 @@ anu = `*List Menu*
 ⊳ ${prefix}tomp3
 ⊳ ${prefix}tovideo
 ⊳ ${prefix}togif
-⊳ ${prefix}tts [offline]
+⊳ ${prefix}tts [nonaktif]
 ⊳ ${prefix}tourl
 ⊳ ${prefix}removebg
 
@@ -2857,17 +2857,17 @@ anu = `*List Menu*
 ⊳ ${prefix}igmp4
 ⊳ ${prefix}ttmp4
 ⊳ ${prefix}ttmp3
-⊳ ${prefix}telesticker [offline]
+⊳ ${prefix}telesticker [nonaktif]
 ⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}nulis
+⊳ ${prefix}nulis [nonaktif]
 ⊳ ${prefix}attp
 
 *Other Menu*
 ⊳ ${prefix}simi
-⊳ ${prefix}suit [offline]
+⊳ ${prefix}suit [nonaktif]
 ⊳ ${prefix}delete
 
        *Attention!*
