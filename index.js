@@ -125,7 +125,7 @@ async function startHisoka() {
                 }
            let ppuser2 = await getBuffer(ppuser)
            let imageMsg = await prepareWAMessageMedia({ image: ppuser2 }, { upload: conn.waUploadToServer })
-           let imageMsg2 = imageMsg.message.imageMessage
+           let imageMsg2 = imageMsg.imageMessage
            var mess = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
            imageMessage: imageMsg2
             }), options)
