@@ -111,39 +111,7 @@ async function startHisoka() {
         }
     })
 
-    conn.ev.on('group-participants.update', async (anu) => {
-        console.log(anu)
-        try {
-            let metadata = await conn.groupMetadata(anu.id)
-            let participants = anu.participants
-            for (let num of participants) {
-                // Get Profile Picture User
-                try {
-                    ppuser = await conn.profilePictureUrl(num, 'image')
-                } catch {
-                    ppuser = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
-                }
-           let ppuser2 = await getBuffer(ppuser)
-           let imageMsg = await prepareWAMessageMedia({ image: ppuser2 }, { upload: conn.waUploadToServer })
-           let thmub = imageMsg.imageMessage.jpegThumbnail
-                // Get Profile Picture Group
-                try {
-                    ppgroup = await conn.profilePictureUrl(anu.id, 'image')
-                } catch {
-                    ppgroup = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
-                }
-
-                if (anu.action == 'add') {
-                    conn.sendMessage(anu.id, { image: ppuser2, jpegThumbnail: thmub, contextInfo: { mentionedJid: [num] }, caption: `Selamat datang di grup ${metadata.subject} @${num.split("@")[0]}` })
-                } else if (anu.action == 'remove') {
-                    conn.sendMessage(anu.id, { image: ppuser2, jpegThumbnail: thmub, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Telah keluar dari grup ${metadata.subject}` })
-                }
-            }
-        } catch (err) {
-            console.log(err)
-        }
-    })
-	
+    
     // Setting
     conn.decodeJid = (jid) => {
         if (!jid) return jid
@@ -318,6 +286,7 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
 	let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         return await conn.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
     }
+
 
     /**
      * 
@@ -544,6 +513,37 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
      * @param {*} path 
      * @returns 
      */
+     conn.ev.on('group-participants.update', async (anu) => {
+        console.log(anu)
+        try {
+            let metadata = await conn.groupMetadata(anu.id)
+            let participants = anu.participants
+            for (let num of participants) {
+                // Get Profile Picture User
+                try {
+                    ppuser = await conn.profilePictureUrl(num, 'image')
+                } catch {
+                    ppuser = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
+                }
+           let ppuser2 = await getBuffer(ppuser)
+                // Get Profile Picture Group
+                try {
+                    ppgroup = await conn.profilePictureUrl(anu.id, 'image')
+                } catch {
+                    ppgroup = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
+                }
+
+                if (anu.action == 'add') {
+                    conn.sendImage(anu.id, ppuser2, `Selamat datang di grup ${metadata.subject} @${num.split("@")[0]}`)
+                } else if (anu.action == 'remove') {
+                    conn.sendImage(anu.id, ppuser2, `@${num.split("@")[0]} Telah keluar dari grup ${metadata.subject}`)
+                }
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    })
+	
     conn.getFile = async (PATH, save) => {
         let res
         let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
