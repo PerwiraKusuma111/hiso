@@ -123,9 +123,9 @@ async function startHisoka() {
                 } catch {
                     ppuser = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
                 }
-            let ppuser2 = await getBuffer(ppuser)
-            let imageMsg = await conn.prepareMessage(metadata.id, {image: ppuser2, mimetype: 'image/jpeg'})
-            let imageMsg2 = imageMsg.message.imageMessage
+           /* let ppuser2 = await getBuffer(ppuser)
+            let imageMsg = await conn.prepareMessage(anu.id, {image: ppuser2, mimetype: 'image/jpeg'})
+            let imageMsg2 = imageMsg.message.imageMessage*/
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
@@ -134,9 +134,9 @@ async function startHisoka() {
                 }
 
                 if (anu.action == 'add') {
-                    conn.sendMessage(anu.id, { image: imageMsg2, contextInfo: { mentionedJid: [num] }, caption: `Selamat datang di ${metadata.subject} @${num.split("@")[0]}` })
+                    conn.sendMessage(anu.id, {image: { url: ppuser}, contextInfo: { mentionedJid: [num] }, mimetype: 'image/jpeg', caption: `Selamat datang di ${metadata.subject} @${num.split("@")[0]}` })
                 } else if (anu.action == 'remove') {
-                    conn.sendMessage(anu.id, { image:  imageMsg2, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Keluar dari ${metadata.subject}` })
+                    conn.sendMessage(anu.id, {image: { url: ppuser}, contextInfo: { mentionedJid: [num] }, mimetype: 'image/jpeg', caption: `@${num.split("@")[0]} Keluar dari ${metadata.subject}`})
                 }
             }
         } catch (err) {
