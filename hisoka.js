@@ -2655,9 +2655,13 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
                 break
 
             }*/
-            case 'attp':       
+            case 'attp':
+            try {
               if (args.length == 0) return reply(`Example: ${prefix+command} Halo`)
-              conn.sendMessage(m.chat, {sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`}, mimetype: 'image/webp'}, {quoted: m}).catch((err) => reply(`*Error*\n${util.format(err)}`))
+              conn.sendMessage(m.chat, {sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`}, mimetype: 'image/webp'}, {quoted: m})
+              } catch(err) {
+              	m.reply(`*Error*\n${util.format(err)}`))
+              	}
               break
             case 'public': {
                 if (!isCreator) throw mess.owner
