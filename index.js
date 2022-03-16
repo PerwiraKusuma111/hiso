@@ -513,7 +513,7 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
      * @param {*} path 
      * @returns 
      */
-     conn.ev.on('group-participants.update', async (anu) => {
+     /*conn.ev.on('group-participants.update', async (anu) => {
         console.log(anu)
         try {
             let metadata = await conn.groupMetadata(anu.id)
@@ -543,7 +543,7 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
             console.log(err)
         }
     })
-	
+	*/
     conn.getFile = async (PATH, save) => {
         let res
         let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
