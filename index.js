@@ -125,10 +125,7 @@ async function startHisoka() {
                 }
            let ppuser2 = await getBuffer(ppuser)
            let imageMsg = await prepareWAMessageMedia({ image: ppuser2 }, { upload: conn.waUploadToServer })
-           let imageMsg2 = imageMsg.imageMessage
-           var mess = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-           imageMessage: imageMsg2
-            }), {})
+           let thmub = imageMsg.imageMessage.jpegThumbnail
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
@@ -137,9 +134,9 @@ async function startHisoka() {
                 }
 
                 if (anu.action == 'add') {
-                    conn.relayMessage(anu.id, mess.message, { messageId: mess.key.id, contextInfo: { mentionedJid: [num] }, caption: `Selamat datang di grup ${metadata.subject} @${num.split("@")[0]}`})
+                    conn.sendMessage(anu.id, { image: ppuser2, jpegThumbnail: thmub, contextInfo: { mentionedJid: [num] }, caption: `Selamat datang di grup ${metadata.subject} @${num.split("@")[0]}` })
                 } else if (anu.action == 'remove') {
-                    conn.relayMessage(anu.id, mess.message, { messageId: mess.key.id, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Keluar dari grup ${metadata.subject}`})
+                    conn.sendMessage(anu.id, { image: ppuser2, jpegThumbnail: thmub, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Telah keluar dari grup ${metadata.subject}` })
                 }
             }
         } catch (err) {
