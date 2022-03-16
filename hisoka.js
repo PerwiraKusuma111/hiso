@@ -2135,7 +2135,7 @@ let res = await TiktokDownloader(text)
 got_vid = await getBuffer(res.result.nowatermark)
 conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m})
 } catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
 		}
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
@@ -2150,7 +2150,7 @@ if(text.includes("tiktok.com")) {
 	let res = await downloader(text)
 	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
 	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktok https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktok https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
 		}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
@@ -2164,7 +2164,7 @@ if(text.includes("tiktok.com")) {
 	let res = await downloader(text)
 	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
 	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktokmp3 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktokmp3 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
 		}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
@@ -2181,7 +2181,7 @@ case 'tiktokmp3': {
             let audio = await toAudio(media, 'mp4')
             conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}})
             } catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${util.format(err)}`)
+		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
 		}
             }
             }
@@ -2192,7 +2192,7 @@ case 'instagramvideo':
 if (text.includes("instagram.com")) {
 let { igdownloader } = require('./lib/igdown')
 igdownloader(text).then(async res => {
-conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${util.format(err)}`))*/
+conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
 })
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
@@ -2660,7 +2660,7 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
               if (args.length == 0) return reply(`Example: ${prefix+command} Halo`)
               conn.sendMessage(m.chat, {sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`}, mimetype: 'image/webp'}, {quoted: m})
               } catch(err) {
-              	m.reply(`*Error*\n${util.format(err)}`)
+              	m.reply(`*Error*\n${String(err)}`)
               	}
               break
             case 'public': {
@@ -2755,7 +2755,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 case 'tahta':
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 conn.sendMessage(m.chat, {image: {url: `https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`}, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err =>
-m.reply(`*Error*\n${util.format(err)}`))
+m.reply(`*Error*\n${String(err)}`))
 break
             case 'owner': case 'creator': {
                 conn.sendContact(m.chat, global.owner, m)
@@ -2969,7 +2969,7 @@ try {
 let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
 conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
 } catch(err) {
-m.reply(`*Error*\n${util.format(err)}`)
+m.reply(`*Error*\n${String(err)}`)
 }
 }
         if (budy.startsWith('=>')) {
@@ -3021,7 +3021,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
 		    conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		   }
            } catch (err) {
-           m.reply(`*Attention*\n${util.format(err)}`)
+           m.reply(`*Attention*\n${String(err)}`)
            }
            }
 
