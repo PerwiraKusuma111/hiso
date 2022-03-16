@@ -887,6 +887,7 @@ case 'u2': case 'set22': case 'set2': {
                 break
             case 'tagall': {
                 if (!m.isGroup) return m.reply(mess.group)
+                if (!isAdmins && !isCreator) return m.reply(mess.admin)
 let teks = `*Pesan :* ${q ? q : 'Tidak ada'}\n\n`
                 for (let mem of participants) {
                 teks += `@${mem.id.split('@')[0]} `
@@ -896,6 +897,7 @@ let teks = `*Pesan :* ${q ? q : 'Tidak ada'}\n\n`
                 break
                 case 'hidetag': {
             if (!m.isGroup) return m.reply(mess.group)
+            if (!isAdmins && !isCreator) return m.reply(mess.admin)
             conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
             }
             break
@@ -2716,6 +2718,11 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(respon)
             }
             break
+case 'tahta':
+if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
+conn.sendMessage(m.chat, {image: {url: `https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`}, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err =>
+m.reply(`*Error*\n${util.format(err)}`))
+break
             case 'owner': case 'creator': {
                 conn.sendContact(m.chat, global.owner, m)
             }
@@ -2760,7 +2767,7 @@ anu = `*List Menu*
 
 *Maker Menu*
 ⊳ ${prefix}glitch [offline]
-⊳ ${prefix}tahta [offline]
+⊳ ${prefix}tahta
 ⊳ ${prefix}wolf [offline]
 ⊳ ${prefix}nulis [offline]
 ⊳ ${prefix}attp
@@ -2829,7 +2836,7 @@ anu = `*List Menu*
 
 *Maker Menu*
 ⊳ ${prefix}glitch [offline]
-⊳ ${prefix}tahta [offline]
+⊳ ${prefix}tahta
 ⊳ ${prefix}wolf [offline]
 ⊳ ${prefix}nulis [offline]
 ⊳ ${prefix}attp
@@ -2870,7 +2877,7 @@ let btn = [{
                             }]
                 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, m)
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
             break
 case 'rules':{
