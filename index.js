@@ -128,7 +128,7 @@ async function startHisoka() {
            let imageMsg2 = imageMsg.imageMessage
            var mess = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
            imageMessage: imageMsg2
-            }), options)
+            }), {})
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
