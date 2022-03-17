@@ -2780,6 +2780,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 case 'nulis':
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 conn.sendMessage(m.chat, {image: { url: `https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`}, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
+break
 case 'tahta':
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 conn.sendMessage(m.chat, {image: {url: `https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`}, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
@@ -2827,7 +2828,7 @@ anu = `*List Menu*
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}nulis [nonaktif]
+⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
@@ -2894,7 +2895,7 @@ anu = `*List Menu*
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}nulis [nonaktif]
+⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
