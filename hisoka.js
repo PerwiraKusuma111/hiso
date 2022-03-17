@@ -77,6 +77,7 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         const isSimi = [...global.simi]/*.map(v => v.replace(/[^0-9]/g, '') + '@g.us')*/.includes(m.chat)
         const itsMe = m.sender == botNumber ? true : false
         const text = q = args.join(" ")
+        const isOffline = !m.isGroup ? global.offline.includes("offline") : false
         const simo = args.join("")
         const quoted = m.quoted ? m.quoted : m
         const mime = (quoted.msg || quoted).mimetype || ''
@@ -489,6 +490,13 @@ Selama ${clockString(new Date - user.afkTime)}
             user.afkReason = ''
         }
 	 */   
+	
+	//Updatenya
+	/*fs.readdirSync('./commands').forEach((file) => {
+    if (path.extname(file).toLowerCase() == '.js') {
+    eval(fs.readFileSync('./commands/' + file,  'utf8'))
+    }
+    })*/
         switch(command) {
 	 /*   case 'afk': {
                 let user = global.db.users[m.sender]
@@ -865,12 +873,13 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 m.reply(mess.success)
                 }
                 break
-case 'u2': case 'set22': case 'set2': {
+case 'setpp': case 'ppchange': case 'changepp': {
+	            if(!isCreator) return m.reply("Khusus Owner")
                 if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
                 let media = await conn.downloadAndSaveMediaMessage(quoted)
-                await conn.updateProfilePicture("120363025593623282@g.us", { url: media }).catch((err) => fs.unlinkSync(media))
+                await conn.updateProfilePicture(`${text}`, { url: media }).catch((err) => fs.unlinkSync(media))
                 m.reply(mess.success)
                 }
                 break
@@ -2656,17 +2665,33 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
 
             }*/
             case 'attp':
+            {
             try {
-              if (args.length == 0) return reply(`Example: ${prefix+command} Halo`)
+              if (args.length == 0) return m.reply(`Example: ${prefix+command} Halo`)
               conn.sendMessage(m.chat, {sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`}, mimetype: 'image/webp'}, {quoted: m})
               } catch(err) {
               	m.reply(`*Error*\n${String(err)}`)
               	}
+              }
               break
             case 'public': {
                 if (!isCreator) throw mess.owner
                 conn.public = true
                 m.reply('Sukse Change To Public Usage')
+            }
+            break
+case 'offline': {
+                if (!isCreator) throw mess.owner
+                if (isOffline) return m.reply("Kamu sedang dalam mode Offline")
+                global.offline.push("offline")
+                m.reply('You know Offline')
+            }
+            break
+case 'online': {
+                if (!isCreator) throw mess.owner
+                if (!isOffline) return m.reply("Kamu sedang dalam mode Online")
+                global.offline.splice("offline", 1)
+                m.reply('You know Online')
             }
             break
             case 'self': {
@@ -2752,10 +2777,12 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(respon)
             }
             break
+case 'nulis':
+if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
+conn.sendMessage(m.chat, {image: { url: `https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`}, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
 case 'tahta':
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
-conn.sendMessage(m.chat, {image: {url: `https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`}, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err =>
-m.reply(`*Error*\n${String(err)}`))
+conn.sendMessage(m.chat, {image: {url: `https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`}, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
 break
             case 'owner': case 'creator': {
                 conn.sendContact(m.chat, global.owner, m)
@@ -2801,6 +2828,7 @@ anu = `*List Menu*
 
 *Maker Menu*
 ⊳ ${prefix}nulis [nonaktif]
+⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
 *Other Menu*
@@ -2867,6 +2895,7 @@ anu = `*List Menu*
 
 *Maker Menu*
 ⊳ ${prefix}nulis [nonaktif]
+⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
 *Other Menu*
@@ -2903,8 +2932,6 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
-                                  {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
             break
@@ -2963,7 +2990,43 @@ case 'simi':
                                return !0
                                }
 			                   */
+			
+			if(budy.startsWith("")) {
+			if(!isOffline) return
+            if(mek.key.fromMe) return
+			if(m.isGroup) return          
+            if(budy.startsWith(prefix)) return
+            let btn = [{
+                                urlButton: {
+                                    displayText: 'Instagram',
+                                    url: 'https://www.instagram.com/perwira_kusuma1/'
+                                }
+                            }, {
+                                callButton: {
+                                    displayText: 'Phone',
+                                    phoneNumber: '+62 8123-3264-6925'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Rules',
+                                    id: 'rules'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Simi',
+                                    id: 'simi'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Speed',
+                                    id: 'ping'
+                                }
+                            }]
+                       await conn.sendButtonText2(m.chat, `Maaf saat ini Perwira sedang offline\nTunggu beberapa saat lagi jika penting silahkan menelfon. Saya adalah bot assisten Perwira apabila ada yang bisa saya bantu ketik */menu* untuk menampilkan *List Menu* yang tersedia. Terimakasih telah menghubungi.`, `Perwira Bot WhatsApp`, btn)
+            }
+            
 if(isSimi) {
+if(!budy.startsWith(prefix)) return
 if(sisMedia) return
 try {
 let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)

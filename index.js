@@ -22,9 +22,11 @@ global.APIKeys = {
 }
 
 // Other
+
 global.chatDB = []
+global.offline = []
 global.simi = []
-global.owner = ["6281232646925"]
+global.owner = ["6281232646925", "6282230819722"]
 global.premium = ['6288292024190']
 global.packname = 'Perwira'
 global.author = 'WhatsApp Bot'
@@ -69,14 +71,14 @@ const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
 
-var low
+/*var low
 try {
 low = require('lowdb')
 } catch (e) {
 low = require('./lib/lowdb')
 }
 const { Low, JSONFile } = low
-
+*/
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
 
@@ -97,7 +99,7 @@ async function startHisoka() {
     if (json.content[0].tag == 'offer') {
     let pa7rick = await conn.sendContact(callerId, global.owner)
     conn.sendMessage(callerId, { text: `Sistem otomatis block!\nJangan menelpon bot!\nSilahkan Hubungi Owner Untuk Dibuka !`}, { quoted : pa7rick })
-    await sleep(8000)
+    await sleep(10000)
     await conn.updateBlockStatus(callerId, "block")
     }
     })
