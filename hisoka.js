@@ -1367,6 +1367,7 @@ break
 			m.reply("Masukkan emoji yang jelas!")
 			}
 	    }
+	break
 	/*case 'semoji': {
 		try {
 	    if(!text) return m.reply(`Masukkan emoji nya!\n*Contoh :* ${prefix+command} 😎`)
@@ -3052,7 +3053,7 @@ case 'simi':
 			                   */
 			
 if(isSimi) {
-if(!budy.startsWith(prefix)) return
+if(budy.startsWith(prefix)) return
 if(sisMedia) return
 try {
 let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
@@ -3101,8 +3102,8 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
                 })
                 }
                 
-    //        if(!isCmd) {
-			/*if(!isOffline) return
+          /* if(!isCmd) {
+			if(!isOffline) return
             if(mek.key.fromMe) return
 			if(m.isGroup) return
             if(isOff) return
@@ -3137,8 +3138,9 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
                        await conn.sendButtonText2(m.chat, `Maaf *${pushname}* untuk saat ini *Perwira* sedang offline. Tunggu beberapa saat lagi jika penting silahkan menelfon. Saya adalah bot assisten Perwira, apabila ada yang bisa saya bantu ketik *${prefix}menu* atau klik tombol Menu dibawah untuk menampilkan menu yang tersedia. Terimakasih telah menghubungi.`, `Perwira Bot WhatsApp`, btn)
                        global.udah.push(m.chat)
             }
+            */
             
-*/
+
                 
             if (isCmd && budy.toLowerCase() != undefined) {
 		    if (m.chat.endsWith('broadcast')) return
