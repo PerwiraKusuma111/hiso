@@ -1355,6 +1355,7 @@ break
         }
         break*/
             case 'emojimix': {
+            	try {
 	        if (!text.includes("+")) return m.reply(`Example : ${prefix + command} 😅+🤔`)
 		let [emoji1, emoji2] = text.split`+`
 		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
@@ -1362,8 +1363,23 @@ break
 		    let encmedia = await conn.sendImageAsSticker(m.chat, res.url, m, { packname: global.packname, author: global.author, categories: res.tags })
 		    await fs.unlinkSync(encmedia)
 		}
+		} catch(err) {
+			m.reply("Masukkan emoji yang jelas!")
+			}
 	    }
-	    break
+	/*case 'semoji': {
+		try {
+	    if(!text) return m.reply(`Masukkan emoji nya!\n*Contoh :* ${prefix+command} 😎`)
+		let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(text)}`)
+		for (let res of anu.results) {
+		    let encmedia = await conn.sendImageAsSticker(m.chat, res.url, m, { packname: global.packname, author: global.author, categories: res.tags })
+		    await fs.unlinkSync(encmedia)
+		}
+		} catch {
+			m.reply("Masukkan emoji yang jelas!")
+			}
+	    }
+	    break*/
             case 'toimage': case 'toimg': {
                 if (!quoted) throw 'Reply Image'
                 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
@@ -1545,6 +1561,19 @@ conn.sendMessage(m.chat, listMessage)
         })
         }
         break*/
+case 'tsticker':
+case 'telesticker': 
+case 'tstiker': {
+			if (m.isGroup) return m.reply("Tidak bisa digunakan di group")
+			if (!text) return m.reply(`Contoh: ${prefix+command} https://t.me/addstickers/geestickerpack`)
+			if (!text.includes('t.me')) return m.reply('Bukan link telegram stiker')
+			let { Tstick } = require('./lib/scraper')
+            var telestc = await Tstick(`${q}`).catch(err => m.reply(`*Error*\n${util.format(err)}`))
+			for (let unduh of telestc) {
+			conn.sendMessage(m.chat, {sticker: await getBuffer(unduh.url), mimetype:'image/webp'},{quoted: m}).catch(err => m.reply(`*Error*\n${util.format(err)}`))
+			}
+		}
+		break
         case 'tes':
         let sections = [
     {
@@ -2852,7 +2881,7 @@ anu = `*List Menu*
 ⊳ ${prefix}igmp4
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker [nonaktif]
+⊳ ${prefix}telesticker
 ⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
 
@@ -2920,7 +2949,7 @@ anu = `*List Menu*
 ⊳ ${prefix}igmp4
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker [nonaktif]
+⊳ ${prefix}telesticker
 ⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
 
@@ -3085,9 +3114,9 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
                                     url: 'https://www.instagram.com/perwira_kusuma1/'
                                 }
                             }, {
-                                callButton: {
-                                    displayText: 'Phone',
-                                    phoneNumber: '+62 8123-3264-6925'
+                                urlButton: {
+                                    displayText: 'YouTube',
+                                    url: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w'
                                 }
                             }, {
                                 quickReplyButton: {
