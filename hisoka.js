@@ -1612,9 +1612,9 @@ await conn.sendMessage(m.chat, listMessage)
                 let aramat = search.all
                 /*search.videos[Math.floor(Math.random() * search.videos.length)]*/
                 let res = await yta(`${search.videos[0].url}`)
-                let get_img = await getBuffer(res.thumb)
+                /*let get_img = await getBuffer(res.thumb)*/
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 1, thumbnail: get_img}}}, {}).catch(err => m.reply(util.format(err))).then(() => {
+                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {}).catch(err => m.reply(util.format(err))).then(() => {
 
 let kunnu = []
 let no = 1
@@ -1650,9 +1650,9 @@ conn.sendMessage(m.chat, listMessage)
             if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
                            /*let quality = args[1] ? args[1] : '360p'*/
             let res = await yta(text)
-            let ythumb = await getBuffer(res.thumb)
+          /*  let ythumb = await getBuffer(res.thumb)*/
             if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-           conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: ythumb}}}, {})     
+           conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {})     
             } else {
             	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
