@@ -24,6 +24,8 @@ global.APIKeys = {
 // Other
 
 global.chatDB = []
+global.udah = []
+global.ban = ["6281553391495@s.whatsapp.net"]
 global.offline = []
 global.simi = []
 global.owner = ["6281232646925", "6282230819722"]
@@ -94,7 +96,7 @@ async function startHisoka() {
 
     store.bind(conn.ev)
 
-    conn.ws.on('CB:call', async (json) => {
+    /*conn.ws.on('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag == 'offer') {
     let pa7rick = await conn.sendContact(callerId, global.owner)
@@ -102,7 +104,7 @@ async function startHisoka() {
     await sleep(10000)
     await conn.updateBlockStatus(callerId, "block")
     }
-    })
+    })*/
 
     conn.ev.on('messages.upsert', async chatUpdate => {
         //console.log(JSON.stringify(chatUpdate, undefined, 2))

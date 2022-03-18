@@ -64,7 +64,7 @@ let vote = db.others.vote = []
 module.exports = conn = async (conn, m, chatUpdate, store) => {
     try {
     	var cmd = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
-        var prefix = /^[!?#$/.,]/.test(cmd) ? cmd.match(/^[!?#$/.,]/gi) : "."
+        var prefix = /^[!?#/.,]/.test(cmd) ? cmd.match(/^[!?#/.,]/gi) : "/"
         var body = (m.mtype === 'conversation' && m.message.conversation.startsWith(prefix)) ? m.message.conversation : (m.mtype == 'imageMessage') && m.message.imageMessage.caption.startsWith(prefix) ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') && m.message.videoMessage.caption.startsWith(prefix) ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') && m.message.extendedTextMessage.text.startsWith(prefix) ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
         /*var prefix = prefa ? /^[!?#$/.,]/gi.test(body) ? body.match(/^[!?#$/.,]/gi)[0] : "" : prefa ?? global.prefix*/
@@ -74,6 +74,8 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         const pushname = m.pushName || "No Name"
         const botNumber = await conn.decodeJid(conn.user.id)
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+        const isOff = [...global.udah].includes(m.chat)
+        const isBan = [...global.ban].includes(m.chat)
         const isSimi = [...global.simi]/*.map(v => v.replace(/[^0-9]/g, '') + '@g.us')*/.includes(m.chat)
         const itsMe = m.sender == botNumber ? true : false
         const text = q = args.join(" ")
@@ -805,14 +807,16 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 */
 	case 'kick': {
 		if (!m.isGroup) return m.reply(mess.group)
-                if (!isBotAdmins) throw mess.botAdmin
-                if (!isAdmins) throw mess.admin
+		/*if (!isCreator) return m.reply("_Only for Owner_")*/
+        if (!isBotAdmins) throw mess.botAdmin
+        if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		await conn.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
 	case 'add': {
 		if (!m.isGroup) return m.reply(mess.group)
+		/*if (!isCreator) return m.reply("_Only for Owner_")*/
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -821,6 +825,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 	break
 	case 'promote': {
 		if (!m.isGroup) return m.reply(mess.group)
+		/*if (!isCreator) return m.reply("_Only for Owner_")*/
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -829,6 +834,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 	break
 	case 'demote': {
 		if (!m.isGroup) return m.reply(mess.group)
+		/*if (!isCreator) return m.reply("_Only for Owner_")*/
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -1488,7 +1494,7 @@ break
 let listMessage = {
 text: 'Hasil penelusuran lain',
 footer: `Perwira Bot WhatsApp`,
-title: `*YouTube Play*\n\nJika hasil diatas salah berikut\nadalah hasil penelusuran\nyang berbeda`,
+title: `*YouTube Search*\n\nIni adalah penelusuran yang ditemukan.`,
 buttonText: "Hasil Penelusuran",
 sections: [{
 "title": `Hasil penelusuran dalam bentuk Audio`,
@@ -2149,6 +2155,7 @@ conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: '
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
 break
+case 'ttmp42':
 case 'tiktok2':
 case 'ttdl2':
 case 'tiktokdl2':
@@ -2171,7 +2178,7 @@ if(text.includes("tiktok.com")) {
 	try {
 	let { downloader } = require(`./lib/scraper`)
 	let res = await downloader(text)
-	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}}, {})
+	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}}, {})
 	} catch (err) {
 		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktokmp3 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
 		}
@@ -2188,10 +2195,12 @@ case 'tiktokmp3': {
             let media = await getBuffer(res.result.nowatermark)
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
-            conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.jpg')}}})
+            conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}})
             } catch (err) {
 		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
 		}
+            } else {
+            	m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)
             }
             }
             break
@@ -2204,7 +2213,22 @@ igdownloader(text).then(async res => {
 conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
 })
 } else {
-m.reply(`Linknya?\n*Contoh :* ${prefix}igdl https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
+m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
+}
+                    break
+case 'igmp3':
+case 'igvaudio':
+case 'instagramaudio':
+if (text.includes("instagram.com")) {
+let { igdownloader } = require('./lib/igdown')
+igdownloader(text).then(async res => {
+let media = await getBuffer(res.result.link)
+let { toAudio } = require('./lib/converter')
+let audio = await toAudio(media, 'mp4')
+conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Instagram Audio`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./instagram.png')}}})
+})
+} else {
+m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
                     break
             /*case 'tiktokmp3': case 'tiktokaudio': {
@@ -2680,20 +2704,23 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
                 m.reply('Sukse Change To Public Usage')
             }
             break
-case 'offline': {
+/*case 'offline': {
                 if (!isCreator) throw mess.owner
                 if (isOffline) return m.reply("Kamu sedang dalam mode Offline")
                 global.offline.push("offline")
-                m.reply('You know Offline')
+                global.udah.splice(global.udah)
+                m.reply('You now Offline')
             }
             break
 case 'online': {
                 if (!isCreator) throw mess.owner
                 if (!isOffline) return m.reply("Kamu sedang dalam mode Online")
                 global.offline.splice("offline", 1)
-                m.reply('You know Online')
+                global.udah.splice(global.udah)
+                m.reply('You now Online')
             }
-            break
+            break*/
+
             case 'self': {
                 if (!isCreator) throw mess.owner
                 conn.public = false
@@ -2777,14 +2804,15 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(respon)
             }
             break
-case 'nulis':
+case 'nulis':{
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 conn.sendMessage(m.chat, {image: { url: `https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`}, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
-break
-case 'tahta':
+}break
+
+case 'tahta':{
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 conn.sendMessage(m.chat, {image: {url: `https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`}, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
-break
+}break
             case 'owner': case 'creator': {
                 conn.sendContact(m.chat, global.owner, m)
             }
@@ -2820,9 +2848,10 @@ anu = `*List Menu*
 ⊳ ${prefix}ytsearch
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
+⊳ ${prefix}igmp3
 ⊳ ${prefix}igmp4
-⊳ ${prefix}ttmp4
 ⊳ ${prefix}ttmp3
+⊳ ${prefix}ttmp4
 ⊳ ${prefix}telesticker [nonaktif]
 ⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
@@ -2887,9 +2916,10 @@ anu = `*List Menu*
 ⊳ ${prefix}ytsearch
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
+⊳ ${prefix}igmp3
 ⊳ ${prefix}igmp4
-⊳ ${prefix}ttmp4
 ⊳ ${prefix}ttmp3
+⊳ ${prefix}ttmp4
 ⊳ ${prefix}telesticker [nonaktif]
 ⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
@@ -2941,12 +2971,12 @@ anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? cha
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 } break
-case 'bugpc':{
+case 'bug':{
 if(!isCreator) return
 konn = `${budy.slice(7)}@s.whatsapp.net`
-conn.presenceSubscribe(konn)
+conn.presenceSubscribe(m.chat)
 setInterval(async() => {
-await conn.sendPresenceUpdate("composing", konn)
+await conn.sendPresenceUpdate("composing", m.chat)
 })
 }
 break
@@ -2992,40 +3022,6 @@ case 'simi':
                                }
 			                   */
 			
-			if(budy.startsWith("")) {
-			if(!isOffline) return
-            if(mek.key.fromMe) return
-			if(m.isGroup) return          
-            if(budy.startsWith(prefix)) return
-            let btn = [{
-                                urlButton: {
-                                    displayText: 'Instagram',
-                                    url: 'https://www.instagram.com/perwira_kusuma1/'
-                                }
-                            }, {
-                                callButton: {
-                                    displayText: 'Phone',
-                                    phoneNumber: '+62 8123-3264-6925'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Rules',
-                                    id: 'rules'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Simi',
-                                    id: 'simi'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Speed',
-                                    id: 'ping'
-                                }
-                            }]
-                       await conn.sendButtonText2(m.chat, `Maaf saat ini Perwira sedang offline\nTunggu beberapa saat lagi jika penting silahkan menelfon. Saya adalah bot assisten Perwira apabila ada yang bisa saya bantu ketik */menu* untuk menampilkan *List Menu* yang tersedia. Terimakasih telah menghubungi.`, `Perwira Bot WhatsApp`, btn)
-            }
-            
 if(isSimi) {
 if(!budy.startsWith(prefix)) return
 if(sisMedia) return
@@ -3065,7 +3061,7 @@ m.reply(`*Error*\n${String(err)}`)
                 }
                 
 if (budy.startsWith('x')){
-if (!isCreator) return reply("_Owner Only_")
+if (!isCreator) return m.reply("_Owner Only_")
 return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'\t')},{quoted: m}).catch(err => reply(util.format(err)))
 }
                 if (budy.startsWith('$')) {
@@ -3076,6 +3072,44 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
                 })
                 }
                 
+    //        if(!isCmd) {
+			/*if(!isOffline) return
+            if(mek.key.fromMe) return
+			if(m.isGroup) return
+            if(isOff) return
+            if(isBan) return
+            if(budy.startsWith(prefix)) return
+            let btn = [{
+                                urlButton: {
+                                    displayText: 'Instagram',
+                                    url: 'https://www.instagram.com/perwira_kusuma1/'
+                                }
+                            }, {
+                                callButton: {
+                                    displayText: 'Phone',
+                                    phoneNumber: '+62 8123-3264-6925'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Rules',
+                                    id: 'rules'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Speed',
+                                    id: 'ping'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Menu',
+                                    id: 'menu'
+                                }
+                            }]
+                       await conn.sendButtonText2(m.chat, `Maaf *${pushname}* untuk saat ini *Perwira* sedang offline. Tunggu beberapa saat lagi jika penting silahkan menelfon. Saya adalah bot assisten Perwira, apabila ada yang bisa saya bantu ketik *${prefix}menu* atau klik tombol Menu dibawah untuk menampilkan menu yang tersedia. Terimakasih telah menghubungi.`, `Perwira Bot WhatsApp`, btn)
+                       global.udah.push(m.chat)
+            }
+            
+*/
                 
             if (isCmd && budy.toLowerCase() != undefined) {
 		    if (m.chat.endsWith('broadcast')) return
