@@ -1301,7 +1301,7 @@ let anu = Object.keys(store.contacts)
 let mes = `Jumlah private chat: ${anu.length}\n`
 let i = 1
 for(let _ of anu) {
-	name = _[_].pushname
+	name = _[_].pushName
     mes += `*Name:* ${name}\n*Chat:* @${_.split("@")[_]}\n*Id:* ${_}`
 	}
 	conn.sendTextWithMentions(m.chat, mes, m)
