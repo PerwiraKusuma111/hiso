@@ -1296,6 +1296,17 @@ break
 		await wokwol.quoted.copyNForward(m.chat, true)
             }
 	    break
+case 'listpc':{
+let anu = Object.keys(store.contacts)
+let mes = `Jumlah private chat: ${anu.length}\n`
+let i = 1
+for(let _ of anu) {
+	name = _[i].pushname
+    mes += `*Name:* ${name}\n*Chat:* @${_.split("@")[i]}\n*Id:* ${_}`
+	}
+	conn.sendTextWithMentions(m.chat, mes, m)
+}
+break
             /*case 'listpc': {
                  let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v.id)
                  let teks = `⬣ *LIST PERSONAL CHAT*\n\nTotal Chat : ${anu.length} Chat\n\n`
@@ -1306,7 +1317,7 @@ break
                  conn.sendTextWithMentions(m.chat, teks, m)
              }
              break*/
-                case 'listgc': {
+                /*case 'listgc': {
                  let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
                  let teks = `⬣ *LIST GROUP CHAT*\n\nTotal Group : ${anu.length} Group\n\n`
                  for (let i of anu) {
@@ -1315,7 +1326,7 @@ break
                  }
                  conn.sendTextWithMentions(m.chat, teks, m)
              }
-             break
+             break*/
              case 'listonline': case 'liston': {
                     let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
                     let online = [...Object.keys(store.presences[id]), botNumber]
@@ -1606,6 +1617,7 @@ await conn.sendMessage(m.chat, listMessage)
             break
 	    case 'play': case 'ytplay': 
                 if (!text) throw `Example : ${prefix + command} story wa anime`
+                try {
                 let yts = require("yt-search")           
                 let { yta } = require('./lib/y2mate')
                 let search = await yts(text)
@@ -1641,10 +1653,14 @@ sections: [{
 conn.sendMessage(m.chat, listMessage)
                 
                 	})
+                } catch(err) {
+                	m.reply(util.format(err))
+                	}
             break
 	  
             case 'ytmp3': 
             case 'ytaudio': 
+            try {
             if(text.includes("youtu")) {
             let { yta } = require('./lib/y2mate')
             if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
@@ -1656,11 +1672,15 @@ conn.sendMessage(m.chat, listMessage)
             } else {
             	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
+            } catch(err) {
+            	m.reply(util.format(err))
+            	}
             
             break
             
             case 'ytmp4': 
             case 'ytvideo': 
+            try {
             if(text.includes("youtu")) {
             let { ytv } = require('./lib/y2mate')
             if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
@@ -1671,6 +1691,9 @@ conn.sendMessage(m.chat, listMessage)
             } else {
             	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
+            } catch(err) {
+            	m.reply(util.format(err))
+            	}
             break
 	   /* case 'getmusic': {
                 let { yta } = require('./lib/y2mate')
@@ -2722,7 +2745,8 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
             {
             try {
               if (args.length == 0) return m.reply(`Example: ${prefix+command} Halo`)
-              conn.sendMessage(m.chat, {sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`}, mimetype: 'image/webp'}, {quoted: m})
+              stik = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`)
+              conn.sendMessage(m.chat, {sticker: stik, mimetype: 'image/webp'}, {quoted: m})
               } catch(err) {
               	m.reply(`*Error*\n${String(err)}`)
               	}
@@ -2835,13 +2859,23 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
 case 'nulis':{
+	try {
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
-conn.sendMessage(m.chat, {image: { url: `https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`}, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
+nulli = await getBuffer(`https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`)
+conn.sendMessage(m.chat, {image: nulli, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m})
+} catch(err) {
+	m.reply(util.format(err))
+	}
 }break
 
 case 'tahta':{
+	try {
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
-conn.sendMessage(m.chat, {image: {url: `https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`}, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
+gimgt = await getBuffer(`https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`)
+conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
+} catch(err) {
+	m.reply(util.format(err))
+	}
 }break
             case 'owner': case 'creator': {
                 conn.sendContact(m.chat, global.owner, m)
@@ -3149,7 +3183,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
 		    if (!(budy.toLowerCase() in msgs)) return
 		    conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		   }
-           } catch (err) {
+           } catch(err) {
            m.reply(`*Attention*\n${String(err)}`)
            }
            }
