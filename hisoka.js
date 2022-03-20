@@ -1305,18 +1305,17 @@ let i = 1
     mes += `*Name :* ${name}\n*Chat :* @${_.split("@")[0]}\n*Id :* ${_}\n\n`
 	}
 	conn.sendTextWithMentions(m.chat, mes, m)
-break
+}break
 case 'listroom':{
 let anu = Object.keys(store.chats.dict)
-const
 let mes = `*Jumlah grup chat :* ${anu.length}\n\n`
 for(let _ of anu) {
 let i = 1
-	name = await conn.groupMetadata(_).subject
+	let name = await conn.groupMetadata(_).subject
     mes += `*Name :* ${name}\n*Id :* ${_}\n\n`
 	}
 	conn.sendTextWithMentions(m.chat, mes, m)
-break
+}break
             /*case 'listpc': {
                  let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v.id)
                  let teks = `⬣ *LIST PERSONAL CHAT*\n\nTotal Chat : ${anu.length} Chat\n\n`
