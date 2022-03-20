@@ -28,7 +28,7 @@ global.udah = []
 global.ban = ["6281553391495@s.whatsapp.net"]
 global.offline = []
 global.simi = []
-global.owner = ["6281232646925", "6282230819722", "6283167714830"]
+global.owner = ["6281232646925", "6282230819722"]
 global.premium = ['6288292024190']
 global.packname = 'Perwira'
 global.author = 'WhatsApp Bot'
@@ -73,16 +73,31 @@ const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
 
-/*var low
+var low
 try {
 low = require('lowdb')
 } catch (e) {
 low = require('./lib/lowdb')
 }
 const { Low, JSONFile } = low
-*/
+
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+global.db = new Low(new JSONFile(`src/database.json`))
+global.db.data = {
+    users: {},
+    chats: {},
+    sticker: {},
+    database: {},
+    game: {},
+    settings: {},
+    others: {},
+    ...(global.db.data || {})
+}
+
+/*if (global.db) setInterval(async () => {
+    if (global.db.data) await global.db.write()
+  }, 30 * 1000)*/
 
 async function startHisoka() {
     let { version, isLatest } = await fetchLatestBaileysVersion()
