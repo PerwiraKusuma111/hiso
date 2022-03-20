@@ -1641,7 +1641,7 @@ await conn.sendMessage(m.chat, listMessage)
                 let res = await yta(`${search.videos[0].url}`)
                 /*let get_img = await getBuffer(res.thumb)*/
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {}).catch(err => m.reply(util.format(err))).then(() => {
+                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 2, thumbnailUrl: res.thumb}}}, {}).catch((e) => m.reply(String(e))).then(() => {
 
 let kunnu = []
 let no = 1
@@ -1683,7 +1683,7 @@ conn.sendMessage(m.chat, listMessage)
             let res = await yta(text)
           /*  let ythumb = await getBuffer(res.thumb)*/
             if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-           conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {})     
+           conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, thumbnailUrl: res.thumb}}}, {}).catch((e) => m.reply(String(e)))
             } else {
             	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
@@ -2881,25 +2881,24 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
                 m.reply(respon)
             }
             break
-case 'nulis':{
+case 'nulis':
 	try {
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 nulli = await getBuffer(`https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`)
-conn.sendMessage(m.chat, {image: nulli, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m})
+conn.sendMessage(m.chat, {image: nulli, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m}).catch((e) => m.reply(String(e)))
 } catch(e) {
 	m.reply(String(e))
-	}
 }break
 
-case 'tahta':{
+case 'tahta':
 	try {
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 gimgt = await getBuffer(`https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`)
-conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
+conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch((e) => m.reply(`*Error*\n${String(e)}`))
 } catch(e) {
 	m.reply(String(e))
 	}
-}break
+break
             case 'owner': case 'creator': {
                 conn.sendContact(m.chat, global.owner, m)
             }
