@@ -1296,16 +1296,26 @@ break
 		await wokwol.quoted.copyNForward(m.chat, true)
             }
 	    break
-case 'listpc':{
+case 'listpcon':{
 let anu = Object.keys(store.contacts)
-let mes = `Jumlah private chat: ${anu.length}\n`
-let i = 1
+let mes = `*Jumlah private chat :* ${anu.length}\n\n`
 for(let _ of anu) {
-	name = _[_].pushName
-    mes += `*Name:* ${name}\n*Chat:* @${_.split("@")[_]}\n*Id:* ${_}`
+let i = 1
+	name = conn.getName(_)
+    mes += `*Name :* ${name}\n*Chat :* @${_.split("@")[0]}\n*Id :* ${_}\n\n`
 	}
 	conn.sendTextWithMentions(m.chat, mes, m)
-}
+break
+case 'listroom':{
+let anu = Object.keys(store.chats.dict)
+const
+let mes = `*Jumlah grup chat :* ${anu.length}\n\n`
+for(let _ of anu) {
+let i = 1
+	name = await conn.groupMetadata(_).subject
+    mes += `*Name :* ${name}\n*Id :* ${_}\n\n`
+	}
+	conn.sendTextWithMentions(m.chat, mes, m)
 break
             /*case 'listpc': {
                  let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v.id)
