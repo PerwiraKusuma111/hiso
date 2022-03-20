@@ -38,6 +38,7 @@ const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 
 // read database
+/*
 global.db = JSON.parse(fs.readFileSync('./src/database.json'))
 if (global.db) global.db = {
     sticker: {},
@@ -49,6 +50,7 @@ if (global.db) global.db = {
     settings: {},
     ...(global.db || {})
 }
+*/
 /*let tebaklagu = db.game.tebaklagu = []
 let _family100 = db.game.family100 = []
 let kuismath = db.game.math = []
@@ -101,34 +103,34 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
 	try {
           /*  let isNumber = x => typeof x === 'number' && !isNaN(x)
             let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-            let user = global.db.users[m.sender]
-            if (typeof user !== 'object') global.db.users[m.sender] = {}
+            let user = global.db.data.users[m.sender]
+            if (typeof user !== 'object') global.db.data.users[m.sender] = {}
             if (user) {
                 if (!isNumber(user.afkTime)) user.afkTime = -1
                 if (!('afkReason' in user)) user.afkReason = ''
                 if (!isNumber(user.limit)) user.limit = limitUser
-            } else global.db.users[m.sender] = {
+            } else global.db.data.users[m.sender] = {
                 afkTime: -1,
                 afkReason: '',
                 limit: limitUser,
             }
     */
-            let chats = global.db.chats[m.chat]
-            /*if (typeof chats !== 'object') global.db.chats[m.chat] = {}
+            let chats = global.db.data.chats[m.chat]
+            /*if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
             if (chats) {
                 if (!('mute' in chats)) chats.mute = false
                 if (!('antilink' in chats)) chats.antilink = false
-            } else global.db.chats[m.chat] = {
+            } else global.db.data.chats[m.chat] = {
                 mute: false,
                 antilink: false,
             }*/
 		
-	    let setting = global.db.settings[botNumber]
-        /*if (typeof setting !== 'object') global.db.settings[botNumber] = {}
+	    let setting = global.db.data.settings[botNumber]
+        /*if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
 	    if (setting) {
 		if (!isNumber(setting.status)) setting.status = 0
 		if (!('autobio' in setting)) setting.autobio = false
-	    } else global.db.settings[botNumber] = {
+	    } else global.db.data.settings[botNumber] = {
 		status: 0,
 		autobio: false,
 	    }
@@ -175,9 +177,9 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
 	// reset limit every 12 hours
  /*       let cron = require('node-cron')
         cron.schedule('00 12 * * *', () => {
-            let user = Object.keys(global.db.users)
+            let user = Object.keys(global.db.data.users)
             let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
-            for (let jid of user) global.db.users[jid].limit = limitUser
+            for (let jid of user) global.db.data.users[jid].limit = limitUser
             console.log('Reseted Limit')
         }, {
             scheduled: true,
@@ -186,7 +188,7 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         
 	// auto set bio
 	if (db.settings[botNumber].autobio) {
-	    let setting = global.db.settings[botNumber]
+	    let setting = global.db.data.settings[botNumber]
 	    if (new Date() * 1 - setting.status > 1000) {
 		let uptime = await runtime(process.uptime())
 		await conn.setStatus(`${conn.user.name} | Runtime : ${runtime(uptime)}`)
@@ -215,8 +217,8 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
       }
 
         // Respon Cmd with media
-        if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.sticker)) {
-        let hash = global.db.sticker[m.msg.fileSha256.toString('base64')]
+        if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
+        let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
         let { text, mentionedJid } = hash
         let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
             userJid: conn.user.id,
@@ -470,7 +472,7 @@ klik https://wa.me/${botNumber.split`@`[0]}`, m, { mentions: [roof.p, roof.p2] }
 	    
 	    let mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 	    for (let jid of mentionUser) {
-            let user = global.db.users[jid]
+            let user = global.db.data.users[jid]
             if (!user) continue
             let afkTime = user.afkTime
             if (!afkTime || afkTime < 0) continue
@@ -483,7 +485,7 @@ Selama ${clockString(new Date - afkTime)}
         }
 
         if (db.users[m.sender].afkTime > -1) {
-            let user = global.db.users[m.sender]
+            let user = global.db.data.users[m.sender]
             m.reply(`
 Kamu berhenti AFK${user.afkReason ? ' setelah ' + user.afkReason : ''}
 Selama ${clockString(new Date - user.afkTime)}
@@ -501,7 +503,7 @@ Selama ${clockString(new Date - user.afkTime)}
     })*/
         switch(command) {
 	 /*   case 'afk': {
-                let user = global.db.users[m.sender]
+                let user = global.db.data.users[m.sender]
                 user.afkTime = + new Date
                 user.afkReason = text
                 m.reply(`${m.pushName} Telah Afk${text ? ': ' + text : ''}`)
@@ -917,7 +919,7 @@ let teks = `*Pesan :* ${q ? q : 'Tidak ada'}\n\n`
             }
             break
 	    /*case 'style': case 'styletext': {
-	       if (!isPremium && global.db.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+	       if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
 		db.users[m.sender].limit -= 1 // -1 limit
 		let { styletext } = require('./lib/scraper')
 		if (!text) throw 'Masukkan Query text!'
@@ -1585,6 +1587,7 @@ conn.sendMessage(m.chat, listMessage)
 case 'tsticker':
 case 'telesticker': 
 case 'tstiker': {
+	try {
 			if (m.isGroup) return m.reply("Tidak bisa digunakan di group")
 			if (!text) return m.reply(`Contoh: ${prefix+command} https://t.me/addstickers/geestickerpack`)
 			if (!text.includes('t.me')) return m.reply('Bukan link telegram stiker')
@@ -1593,6 +1596,9 @@ case 'tstiker': {
 			for (let unduh of telestc) {
 			conn.sendMessage(m.chat, {sticker: await getBuffer(unduh.url), mimetype:'image/webp'},{quoted: m}).catch(err => m.reply(`*Error*\n${util.format(err)}`))
 			}
+			} catch(e) {
+	m.reply(String(e))
+	}
 		}
 		break
         case 'tes':
@@ -1662,9 +1668,9 @@ sections: [{
 conn.sendMessage(m.chat, listMessage)
                 
                 	})
-                } catch(err) {
-                	m.reply(util.format(err))
-                	}
+                } catch(e) {
+	m.reply(String(e))
+	}
             break
 	  
             case 'ytmp3': 
@@ -1681,9 +1687,9 @@ conn.sendMessage(m.chat, listMessage)
             } else {
             	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
-            } catch(err) {
-            	m.reply(util.format(err))
-            	}
+            } catch(e) {
+	m.reply(String(e))
+	}
             
             break
             
@@ -1700,9 +1706,9 @@ conn.sendMessage(m.chat, listMessage)
             } else {
             	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
-            } catch(err) {
-            	m.reply(util.format(err))
-            	}
+            } catch(e) {
+	m.reply(String(e))
+	}
             break
 	   /* case 'getmusic': {
                 let { yta } = require('./lib/y2mate')
@@ -2113,7 +2119,7 @@ conn.sendMessage(m.chat, listMessage)
             }
             break
 	    case 'stalker': case 'stalk': {
-		if (!isPremium && global.db.users[m.sender].limit < 1) return m.reply('Limit Harian Anda Telah Habis')
+		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply('Limit Harian Anda Telah Habis')
                 if (!text) return m.reply(`Example : ${prefix +command} type id\n\nList Type :\n1. ff (Free Fire)\n2. ml (Mobile Legends)\n3. aov (Arena Of Valor)\n4. cod (Call Of Duty)\n5. pb (point Blank)\n6. ig (Instagram)\n7. npm (https://npmjs.com)`)
                 let [type, id, zone] = args
                 if (type.toLowerCase() == 'ff') {
@@ -2211,9 +2217,9 @@ let { TiktokDownloader } = require('./lib/scraper')
 let res = await TiktokDownloader(text)
 got_vid = await getBuffer(res.result.nowatermark)
 conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m})
-} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
-		}
+} catch(e) {
+	m.reply(String(e))
+	}
 } else {m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)}
 }
 break
@@ -2227,9 +2233,9 @@ if(text.includes("tiktok.com")) {
 	let { downloader } = require(`./lib/scraper`)
 	let res = await downloader(text)
 	conn.sendMessage(m.chat, {video: {url: `${res.medias[1].url}`}, mimetype: 'video/mp4', caption: '*Tiktok Downloader*'}, {quoted: m})
-	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktok https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
-		}
+	} catch(e) {
+	m.reply(String(e))
+	}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
@@ -2241,9 +2247,9 @@ if(text.includes("tiktok.com")) {
 	let { downloader } = require(`./lib/scraper`)
 	let res = await downloader(text)
 	conn.sendMessage(m.chat, {audio: {url: `${res.medias[2].url}`}, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}}, {})
-	} catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix}tiktokmp3 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
-		}
+	} catch(e) {
+	m.reply(String(e))
+	}
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
@@ -2258,9 +2264,9 @@ case 'tiktokmp3': {
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
             conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}})
-            } catch (err) {
-		m.reply(`*Saat ini fitur sedang error*\nSilahkan gunakan command\n${prefix+command}2 https://vt.tiktok.com/ZSdemdwHF/\n\n*Detail Error :*\n${String(err)}`)
-		}
+            } catch(e) {
+	m.reply(String(e))
+	}
             } else {
             	m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)
             }
@@ -2270,10 +2276,14 @@ case 'igmp4':
 case 'igvideo':
 case 'instagramvideo':
 if (text.includes("instagram.com")) {
+	try {
 let { igdownloader } = require('./lib/igdown')
 igdownloader(text).then(async res => {
 conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
 })
+} catch(e) {
+	m.reply(String(e))
+	}
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
@@ -2282,6 +2292,7 @@ case 'igmp3':
 case 'igvaudio':
 case 'instagramaudio':
 if (text.includes("instagram.com")) {
+	try {
 let { igdownloader } = require('./lib/igdown')
 igdownloader(text).then(async res => {
 let media = await getBuffer(res.result.link)
@@ -2289,6 +2300,9 @@ let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
 conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Instagram Audio`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./instagram.png')}}})
 })
+} catch(e) {
+	m.reply(String(e))
+	}
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
@@ -2562,8 +2576,8 @@ ${id}`)
                 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
                 if (!text) throw `Untuk Command Apa?`
                 let hash = m.quoted.fileSha256.toString('base64')
-                if (global.db.sticker[hash] && global.db.sticker[hash].locked) throw 'You have no permission to change this sticker command'
-                global.db.sticker[hash] = {
+                if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to change this sticker command'
+                global.db.data.sticker[hash] = {
                     text,
                     mentionedJid: m.mentionedJid,
                     creator: m.sender,
@@ -2576,8 +2590,8 @@ ${id}`)
             case 'delcmd': {
                 let hash = m.quoted.fileSha256.toString('base64')
                 if (!hash) throw `Tidak ada hash`
-                if (global.db.sticker[hash] && global.db.sticker[hash].locked) throw 'You have no permission to delete this sticker command'              
-                delete global.db.sticker[hash]
+                if (global.db.data.sticker[hash] && global.db.data.sticker[hash].locked) throw 'You have no permission to delete this sticker command'              
+                delete global.db.data.sticker[hash]
                 m.reply(`Done!`)
             }
             break
@@ -2585,9 +2599,9 @@ ${id}`)
                 let teks = `
 *List Hash*
 Info: *bold* hash is Locked
-${Object.entries(global.db.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}
+${Object.entries(global.db.data.sticker).map(([key, value], index) => `${index + 1}. ${value.locked ? `*${key}*` : key} : ${value.text}`).join('\n')}
 `.trim()
-                conn.sendText(m.chat, teks, m, { mentions: Object.values(global.db.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
+                conn.sendText(m.chat, teks, m, { mentions: Object.values(global.db.data.sticker).map(x => x.mentionedJid).reduce((a,b) => [...a, ...b], []) })
             }
             break
             case 'lockcmd': {
@@ -2595,15 +2609,15 @@ ${Object.entries(global.db.sticker).map(([key, value], index) => `${index + 1}. 
                 if (!m.quoted) throw 'Reply Pesan!'
                 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
                 let hash = m.quoted.fileSha256.toString('base64')
-                if (!(hash in global.db.sticker)) throw 'Hash not found in database'
-                global.db.sticker[hash].locked = !/^un/i.test(command)
+                if (!(hash in global.db.data.sticker)) throw 'Hash not found in database'
+                global.db.data.sticker[hash].locked = !/^un/i.test(command)
                 m.reply('Done!')
             }
             break
             case 'addmsg': {
                 if (!m.quoted) throw 'Reply Message Yang Ingin Disave Di Database'
                 if (!text) throw `Example : ${prefix + command} nama file`
-                let msgs = global.db.database
+                let msgs = global.db.data.database
                 if (text.toLowerCase() in msgs) throw `'${text}' telah terdaftar di list pesan`
                 msgs[text.toLowerCase()] = quoted.fakeObj
 m.reply(`Berhasil menambahkan pesan di list pesan sebagai '${text}'
@@ -2615,14 +2629,14 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
             break
             case 'getmsg': {
                 if (!text) throw `Example : ${prefix + command} file name\n\nLihat list pesan dengan ${prefix}listmsg`
-                let msgs = global.db.database
+                let msgs = global.db.data.database
                 if (!(text.toLowerCase() in msgs)) throw `'${text}' tidak terdaftar di list pesan`
                 conn.copyNForward(m.chat, msgs[text.toLowerCase()], true)
             }
             break
             case 'listmsg': {
                 let msgs = JSON.parse(fs.readFileSync('./src/database.json'))
-	        let seplit = Object.entries(global.db.database).map(([nama, isi]) => { return { nama, ...isi } })
+	        let seplit = Object.entries(global.db.data.database).map(([nama, isi]) => { return { nama, ...isi } })
 		let teks = '「 LIST DATABASE 」\n\n'
 		for (let i of seplit) {
 		    teks += `⬡ *Name :* ${i.nama}\n⬡ *Type :* ${getContentType(i.message).replace(/Message/i, '')}\n────────────────────────\n\n`
@@ -2631,7 +2645,7 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
 	    }
 	    break
             case 'delmsg': case 'deletemsg': {
-	        let msgs = global.db.database
+	        let msgs = global.db.data.database
 	        if (!(text.toLowerCase() in msgs)) return m.reply(`'${text}' tidak terdaftar didalam list pesan`)
 		delete msgs[text.toLowerCase()]
 		m.reply(`Berhasil menghapus '${text}' dari list pesan`)
@@ -2756,9 +2770,9 @@ Lihat list Pesan Dengan ${prefix}listmsg`)
               if (args.length == 0) return m.reply(`Example: ${prefix+command} Halo`)
               stik = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`)
               conn.sendMessage(m.chat, {sticker: stik, mimetype: 'image/webp'}, {quoted: m})
-              } catch(err) {
-              	m.reply(`*Error*\n${String(err)}`)
-              	}
+              } catch(e) {
+	m.reply(String(e))
+	}
               }
               break
             case 'public': {
@@ -2872,8 +2886,8 @@ case 'nulis':{
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 nulli = await getBuffer(`https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`)
 conn.sendMessage(m.chat, {image: nulli, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m})
-} catch(err) {
-	m.reply(util.format(err))
+} catch(e) {
+	m.reply(String(e))
 	}
 }break
 
@@ -2882,8 +2896,8 @@ case 'tahta':{
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 gimgt = await getBuffer(`https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`)
 conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch(err => m.reply(`*Error*\n${String(err)}`))
-} catch(err) {
-	m.reply(util.format(err))
+} catch(e) {
+	m.reply(String(e))
 	}
 }break
             case 'owner': case 'creator': {
@@ -3188,7 +3202,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
             if (isCmd && budy.toLowerCase() != undefined) {
 		    if (m.chat.endsWith('broadcast')) return
 		    if (m.isBaileys) return
-		    let msgs = global.db.database
+		    let msgs = global.db.data.database
 		    if (!(budy.toLowerCase() in msgs)) return
 		    conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		   }
