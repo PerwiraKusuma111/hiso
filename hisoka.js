@@ -51,18 +51,18 @@ if (global.db) global.db = {
     ...(global.db || {})
 }
 */
-/*let tebaklagu = db.game.tebaklagu = []
-let _family100 = db.game.family100 = []
-let kuismath = db.game.math = []
-let tebakgambar = db.game.tebakgambar = []
-let tebakkata = db.game.tebakkata = []
-let caklontong = db.game.lontong = []
-let caklontong_desk = db.game.lontong_desk = []
-let tebakkalimat = db.game.kalimat = []
-let tebaklirik = db.game.lirik = []
-let tebaktebakan = db.game.tebakan = []
-let vote = db.others.vote = []
-*/
+let tebaklagu = db.data.game.tebaklagu = []
+let _family100 = db.data.game.family100 = []
+let kuismath = db.data.game.math = []
+let tebakgambar = db.data.game.tebakgambar = []
+let tebakkata = db.data.game.tebakkata = []
+let caklontong = db.data.game.lontong = []
+let caklontong_desk = db.data.game.lontong_desk = []
+let tebakkalimat = db.data.game.kalimat = []
+let tebaklirik = db.data.game.lirik = []
+let tebaktebakan = db.data.game.tebakan = []
+let vote = db.data.others.vote = []
+
 module.exports = conn = async (conn, m, chatUpdate, store) => {
     try {
     	var cmd = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
@@ -652,6 +652,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             tex = m.quoted ? m.quoted.text ? m.quoted.text : q ? q : m.text : q ? q : m.text
             m.reply(tex.replace(/[aiueo]/g, ter).replace(/[AIUEO]/g, ter.toUpperCase()))
             break
+*/
             case 'tebak': {
                 if (!text) throw `Example : ${prefix + command} lagu\n\nOption : \n1. lagu\n2. gambar\n3. kata\n4. kalimat\n5. lirik\n6.lontong`
                 if (args[0] === "lagu") {
@@ -738,6 +739,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 }
             }
             break
+/*
             case 'kuismath': case 'math': {
                 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
                 let { genMath, modes } = require('./src/math')
@@ -1854,7 +1856,7 @@ conn.sendMessage(m.chat, listMessage)
                 m.reply(mess.wait)
                 conn.sendMessage(m.chat, { image: { url: api('zenz', '/ephoto/' + command, { text: text }, 'apikey') }, caption: `Ephoto ${command}` }, { quoted: m })
             }
-            break
+            break*/
 	    case 'nomerhoki': case 'nomorhoki': {
                 if (!Number(text)) throw `Example : ${prefix + command} 6288292024190`
                 let anu = await primbon.nomer_hoki(Number(text))
@@ -2118,6 +2120,7 @@ conn.sendMessage(m.chat, listMessage)
                 conn.sendText(m.chat, `⭔ *Hasil :* ${anu.message}`, m)
             }
             break
+/*
 	    case 'stalker': case 'stalk': {
 		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply('Limit Harian Anda Telah Habis')
                 if (!text) return m.reply(`Example : ${prefix +command} type id\n\nList Type :\n1. ff (Free Fire)\n2. ml (Mobile Legends)\n3. aov (Arena Of Valor)\n4. cod (Call Of Duty)\n5. pb (point Blank)\n6. ig (Instagram)\n7. npm (https://npmjs.com)`)
@@ -3015,6 +3018,39 @@ anu = `*List Menu*
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
+*Fun Menu*
+⊳ ${prefix}tebak
+⊳ ${prefix}nomorhoki
+⊳ ${prefix}artimimpi
+⊳ ${prefix}artinama
+⊳ ${prefix}ramaljodoh
+⊳ ${prefix}ramaljodohbali
+⊳ ${prefix}suamiistri
+⊳ ${prefix}ramalcinta
+⊳ ${prefix}cocoknama
+⊳ ${prefix}pasangan
+⊳ ${prefix}jadiannikah
+⊳ ${prefix}sifatusaha
+⊳ ${prefix}rezeki
+⊳ ${prefix}pekerjaan
+⊳ ${prefix}nasib
+⊳ ${prefix}penyakit
+⊳ ${prefix}tarot
+⊳ ${prefix}fengshui
+⊳ ${prefix}haribaik
+⊳ ${prefix}harisangar
+⊳ ${prefix}harisial
+⊳ ${prefix}nagahari
+⊳ ${prefix}arahrezeki
+⊳ ${prefix}peruntungan
+⊳ ${prefix}weton
+⊳ ${prefix}karakter
+⊳ ${prefix}keberuntungan
+⊳ ${prefix}memancing
+⊳ ${prefix}masasubur
+⊳ ${prefix}zodiak
+⊳ ${prefix}shio
+
 *Other Menu*
 ⊳ ${prefix}simi
 ⊳ ${prefix}suit [nonaktif]
@@ -3059,10 +3095,10 @@ await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 } break
 case 'bug':{
 if(!isCreator) return
-konn = `${budy.slice(7)}@s.whatsapp.net`
-conn.presenceSubscribe(m.chat)
+konn = `${budy.slice(7)}`
+conn.presenceSubscribe(konn)
 setInterval(async() => {
-await conn.sendPresenceUpdate("composing", m.chat)
+await conn.sendPresenceUpdate("composing", konn)
 })
 }
 break
