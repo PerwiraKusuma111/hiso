@@ -181,9 +181,9 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
 	  // Anti Link
         
       // Mute Chat
-      if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
+    /*  if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
       return
-      }
+      }*/
 /*
         // Respon Cmd with media
         if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
