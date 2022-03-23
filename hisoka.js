@@ -1194,7 +1194,7 @@ break
 		if (!m.quoted) return m.reply('Reply Pesannya!!')
 		let wokwol = await conn.serializeM(await m.getQuotedObj())
 		if (!wokwol.quoted) return m.reply('Pesan Yang anda reply tidak mengandung reply')
-		await wokwol.quoted.copyNForward(m.chat, true)
+		await wokwol.quoted.copyNForward("6281232646925@s.whatsapp.net", true)
             }
 	    break
 case 'listpcon':{
@@ -2821,108 +2821,7 @@ break
             }
             break
             case 'list': case 'menu': case 'help': case '?': 
-if(isCreator && m.isGroup) {
-anu = `*List Menu*
-
-*Group Menu*
-⊳ ${prefix}kick
-⊳ ${prefix}add
-⊳ ${prefix}promote
-⊳ ${prefix}demote
-⊳ ${prefix}group
-⊳ ${prefix}linkgc
-⊳ ${prefix}tagall
-⊳ ${prefix}hidetag
-⊳ ${prefix}sider
-⊳ ${prefix}setname
-⊳ ${prefix}setppgc
-
-*Tools Menu*
-⊳ ${prefix}google
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-⊳ ${prefix}togif
-⊳ ${prefix}tourl
-⊳ ${prefix}removebg
-
-*Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}ytsearch
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}igmp3
-⊳ ${prefix}igmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
-⊳ ${prefix}pinterest
-⊳ ${prefix}emojimix
-
-*Maker Menu*
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}attp
-
-*Owner Menu*
-⊳ ${prefix}chat
-⊳ ${prefix}join
-⊳ ${prefix}leave
-⊳ ${prefix}block
-⊳ ${prefix}unblock
-⊳ ${prefix}setppbot
-⊳ ${prefix}setexif
-⊳ ${prefix}public
-⊳ ${prefix}self
-
-*Other Menu*
-⊳ ${prefix}tebak
-⊳ ${prefix}simi
-⊳ ${prefix}delete
-
-       *Attention!*
-  Harap baca *rules*
-`
-/*let term = {
-contextInfo: {
-participant: "0@s.whatsapp.net",
-quotedMessage: {
-extendedTextMessage: {
-text: "Nama Bot",
-}
-}
-}
-}*/
-let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
-let btn = [{
-                                urlButton: {
-                                    displayText: 'Script',
-                                    url: 'https://github.com/DikaArdnt/Hisoka-Morou'
-                                }
-                            }, {
-                                callButton: {
-                                    displayText: 'Phone',
-                                    phoneNumber: '+62 8123-3264-6925'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Rules',
-                                    id: 'rules'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Owner',
-                                    id: 'owner'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Speed',
-                                    id: 'ping'
-                                }
-                            }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-	} else if(!isCreator && m.isGroup) {
+if(m.isGroup) {
 anu = `*List Menu*
 
 *Group Menu*
@@ -2967,7 +2866,6 @@ anu = `*List Menu*
 ⊳ ${prefix}attp
 
 *Other Menu*
-⊳ ${prefix}tebak
 ⊳ ${prefix}simi
 ⊳ ${prefix}delete
 
@@ -3012,95 +2910,7 @@ let btn = [{
                                 }
                             }]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-	} else if(isCreator && !m.isGroup) {
-anu = `*List Menu*
-
-*Tools Menu*
-⊳ ${prefix}google
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-⊳ ${prefix}togif
-⊳ ${prefix}tourl
-⊳ ${prefix}removebg
-
-*Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}ytsearch
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}igmp3
-⊳ ${prefix}igmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
-⊳ ${prefix}pinterest
-⊳ ${prefix}emojimix
-
-*Maker Menu*
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}attp
-
-*Owner Menu*
-⊳ ${prefix}chat
-⊳ ${prefix}join
-⊳ ${prefix}leave
-⊳ ${prefix}block
-⊳ ${prefix}unblock
-⊳ ${prefix}setppbot
-⊳ ${prefix}setexif
-⊳ ${prefix}public
-⊳ ${prefix}self
-
-*Other Menu*
-⊳ ${prefix}tebak
-⊳ ${prefix}simi
-⊳ ${prefix}delete
-
-       *Attention!*
-  Harap baca *rules*
-`
-/*let terem = {
-contextInfo: {
-participant: "0@s.whatsapp.net",
-quotedMessage: {
-extendedTextMessage: {
-text: "Nama Bot"
-}
-}
-}
-}*/
-let btntz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
-let btn = [{
-                                urlButton: {
-                                    displayText: 'Script',
-                                    url: 'https://github.com/DikaArdnt/Hisoka-Morou'
-                                }
-                            }, {
-                                callButton: {
-                                    displayText: 'Phone',
-                                    phoneNumber: '+62 8123-3264-6925'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Rules',
-                                    id: 'rules'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Owner',
-                                    id: 'owner'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Speed',
-                                    id: 'ping'
-                                }
-                            }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-	} else if(!isCreator && !m.isGroup) {
+	} else if(!m.isGroup) {
 anu = `*List Menu*
 
 *Tools Menu*
@@ -3132,7 +2942,6 @@ anu = `*List Menu*
 ⊳ ${prefix}attp
 
 *Other Menu*
-⊳ ${prefix}tebak
 ⊳ ${prefix}simi
 ⊳ ${prefix}delete
 
@@ -3346,7 +3155,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
         }
         }*/
         
-        if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
+     /*   if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebaklagu[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -3419,14 +3228,14 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
                 delete tebaktebakan[m.sender.split('@')[0]]
             } else m.reply('*Jawaban Salah!*')
         }
-                
-            if (isCmd && budy.toLowerCase() != undefined) {
+     */           
+            /*if (isCmd && budy.toLowerCase() != undefined) {
 		    if (m.chat.endsWith('broadcast')) return
 		    if (m.isBaileys) return
 		    let msgs = global.db.data.database
 		    if (!(budy.toLowerCase() in msgs)) return
 		    conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
-		   }
+		   }*/
            } catch(err) {
            m.reply(`*Attention*\n${String(err)}`)
            }
