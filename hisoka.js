@@ -3027,7 +3027,7 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, term)
+                       await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 	} else if(!m.isGroup) {
 anu = `*╰•List Menu•╯*
 
@@ -3118,7 +3118,7 @@ contextInfo: {
 participant: "0@s.whatsapp.net",
 quotedMessage: {
 extendedTextMessage: {
-text: "Nama Bot",
+text: "Nama Bot"
 }
 }
 }
@@ -3150,7 +3150,7 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText(m.chat, btntz, anu, `Perwira Bot WhatsApp`, terem)
+                       await conn.sendButtonText(m.chat, btntz, anu, `Perwira Bot WhatsApp`)
 	}
             break
 case 'virtex':{
@@ -3163,7 +3163,7 @@ break
 case 'rules':{
 anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
-await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
+await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, {},{contextInfo: {participant: "0@s.whatsapp.net",quotedMessage: {extendedTextMessage: {text: "Nama Bot"}}}})
 } break
 
 case 'simi':
