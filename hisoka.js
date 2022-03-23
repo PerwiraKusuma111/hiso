@@ -2909,7 +2909,7 @@ break
             break
             case 'list': case 'menu': case 'help': case '?': 
 if(m.isGroup) {
-anu = `*Halo* @${sender.split("@")[0]}
+anu = `*Halo* @${m.sender.split("@")[0]}
 Ini adalah menu yang tersedia
 
 *╰•List Menu•╯*
@@ -3044,9 +3044,9 @@ let btn = [{
                                     id: 'gans'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, anu, `Raf Botz Whatsapp`, btn, {contextInfo: { mentionedJid: [`${sender}`]}})
+                       await conn.sendButtonText2(m.chat, anu, `Raf Botz Whatsapp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
 	} else if(!m.isGroup) {
-anu = `*Halo* @${sender.split("@")[0]}
+anu = `*Halo* @${m.sender.split("@")[0]}
 Ini adalah menu yang tersedia
 
 *╰•List Menu•╯*
@@ -3168,7 +3168,7 @@ let btn = [{
                                     id: 'gans'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, anu, `Raf Botz Whatsapp`, btn, {contextInfo: { mentionedJid: [`${sender}`]}})
+                       await conn.sendButtonText2(m.chat, anu, `Raf Botz Whatsapp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
 	}
             break
 /*case 'virtex':{
