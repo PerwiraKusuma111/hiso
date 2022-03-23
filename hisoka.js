@@ -1581,6 +1581,12 @@ let btnz = [{buttonId: 'menu', buttonText: {displayText: 'Menu'}, type:1}, {butt
 await conn.sendButtonText(m.chat, btnz, texti, `Raf Botz Whatsapp`, m)
 }
 break
+case 'gans': {
+let texti = `Thanks you Jelek 😜`
+let btnz = [{buttonId: 'menu', buttonText: {displayText: 'Menu'}, type:1}, {buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1}]
+await conn.sendButtonText(m.chat, btnz, texti, `Raf Botz Whatsapp`, m)
+}
+break
 case 'tsticker':
 case 'telesticker': 
 case 'tstiker': {

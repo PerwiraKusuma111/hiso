@@ -28,10 +28,10 @@ global.udah = []
 global.ban = ["6281553391495@s.whatsapp.net"]
 global.offline = []
 global.simi = []
-global.owner = ["6281232646925", "6282230819722", "6283167714830@s.whatsapp.net"]
+global.owner = ["6281946945315", "6282143415448"]
 global.premium = ['6288292024190']
-global.packname = 'Perwira'
-global.author = 'WhatsApp Bot'
+global.packname = 'Raf'
+global.author = 'Botz'
 global.sessionName = 'hisoka'
 global.prefa = [',','!','.','?','#','/']
 global.sp = 'тнФ'
@@ -183,7 +183,7 @@ async function startHisoka() {
 	for (let i of kon) {
 	    list.push({
 	    	displayName: await conn.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i + '@s.whatsapp.net')}\nFN:${await conn.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:perwiraanjay111@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/perwira_kusuma1\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i + '@s.whatsapp.net')}\nFN:${await conn.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:wekasenpai@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://youtube.com/channel/UCY6WNM6jZlmfWULcG69rNbQ\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
 	conn.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
