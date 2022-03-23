@@ -799,7 +799,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
         if (!isBotAdmins) throw mess.botAdmin
         if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await conn.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await conn.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
 	case 'add': {
@@ -808,7 +808,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await conn.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await conn.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
 	case 'promote': {
@@ -817,7 +817,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
 	case 'demote': {
@@ -826,7 +826,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
         case 'block': {
@@ -3027,7 +3027,7 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, {quoted: term})
+                       await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, term)
 	} else if(!m.isGroup) {
 anu = `*╰•List Menu•╯*
 
@@ -3113,7 +3113,7 @@ anu = `*╰•List Menu•╯*
        *Attention!*
   Harap baca *rules*
 `
-let term = {
+let terem = {
 contextInfo: {
 participant: "0@s.whatsapp.net",
 quotedMessage: {
@@ -3123,7 +3123,7 @@ text: "Nama Bot",
 }
 }
 }
-let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
+let btntz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
 let btn = [{
                                 urlButton: {
                                     displayText: 'Script',
@@ -3150,7 +3150,7 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, {quoted: term})
+                       await conn.sendButtonText(m.chat, btntz, anu, `Perwira Bot WhatsApp`, terem)
 	}
             break
 case 'virtex':{
