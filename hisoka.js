@@ -2909,7 +2909,10 @@ break
             break
             case 'list': case 'menu': case 'help': case '?': 
 if(m.isGroup) {
-anu = `*╰•List Menu•╯*
+anu = `*Halo* ${pushname}
+Ini adalah menu yang tersedia
+
+*╰•List Menu•╯*
 
 *╰•Group Menu•╯*
 ⇓•➣ ${prefix}kick
@@ -3043,7 +3046,10 @@ let btn = [{
                             }]
                        await conn.sendButtonText2(m.chat, anu, `Raf Botz Whatsapp`, btn)
 	} else if(!m.isGroup) {
-anu = `*╰•List Menu•╯*
+anu = `*Halo* ${pushname}
+Ini adalah menu yang tersedia
+
+*╰•List Menu•╯*
 
 *╰•Tools Menu•╯*
 ⇓•➣ ${prefix}google
