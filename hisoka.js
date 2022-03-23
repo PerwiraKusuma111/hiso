@@ -3344,7 +3344,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
             }
             */
             
-if (db.data.chats[m.chat].antilink) {
+/*if (db.data.chats[m.chat].antilink) {
         if (budy.match(`chat.whatsapp.com`)) {
         m.reply(`「 ANTI LINK 」\n\nKamu terdeteksi mengirim link group, maaf kamu akan di kick !`)
         if (!isBotAdmins) return m.reply(`Ehh bot gak admin T_T`)
@@ -3356,7 +3356,7 @@ if (db.data.chats[m.chat].antilink) {
         if (isCreator) return m.reply(`Ehh maaf kamu owner bot ku`)
         conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
-        }
+        }*/
         
         if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
