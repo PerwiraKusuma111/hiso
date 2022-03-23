@@ -539,7 +539,7 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
      * @param {*} path 
      * @returns 
      */
-     /*conn.ev.on('group-participants.update', async (anu) => {
+     conn.ev.on('group-participants.update', async (anu) => {
         console.log(anu)
         try {
             let metadata = await conn.groupMetadata(anu.id)
@@ -551,7 +551,7 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
                 } catch {
                     ppuser = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
                 }
-           let ppuser2 = await getBuffer(ppuser)
+        
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
@@ -560,16 +560,16 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
                 }
 
                 if (anu.action == 'add') {
-                    conn.sendImage(anu.id, ppuser2, `Selamat datang di grup ${metadata.subject} @${num.split("@")[0]}`)
+                    conn.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Selamat datang di ${metadata.subject} @${num.split("@")[0]}\nRaf Botz Whatsapp` })
                 } else if (anu.action == 'remove') {
-                    conn.sendImage(anu.id, ppuser2, `@${num.split("@")[0]} Telah keluar dari grup ${metadata.subject}`)
+                    conn.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Telah keluar dari ${metadata.subject}\nRaf Botz Whatsapp` })
                 }
             }
         } catch (err) {
             console.log(err)
         }
     })
-	*/
+	
     conn.getFile = async (PATH, save) => {
         let res
         let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
