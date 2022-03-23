@@ -2821,7 +2821,7 @@ break
             }
             break
             case 'list': case 'menu': case 'help': case '?': 
-if(m.isGroup && isCreator) {
+if(isCreator && m.isGroup) {
 anu = `*List Menu*
 
 *Group Menu*
@@ -2922,7 +2922,7 @@ let btn = [{
                                 }
                             }]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-	} else if(m.isGroup) {
+	} else if(!isCreator && m.isGroup) {
 anu = `*List Menu*
 
 *Group Menu*
@@ -2965,17 +2965,6 @@ anu = `*List Menu*
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
-
-*Owner Menu*
-⊳ ${prefix}chat
-⊳ ${prefix}join
-⊳ ${prefix}leave
-⊳ ${prefix}block
-⊳ ${prefix}unblock
-⊳ ${prefix}setppbot
-⊳ ${prefix}setexif
-⊳ ${prefix}public
-⊳ ${prefix}self
 
 *Other Menu*
 ⊳ ${prefix}tebak
@@ -3023,7 +3012,7 @@ let btn = [{
                                 }
                             }]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-	} else if(!m.isGroup && isCreator) {
+	} else if(isCreator && !m.isGroup) {
 anu = `*List Menu*
 
 *Tools Menu*
@@ -3111,7 +3100,7 @@ let btn = [{
                                 }
                             }]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-	} else if(!m.isGroup && !isCreator) {
+	} else if(!isCreator && !m.isGroup) {
 anu = `*List Menu*
 
 *Tools Menu*
