@@ -3163,7 +3163,7 @@ break
 case 'rules':{
 anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
-await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, {},{contextInfo: {participant: "0@s.whatsapp.net",quotedMessage: {extendedTextMessage: {text: "Nama Bot"}}}})
+await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, m,{contextInfo: {participant: "0@s.whatsapp.net",quotedMessage: {extendedTextMessage: {text: "Nama Bot"}}}})
 } break
 
 case 'simi':
