@@ -3035,7 +3035,7 @@ let btn = [{
                                     id: 'gans'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, btnz, anu, `Raf Botz Whatsapp`, btn)
+                       await conn.sendButtonText2(m.chat, anu, `Raf Botz Whatsapp`, btn)
 	} else if(!m.isGroup) {
 anu = `*╰•List Menu•╯*
 
