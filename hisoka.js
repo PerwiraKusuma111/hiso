@@ -240,7 +240,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             if (isWin || isSurender) delete _family100['family100'+m.chat]
         }
 */
-        if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+        if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebaklagu[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -249,7 +249,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             } else m.reply('*Jawaban Salah!*')
         }
 
-        if (kuismath.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+        if (kuismath.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = kuismath[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -258,7 +258,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             } else m.reply('*Jawaban Salah!*')
         }
 
-        if (tebakgambar.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+        if (tebakgambar.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebakgambar[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -267,7 +267,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             } else m.reply('*Jawaban Salah!*')
         }
 
-        if (tebakkata.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+        if (tebakkata.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebakkata[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -276,7 +276,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             } else m.reply('*Jawaban Salah!*')
         }
 
-        if (caklontong.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+        if (caklontong.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = caklontong[m.sender.split('@')[0]]
 	    deskripsi = caklontong_desk[m.sender.split('@')[0]]
@@ -287,7 +287,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             } else m.reply('*Jawaban Salah!*')
         }
 
-        if (tebakkalimat.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+        if (tebakkalimat.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebakkalimat[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -296,7 +296,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             } else m.reply('*Jawaban Salah!*')
         }
 
-        if (tebaklirik.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+        if (tebaklirik.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebaklirik[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -305,7 +305,7 @@ ${Array.from(room.jawaban, (jawaban, index) => {
             } else m.reply('*Jawaban Salah!*')
         }
 	    
-	if (tebaktebakan.hasOwnProperty(m.sender.split('@')[0]) && isCmd) {
+	if (tebaktebakan.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebaktebakan[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -2990,6 +2990,17 @@ anu = `*╰•List Menu•╯*
        *Attention!*
   Harap baca *rules*
 `
+let term = {
+contextInfo: {
+participant: "0@s.whatsapp.net",
+quotedMessage: {
+extendedTextMessage: {
+text: "Nama Bot",
+}
+}
+}
+}
+let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
 let btn = [{
                                 urlButton: {
                                     displayText: 'Script',
@@ -3016,10 +3027,8 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},
-                                  {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-} else if(!m.isGroup) {
+                       await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, {quoted: term})
+	} else if(!m.isGroup) {
 anu = `*╰•List Menu•╯*
 
 *╰•Tools Menu•╯*
@@ -3104,6 +3113,17 @@ anu = `*╰•List Menu•╯*
        *Attention!*
   Harap baca *rules*
 `
+let term = {
+contextInfo: {
+participant: "0@s.whatsapp.net",
+quotedMessage: {
+extendedTextMessage: {
+text: "Nama Bot",
+}
+}
+}
+}
+let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
 let btn = [{
                                 urlButton: {
                                     displayText: 'Script',
@@ -3130,7 +3150,7 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
+                       await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, {quoted: term})
 	}
             break
 case 'virtex':{
@@ -3145,15 +3165,7 @@ anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? cha
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`)
 } break
-case 'bug':{
-if(!isCreator) return
-konn = `${budy.slice(7)}`
-conn.presenceSubscribe(konn)
-setInterval(async() => {
-await conn.sendPresenceUpdate("composing", konn)
-})
-}
-break
+
 case 'simi':
                     let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{buttonId: 'simi on', buttonText: {displayText: 'On'}, type:1}]
 					if (args.length < 1) return conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
