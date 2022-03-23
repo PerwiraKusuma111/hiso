@@ -116,8 +116,15 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
             }
     */
             let chats = global.db.data.chats[m.chat]
-            
-		
+       /*     if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
+            if (chats) {
+                if (!('mute' in chats)) chats.mute = false
+                if (!('antilink' in chats)) chats.antilink = false
+            } else global.db.data.chats[m.chat] = {
+                mute: false,
+                antilink: false,
+            }
+		*/
 	    let setting = global.db.data.settings[botNumber]
         /*if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
 	    if (setting) {
@@ -502,12 +509,8 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
 */
             case 'chat': {
                 if (!isCreator) throw mess.owner
-                if (!q) return m.reply('*Option :*\n1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete')
-                if (args[0] === 'mute') {
-                    conn.chatModify({ mute: 'Infinity' }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0] === 'unmute') {
-                    conn.chatModify({ mute: null }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
-                } else if (args[0] === 'archive') {
+                if (!q) return m.reply('*Option :*\n1. archive\n2. unarchive\n3. read\n4. unread\n5. delete')
+                if (args[0] === 'archive') {
                     conn.chatModify({  archive: true }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
                 } else if (args[0] === 'unarchive') {
                     conn.chatModify({ archive: false }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
@@ -1025,7 +1028,7 @@ break
             }
             }
             break
-            case 'antilink': {
+         /*   case 'antilink': {
                 if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
@@ -1045,8 +1048,8 @@ break
                     await conn.sendButtonText(m.chat, buttons, `Mode Antilink`, conn.user.name, m)
                 }
              }
-             break
-             case 'mute': {
+             break*/
+         /*    case 'mute': {
                 if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
@@ -1066,7 +1069,7 @@ break
                     await conn.sendButtonText(m.chat, buttons, `Mute Bot`, conn.user.name, m)
                 }
              }
-             break
+             break*/
             case 'linkgroup': case 'linkgc': {
                 if (!m.isGroup) return m.reply(mess.group)
                 let response = await conn.groupInviteCode(m.chat)
@@ -3428,15 +3431,6 @@ if (db.data.chats[m.chat].antilink) {
                 delete tebaktebakan[m.sender.split('@')[0]]
             } else m.reply('*Jawaban Salah!*')
         }
-    
-    if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
-            if (chats) {
-                if (!('mute' in chats)) chats.mute = false
-                if (!('antilink' in chats)) chats.antilink = false
-            } else global.db.data.chats[m.chat] = {
-                mute: false,
-                antilink: false,
-            }
                 
             if (isCmd && budy.toLowerCase() != undefined) {
 		    if (m.chat.endsWith('broadcast')) return
