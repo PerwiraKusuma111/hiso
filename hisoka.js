@@ -2822,10 +2822,7 @@ break
             break
             case 'list': case 'menu': case 'help': case '?': 
 if(m.isGroup && isCreator) {
-anu = `*Halo* @${m.sender.split("@")[0]}
-Ini adalah menu yang tersedia
-
-*List Menu*
+anu = `*List Menu*
 
 *Group Menu*
 ⊳ ${prefix}kick
@@ -2924,12 +2921,9 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(m.isGroup) {
-anu = `*Halo* @${m.sender.split("@")[0]}
-Ini adalah menu yang tersedia
-
-*List Menu*
+anu = `*List Menu*
 
 *Group Menu*
 ⊳ ${prefix}kick
@@ -3028,12 +3022,9 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(!m.isGroup && isCreator) {
-anu = `*Halo* @${m.sender.split("@")[0]}
-Ini adalah menu yang tersedia
-
-*List Menu*
+anu = `*List Menu*
 
 *Tools Menu*
 ⊳ ${prefix}google
@@ -3119,12 +3110,9 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(!m.isGroup && !isCreator) {
-anu = `*Halo* @${m.sender.split("@")[0]}
-Ini adalah menu yang tersedia
-
-*List Menu*
+anu = `*List Menu*
 
 *Tools Menu*
 ⊳ ${prefix}google
@@ -3199,7 +3187,7 @@ let btn = [{
                                     id: 'ping'
                                 }
                             }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
             break
 /*case 'virtex':{
