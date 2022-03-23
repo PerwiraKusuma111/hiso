@@ -2821,100 +2821,7 @@ break
             }
             break
             case 'list': case 'menu': case 'help': case '?': 
-if(m.isGroup) {
-anu = `*Halo* @${m.sender.split("@")[0]}
-Ini adalah menu yang tersedia
-
-*List Menu*
-
-*Group Menu*
-⊳ ${prefix}kick
-⊳ ${prefix}add
-⊳ ${prefix}promote
-⊳ ${prefix}demote
-⊳ ${prefix}group
-⊳ ${prefix}linkgc
-⊳ ${prefix}tagall
-⊳ ${prefix}hidetag
-⊳ ${prefix}sider
-⊳ ${prefix}setname
-⊳ ${prefix}setppgc
-
-*Tools Menu*
-⊳ ${prefix}google
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-⊳ ${prefix}togif
-⊳ ${prefix}tourl
-⊳ ${prefix}removebg
-
-*Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}ytsearch
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}igmp3
-⊳ ${prefix}igmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
-⊳ ${prefix}pinterest
-⊳ ${prefix}emojimix
-
-*Maker Menu*
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}attp
-
-*Other Menu*
-⊳ ${prefix}tebak
-⊳ ${prefix}simi
-⊳ ${prefix}delete
-
-       *Attention!*
-  Harap baca *rules*
-`
-/*let term = {
-contextInfo: {
-participant: "0@s.whatsapp.net",
-quotedMessage: {
-extendedTextMessage: {
-text: "Nama Bot",
-}
-}
-}
-}*/
-let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
-let btn = [{
-                                urlButton: {
-                                    displayText: 'Script',
-                                    url: 'https://github.com/DikaArdnt/Hisoka-Morou'
-                                }
-                            }, {
-                                callButton: {
-                                    displayText: 'Phone',
-                                    phoneNumber: '+62 8123-3264-6925'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Rules',
-                                    id: 'rules'
-                                }
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Owner',
-                                    id: 'owner'
-                                }  
-                            }, {
-                                quickReplyButton: {
-                                    displayText: 'Speed',
-                                    id: 'ping'
-                                }
-                            }]
-                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
-	} else if(m.isGroup && isCreator) {
+if(m.isGroup && isCreator) {
 anu = `*Halo* @${m.sender.split("@")[0]}
 Ini adalah menu yang tersedia
 
@@ -3018,11 +2925,24 @@ let btn = [{
                                 }
                             }]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
-	} else if(!m.isGroup) {
+	} else if(m.isGroup) {
 anu = `*Halo* @${m.sender.split("@")[0]}
 Ini adalah menu yang tersedia
 
 *List Menu*
+
+*Group Menu*
+⊳ ${prefix}kick
+⊳ ${prefix}add
+⊳ ${prefix}promote
+⊳ ${prefix}demote
+⊳ ${prefix}group
+⊳ ${prefix}linkgc
+⊳ ${prefix}tagall
+⊳ ${prefix}hidetag
+⊳ ${prefix}sider
+⊳ ${prefix}setname
+⊳ ${prefix}setppgc
 
 *Tools Menu*
 ⊳ ${prefix}google
@@ -3052,6 +2972,17 @@ Ini adalah menu yang tersedia
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
+*Owner Menu*
+⊳ ${prefix}chat
+⊳ ${prefix}join
+⊳ ${prefix}leave
+⊳ ${prefix}block
+⊳ ${prefix}unblock
+⊳ ${prefix}setppbot
+⊳ ${prefix}setexif
+⊳ ${prefix}public
+⊳ ${prefix}self
+
 *Other Menu*
 ⊳ ${prefix}tebak
 ⊳ ${prefix}simi
@@ -3060,17 +2991,17 @@ Ini adalah menu yang tersedia
        *Attention!*
   Harap baca *rules*
 `
-/*let terem = {
+/*let term = {
 contextInfo: {
 participant: "0@s.whatsapp.net",
 quotedMessage: {
 extendedTextMessage: {
-text: "Nama Bot"
+text: "Nama Bot",
 }
 }
 }
 }*/
-let btntz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
+let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
 let btn = [{
                                 urlButton: {
                                     displayText: 'Script',
@@ -3142,6 +3073,86 @@ Ini adalah menu yang tersedia
 ⊳ ${prefix}setexif
 ⊳ ${prefix}public
 ⊳ ${prefix}self
+
+*Other Menu*
+⊳ ${prefix}tebak
+⊳ ${prefix}simi
+⊳ ${prefix}delete
+
+       *Attention!*
+  Harap baca *rules*
+`
+/*let terem = {
+contextInfo: {
+participant: "0@s.whatsapp.net",
+quotedMessage: {
+extendedTextMessage: {
+text: "Nama Bot"
+}
+}
+}
+}*/
+let btntz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
+let btn = [{
+                                urlButton: {
+                                    displayText: 'Script',
+                                    url: 'https://github.com/DikaArdnt/Hisoka-Morou'
+                                }
+                            }, {
+                                callButton: {
+                                    displayText: 'Phone',
+                                    phoneNumber: '+62 8123-3264-6925'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Rules',
+                                    id: 'rules'
+                                }
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Owner',
+                                    id: 'owner'
+                                }  
+                            }, {
+                                quickReplyButton: {
+                                    displayText: 'Speed',
+                                    id: 'ping'
+                                }
+                            }]
+                       await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn, {contextInfo: { mentionedJid: [`${m.sender}`]}})
+	} else if(!m.isGroup && !isCreator) {
+anu = `*Halo* @${m.sender.split("@")[0]}
+Ini adalah menu yang tersedia
+
+*List Menu*
+
+*Tools Menu*
+⊳ ${prefix}google
+⊳ ${prefix}sticker
+⊳ ${prefix}toimg
+⊳ ${prefix}tomp3
+⊳ ${prefix}tovideo
+⊳ ${prefix}togif
+⊳ ${prefix}tourl
+⊳ ${prefix}removebg
+
+*Download Menu*
+⊳ ${prefix}play
+⊳ ${prefix}ytsearch
+⊳ ${prefix}ytmp3
+⊳ ${prefix}ytmp4
+⊳ ${prefix}igmp3
+⊳ ${prefix}igmp4
+⊳ ${prefix}ttmp3
+⊳ ${prefix}ttmp4
+⊳ ${prefix}telesticker
+⊳ ${prefix}pinterest
+⊳ ${prefix}emojimix
+
+*Maker Menu*
+⊳ ${prefix}nulis
+⊳ ${prefix}tahta
+⊳ ${prefix}attp
 
 *Other Menu*
 ⊳ ${prefix}tebak
