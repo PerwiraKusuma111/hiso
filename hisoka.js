@@ -116,14 +116,14 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
             }
     */
             let chats = global.db.data.chats[m.chat]
-            /*if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
+            if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
             if (chats) {
                 if (!('mute' in chats)) chats.mute = false
                 if (!('antilink' in chats)) chats.antilink = false
             } else global.db.data.chats[m.chat] = {
                 mute: false,
                 antilink: false,
-            }*/
+            }
 		
 	    let setting = global.db.data.settings[botNumber]
         /*if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
@@ -150,25 +150,7 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
             console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
         }
 	//Antidelte
-/*if (m.mtype == 'protocolMessage' && m.isGroup && !m.isGroup) {
-        let msgChat = chatDB.findIndex( x => x.id === m.msg.key.id )
-        deleteMSG = JSON.parse(fs.readFileSync('./chatsDB.js'))[msgChat]
-        console.log(deleteMSG)
-        let _teksDel = `⊙─❲ *ANTI DELETE MESSAGE* ❳`
-        _teksDel += `\n`
-        _teksDel += `\n├⊙ Name : ${deleteMSG.pushName}`
-        _teksDel += `\n├⊙ User : @${deleteMSG.sender.split("@")[0]}`
-        _teksDel += `\n├⊙ Day : ${Tanggal}`
-        _teksDel += `\n├⊙ Time : ${moment.unix(deleteMSG.messageTimestamp).tz('Asia/Jakarta').format('HH:mm:ss')} WIB`
-        _teksDel += `\n└⊙ Type : ${deleteMSG.mtype}`
-        cafnay.sendTextWithMentions(m.chat, _teksDel)
-        setTimeout(() => {
-        cafnay.copyNForward(m.chat, deleteMSG, true)
-        }, 100)
-        } else {
-        chatDB.push(m)
-        fs.writeFileSync("chatsDB.js", JSON.stringify(chatDB, null, 2))
-        }*/
+
 	// write database every 1 minute
 	/*setInterval(() => {
             fs.writeFileSync('./src/database.json', JSON.stringify(global.db, null, 2))
@@ -195,9 +177,9 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
 		setting.status = new Date() * 1
 	    }
 	}
-	    
+	    */
 	  // Anti Link
-        if (db.chats[m.chat].antilink) {
+        if (db.data.chats[m.chat].antilink) {
         if (budy.match(`chat.whatsapp.com`)) {
         m.reply(`「 ANTI LINK 」\n\nKamu terdeteksi mengirim link group, maaf kamu akan di kick !`)
         if (!isBotAdmins) return m.reply(`Ehh bot gak admin T_T`)
@@ -212,10 +194,10 @@ module.exports = conn = async (conn, m, chatUpdate, store) => {
         }
         
       // Mute Chat
-      if (db.chats[m.chat].mute && !isAdmins && !isCreator) {
+      if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
       return
       }
-
+/*
         // Respon Cmd with media
         if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
         let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
@@ -609,6 +591,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 m.reply('Script : https://github.com/DikaArdnt/Hisoka-Morou\n\n Dont Forget Give Star\n\nDonate : 6281615075793 (Link Aja)\nSaweria : https://saweria.co/DikaArdnt\nPaypal : https://www.paypal.me/Cakhaho\n\n Dont Forget Donate')
             }
             break
+*/
             case 'chat': {
                 if (!isCreator) throw mess.owner
                 if (!q) throw 'Option : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete'
@@ -629,6 +612,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 }
             }
             break
+/*
 	    case 'family100': {
                 if ('family100'+m.chat in _family100) {
                     m.reply('Masih Ada Sesi Yang Belum Diselesaikan!')
@@ -739,7 +723,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 }
             }
             break
-/*
+
             case 'kuismath': case 'math': {
                 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
                 let { genMath, modes } = require('./src/math')
@@ -808,7 +792,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
           m.reply(`Exif berhasil diubah menjadi\n\nPackname : ${global.packname}\nAuthor : ${global.author}`)
             }
             break
-*/
+
 	case 'kick': {
 		if (!m.isGroup) return m.reply(mess.group)
 		/*if (!isCreator) return m.reply("_Only for Owner_")*/
@@ -1131,17 +1115,17 @@ break
             }
             }
             break
-            /*case 'antilink': {
+            case 'antilink': {
                 if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (args[0] === "on") {
-                if (db.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
-                db.chats[m.chat].antilink = true
+                if (db.data.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
+                db.data.chats[m.chat].antilink = true
                 m.reply(`Antilink Aktif !`)
                 } else if (args[0] === "off") {
-                if (!db.chats[m.chat].antilink) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
-                db.chats[m.chat].antilink = false
+                if (!db.data.chats[m.chat].antilink) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+                db.data.chats[m.chat].antilink = false
                 m.reply(`Antilink Tidak Aktif !`)
                 } else {
                  let buttons = [
@@ -1151,18 +1135,18 @@ break
                     await conn.sendButtonText(m.chat, buttons, `Mode Antilink`, conn.user.name, m)
                 }
              }
-             break*/
-             /*case 'mute': {
+             break
+             case 'mute': {
                 if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
                 if (args[0] === "on") {
-                if (db.chats[m.chat].mute) return m.reply(`Sudah Aktif Sebelumnya`)
-                db.chats[m.chat].mute = true
+                if (db.data.chats[m.chat].mute) return m.reply(`Sudah Aktif Sebelumnya`)
+                db.data.chats[m.chat].mute = true
                 m.reply(`${conn.user.name} telah di mute di group ini !`)
                 } else if (args[0] === "off") {
-                if (!db.chats[m.chat].mute) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
-                db.chats[m.chat].mute = false
+                if (!db.data.chats[m.chat].mute) return m.reply(`Sudah Tidak Aktif Sebelumnya`)
+                db.data.chats[m.chat].mute = false
                 m.reply(`${conn.user.name} telah di unmute di group ini !`)
                 } else {
                  let buttons = [
@@ -1172,14 +1156,14 @@ break
                     await conn.sendButtonText(m.chat, buttons, `Mute Bot`, conn.user.name, m)
                 }
              }
-             break*/
+             break
             case 'linkgroup': case 'linkgc': {
                 if (!m.isGroup) return m.reply(mess.group)
                 let response = await conn.groupInviteCode(m.chat)
                 conn.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`, m, { detectLink: true })
             }
             break
-        /*    case 'ephemeral': {
+           case 'ephemeral': {
                 if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
                 if (!isAdmins) throw mess.admin
@@ -1190,7 +1174,7 @@ break
                     await conn.sendMessage(m.chat, { disappearingMessagesInChat: false }).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
                 }
             }
-            break*/
+            break
             case 'delete': case 'del': {
                 if (!m.quoted) throw false
                 let { chat, fromMe, id, isBaileys } = m.quoted
@@ -1278,7 +1262,7 @@ break
 		m.reply('Sukses Broadcast')
             }
             break
-        /*    case 'infochat': {
+            case 'infochat': case 'sider':{
                 if (!m.quoted) m.reply('Reply Pesan')
                 let msg = await m.getQuotedObj()
                 if (!m.quoted.isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
@@ -1292,7 +1276,7 @@ break
                 }
                 conn.sendTextWithMentions(m.chat, teks, m)
             }
-            break*/
+            break
             case 'q': case 'quoted': {
 		if (!m.quoted) return m.reply('Reply Pesannya!!')
 		let wokwol = await conn.serializeM(await m.getQuotedObj())
@@ -2908,85 +2892,100 @@ break
             break
             case 'list': case 'menu': case 'help': case '?': 
 if(m.isGroup) {
-anu = `*List Menu*
+anu = `*╰•List Menu•╯*
 
-*Group Menu*
-⊳ ${prefix}kick
-⊳ ${prefix}add
-⊳ ${prefix}promote
-⊳ ${prefix}demote
-⊳ ${prefix}group
-⊳ ${prefix}linkgc
-⊳ ${prefix}tagall
-⊳ ${prefix}hidetag
-⊳ ${prefix}sider
-⊳ ${prefix}totag
+*╰•Group Menu•╯*
+⇓•➣ ${prefix}kick
+⇓•➣ ${prefix}add
+⇓•➣ ${prefix}promote
+⇓•➣ ${prefix}demote
+⇓•➣ ${prefix}group
+⇓•➣ ${prefix}linkgc
+⇓•➣ ${prefix}tagall
+⇓•➣ ${prefix}hidetag
+⇓•➣ ${prefix}sider
+⇓•➣ ${prefix}totag
+⇓•➣ ${prefix}randomkick
 
-*Tools Menu*
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-⊳ ${prefix}togif
-⊳ ${prefix}tts [nonaktif]
-⊳ ${prefix}tourl
-⊳ ${prefix}removebg
+*╰•╰•Tools Menu•╯*
+⇓•➣ ${prefix}sticker
+⇓•➣ ${prefix}toimg
+⇓•➣ ${prefix}tomp3
+⇓•➣ ${prefix}tovideo
+⇓•➣ ${prefix}togif
+⇓•➣ ${prefix}tts [nonaktif]
+⇓•➣ ${prefix}tourl
+⇓•➣ ${prefix}removebg
 
-*Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}ytsearch
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}igmp3
-⊳ ${prefix}igmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
-⊳ ${prefix}pinterest
-⊳ ${prefix}emojimix
+*╰•Download Menu•╯*
+⇓•➣ ${prefix}play
+⇓•➣ ${prefix}ytsearch
+⇓•➣ ${prefix}ytmp3
+⇓•➣ ${prefix}ytmp4
+⇓•➣ ${prefix}igmp3
+⇓•➣ ${prefix}igmp4
+⇓•➣ ${prefix}ttmp3
+⇓•➣ ${prefix}ttmp4
+⇓•➣ ${prefix}telesticker
+⇓•➣ ${prefix}pinterest
+⇓•➣ ${prefix}emojimix
 
-*Maker Menu*
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}attp
+*╰•Maker Menu•╯*
+⇓•➣ ${prefix}nulis
+⇓•➣ ${prefix}tahta
+⇓•➣ ${prefix}attp
 
-*Fun Menu*
-⊳ ${prefix}tebak
-⊳ ${prefix}nomorhoki
-⊳ ${prefix}artimimpi
-⊳ ${prefix}artinama
-⊳ ${prefix}ramaljodoh
-⊳ ${prefix}ramaljodohbali
-⊳ ${prefix}suamiistri
-⊳ ${prefix}ramalcinta
-⊳ ${prefix}cocoknama
-⊳ ${prefix}pasangan
-⊳ ${prefix}jadiannikah
-⊳ ${prefix}sifatusaha
-⊳ ${prefix}rezeki
-⊳ ${prefix}pekerjaan
-⊳ ${prefix}nasib
-⊳ ${prefix}penyakit
-⊳ ${prefix}tarot
-⊳ ${prefix}fengshui
-⊳ ${prefix}haribaik
-⊳ ${prefix}harisangar
-⊳ ${prefix}harisial
-⊳ ${prefix}nagahari
-⊳ ${prefix}arahrezeki
-⊳ ${prefix}peruntungan
-⊳ ${prefix}weton
-⊳ ${prefix}karakter
-⊳ ${prefix}keberuntungan
-⊳ ${prefix}memancing
-⊳ ${prefix}masasubur
-⊳ ${prefix}zodiak
-⊳ ${prefix}shio
+*╰•Fun Menu•╯*
+⇓•➣ ${prefix}tebak
+⇓•➣ ${prefix}nomorhoki
+⇓•➣ ${prefix}artimimpi
+⇓•➣ ${prefix}artinama
+⇓•➣ ${prefix}ramaljodoh
+⇓•➣ ${prefix}ramaljodohbali
+⇓•➣ ${prefix}suamiistri
+⇓•➣ ${prefix}ramalcinta
+⇓•➣ ${prefix}cocoknama
+⇓•➣ ${prefix}pasangan
+⇓•➣ ${prefix}jadiannikah
+⇓•➣ ${prefix}sifatusaha
+⇓•➣ ${prefix}rezeki
+⇓•➣ ${prefix}pekerjaan
+⇓•➣ ${prefix}nasib
+⇓•➣ ${prefix}penyakit
+⇓•➣ ${prefix}tarot
+⇓•➣ ${prefix}fengshui
+⇓•➣ ${prefix}haribaik
+⇓•➣ ${prefix}harisangar
+⇓•➣ ${prefix}harisial
+⇓•➣ ${prefix}nagahari
+⇓•➣ ${prefix}arahrezeki
+⇓•➣ ${prefix}peruntungan
+⇓•➣ ${prefix}weton
+⇓•➣ ${prefix}karakter
+⇓•➣ ${prefix}keberuntungan
+⇓•➣ ${prefix}memancing
+⇓•➣ ${prefix}masasubur
+⇓•➣ ${prefix}zodiak
+⇓•➣ ${prefix}shio
 
-*Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}suit [nonaktif]
-⊳ ${prefix}delete
+*╰•Owner Menu•╯*
+⇓•➣ ${prefix}chat [option]
+⇓•➣ ${prefix}join [link]
+⇓•➣ ${prefix}leave
+⇓•➣ ${prefix}block @user
+⇓•➣ ${prefix}unblock @user
+⇓•➣ ${prefix}setppbot [image]
+⇓•➣ ${prefix}setexif
+⇓•➣ ${prefix}public
+⇓•➣ ${prefix}self
+⇓•➣ ${prefix}virtex
+⇓•➣ ${prefix}fakengetik
+⇓•➣ ${prefix}fakerekam
+
+*╰•Other Menu•╯*
+⇓•➣ ${prefix}simi
+⇓•➣ ${prefix}suit [nonaktif]
+⇓•➣ ${prefix}delete
 
        *Attention!*
   Harap baca *rules*
@@ -3021,73 +3020,86 @@ let btn = [{
                                   {buttonId: 'sc', buttonText: {displayText: 'Status'}, type:1}]
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 } else if(!m.isGroup) {
-anu = `*List Menu*
+anu = `*╰•List Menu•╯*
 
-*Tools Menu*
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-⊳ ${prefix}togif
-⊳ ${prefix}tts [nonaktif]
-⊳ ${prefix}tourl
-⊳ ${prefix}removebg
+*╰•Tools Menu•╯*
+⇓•➣ ${prefix}sticker
+⇓•➣ ${prefix}toimg
+⇓•➣ ${prefix}tomp3
+⇓•➣ ${prefix}tovideo
+⇓•➣ ${prefix}togif
+⇓•➣ ${prefix}tourl
+⇓•➣ ${prefix}removebg
 
-*Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}ytsearch
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}igmp3
-⊳ ${prefix}igmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
-⊳ ${prefix}pinterest
-⊳ ${prefix}emojimix
+*╰•Download Menu•╯*
+⇓•➣ ${prefix}play
+⇓•➣ ${prefix}ytsearch
+⇓•➣ ${prefix}ytmp3
+⇓•➣ ${prefix}ytmp4
+⇓•➣ ${prefix}igmp3
+⇓•➣ ${prefix}igmp4
+⇓•➣ ${prefix}ttmp3
+⇓•➣ ${prefix}ttmp4
+⇓•➣ ${prefix}telesticker
+⇓•➣ ${prefix}pinterest
+⇓•➣ ${prefix}emojimix
 
-*Maker Menu*
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}attp
+*╰•Maker Menu•╯*
+⇓•➣ ${prefix}nulis
+⇓•➣ ${prefix}tahta
+⇓•➣ ${prefix}attp
 
-*Fun Menu*
-⊳ ${prefix}tebak
-⊳ ${prefix}nomorhoki
-⊳ ${prefix}artimimpi
-⊳ ${prefix}artinama
-⊳ ${prefix}ramaljodoh
-⊳ ${prefix}ramaljodohbali
-⊳ ${prefix}suamiistri
-⊳ ${prefix}ramalcinta
-⊳ ${prefix}cocoknama
-⊳ ${prefix}pasangan
-⊳ ${prefix}jadiannikah
-⊳ ${prefix}sifatusaha
-⊳ ${prefix}rezeki
-⊳ ${prefix}pekerjaan
-⊳ ${prefix}nasib
-⊳ ${prefix}penyakit
-⊳ ${prefix}tarot
-⊳ ${prefix}fengshui
-⊳ ${prefix}haribaik
-⊳ ${prefix}harisangar
-⊳ ${prefix}harisial
-⊳ ${prefix}nagahari
-⊳ ${prefix}arahrezeki
-⊳ ${prefix}peruntungan
-⊳ ${prefix}weton
-⊳ ${prefix}karakter
-⊳ ${prefix}keberuntungan
-⊳ ${prefix}memancing
-⊳ ${prefix}masasubur
-⊳ ${prefix}zodiak
-⊳ ${prefix}shio
+*╰•Fun Menu•╯*
+⇓•➣ ${prefix}tebak
+⇓•➣ ${prefix}nomorhoki
+⇓•➣ ${prefix}artimimpi
+⇓•➣ ${prefix}artinama
+⇓•➣ ${prefix}ramaljodoh
+⇓•➣ ${prefix}ramaljodohbali
+⇓•➣ ${prefix}suamiistri
+⇓•➣ ${prefix}ramalcinta
+⇓•➣ ${prefix}cocoknama
+⇓•➣ ${prefix}pasangan
+⇓•➣ ${prefix}jadiannikah
+⇓•➣ ${prefix}sifatusaha
+⇓•➣ ${prefix}rezeki
+⇓•➣ ${prefix}pekerjaan
+⇓•➣ ${prefix}nasib
+⇓•➣ ${prefix}penyakit
+⇓•➣ ${prefix}tarot
+⇓•➣ ${prefix}fengshui
+⇓•➣ ${prefix}haribaik
+⇓•➣ ${prefix}harisangar
+⇓•➣ ${prefix}harisial
+⇓•➣ ${prefix}nagahari
+⇓•➣ ${prefix}arahrezeki
+⇓•➣ ${prefix}peruntungan
+⇓•➣ ${prefix}weton
+⇓•➣ ${prefix}karakter
+⇓•➣ ${prefix}keberuntungan
+⇓•➣ ${prefix}memancing
+⇓•➣ ${prefix}masasubur
+⇓•➣ ${prefix}zodiak
+⇓•➣ ${prefix}shio
 
-*Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}suit [nonaktif]
-⊳ ${prefix}delete
+*╰•Owner Menu•╯*
+⇓•➣ ${prefix}chat [option]
+⇓•➣ ${prefix}join [link]
+⇓•➣ ${prefix}leave
+⇓•➣ ${prefix}block @user
+⇓•➣ ${prefix}unblock @user
+⇓•➣ ${prefix}setppbot [image]
+⇓•➣ ${prefix}setexif
+⇓•➣ ${prefix}public
+⇓•➣ ${prefix}self
+⇓•➣ ${prefix}virtex
+⇓•➣ ${prefix}fakengetik
+⇓•➣ ${prefix}fakerekam
+
+*╰•Other Menu•╯*
+⇓•➣ ${prefix}simi
+⇓•➣ ${prefix}suit [nonaktif]
+⇓•➣ ${prefix}delete
 
        *Attention!*
   Harap baca *rules*
@@ -3121,6 +3133,13 @@ let btn = [{
                        await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
             break
+case 'virtex':{
+let mes = await conn.sendMessage(m.chat, {text: 'Virtex Boom', contextInfo: {externalAdReply: {title: 'Virtex', body: 'This is Virtex', sourceUrl: `https://github.com`, mediaUrl: `https://github.com`, mediaType: 1, thumbnail: fs.readFileSync(`./vir.jpg`) }}})    
+setTimeout(() => {
+conn.deleteMessage(from, mes.key)
+}, 30000)
+}
+break
 case 'rules':{
 anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
