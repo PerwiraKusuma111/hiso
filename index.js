@@ -551,7 +551,13 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
                 } catch {
                     ppuser = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
                 }
-        
+                ppnya = await getBuffer(ppuser)
+        let message = await prepareWAMessageMedia({ image: ppnya}, { upload: conn.waUploadToServer })
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+       imageMessage: message.imageMessage,
+       	caption: `Hmmm`	
+ }))
+            conn.relayMessage(jid, template.message, { messageId: template.key.id })
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
@@ -560,9 +566,9 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
                 }
 
                 if (anu.action == 'add') {
-                    conn.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `Selamat datang di ${metadata.subject} @${num.split("@")[0]}\nRaf Botz Whatsapp` })
+                    conn.relayMessage(anu.id, template.message)
                 } else if (anu.action == 'remove') {
-                    conn.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: `@${num.split("@")[0]} Telah keluar dari ${metadata.subject}\nRaf Botz Whatsapp` })
+                    conn.relayMessage(anu.id, template.message)
                 }
             }
         } catch (err) {
