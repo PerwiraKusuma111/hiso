@@ -1631,7 +1631,7 @@ await conn.sendMessage(m.chat, listMessage)
                 let res = await yta(`${search.videos[0].url}`)
                 /*let get_img = await getBuffer(res.thumb)*/
                 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 2, thumbnailUrl: res.thumb}}}, {}).catch((e) => m.reply(String(e))).then(() => {
+                conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {}).catch((e) => m.reply(String(e))).then(() => {
 
 let kunnu = []
 let no = 1
@@ -1673,7 +1673,7 @@ conn.sendMessage(m.chat, listMessage)
             let res = await yta(text)
           /*  let ythumb = await getBuffer(res.thumb)*/
             if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-           conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, thumbnailUrl: res.thumb}}}, {}).catch((e) => m.reply(String(e)))
+           conn.sendMessage(m.chat, { audio: { url: res.dl_link }, mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {}).catch((e) => m.reply(String(e)))
             } else {
             	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
             }
@@ -2254,7 +2254,7 @@ case 'tiktokmp3': {
             let media = await getBuffer(res.result.nowatermark)
             let { toAudio } = require('./lib/converter')
             let audio = await toAudio(media, 'mp4')
-            conn.sendAudio(m.chat, audio, m, ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}})
+            conn.sendAudio(m.chat, audio, '', ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}})
             } catch(e) {
 	m.reply(String(e))
 	}
