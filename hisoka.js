@@ -2866,7 +2866,7 @@ anu = `*List Menu*
 ⊳ ${prefix}attp
 
 *Other Menu*
-⊳ ${prefix}simi
+⊳ ${prefix}tebak
 ⊳ ${prefix}simi
 ⊳ ${prefix}delete
 
@@ -3208,7 +3208,7 @@ return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'
             kuis = true
             jawaban = tebakkalimat[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
-                await conn.sendButtonText(m.chat, [{ buttonId: 'tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, `Perwira Bot WhatsApp`, m)
+                await conn.sendButtonText(m.chat, [{ buttonId: 'tebak kalimat', buttonText: { displayText: 'Tebak Kalimat' }, type: 1 }], `🎮 Tebak Kalimat ??\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, `Perwira Bot WhatsApp`, m)
                 delete tebakkalimat[m.sender.split('@')[0]]
             } else m.reply('*Jawaban Salah!*')
         }
