@@ -2867,6 +2867,7 @@ anu = `*List Menu*
 
 *Other Menu*
 ⊳ ${prefix}simi
+⊳ ${prefix}simi
 ⊳ ${prefix}delete
 
        *Attention!*
@@ -2942,6 +2943,7 @@ anu = `*List Menu*
 ⊳ ${prefix}attp
 
 *Other Menu*
+⊳ ${prefix}tebak
 ⊳ ${prefix}simi
 ⊳ ${prefix}delete
 
