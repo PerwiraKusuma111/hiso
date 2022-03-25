@@ -2753,6 +2753,15 @@ case 'online': {
 										}
 									}
 									break*/
+									case 'translate':
+                                    case 'tr': {
+                                    	let texti = args.join(" ")
+                                        let text1 = texti.split("/")[0]
+                                        let text2 = texti.split("/")[1]
+let tr = require("translate-google-api")
+let _tr = await tr(text1, {to: text2})
+m.reply(_tr[0])
+}break
             case 'ping': case 'botstatus': case 'statusbot': {
                 const used = process.memoryUsage()
                 const cpus = os.cpus().map(cpu => {
