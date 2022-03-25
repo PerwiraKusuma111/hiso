@@ -2754,14 +2754,20 @@ case 'online': {
 									}
 									break*/
 									case 'translate':
-                                    case 'tr': {
+                                    case 'tr':
+try { {
                                     	let texti = args.join(" ")
-                                        let text1 = texti.split("/")[0]
-                                        let text2 = texti.split("/")[1]
+                                        let text2 = texti.split("/")[0]
+                                        let text1 = texti.split("/")[1]
+                                        let totyp = m.quoted.text
 let tr = require("translate-google-api")
-let _tr = await tr(text1, {to: text2})
+let _tr = await tr(`${text1 ? text1 : totyp}`, {to: text2})
 m.reply(_tr[0])
-}break
+}
+} catch(e) {
+m.reply(String(e))
+}
+break
             case 'ping': case 'botstatus': case 'statusbot': {
                 const used = process.memoryUsage()
                 const cpus = os.cpus().map(cpu => {
@@ -2849,6 +2855,7 @@ anu = `*List Menu*
 ⊳ ${prefix}setppgc
 
 *Tools Menu*
+⊳ ${prefix}translate
 ⊳ ${prefix}google
 ⊳ ${prefix}sticker
 ⊳ ${prefix}toimg
@@ -2868,13 +2875,13 @@ anu = `*List Menu*
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
 ⊳ ${prefix}telesticker
-⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
+⊳ ${prefix}pinterest
 
        *Attention!*
   Harap baca *rules*
@@ -2921,6 +2928,7 @@ let btn = [{
 anu = `*List Menu*
 
 *Tools Menu*
+⊳ ${prefix}translate
 ⊳ ${prefix}google
 ⊳ ${prefix}sticker
 ⊳ ${prefix}toimg
@@ -2940,13 +2948,13 @@ anu = `*List Menu*
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
 ⊳ ${prefix}telesticker
-⊳ ${prefix}pinterest
 ⊳ ${prefix}emojimix
 
-*Maker Menu*
+*Other Menu*
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
+⊳ ${prefix}pinterest
 
        *Attention!*
   Harap baca *rules*
