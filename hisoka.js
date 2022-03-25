@@ -1655,13 +1655,63 @@ conn.sendMessage(m.chat, listMessage)
                 conn.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `Title : ${media.title}\nFile Size : ${media.filesizeF}\nUrl : ${urls[text - 1]}\nExt : MP3\nResolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break*/
-            case 'pinterest': {
+     /*       case 'pinterest': {
 		let { pinterest } = require('./lib/scraper')
                 anu = await pinterest(text)
                 result = anu[Math.floor(Math.random() * anu.length)]
                 conn.sendMessage(m.chat, { image: { url: result }, caption: 'Media Url : '+result }, { quoted: m })
             }
-            break
+            break*/
+case 'pinterest': 
+			if(!text) return reply(`Masukkan query\n*Contoh :* ${prefix+command} Naruto`)
+            async function pinterestSearch(query) {
+                    return new Promise((resolve, reject) => {
+                        fetch(`https://www.pinterest.com/resource/BaseSearchResource/get/?source_url=%2Fsearch%2Fpins%2F%3Fq%3D${query}&data=%7B%22options%22%3A%7B%22isPrefetch%22%3Afalse%2C%22query%22%3A%22${query}%22%2C%22scope%22%3A%22pins%22%2C%22no_fetch_context_on_resource%22%3Afalse%7D%2C%22context%22%3A%7B%7D%7D&_=1619980301559`, {
+                            "headers": {
+                                "accept": "application/json, text/javascript, */*, q=0.01",
+                                "accept-language": "en-US,en;q=0.9",
+                                "cache-control": "no-cache",
+                                "pragma": "no-cache",
+                                "sec-fetch-dest": "empty",
+                                "sec-fetch-mode": "cors",
+                                "sec-fetch-site": "same-origin",
+                                "sec-gpc": "1",
+                                "x-app-version": "9a236a4",
+                                "x-pinterest-appstate": "active",
+                                "x-requested-with": "XMLHttpRequest"
+                            },
+                            "referrer": "https://www.pinterest.com/",
+                            "referrerPolicy": "origin",
+                            "body": null,
+                            "method": "GET",
+                            "mode": "cors"
+                        }).then((res) => res.json())
+                            .then((json) => {
+                                const generatepin = json.resource_response.data.results[Math.floor(Math.random() * (json.resource_response.data.results.length))]
+                                var result = [];
+                                result.push({
+                                    link: generatepin.images.orig.url
+                                })
+                                resolve(result)
+                            }).catch(reject)
+                    })
+                }
+
+                const pinterest = (query) => new Promise((resolve, reject) => {
+                    pinterestSearch(query).then((data) => {
+                        resolve({
+                            status: 200,
+                            image: data[0].link
+                        })
+                    }).catch(reject)
+                })
+
+                pinterest(q).then(async res => {
+ /*          	let we = await getBuffer(res.image).catch(err => reply(`*Error*
+${util.format(err)}`))*/
+              	  conn.sendMessage(m.chat, {image: {url : res.image}, caption: 'From Pinterest', mimetype: 'image/jpeg'}, {quoted: m}).catch(e => m.reply(`*Error* ${String(e)}`))
+              }).catch(e => m.reply(`*Error* ${String(e)}`))
+             break
             /*case 'anime': case 'waifu': case 'husbu': case 'neko': case 'shinobu': case 'megumin': case 'waifus': case 'nekos': case 'trap': case 'blowjob': {
                 m.reply(mess.wait)
                 conn.sendMessage(m.chat, { image: { url: api('zenz', '/api/random/'+command, {}, 'apikey') }, caption: 'Generate Random ' + command }, { quoted: m })
