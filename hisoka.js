@@ -2867,10 +2867,6 @@ anu = `*List Menu*
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
-*Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}delete
-
        *Attention!*
   Harap baca *rules*
 `
@@ -2943,10 +2939,6 @@ anu = `*List Menu*
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
 
-*Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}delete
-
        *Attention!*
   Harap baca *rules*
 `
@@ -3013,7 +3005,7 @@ let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, t
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, m)
 } break
 
-case 'simi':
+/*case 'simi':
                     let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{buttonId: 'simi on', buttonText: {displayText: 'On'}, type:1}]
 					if (args.length < 1) return conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					if ((args[0]) === 'on') {
@@ -3026,9 +3018,9 @@ case 'simi':
 					} else {
 						conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					}
-					break
+					break*/
             default:
-            
+        /*    
             if(isSimi) {
             if(budy.startsWith(prefix)) return
             if(sisMedia) return
@@ -3039,7 +3031,7 @@ case 'simi':
            m.reply(`*Error*\n${String(err)}`)
             }
             }
-            
+            */
                  if (budy.startsWith('=>')) {
                  if (!isCreator) return m.reply(mess.owner)
                  function Return(sul) {
