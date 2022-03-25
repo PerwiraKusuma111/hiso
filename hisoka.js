@@ -2804,18 +2804,18 @@ case 'nulis':
 	try {
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 nulli = await getBuffer(`https://hadi-api.herokuapp.com/api/canvas/nulis?text=${encodeURI(q)}`)
-conn.sendMessage(m.chat, {image: nulli, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m}).catch((e) => m.reply(String(e)))
+await conn.sendMessage(m.chat, {image: nulli, mimetype: 'image/jpeg', caption: 'Done'}, {quoted: m}).catch((e) => m.reply(String(e)))
 } catch(e) {
-	m.reply(String(e))
+	m.reply(`${String(e)}`)
 }break
 
 case 'tahta':
 	try {
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
 gimgt = await getBuffer(`https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`)
-conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch((e) => m.reply(`*Error*\n${String(e)}`))
+await conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch((e) => m.reply(`*Error*\n${String(e)}`))
 } catch(e) {
-	m.reply(String(e))
+	m.reply(`${String(e)}`)
 	}
 break
             case 'owner': case 'creator': {
@@ -2868,7 +2868,6 @@ anu = `*List Menu*
 ⊳ ${prefix}attp
 
 *Other Menu*
-⊳ ${prefix}tebak
 ⊳ ${prefix}simi
 ⊳ ${prefix}delete
 
@@ -2945,7 +2944,6 @@ anu = `*List Menu*
 ⊳ ${prefix}attp
 
 *Other Menu*
-⊳ ${prefix}tebak
 ⊳ ${prefix}simi
 ⊳ ${prefix}delete
 
@@ -3088,7 +3086,7 @@ case 'simi':
                 conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list men`, `Perwira Bot WhatsApp`, m, {})
                 }
                 
-                if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
+               /* if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
             kuis = true
             jawaban = tebaklagu[m.sender.split('@')[0]]
             if (budy.toLowerCase() == jawaban) {
@@ -3160,7 +3158,7 @@ case 'simi':
                 await conn.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, `Perwira Bot WhatsApp`, m)
                 delete tebaktebakan[m.sender.split('@')[0]]
             } else m.reply('*Jawaban Salah!*')
-        }
+        }*/
                 break
 
              }
