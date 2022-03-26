@@ -2813,7 +2813,7 @@ case 'online': {
                                         let text1 = texti.split("/")[1]
                                         let totyp = m.quoted.text
 let tr = require("translate-google-api")
-let _tr = await tr(`${text1 ? text1 : totyp}`, {to: text2})
+let _tr = await tr(`${text1}`, {to: text2})
 m.reply(_tr[0])
 }
 } catch(e) {
