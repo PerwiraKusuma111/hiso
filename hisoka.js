@@ -666,7 +666,7 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
             let buttons = [
                         { buttonId: 'jodohku', buttonText: { displayText: 'Jodohku' }, type: 1 }
                     ]
-                    await conn.sendButtonText(m.chat, buttons, jawab, conn.user.name, m, {mentions: ments})
+                    await conn.sendButtonText(m.chat, buttons, jawab, 'Perwira Bot WhatsApp', m, {mentions: ments})
             }
             break
             case 'jadian': {
@@ -2811,7 +2811,7 @@ case 'online': {
                                     	let texti = args.join(" ")
                                         let text2 = texti.split("/")[0]
                                         let text1 = texti.split("/")[1]
-                                        let totyp = m.quoted.text
+                                     /*   let totyp = m.quoted.text*/
 let tr = require("translate-google-api")
 let _tr = await tr(`${text1}`, {to: text2})
 m.reply(_tr[0])
