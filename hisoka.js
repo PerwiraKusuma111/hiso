@@ -765,6 +765,14 @@ Silahkan @${m.mentionedJid[0].split`@`[0]} untuk ketik terima/tolak`
                 await conn.groupUpdateSubject(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
             }
             break
+case 'setnam': case 'setsub': {
+                if (!m.isGroup) return m.reply(mess.group)
+                if (!isBotAdmins) throw mess.botAdmin
+                if (!isAdmins) throw mess.admin
+                if (!text) throw 'Text ?'
+                await conn.groupUpdateSubject(`${text}`, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
+            }
+            break
           case 'setdesc': case 'setdesk': {
                 if (!m.isGroup) return m.reply(mess.group)
                 if (!isBotAdmins) throw mess.botAdmin
@@ -1143,10 +1151,10 @@ break
                 if (!isCreator) throw mess.owner
                 if (!text) throw `Text mana?\n\nContoh : ${prefix + command} fatih-san`
                 let anu = await store.chats.all().map(v => v.id)
-                m.reply(`Mengirim Broadcast Ke ${anu.length} Chat\nWaktu Selesai ${anu.length * 1.5} detik`)
+              /*  m.reply(`Mengirim Broadcast Ke ${anu.length} Chat\nWaktu Selesai ${anu.length * 1.5} detik`)*/
 		        for (let yoi of anu) {
 		    
-		    let btn = [{
+		   /* let btn = [{
                                 urlButton: {
                                     displayText: 'Script',
                                     url: 'https://github.com/DikaArdnt/Hisoka-Morou'
@@ -1173,7 +1181,9 @@ break
                                 }
                             }]
                       let txt = `「 Broadcast Bot 」\n\n${text}`
-                      conn.send5ButImg(yoi, txt, conn.user.name, global.thumb, btn)
+                      conn.send5ButImg(yoi, txt, conn.user.name, global.thumb, btn)*/
+                      await sleep(4000)
+                      conn.sendMessage(yoi, {text: `${text}`}, '')
 		}
 		m.reply('Sukses Broadcast')
             }
