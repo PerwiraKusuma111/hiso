@@ -3201,7 +3201,7 @@ m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
 }
-} else if(args.length > 1) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
+} else if(args.length > 2) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
                                         try {
                                     	let texti = args.join(" ")
                                         let text2 = texti.split("/")[0]
