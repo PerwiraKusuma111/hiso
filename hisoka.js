@@ -3173,7 +3173,7 @@ case 'online': {
 									break*/
 									case 'translate':
                                     case 'tr':{
-                                    
+                                    if (!text) return conn.sendButtonText(m.chat, [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}], "*Contoh :*\n/translate id/Thanks\nAtau\n/translate id(reply pesan)", `Perwira Bot WhatsApp`, m)
                                     if (text.includes("/")) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
                                         try {
                                     	let texti = args.join(" ")
@@ -3202,12 +3202,9 @@ m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
 }
-} else if(!text) {
-anpu = "*Contoh :*\n/translate id/Thanks\nAtau\n/translate id(reply pesan)"
-let bttnz = [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}]
-await conn.sendButtonText(m.chat, bttnz, anpu, `Perwira Bot WhatsApp`, m)
-	}
-}break
+}
+}
+break
 case 'kodebahasa':{
 let leang = `*Kode Bahasa*
 
