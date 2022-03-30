@@ -3173,7 +3173,7 @@ case 'online': {
 									break*/
 									case 'translate':
                                     case 'tr':{
-                                    if (!text) return conn.sendButtonText(m.chat, [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}], "*Contoh :*\n/translate id/Thanks\nAtau\n/translate id(reply pesan)", `Perwira Bot WhatsApp`, m)
+                                    if (!text) return conn.sendButtonText(m.chat, [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}], `*Contoh :*\n${prefix+command} id/Thanks\nAtau\n${prefix+command} id(reply pesan)`, `Perwira Bot WhatsApp`, m)
                                     if (text.includes("/")) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
                                         try {
                                     	let texti = args.join(" ")
@@ -3198,6 +3198,18 @@ m.reply(String(e))
                                      /*   let totyp = m.quoted.text*/
 let tr = require("translate-google-api")
 let _tr = await tr(`${text1}`, {to: text2})
+m.reply(_tr[0])
+} catch(e) {
+m.reply(String(e))
+}
+} else if(args.length > 1) {
+	try {
+                                    	let texti = args.join(" ")
+                                        let text2 = texti
+                                        let text1 = m.quoted.text
+                                     /*   let totyp = m.quoted.text*/
+let tr = require("translate-google-api")
+let _tr = await tr(`${text2}`, {to: 'auto'})
 m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
