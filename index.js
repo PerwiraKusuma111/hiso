@@ -28,7 +28,7 @@ global.udah = []
 global.ban = ["6281553391495@s.whatsapp.net"]
 global.offline = []
 global.simi = []
-global.owner = ['6281232646925', '6282230819722', '6283167714830@s.whatsapp.net']
+global.owner = ['6281232646925', '6282230819722@s.whatsapp.net', '6283167714830@s.whatsapp.net']
 global.premium = ['6288292024190']
 global.packname = 'Sticker'
 global.author = 'Perwira Bot WhatsApp'
@@ -111,7 +111,7 @@ async function startHisoka() {
 
     store.bind(conn.ev)
 
-    /*conn.ws.on('CB:call', async (json) => {
+    conn.ws.on('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag == 'offer') {
     let pa7rick = await conn.sendContact(callerId, global.owner)
@@ -119,7 +119,7 @@ async function startHisoka() {
     await sleep(10000)
     await conn.updateBlockStatus(callerId, "block")
     }
-    })*/
+    })
 
     conn.ev.on('messages.upsert', async chatUpdate => {
         //console.log(JSON.stringify(chatUpdate, undefined, 2))
@@ -183,7 +183,7 @@ async function startHisoka() {
 	for (let i of kon) {
 	    list.push({
 	    	displayName: await conn.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i + '@s.whatsapp.net')}\nFN:${await conn.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:perwiraanjay111@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/perwira_kusuma1\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:P/*${await conn.getName(i + '@s.whatsapp.net')}*/\nFN:P/*${await conn.getName(i + '@s.whatsapp.net')}*/\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:perwiraanjay111@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/perwira_kusuma1\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
 	conn.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
