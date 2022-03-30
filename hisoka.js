@@ -3185,9 +3185,10 @@ m.reply(_tr[0])
 break
 									case 'translate':
                                     case 'tr':{
+                                    try {
                                     if (!text) return conn.sendButtonText(m.chat, [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}], `*Contoh :*\n${prefix+command} id/Thanks\nAtau\n${prefix+command} id(reply pesan)`, `Perwira Bot WhatsApp`, m)
                                     if (text.includes("/")) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
-                                        try {
+                                        
                                     	let texti = args.join(" ")
                                         let text2 = texti.split("/")[0]
                                         let text1 = texti.split("/")[1]
@@ -3195,15 +3196,12 @@ break
 let tr = require("translate-google-api")
 let _tr = await tr(`${text1}`, {to: text2})
 m.reply(_tr[0])
-} catch(e) {
-m.reply(String(e))
-}
 } else if(quoted) {
 	if (/image/.test(mime)) return
      if (/audio/.test(mime)) return
       if (/video/.test(mime)) return
 	   if (/webp/.test(mime)) return
-	try {
+	
                                     	let texti = args.join(" ")
                                         let text2 = texti
                                         let text1 = m.quoted.text
@@ -3211,9 +3209,17 @@ m.reply(String(e))
 let tr = require("translate-google-api")
 let _tr = await tr(`${text1}`, {to: text2})
 m.reply(_tr[0])
+} else {
+	let texti = args.join(" ")
+    /*let text2 = texti.split("/")[0]
+    let text1 = texti.split("/")[1]*/
+    /*let totyp = m.quoted.text*/
+let tr = require("translate-google-api")
+let _tr = await tr(`${texti}`, {to: 'auto'})
+m.reply(_tr[0])
+	}
 } catch(e) {
 m.reply(String(e))
-}
 }
 }
 break
