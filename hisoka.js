@@ -2552,8 +2552,8 @@ if (text.includes("tiktok.com")) {
 	try {
 let { TiktokDownloader } = require('./lib/scraper')
 let res = await TiktokDownloader(text)
-got_vid = await getBuffer(res.result.nowatermark)
-conn.sendMessage(m.chat, {video: {url: `${res.result.nowatermark}`}, mimetype: 'video/mp4'}, {quoted: m})
+got_vid = await getBuffer(res.result.nowatermark).catch(e => m.reply("Error"))
+conn.sendMessage(m.chat, {video: got_vid, mimetype: 'video/mp4'}, {quoted: m})
 } catch(e) {
 	m.reply(String(e))
 	}
@@ -3198,18 +3198,6 @@ m.reply(String(e))
                                      /*   let totyp = m.quoted.text*/
 let tr = require("translate-google-api")
 let _tr = await tr(`${text1}`, {to: text2})
-m.reply(_tr[0])
-} catch(e) {
-m.reply(String(e))
-}
-} else if(text) {
-	try {
-                                    	let texti = args.join(" ")
-                                      /*  let text2 = texti*/
-                                        /*let text1 = m.quoted.text*/
-                                     /*   let totyp = m.quoted.text*/
-let tr = require("translate-google-api")
-let _tr = await tr(`${texti}`, {to: 'auto'})
 m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
