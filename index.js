@@ -182,8 +182,8 @@ async function startHisoka() {
 	let list = []
 	for (let i of kon) {
 	    list.push({
-	    	displayName: P,
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:P\nFN:P\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:perwiraanjay111@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/perwira_kusuma1\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	displayName: await conn.getName(i + '@s.whatsapp.net'),
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i + '@s.whatsapp.net')}\nFN:P${await conn.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:perwiraanjay111@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/perwira_kusuma1\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
 	conn.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })

@@ -3398,7 +3398,7 @@ await conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "
 	}
 break
 case 'owner': case 'creator': {
-conn.sendContact(m.chat, global.owner, m)
+conn.sendContact(m.chat, global.owner, '')
 }
 break
 case 'list': case 'menu': case 'help': case '?': 
