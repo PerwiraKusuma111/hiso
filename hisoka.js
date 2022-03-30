@@ -3192,7 +3192,7 @@ m.reply(String(e))
 	   if (/webp/.test(mime)) return
 	try {
                                     	let texti = args.join(" ")
-                                        let text2 = texti[0]
+                                        let text2 = texti
                                         let text1 = m.quoted.text
                                      /*   let totyp = m.quoted.text*/
 let tr = require("translate-google-api")
@@ -3201,7 +3201,7 @@ m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
 }
-} else if(args.length > 2) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
+} else if(text) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
                                         try {
                                     	let texti = args.join(" ")
                                         let text2 = texti.split("/")[0]
