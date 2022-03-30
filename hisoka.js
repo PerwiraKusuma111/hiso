@@ -3202,11 +3202,11 @@ m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
 }
-} else if(args.length > 1) {
+} else if(text) {
 	try {
                                     	let texti = args.join(" ")
                                         let text2 = texti
-                                        let text1 = m.quoted.text
+                                        /*let text1 = m.quoted.text*/
                                      /*   let totyp = m.quoted.text*/
 let tr = require("translate-google-api")
 let _tr = await tr(`${text2}`, {to: 'auto'})
