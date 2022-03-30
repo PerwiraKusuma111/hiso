@@ -3171,7 +3171,7 @@ case 'online': {
 										}
 									}
 									break*/
-									case 'tr2':
+									case 'tr2':{
                                     if (!text) return conn.sendButtonText(m.chat, [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}], `*Contoh :*\n${prefix+command} id/Thanks\nAtau\n${prefix+command} id(reply pesan)`, `Perwira Bot WhatsApp`, m)
                                     	let texti = args.join(" ")
                                         /*let text2 = texti.split("/")[0]
