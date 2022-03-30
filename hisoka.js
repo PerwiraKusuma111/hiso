@@ -3203,7 +3203,7 @@ m.reply(_tr[0])
 m.reply(String(e))
 }
 } else if(!text) {
-anpu = `*Contoh :*\n${prefix+command} id/Thanks\nAtau\n${prefix+command} id(reply pesan)`
+anpu = "*Contoh :*\n/translate id/Thanks\nAtau\n/translate id(reply pesan)"
 let bttnz = [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}]
 await conn.sendButtonText(m.chat, bttnz, anpu, `Perwira Bot WhatsApp`, m)
 	}
