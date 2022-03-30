@@ -3196,12 +3196,12 @@ let text1 = texti.split("/")[1]
 let tr = require("translate-google-api")
 let _tr = await tr(`${text1}`, {to: text2})
 m.reply(_tr[0])
-} else if(text) {
+} /*else if(text) {
 let texti = args.join(" ")
 let tr = require("translate-google-api")
 let _tr = await tr(`${texti}`, {to: 'auto'})
 m.reply(_tr[0])
-} else if(quoted) {
+} */else if(quoted) {
 if (/image/.test(mime)) return
 if (/audio/.test(mime)) return
 if (/video/.test(mime)) return
@@ -3216,7 +3216,8 @@ let _tr = await tr(`${text1}`, {to: text2})
 m.reply(_tr[0])
 }
 } catch(e) {
-m.reply(String(e))
+/*m.reply(String(e))*/
+conn.sendButtonText(m.chat, [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode Bahasa'}, type:1}], `*Contoh :*\n${prefix+command} id/Thanks\nAtau\n${prefix+command} id(reply pesan)`, `Perwira Bot WhatsApp`, m)
 }
 }
 break
