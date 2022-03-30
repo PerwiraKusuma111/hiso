@@ -3201,19 +3201,7 @@ m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
 }
-} /*else if(text) {/*throw `Contoh : ${prefix + command} en/Aku suka kamu`*/
-                                        try {
-                                    	let texti = args.join(" ")
-                                        let text2 = texti.split("/")[0]
-                                        let text1 = texti.split("/")[1]
-                                     /*   let totyp = m.quoted.text*/
-let tr = require("translate-google-api")
-let _tr = await tr(`${texti}`, {to: 'auto'})
-m.reply(_tr[0])
-} catch(e) {
-m.reply(String(e))
-}
-}*/ else {
+} else {
 anpu = `*Contoh :* \n${prefix+command} en/Thanks\nAtau\n${prefix+command} en(reply pesan)`
 let bttnz = [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode bahasa'}, type:1}]
 await conn.sendButtonText(m.chat, bttnz, anpu, `Perwira Bot WhatsApp`, m)
