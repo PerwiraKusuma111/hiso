@@ -3296,7 +3296,8 @@ anu = `*List Menu*
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
 
-*Maker Menu*
+*Other Menu*
+⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
@@ -3370,6 +3371,7 @@ anu = `*List Menu*
 ⊳ ${prefix}emojimix
 
 *Other Menu*
+⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
 ⊳ ${prefix}attp
@@ -3441,7 +3443,7 @@ let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, t
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, m)
 } break
 
-/*case 'simi':
+case 'simi':
                     let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{buttonId: 'simi on', buttonText: {displayText: 'On'}, type:1}]
 					if (args.length < 1) return conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					if ((args[0]) === 'on') {
@@ -3454,19 +3456,10 @@ await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, m)
 					} else {
 						conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					}
-					break*/
+					break
             default:
         /*    
-            if(isSimi) {
-            if(budy.startsWith(prefix)) return
-            if(sisMedia) return
-            try {
-            let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
-            conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
-            } catch(err) {
-           m.reply(`*Error*\n${String(err)}`)
-            }
-            }
+            
             */
                  if (budy.startsWith('=>')) {
                  if (!isCreator) return m.reply(mess.owner)
@@ -3587,10 +3580,22 @@ await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, m)
                 delete tebaktebakan[m.sender.split('@')[0]]
             } else m.reply('*Jawaban Salah!*')
         }*/
+        if(isSimi) {
+            if(budy.startsWith(prefix)) return
+            if(sisMedia) return
+            try {
+            let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
+            conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
+            } catch(err) {
+           m.reply(`*Error*\n${String(err)}`)
+            }
+            }
                 break
 
              }
 			
+			
+            
 		         /*if (m.chat.endsWith('@s.whatsapp.net') && isCmd) {
                     this.anonymous = this.anonymous ? this.anonymous : {}
                     let room = Object.values(this.anonymous).find(room => [room.a, room.b].includes(m.sender) && room.state === 'CHATTING')
