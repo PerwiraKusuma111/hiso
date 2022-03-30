@@ -3208,15 +3208,15 @@ m.reply(String(e))
                                         let text1 = texti.split("/")[1]
                                      /*   let totyp = m.quoted.text*/
 let tr = require("translate-google-api")
-let _tr = await tr(`${texti}`, {to: ''})
+let _tr = await tr(`${texti}`, {to: 'auto'})
 m.reply(_tr[0])
 } catch(e) {
 m.reply(String(e))
 }
 } else {
-	anu = `*Contoh :* \n${prefix+command} en/Thanks\nAtau\n${prefix+command} en(reply pesan)`
+anpu = `*Contoh :* \n${prefix+command} en/Thanks\nAtau\n${prefix+command} en(reply pesan)`
 let bttnz = [{buttonId: 'kodebahasa', buttonText: {displayText: 'Kode bahasa'}, type:1}]
-await conn.sendButtonText(m.chat, bttnz, anu, `Perwira Bot WhatsApp`, m)
+await conn.sendButtonText(m.chat, bttnz, anpu, `Perwira Bot WhatsApp`, m)
 	}
 break
 case 'kodebahasa':{
