@@ -3632,9 +3632,36 @@ anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? cha
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, m)
 } break
-
-case 'simi':
-let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{buttonId: 'simi on', buttonText: {displayText: 'On'}, type:1}]
+case 'get':
+            let mimeax = '';
+            try {
+            let res = await axios.head(q)
+            mimeax = res.headers['content-type']
+            if (mimeax.split("/")[1] === "gif") {
+                return conn.sendMessage(from, { video: await getBuffer(q), caption: caption, gifPlayback: true, mentions: men ? men : []}, {quoted: m})
+            } else if(mimeax.split("/")[0] === "image"){
+                return conn.sendMessage(from, { image: await getBuffer(q)}, {quoted: m})
+            } else if(mimeax.split("/")[0] === "video"){
+                return conn.sendMessage(from, { video: await getBuffer(q)}, {quoted: m})
+            } else if(mimeax.split("/")[0] === "audio"){
+                return conn.sendMessage(from, { audio: await getBuffer(q), mimetype: 'audio/mpeg'}, {quoted: m })
+            } else { 
+                fetch(q).then((res) => res.text()).then((bu) => {
+                    m.reply(bu)
+                })
+            }
+            } catch { throw 'Error :( *Bad Request*' }
+            break
+case 'simi':{
+	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Haiii`)
+try {
+let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
+conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
+} catch(err) {
+m.reply(`*Error*\n${String(err)}`)
+}
+}
+/*let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{buttonId: 'simi on', buttonText: {displayText: 'On'}, type:1}]
 					if (args.length < 1) return conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					if ((args[0]) === 'on') {
 						if (isSimi) return m.reply('_Fitur simi sudah aktif sebelum nya_')
@@ -3645,7 +3672,7 @@ let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{bu
 						m.reply('_Sukses menonaktifkan mode simi di group ini_')
 					} else {
 						conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
-					}
+					}*/
 					break
 default:
 /*
@@ -3692,11 +3719,11 @@ if (stdout) return m.reply(stdout)
 })
 }
 
-if(budy.startsWith(`${prefix}${command}`)) {
+/*if(budy.startsWith(`${prefix}${command}`)) {
 let non = [{buttonId: "owner", buttonText: {displayText: "Owner"}, type: 1}, {buttonId: "menu", buttonText: {displayText: "Menu"}, type: 1}]
 conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list men`, `Perwira Bot WhatsApp`, m, {})
 }
-
+*/
 /* if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
 kuis = true
 jawaban = tebaklagu[m.sender.split('@')[0]]
@@ -3770,16 +3797,7 @@ await conn.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { di
 delete tebaktebakan[m.sender.split('@')[0]]
 } else m.reply('*Jawaban Salah!*')
 }*/
-if(isSimi) {
-if(budy.startsWith(prefix)) return
-if(sisMedia) return
-try {
-let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
-conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
-} catch(err) {
-m.reply(`*Error*\n${String(err)}`)
-}
-}
+
 break
 
  }
