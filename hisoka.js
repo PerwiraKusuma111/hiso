@@ -712,6 +712,7 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
+if (!text) return m.reply(`Tag orangnya\nContoh: ${prefix}${command} @orangnya`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 }
@@ -721,6 +722,7 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
+if (!text) return m.reply(`Masukkan nomor\nContoh: ${prefix}${command} 62+++++++++++`)
 let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 }
@@ -730,6 +732,7 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
+if (!text) return m.reply(`Tag orangnya\nContoh: ${prefix}${command} @orangnya`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 }
@@ -739,6 +742,7 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
+if (!text) return m.reply(`Tag orangnya\nContoh: ${prefix}${command} @orangnya`)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
 }
