@@ -2055,7 +2055,7 @@ for (let i of isi) {
 status: link.status,
 result: {
   judul: judul,
-  thumb: thumb
+  thumb: thumb,
   isi: i
 }
   }
