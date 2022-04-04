@@ -1693,14 +1693,14 @@ break
 case 'triggered':
 case 'trigger':{
 	if (!quoted) throw 'Reply Image'
-    if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trigger.jpg')
 	yuricanvas = require("yuri-canvas");
 
     async function create() {
-    let img = await yuricanvas.trigger(media);
-    yuricanvas.write(img, "triggered.webp");
-    conn.sendImageAsSticker(m.chat, fs.readFileSync(`./triggered.webp`), m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
+    let img = await yuricanvas.trigger('trigger.jpg');
+    yuricanvas.write(img, "trigger.jpg");
+    conn.sendImageAsSticker(m.chat, fs.readFileSync(`./trigger.jpg`), m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
 }
 
 create();
