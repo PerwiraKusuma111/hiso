@@ -2658,6 +2658,7 @@ conn.sendAudio(m.chat, audio, '', ptt = false, {mimetype: 'audio/mpeg', contextI
 }
 }
 break
+case 'igdl':
 case 'igmp4':
 case 'igvideo':
 case 'instagramvideo':
@@ -2665,7 +2666,8 @@ if (text.includes("instagram.com")) {
 	try {
 let { igdownloader } = require('./lib/igdown')
 igdownloader(text).then(async res => {
-conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})/*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
+conn.sendMedia(m.chat, res.result.link, '', `Instagram Downloader`, m)
+/*conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})*//*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
 })
 } catch(e) {
 	m.reply(String(e))
@@ -2674,7 +2676,7 @@ conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/m
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
 break
-case 'igmp3':
+/*case 'igmp3':
 case 'igvaudio':
 case 'instagramaudio':
 if (text.includes("instagram.com")) {
@@ -2692,7 +2694,7 @@ conn.sendAudio(m.chat, audio, '', ptt = false, {mimetype: 'audio/mpeg', contextI
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
-break
+break*/
 /*case 'tiktokmp3': case 'tiktokaudio': {
 if (!text) throw 'Masukkan Query Link!'
 m.reply(mess.wait)
@@ -3484,10 +3486,9 @@ anu = `*List Menu*
 ⊳ ${prefix}ytsearch
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
-⊳ ${prefix}igmp3
-⊳ ${prefix}igmp4
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
+⊳ ${prefix}igdl
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
 
@@ -3559,10 +3560,9 @@ anu = `*List Menu*
 ⊳ ${prefix}ytsearch
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
-⊳ ${prefix}igmp3
-⊳ ${prefix}igmp4
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
+⊳ ${prefix}igdl
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
 
@@ -3644,13 +3644,13 @@ try {
 let res = await axios.head(q)
 mimeax = res.headers['content-type']
 if (mimeax.split("/")[1] === "gif") {
-return conn.sendMessage(from, { video: await getBuffer(q), caption: caption, gifPlayback: true, mentions: men ? men : []}, {quoted: m})
+return conn.sendMessage(m.chat, { video: await getBuffer(q), caption: caption, gifPlayback: true, mentions: men ? men : []}, {quoted: m})
 } else if(mimeax.split("/")[0] === "image"){
-return conn.sendMessage(from, { image: await getBuffer(q)}, {quoted: m})
+return conn.sendMessage(m.chat, { image: await getBuffer(q)}, {quoted: m})
 } else if(mimeax.split("/")[0] === "video"){
-return conn.sendMessage(from, { video: await getBuffer(q)}, {quoted: m})
+return conn.sendMessage(m.chat, { video: await getBuffer(q)}, {quoted: m})
 } else if(mimeax.split("/")[0] === "audio"){
-return conn.sendMessage(from, { audio: await getBuffer(q), mimetype: 'audio/mpeg'}, {quoted: m })
+return conn.sendMessage(m.chat, { audio: await getBuffer(q), mimetype: 'audio/mpeg'}, {quoted: m })
 } else { 
 fetch(q).then((res) => res.text()).then((bu) => {
 m.reply(bu)
