@@ -1694,7 +1694,7 @@ case 'triggered':
 case 'trigger':{
 	if (!quoted) throw 'Reply Image'
     if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
-	let media = await conn.downloadAndSaveMediaMessage(quoted)
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trigger.jpg')
 	yuricanvas = require("yuri-canvas");
 
     async function create() {
@@ -3711,8 +3711,8 @@ var pathh = 'out.png'
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx3()
-    .setText1(text)
-    .setText2(text)
+    .setText1(text1)
+    .setText2(text2)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
@@ -3730,8 +3730,8 @@ var pathh = 'out.png'
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx4()
-    .setText1(text)
-    .setText2(text)
+    .setText1(text1)
+    .setText2(text2)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
@@ -3745,7 +3745,7 @@ var pathh = 'out.png'
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx5()
-    .setName(text)
+    .setText(text)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)

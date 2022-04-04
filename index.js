@@ -111,7 +111,7 @@ async function startHisoka() {
 
     store.bind(conn.ev)
 
-    conn.ws.on('CB:call', async (json) => {
+   conn.ws.on('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag == 'offer') {
     let pa7rick = await conn.sendContact(callerId, global.owner)
@@ -416,6 +416,23 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
         await fs.writeFileSync(trueFileName, buffer)
         return trueFileName
     }
+
+conn.downloadAndSaveMediaMessage2 = async (message, filename, attachExtension = true) => {
+        let quoted = message.msg ? message.msg : message
+        let mime = (message.msg || message).mimetype || ''
+        let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
+        const stream = await downloadContentFromMessage(quoted, messageType)
+        let buffer = Buffer.from([])
+        for await(const chunk of stream) {
+            buffer = Buffer.concat([buffer, chunk])
+        }
+	let type = await FileType.fromBuffer(buffer)
+        trueFileName = attachExtension ? (filename) : filename
+        // save to file
+        await fs.writeFileSync(trueFileName, buffer)
+        return trueFileName
+    }
+
 
     conn.downloadMediaMessage = async (message) => {
         let mime = (message.msg || message).mimetype || ''
