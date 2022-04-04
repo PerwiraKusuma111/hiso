@@ -2040,37 +2040,43 @@ let axios = require("axios")
 let cheerio = require("cheerio")
 async function wikipedia(querry) {
   try {
-    const link = await axios.get(`https://id.wikipedia.org/wiki/${querry}`)
-    const $ = cheerio.load(link.data)
-    let judul = $('#firstHeading').text().trim()
-    let thumb = $('#mw-content-text').find('div.mw-parser-output > div:nth-child(1) > table > tbody > tr:nth-child(2) > td > a > img').attr('src') || `//i.ibb.co/nzqPBpC/http-error-404-not-found.png`
-    let isi = []
-    $('#mw-content-text > div.mw-parser-output').each(function (rayy, Ra) {
-      let penjelasan = $(Ra).find('p').text().trim()
-      isi.push(penjelasan)
-    })
-    for (let i of isi) {
-      const data = {
-        status: link.status,
-        result: {
-          judul: judul,
-          thumb: 'https:' + thumb,
-          isi: i
-        }
-      }
-      return data
-    }
+const link = await axios.get(`https://id.wikipedia.org/wiki/${querry}`)
+const $ = cheerio.load(link.data)
+let judul = $('#firstHeading').text().trim()
+let thumb = $("meta[property=\"og:image\"]").attr('content') || `//i.ibb.co/nzqPBpC/http-error-404-not-found.png`
+/*let thumb = $('#mw-content-text').find('div.mw-parser-output > div:nth-child(1) > table > tbody > tr:nth-child(2) > td > a > img').attr('src') || `//i.ibb.co/nzqPBpC/http-error-404-not-found.png`*/
+let isi = []
+$('#mw-content-text > div.mw-parser-output').each(function (rayy, Ra) {
+  let penjelasan = $(Ra).find('p').text().trim()
+  isi.push(penjelasan)
+})
+for (let i of isi) {
+  const data = {
+status: link.status,
+result: {
+  judul: judul,
+  thumb: 'https:' + thumb,
+  isi: i
+}
+  }
+  return data
+}
   } catch (err) {
-    var notFond = {
-      status: link.status,
-      Pesan: eror
-    }
-    return notFond
+var notFond = {
+  status: link.status,
+  Pesan: eror
+}
+return notFond
   }
 }
 
 wikipedia(text).then(res => {
-conn.sendMessage(m.chat, {image: {url: res.result.thumb }, caption: res.result.isi})
+	kunu = `*Judul :* ${res.result.judul}
+	
+	*Hasil penelusuran*
+	${res.result.isi}
+	`
+conn.sendMessage(m.chat, {image: {url: res.result.thumb }, caption: kunu})
 })
 }break
 case 'pinterest': 
@@ -3633,25 +3639,27 @@ let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, t
 await conn.sendButtonText(m.chat, btnz, anu, `Perwira Bot WhatsApp`, m)
 } break
 case 'get':
-            let mimeax = '';
-            try {
-            let res = await axios.head(q)
-            mimeax = res.headers['content-type']
-            if (mimeax.split("/")[1] === "gif") {
-                return conn.sendMessage(from, { video: await getBuffer(q), caption: caption, gifPlayback: true, mentions: men ? men : []}, {quoted: m})
-            } else if(mimeax.split("/")[0] === "image"){
-                return conn.sendMessage(from, { image: await getBuffer(q)}, {quoted: m})
-            } else if(mimeax.split("/")[0] === "video"){
-                return conn.sendMessage(from, { video: await getBuffer(q)}, {quoted: m})
-            } else if(mimeax.split("/")[0] === "audio"){
-                return conn.sendMessage(from, { audio: await getBuffer(q), mimetype: 'audio/mpeg'}, {quoted: m })
-            } else { 
-                fetch(q).then((res) => res.text()).then((bu) => {
-                    m.reply(bu)
-                })
-            }
-            } catch { throw 'Error :( *Bad Request*' }
-            break
+let mimeax = ''
+try {
+let res = await axios.head(q)
+mimeax = res.headers['content-type']
+if (mimeax.split("/")[1] === "gif") {
+return conn.sendMessage(from, { video: await getBuffer(q), caption: caption, gifPlayback: true, mentions: men ? men : []}, {quoted: m})
+} else if(mimeax.split("/")[0] === "image"){
+return conn.sendMessage(from, { image: await getBuffer(q)}, {quoted: m})
+} else if(mimeax.split("/")[0] === "video"){
+return conn.sendMessage(from, { video: await getBuffer(q)}, {quoted: m})
+} else if(mimeax.split("/")[0] === "audio"){
+return conn.sendMessage(from, { audio: await getBuffer(q), mimetype: 'audio/mpeg'}, {quoted: m })
+} else { 
+fetch(q).then((res) => res.text()).then((bu) => {
+m.reply(bu)
+})
+}
+} catch (e){
+m.reply(e)
+}
+break
 case 'simi':{
 	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Haiii`)
 try {
