@@ -1690,6 +1690,22 @@ fs.unlinkSync(ran)
 })
 }
 break
+case 'triggered':
+case 'trigger':{
+	if (!quoted) throw 'Reply Image'
+    if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+	let media = await conn.downloadAndSaveMediaMessage(quoted)
+	yuricanvas = require("yuri-canvas");
+
+    async function create() {
+    let img = await yuricanvas.trigger(media);
+    yuricanvas.write(img, "triggered.webp");
+    conn.sendImageAsSticker(m.chat, fs.readFileSync(`./triggered.webp`), m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
+}
+
+create();
+}
+break
 	case 'tomp4': case 'tovideo': {
 if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
@@ -3473,13 +3489,17 @@ anu = `*List Menu*
 ⊳ ${prefix}translate
 ⊳ ${prefix}google
 ⊳ ${prefix}wikipedia
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
 ⊳ ${prefix}tomp3
 ⊳ ${prefix}tovideo
-⊳ ${prefix}togif
 ⊳ ${prefix}tourl
-⊳ ${prefix}removebg
+⊳ ${prefix}get
+
+*Sticker Menu*
+⊳ ${prefix}sticker
+⊳ ${prefix}toimg
+⊳ ${prefix}tovideo
+⊳ ${prefix}togif
+⊳ ${prefix}triggered
 
 *Download Menu*
 ⊳ ${prefix}play
@@ -3491,6 +3511,14 @@ anu = `*List Menu*
 ⊳ ${prefix}igdl
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
+
+*Maker Menu*
+⊳ ${prefix}gura
+⊳ ${prefix}loli
+⊳ ${prefix}loli2
+⊳ ${prefix}neko
+⊳ ${prefix}catboy
+⊳ ${prefix}ghoul
 
 *Other Menu*
 ⊳ ${prefix}simi
@@ -3547,13 +3575,16 @@ anu = `*List Menu*
 ⊳ ${prefix}translate
 ⊳ ${prefix}google
 ⊳ ${prefix}wikipedia
+⊳ ${prefix}tomp3
+⊳ ${prefix}tourl
+⊳ ${prefix}get
+
+*Sticker Menu*
 ⊳ ${prefix}sticker
 ⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
 ⊳ ${prefix}tovideo
 ⊳ ${prefix}togif
-⊳ ${prefix}tourl
-⊳ ${prefix}removebg
+⊳ ${prefix}triggered
 
 *Download Menu*
 ⊳ ${prefix}play
@@ -3565,6 +3596,14 @@ anu = `*List Menu*
 ⊳ ${prefix}igdl
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
+
+*Maker Menu*
+⊳ ${prefix}gura
+⊳ ${prefix}loli
+⊳ ${prefix}loli2
+⊳ ${prefix}neko
+⊳ ${prefix}catboy
+⊳ ${prefix}ghoul
 
 *Other Menu*
 ⊳ ${prefix}simi
@@ -3615,6 +3654,105 @@ id: 'ping'
 }]
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
+break
+case 'ghoul':{
+	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira`)
+var pathh = 'out.png'
+haha = async () => {
+var knights = require("knights-canvas")
+var image = await new knights.Gfx1()
+    .setName(text)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}})
+}
+haha()
+}
+break
+case 'gura':{
+	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira`)
+var pathh = 'out.png'
+haha = async () => {
+var knights = require("knights-canvas")
+var image = await new knights.Gura()
+    .setName(text)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}})
+}
+haha()
+}
+
+break
+case 'loli':{
+	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira`)
+var pathh = 'out.png'
+haha = async () => {
+var knights = require("knights-canvas")
+var image = await new knights.Gfx2()
+    .setName(text)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}})
+}
+haha()
+}
+
+break
+case 'catboy':{
+	if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira/Bot`)
+let textn = args.join(" ")
+let text1 = textn.split("/")[0]
+let text2 = textn.split("/")[1]
+var pathh = 'out.png'
+haha = async () => {
+var knights = require("knights-canvas")
+var image = await new knights.Gfx3()
+    .setText1(text)
+    .setText2(text)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}})
+}
+haha()
+}
+break
+case 'neko':{
+	if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira/Bot`)
+let textn = args.join(" ")
+let text1 = textn.split("/")[0]
+let text2 = textn.split("/")[1]
+var pathh = 'out.png'
+haha = async () => {
+var knights = require("knights-canvas")
+var image = await new knights.Gfx4()
+    .setText1(text)
+    .setText2(text)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}})
+}
+haha()
+}
+break
+case 'loli2':{
+var pathh = 'out.png'
+haha = async () => {
+var knights = require("knights-canvas")
+var image = await new knights.Gfx5()
+    .setName(text)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}})
+}
+haha()
+}
 break
 /*case 'virtex':{
 let mes = await conn.sendMessage(m.chat, {text: 'Virtex Boom', contextInfo: {externalAdReply: {title: 'Virtex', body: 'This is Virtex', sourceUrl: `https://github.com`, mediaUrl: `https://github.com`, mediaType: 1, thumbnail: fs.readFileSync(`./vir.jpg`) }}})
