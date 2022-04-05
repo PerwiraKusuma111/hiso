@@ -833,8 +833,8 @@ conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a
 }
 break
 	case 'style': case 'styletext': {
-	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
-		db.users[m.sender].limit -= 1 // -1 limit
+	/*if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
+		db.users[m.sender].limit -= 1 // -1 limit*/
 		let { styletext } = require('./lib/scraper')
 		if (!text) throw 'Masukkan Query text!'
 let anu = await styletext(text)
