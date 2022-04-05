@@ -1713,7 +1713,7 @@ case 'gay':{
     async function create() {
     let img = await yuricanvas.gay('gay.jpg');
     yuricanvas.write(img, "jadigay.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jadigay.jpg`), m)
+    conn.sendImage(m.chat, fs.readFileSync(`./jadigay.jpg`), 'Done', m)
 }
 
 create();
@@ -1727,7 +1727,7 @@ case 'jail':{
     async function create() {
     let img = await yuricanvas.jail('jail.jpg');
     yuricanvas.write(img, "jadijail.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jadijail.jpg`), m)
+    conn.sendImage(m.chat, fs.readFileSync(`./jadijail.jpg`), 'Done', m)
 }
 
 create();
@@ -1741,7 +1741,7 @@ case 'wanted':{
     async function create() {
     let img = await yuricanvas.wanted('wanted.jpg');
     yuricanvas.write(img, "jadiwanted.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jadiwanted.jpg`), m)
+    conn.sendImage(m.chat, fs.readFileSync(`./jadiwanted.jpg`), 'Done', m)
 }
 
 create();
@@ -1755,12 +1755,28 @@ case 'trash':{
     async function create() {
     let img = await yuricanvas.trash('trash.jpg');
     yuricanvas.write(img, "jaditrash.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jaditrash.jpg`), m)
+    conn.sendImage(m.chat, fs.readFileSync(`./jaditrash.jpg`), 'Done', m)
 }
 
 create();
 }
 break
+case 'burn':{
+	if (!quoted) throw 'Reply Image'
+    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'sponge.jpg')
+var pathh = 'ouit.png'
+haha = async () => {
+var knights = require("knights-canvas")
+var image = await new knights.Burn()
+    .setAvatar(media)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}, caption: 'Done'}, m)
+}
+haha()
+	}break
 case 'wasted':{
 	if (!quoted) throw 'Reply Image'
     if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
@@ -1769,7 +1785,7 @@ case 'wasted':{
     async function create() {
     let img = await yuricanvas.wasted('wasted.jpg');
     yuricanvas.write(img, "jadiwasted.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jadiwasted.jpg`), m)
+    conn.sendImage(m.chat, fs.readFileSync(`./jadiwasted.jpg`), 'Done', m)
 }
 
 create();
@@ -3595,6 +3611,7 @@ anu = `*List Menu*
 ⊳ ${prefix}wanted
 ⊳ ${prefix}wasted
 ⊳ ${prefix}trash
+⊳ ${prefix}burn
 
 *Other Menu*
 ⊳ ${prefix}simi
@@ -3687,6 +3704,7 @@ anu = `*List Menu*
 ⊳ ${prefix}wanted
 ⊳ ${prefix}wasted
 ⊳ ${prefix}trash
+⊳ ${prefix}burn
 
 *Other Menu*
 ⊳ ${prefix}simi
