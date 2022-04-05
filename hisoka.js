@@ -2771,7 +2771,7 @@ conn.sendAudio(m.chat, audio, '', ptt = false, {mimetype: 'audio/mpeg', contextI
 }
 }
 break
-case 'igdl':
+/*case 'igdl':
 case 'igmp4':
 case 'igvideo':
 case 'instagramvideo':
@@ -2779,16 +2779,33 @@ if (text.includes("instagram.com")) {
 	try {
 let { igdownloader } = require('./lib/igdown')
 igdownloader(text).then(async res => {
-conn.sendMedia(m.chat, res.result.link, '', `Instagram Downloader`, m)
+conn.sendMedia(m.chat, res.result.link, '', `Instagram Downloader`, m)*/
 /*conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})*//*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
-})
+/*})
 } catch(e) {
 	m.reply(String(e))
 	}
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
-break
+break*/
+case 'igdl':
+case 'instagram':
+case 'ig':{
+	try {
+	if(text.includes("instagram.com")) {
+		let { instagramdl } = require('@bochilteam/scraper')
+		instagramdl(text).then(async res => {
+		conn.sendMedia(m.chat, res.url, '', `Instagram Downloader`, m)
+			})
+		} else {
+			m.reply("Pastikan menggunakan link Instagram")
+			}
+			} catch(e) {
+				m.reply(String(e))
+				}
+	}
+	break
 /*case 'igmp3':
 case 'igvaudio':
 case 'instagramaudio':
