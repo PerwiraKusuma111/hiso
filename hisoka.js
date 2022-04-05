@@ -2731,7 +2731,7 @@ if(text) {
 	try {
 	let { downloader } = require(`./lib/scraper`)
 	let res = await downloader(text)
-	return res
+	console.log(res)
 	} catch(e) {
 	m.reply(String(e))
 	}
