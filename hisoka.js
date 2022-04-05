@@ -2794,10 +2794,9 @@ case 'instagram':
 case 'ig':{
 	try {
 	if(text.includes("instagram.com")) {
-		let { instagramdl } = require('@bochilteam/scraper')
-		instagramdl(text).then(async res => {
-			let rin = await getBuffer(res.url)
-		conn.sendMedia(m.chat, rin, '', `Instagram Downloader`, m)
+		let { instagram } = require('mumaker')
+		instagram(text).then(async res => {
+		conn.sendMedia(m.chat, res[0].url, '', `Instagram Downloader`, m)
 			})
 		} else {
 			m.reply("Pastikan menggunakan link Instagram")
@@ -3635,6 +3634,7 @@ anu = `*List Menu*
 ⊳ ${prefix}neko
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
+⊳ ${prefix}textpro [cooming soon]
 
 *Template Maker*
 ⊳ ${prefix}gay
@@ -3729,6 +3729,7 @@ anu = `*List Menu*
 ⊳ ${prefix}neko
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
+⊳ ${prefix}textpro [cooming soon]
 
 *Template Maker*
 ⊳ ${prefix}gay
