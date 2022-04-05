@@ -1696,11 +1696,80 @@ case 'trigger':{
     if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trigger.jpg')
 	yuricanvas = require("yuri-canvas");
-
     async function create() {
     let img = await yuricanvas.trigger('trigger.jpg');
     yuricanvas.write(img, "trigger.jpg");
     conn.sendImageAsSticker(m.chat, fs.readFileSync(`./trigger.jpg`), m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
+}
+
+create();
+}
+break
+case 'gay':{
+	if (!quoted) throw 'Reply Image'
+    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'gay.jpg')
+	yuricanvas = require("yuri-canvas");
+    async function create() {
+    let img = await yuricanvas.gay('gay.jpg');
+    yuricanvas.write(img, "jadigay.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jadigay.jpg`), m)
+}
+
+create();
+}
+break
+case 'jail':{
+	if (!quoted) throw 'Reply Image'
+    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'jail.jpg')
+	yuricanvas = require("yuri-canvas");
+    async function create() {
+    let img = await yuricanvas.jail('jail.jpg');
+    yuricanvas.write(img, "jadijail.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jadijail.jpg`), m)
+}
+
+create();
+}
+break
+case 'wanted':{
+	if (!quoted) throw 'Reply Image'
+    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wanted.jpg')
+	yuricanvas = require("yuri-canvas");
+    async function create() {
+    let img = await yuricanvas.wanted('wanted.jpg');
+    yuricanvas.write(img, "jadiwanted.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jadiwanted.jpg`), m)
+}
+
+create();
+}
+break
+case 'trash':{
+	if (!quoted) throw 'Reply Image'
+    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trash.jpg')
+	yuricanvas = require("yuri-canvas");
+    async function create() {
+    let img = await yuricanvas.trash('trash.jpg');
+    yuricanvas.write(img, "jaditrash.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jaditrash.jpg`), m)
+}
+
+create();
+}
+break
+case 'wasted':{
+	if (!quoted) throw 'Reply Image'
+    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wasted.jpg')
+	yuricanvas = require("yuri-canvas");
+    async function create() {
+    let img = await yuricanvas.wasted('wasted.jpg');
+    yuricanvas.write(img, "jadiwasted.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jadiwasted.jpg`), m)
 }
 
 create();
@@ -3512,13 +3581,20 @@ anu = `*List Menu*
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
 
-*Maker Menu*
+*Text Maker*
 ⊳ ${prefix}gura
 ⊳ ${prefix}loli
 ⊳ ${prefix}loli2
 ⊳ ${prefix}neko
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
+
+*Template Maker*
+⊳ ${prefix}gay
+⊳ ${prefix}jail
+⊳ ${prefix}wanted
+⊳ ${prefix}wasted
+⊳ ${prefix}trash
 
 *Other Menu*
 ⊳ ${prefix}simi
@@ -3597,13 +3673,20 @@ anu = `*List Menu*
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
 
-*Maker Menu*
+*Text Maker*
 ⊳ ${prefix}gura
 ⊳ ${prefix}loli
 ⊳ ${prefix}loli2
 ⊳ ${prefix}neko
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
+
+*Template Maker*
+⊳ ${prefix}gay
+⊳ ${prefix}jail
+⊳ ${prefix}wanted
+⊳ ${prefix}wasted
+⊳ ${prefix}trash
 
 *Other Menu*
 ⊳ ${prefix}simi
