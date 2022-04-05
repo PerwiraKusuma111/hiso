@@ -2796,7 +2796,8 @@ case 'ig':{
 	if(text.includes("instagram.com")) {
 		let { instagramdl } = require('@bochilteam/scraper')
 		instagramdl(text).then(async res => {
-		conn.sendMedia(m.chat, res.url, '', `Instagram Downloader`, m)
+			let rin = await getBuffer(res.url)
+		conn.sendMedia(m.chat, rin, '', `Instagram Downloader`, m)
 			})
 		} else {
 			m.reply("Pastikan menggunakan link Instagram")
