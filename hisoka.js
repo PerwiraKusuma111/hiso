@@ -832,19 +832,19 @@ if (!isAdmins && !isCreator) return m.reply(mess.admin)
 conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
 }
 break
-	/*case 'style': case 'styletext': {
+	case 'style': case 'styletext': {
 	if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
 		db.users[m.sender].limit -= 1 // -1 limit
 		let { styletext } = require('./lib/scraper')
 		if (!text) throw 'Masukkan Query text!'
 let anu = await styletext(text)
-let teks = `Srtle Text From ${text}\n\n`
+let teks = `Style Text From ${text}\n\n`
 for (let i of anu) {
-teks += `*${i.name}* : ${i.result}\n\n`
+teks += `*${i.name}* : ${i.result}\n`
 }
 m.reply(teks)
 	}
-	break
+	break/*
 case 'vote': {
 if (!m.isGroup) return m.reply(mess.group)
 if (m.chat in vote) throw `_Masih ada vote di chat ini!_\n\n*${prefix}hapusvote* - untuk menghapus vote`
@@ -3583,6 +3583,7 @@ anu = `*List Menu*
 ⊳ ${prefix}sticker
 ⊳ ${prefix}toimg
 ⊳ ${prefix}tovideo
+⊳ ${prefix}attp
 ⊳ ${prefix}togif
 ⊳ ${prefix}triggered
 
@@ -3617,7 +3618,7 @@ anu = `*List Menu*
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
-⊳ ${prefix}attp
+⊳ ${prefix}styletext
 ⊳ ${prefix}pinterest
 
 *Attention!*
@@ -3677,6 +3678,7 @@ anu = `*List Menu*
 ⊳ ${prefix}toimg
 ⊳ ${prefix}tovideo
 ⊳ ${prefix}togif
+⊳ ${prefix}attp
 ⊳ ${prefix}triggered
 
 *Download Menu*
@@ -3710,7 +3712,7 @@ anu = `*List Menu*
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
-⊳ ${prefix}attp
+⊳ ${prefix}styletext
 ⊳ ${prefix}pinterest
 
 *Attention!*
