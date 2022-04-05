@@ -1769,14 +1769,14 @@ var pathh = 'ouit.png'
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Burn()
-    .setAvatar(media)
+    .setAvatar('sponge.jpg')
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}, caption: 'Done'}, m)
+conn.sendMessage(m.chat, {image: {url: pathh}, caption: 'Done'}, {quoted: m})
 }
 haha()
-	}break
+}break
 case 'wasted':{
 	if (!quoted) throw 'Reply Image'
     if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
