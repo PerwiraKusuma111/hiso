@@ -2767,9 +2767,7 @@ if (text.includes("instagram.com")) {
 	try {
 let { igdownloader } = require('./lib/igdown')
 igdownloader(text).then(async res => {
-kunn = []
-kunn.push(res)
-conn.sendMedia(m.chat, kunn.result.link, '', `Instagram Downloader`, m)
+conn.sendMedia(m.chat, res.result.link, '', `Instagram Downloader`, m)
 /*conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})*//*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
 })
 } catch(e) {
