@@ -2726,6 +2726,18 @@ if(text.includes("tiktok.com")) {
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
+case 'avio':{
+if(text) {
+	try {
+	let { downloader } = require(`./lib/scraper`)
+	let res = await downloader(text)
+	return res
+	} catch(e) {
+	m.reply(String(e))
+	}
+	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
+	}
+break
 case 'tiktokaudio2':
 case 'ttmp32':
 case 'tiktokmp32': {
