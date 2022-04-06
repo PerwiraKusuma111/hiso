@@ -2365,7 +2365,7 @@ conn.sendMessage(m.chat, { image: { url: api('zenz', '/ephoto/' + command, { tex
 }
 break*/
 case 'textpro':{
-if(text.includes("/")) return m.reply(`Cara menggunakan Contoh ${prefix+command} magma/Text`)
+if(!text.includes("/")) return m.reply(`Cara menggunakan Contoh ${prefix+command} magma/Text`)
 tex = args.join(" ")
 jenis = tex.split("/")[0]
 isi = tex.split("/")[1]
