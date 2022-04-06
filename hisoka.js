@@ -712,9 +712,15 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
-if (!text) return m.reply(`Tag orangnya\nContoh: ${prefix}${command} @orangnya`)
+if (text) {
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+} else if(quoted) {
+	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+await conn.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+	} else {
+		m.reply(`Tag nomor atau reply pesan\nContoh: ${prefix}${command} @orangnya`) 
+		}
 }
 break
 case 'add': {
@@ -722,9 +728,15 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
-if (!text) return m.reply(`Masukkan nomor\nContoh: ${prefix}${command} 62+++++++++++`)
-let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+if (text) {
+let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+} else if(quoted) {
+	let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+await conn.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+	} else {
+		m.reply(`Tag nomor atau reply pesan\nContoh: ${prefix}${command} @orangnya`) 
+		}
 }
 break
 case 'promote': {
@@ -732,9 +744,15 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
-if (!text) return m.reply(`Tag orangnya\nContoh: ${prefix}${command} @orangnya`)
+if (text) { 
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+} else if(quoted) {
+let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+	} else {
+		m.reply(`Tag nomor atau reply pesan\nContoh: ${prefix}${command} @orangnya`)
+		}
 }
 break
 case 'demote': {
@@ -742,20 +760,24 @@ if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
 if (!isBotAdmins) throw mess.botAdmin
 if (!isAdmins) throw mess.admin
-if (!text) return m.reply(`Tag orangnya\nContoh: ${prefix}${command} @orangnya`)
+if (text) { 
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+} else if(quoted) {
+let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
+	} else {
+		m.reply(`Tag nomor atau reply pesan\nContoh: ${prefix}${command} @orangnya`)
+		}
 }
 break
 case 'block': {
-if(!text) return m.reply("_Tag atau masukkan nomor")
 if (!isCreator) throw mess.owner
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 }
 break
 case 'unblock': {
-if(!text) return m.reply("_Tag atau masukkan nomor")
 		if (!isCreator) throw mess.owner
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		await conn.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
@@ -1104,6 +1126,7 @@ await conn.sendMessage(m.chat, { disappearingMessagesInChat: false }).then((res)
 }
 break
 case 'delete': case 'del': {
+if (!isAdmins) throw mess.admin
 if (!m.quoted) throw false
 let { chat, fromMe, id, isBaileys } = m.quoted
 if (!isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
