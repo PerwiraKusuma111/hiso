@@ -3900,7 +3900,6 @@ anu = `*List Menu*
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
-⊳ ${prefix}tebak
 ⊳ ${prefix}tomp3
 ⊳ ${prefix}styletext
 
@@ -3984,7 +3983,6 @@ anu = `*List Menu*
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
-⊳ ${prefix}tebak
 ⊳ ${prefix}tomp3
 ⊳ ${prefix}styletext
 
@@ -4204,53 +4202,13 @@ default:
 /*
 
 */
- if (budy.startsWith('=>')) {
- if (!isCreator) return m.reply(mess.owner)
- function Return(sul) {
- sat = JSON.stringify(sul, null, 2)
- bang = util.format(sat)
- if (sat == undefined) {
- bang = util.format(sul)
- }
- return m.reply(bang)
- }
- try {
- m.reply(util.format(eval(`(async () => { return ${budy.slice(3)} })()`)))
- } catch (e) {
-m.reply(String(e))
-}
-}
-
-if (budy.startsWith('>')) {
-if (!isCreator) return m.reply(mess.owner)
-try {
-let evaled = await eval(budy.slice(2))
-if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
-await m.reply(evaled)
- } catch (err) {
-await m.reply(String(err))
-}
-}
-
-if (budy.startsWith('x')){
-if (!isCreator) return m.reply("_Owner Only_")
-return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'\t')},{quoted: m}).catch(err => reply(util.format(err)))
-}
-
-if (budy.startsWith('$')) {
-if (!isCreator) return m.reply(mess.owner)
-exec(budy.slice(2), (err, stdout) => {
-if(err) return m.reply(err)
-if (stdout) return m.reply(stdout)
-})
-}
-
+ 
 /*if(budy.startsWith(`${prefix}${command}`)) {
 let non = [{buttonId: "owner", buttonText: {displayText: "Owner"}, type: 1}, {buttonId: "menu", buttonText: {displayText: "Menu"}, type: 1}]
 conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list men`, `Perwira Bot WhatsApp`, m, {})
 }
 */
-if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
+/*if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
 kuis = true
 jawaban = tebaklagu[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
@@ -4322,13 +4280,52 @@ if (budy.toLowerCase() == jawaban) {
 await conn.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, `Perwira Bot WhatsApp`, m)
 delete tebaktebakan[m.sender.split('@')[0]]
 } else m.reply('*Jawaban Salah!*')
-}
+}*/
 
 break
 
  }
-			
-			
+ 
+ if (budy.startsWith('=>')) {
+ if (!isCreator) return m.reply(mess.owner)
+ function Return(sul) {
+ sat = JSON.stringify(sul, null, 2)
+ bang = util.format(sat)
+ if (sat == undefined) {
+ bang = util.format(sul)
+ }
+ return m.reply(bang)
+ }
+ try {
+ m.reply(util.format(eval(`(async () => { return ${budy.slice(3)} })()`)))
+ } catch (e) {
+m.reply(String(e))
+}
+}
+
+if (budy.startsWith('>')) {
+if (!isCreator) return m.reply(mess.owner)
+try {
+let evaled = await eval(budy.slice(2))
+if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
+await m.reply(evaled)
+ } catch (err) {
+await m.reply(String(err))
+}
+}
+
+if (budy.startsWith('x')){
+if (!isCreator) return m.reply("_Owner Only_")
+return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'\t')},{quoted: m}).catch(err => reply(util.format(err)))
+}
+
+if (budy.startsWith('$')) {
+if (!isCreator) return m.reply(mess.owner)
+exec(budy.slice(2), (err, stdout) => {
+if(err) return m.reply(err)
+if (stdout) return m.reply(stdout)
+})
+}
 
 		 /*if (m.chat.endsWith('@s.whatsapp.net') && isCmd) {
 this.anonymous = this.anonymous ? this.anonymous : {}
