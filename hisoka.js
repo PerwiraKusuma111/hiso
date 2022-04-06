@@ -2797,14 +2797,15 @@ mimeaxig= ''
 	try {
 	if(text.includes("instagram.com")) {
 let {instagram} = require('mumaker')
-helo = await instagram(text)
-let res = await axios.head(helo[0].url)
+helo = await instagram(text).then(() => { m.reply("Succes") })
+let res = axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
 return conn.sendMessage(m.chat, { image: await getBuffer(helo[0].url)}, {quoted: m})
 } else if(mimeaxig.split("/")[0] === "video"){
 return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted: m})
 }
+
 		} else {
 			m.reply("Pastikan menggunakan link Instagram")
 			}
