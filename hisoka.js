@@ -1724,7 +1724,6 @@ case 'trigger':{
     yuricanvas.write(img, "trigger.jpg");
     conn.sendImageAsSticker(m.chat, fs.readFileSync(`./trigger.jpg`), m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
 }
-
 create();
 }
 break
@@ -1740,7 +1739,6 @@ trash
 burn`)
 	if (!quoted) throw 'Reply Image'
     if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
-    yuricanvas = require("yuri-canvas");
     if(args[0] === 'burn') {
 let media = await conn.downloadAndSaveMediaMessage2(quoted, 'sponge.jpg')
 var pathh = 'ouit.png'
@@ -1753,41 +1751,52 @@ var image = await new knights.Burn()
     await fs.writeFileSync(pathh, data)
     conn.sendMessage(m.chat, {image: {url: pathh}, caption: 'Done'}, {quoted: m})
 }
+haha();
 } else if(args[0] === 'gay') {
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'gay.jpg')
     	async function create() {
+    	yuricanvas = require("yuri-canvas");
     let img = await yuricanvas.gay('gay.jpg');
     yuricanvas.write(img, "jadigay.jpg");
     conn.sendImage(m.chat, fs.readFileSync(`./jadigay.jpg`), 'Done', m)
     	}
+    create();
 } else if(args[0] === 'jail') {
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'jail.jpg')
     	async function create() {
+    	yuricanvas = require("yuri-canvas");
     let img = await yuricanvas.jail('jail.jpg');
     yuricanvas.write(img, "jadijail.jpg");
     conn.sendImage(m.chat, fs.readFileSync(`./jadijail.jpg`), 'Done', m)
     	}
+    create();
 } else if(args[0] === 'wanted') {
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wanted.jpg')
     	async function create() {
+    	yuricanvas = require("yuri-canvas");
     let img = await yuricanvas.wanted('wanted.jpg');
     yuricanvas.write(img, "jadiwanted.jpg");
     conn.sendImage(m.chat, fs.readFileSync(`./jadiwanted.jpg`), 'Done', m)
     	}
+    create();
 } else if(args[0] === 'trash') {
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trash.jpg')
     	async function create() {
+    	yuricanvas = require("yuri-canvas");
     let img = await yuricanvas.trash('trash.jpg');
     yuricanvas.write(img, "jaditrash.jpg");
     conn.sendImage(m.chat, fs.readFileSync(`./jaditrash.jpg`), 'Done', m)
     	}
+    create();
 } else if(args[0] === 'wasted') {
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wasted.jpg')
     	async function create() {
+    	yuricanvas = require("yuri-canvas");
     let img = await yuricanvas.wasted('wasted.jpg');
     yuricanvas.write(img, "jadiwasted.jpg");
     conn.sendImage(m.chat, fs.readFileSync(`./jadiwasted.jpg`), 'Done', m)
     }
+    create();
     	} else { m.reply(`Maaf ${args[0]} tidak ada di Type Template
 *Contoh :* /template gay(reply gambar)
 
