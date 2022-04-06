@@ -2797,7 +2797,7 @@ mimeaxig= ''
 	try {
 	if(text.includes("instagram.com")) {
 let {instagram} = require('mumaker')
-helo = await instagram(text)()
+helo = await instagram(text)
 let res = await axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
