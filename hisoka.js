@@ -638,7 +638,7 @@ delete caklontong[m.sender.split('@')[0]]
 }
 break
 
-case 'kuismath': case 'math': {
+/*case 'kuismath': case 'math': {
 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
 let { genMath, modes } = require('./src/math')
 if (!text) throw `Mode: ${Object.keys(modes).join(' | ')}\nContoh penggunaan: ${prefix}math medium`
@@ -684,6 +684,7 @@ let buttons = [
 await conn.sendButtonText(m.chat, buttons, jawab, conn.user.name, m, {mentions: menst})
 }
 break
+*/
 case 'join': {
 if (!isCreator) throw mess.owner
 if (!text) throw 'Masukkan Link Group!'
@@ -2077,7 +2078,7 @@ sections: [{
 "rows": kunnu
 }],
 }
-conn.sendMessage(m.chat, listMessage)
+conn.sendMessage(m.chat, listMessage, {quoted: m})
 
 	})
 } catch(e) {
@@ -2572,7 +2573,7 @@ chrome`
 	}
 	}
 	break
-	case 'nomerhoki': case 'nomorhoki': {
+	/*case 'nomerhoki': case 'nomorhoki': {
 if (!Number(text)) throw `Contoh : ${prefix + command} 6288292024190`
 let anu = await primbon.nomer_hoki(Number(text))
 if (anu.status == false) return m.reply(anu.message)
@@ -2834,7 +2835,7 @@ let anu = await primbon.shio(text)
 if (anu.status == false) return m.reply(anu.message)
 conn.sendText(m.chat, `*Hasil :* ${anu.message}`, m)
 }
-break
+break*/
 /*
 	case 'stalker': case 'stalk': {
 		if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply('Limit Harian Anda Telah Habis')
@@ -3899,6 +3900,7 @@ anu = `*List Menu*
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
+⊳ ${prefix}tebak
 ⊳ ${prefix}tomp3
 ⊳ ${prefix}styletext
 
@@ -3917,14 +3919,14 @@ text: "Nama Bot",
 }*/
 let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
 let btn = [{
-urlButton: {
-displayText: 'Script',
-url: 'https://github.com/DikaArdnt/Hisoka-Morou'
-}
-}, {
 callButton: {
 displayText: 'Phone',
 phoneNumber: '+62 8123-3264-6925'
+}
+}, {
+urlButton: {
+displayText: 'Instagram',
+url: 'https://www.instagram.com/perwira_kusuma1/'
 }
 }, {
 quickReplyButton: {
@@ -3982,6 +3984,7 @@ anu = `*List Menu*
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
+⊳ ${prefix}tebak
 ⊳ ${prefix}tomp3
 ⊳ ${prefix}styletext
 
@@ -4000,14 +4003,14 @@ text: "Nama Bot"
 }*/
 let btntz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
 let btn = [{
-urlButton: {
-displayText: 'Script',
-url: 'https://github.com/DikaArdnt/Hisoka-Morou'
-}
-}, {
 callButton: {
 displayText: 'Phone',
 phoneNumber: '+62 8123-3264-6925'
+}
+}, {
+urlButton: {
+displayText: 'Instagram',
+url: 'https://www.instagram.com/perwira_kusuma1/'
 }
 }, {
 quickReplyButton: {
@@ -4247,7 +4250,7 @@ let non = [{buttonId: "owner", buttonText: {displayText: "Owner"}, type: 1}, {bu
 conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list men`, `Perwira Bot WhatsApp`, m, {})
 }
 */
-/* if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
+if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
 kuis = true
 jawaban = tebaklagu[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
@@ -4319,7 +4322,7 @@ if (budy.toLowerCase() == jawaban) {
 await conn.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { displayText: 'Tebak Tebakan' }, type: 1 }], `🎮 Tebak Tebakan 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, `Perwira Bot WhatsApp`, m)
 delete tebaktebakan[m.sender.split('@')[0]]
 } else m.reply('*Jawaban Salah!*')
-}*/
+}
 
 break
 
