@@ -52,7 +52,7 @@ settings: {},
 ...(global.db || {})
 }
 */
-let tebaklagu = db.data.game.tebaklagu = []
+/*let tebaklagu = db.data.game.tebaklagu = []
 let _family100 = db.data.game.family100 = []
 let kuismath = db.data.game.math = []
 let tebakgambar = db.data.game.tebakgambar = []
@@ -63,7 +63,7 @@ let tebakkalimat = db.data.game.kalimat = []
 let tebaklirik = db.data.game.lirik = []
 let tebaktebakan = db.data.game.tebakan = []
 let vote = db.data.others.vote = []
-
+*/
 module.exports = conn = async (conn, m, chatUpdate, store) => {
 try {
 	var cmd = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
@@ -551,7 +551,7 @@ tex = m.quoted ? m.quoted.text ? m.quoted.text : q ? q : m.text : q ? q : m.text
 m.reply(tex.replace(/[aiueo]/g, ter).replace(/[AIUEO]/g, ter.toUpperCase()))
 break
 */
-case 'tebak': {
+/*case 'tebak': {
 if (!text) throw `Contoh : ${prefix + command} lagu\n*Option :* \n1. lagu\n2. gambar\n3. kata\n4. kalimat\n5. lirik\n6.lontong`
 if (args[0] === "lagu") {
 if (tebaklagu.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
@@ -637,7 +637,7 @@ delete caklontong[m.sender.split('@')[0]]
 }
 }
 break
-
+*/
 /*case 'kuismath': case 'math': {
 if (kuismath.hasOwnProperty(m.sender.split('@')[0])) throw "Masih Ada Sesi Yang Belum Diselesaikan!"
 let { genMath, modes } = require('./src/math')
@@ -4282,10 +4282,6 @@ delete tebaktebakan[m.sender.split('@')[0]]
 } else m.reply('*Jawaban Salah!*')
 }*/
 
-break
-
- }
- 
  if (budy.startsWith('=>')) {
  if (!isCreator) return m.reply(mess.owner)
  function Return(sul) {
@@ -4326,6 +4322,12 @@ if(err) return m.reply(err)
 if (stdout) return m.reply(stdout)
 })
 }
+
+break
+
+ }
+ 
+
 
 		 /*if (m.chat.endsWith('@s.whatsapp.net') && isCmd) {
 this.anonymous = this.anonymous ? this.anonymous : {}
