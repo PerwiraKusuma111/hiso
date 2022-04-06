@@ -1728,7 +1728,7 @@ create();
 }
 break
 case 'template':{
-	if(!text) return m.reply(`*Contoh :* /template gay(reply gambar)
+	if(!text) return m.reply(`*Contoh :* ${prefix+command} gay(reply gambar)
 
 *List Type Template*
 gay
@@ -1798,7 +1798,7 @@ haha();
     }
     create();
     	} else { m.reply(`Maaf ${args[0]} tidak ada di Type Template
-*Contoh :* /template gay(reply gambar)
+*Contoh :* ${prefix+command} gay(reply gambar)
 
 *List Type Template*
 gay
@@ -1915,32 +1915,34 @@ for (let i of search.all) {
 kunn.push({
 "title": `${no++}.${i.title}`,
 "description": `•Upload : ${i.ago}\n•Duration : ${i.timestamp}`,
-"rowId": `ytmp3 ${i.url}`
+"rowId": `ytdl ${i.url}`
 })
-kunni.push({
+/*kunni.push({
 "title": `${po++}.${i.title}`,
 "description": `•Upload : ${i.ago}\n•Duration : ${i.timestamp}`,
 "rowId": `ytmp4 ${i.url}`
-})
+})*/
 }
 let listMessage = {
 text: 'Hasil penelusuran lain',
 footer: `Perwira Bot WhatsApp`,
 title: `*YouTube Search*\n\nIni adalah penelusuran yang ditemukan.`,
-buttonText: "Hasil Penelusuran",
+buttonText: "Click Here",
 sections: [{
-"title": `Hasil penelusuran dalam bentuk Audio`,
-"rows": kunn}, {
-"title": `Hasil penelusuran dalam bentuk Video`,
-"rows": kunni
-}],
+"title": `Hasil penelusuran yang ditemukan`,
+"rows": kunn}],
 }
-conn.sendMessage(m.chat, listMessage)
+conn.sendMessage(m.chat, listMessage, {quoted: m})
   /*teks += `No : ${no++}\nType : ${i.type}\nVideo ID : ${i.videoId}\nTitle : ${i.title}\nViews : ${i.views}\nDuration : ${i.timestamp}\nUpload At : ${i.ago}\nAuthor : ${i.author.name}\nUrl : ${i.url}\n\n─────────────────\n\n`*/
 
 /* conn.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })*/
 }
 break
+case 'ytdl':{
+	pesan = `Silahkan pilih type media`
+	let btnz = [{buttonId: `ytmp3 ${text}`, buttonText: {displayText: 'Audio'}, type:1},{buttonId: `ytmp4 ${text}`, buttonText: {displayText: 'Video'}, type:1}]
+	conn.sendButtonText(m.chat, btnz, pesan, `Perwira Bot WhatsApp`)
+	}break
 case 'google': {
 if (!text) throw `Contoh : ${prefix + command} fatih arridho`
 let google = require('google-it')
@@ -3890,12 +3892,7 @@ anu = `*List Menu*
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}gura
-⊳ ${prefix}loli
-⊳ ${prefix}loli2
-⊳ ${prefix}neko
-⊳ ${prefix}catboy
-⊳ ${prefix}ghoul
+⊳ ${prefix}anim
 ⊳ ${prefix}textpro
 ⊳ ${prefix}template
 
@@ -3978,12 +3975,7 @@ anu = `*List Menu*
 ⊳ ${prefix}emojimix
 
 *Maker Menu*
-⊳ ${prefix}gura
-⊳ ${prefix}loli
-⊳ ${prefix}loli2
-⊳ ${prefix}neko
-⊳ ${prefix}catboy
-⊳ ${prefix}ghoul
+⊳ ${prefix}anim
 ⊳ ${prefix}textpro
 ⊳ ${prefix}template
 
@@ -4037,105 +4029,109 @@ id: 'ping'
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
 break
-case 'ghoul':{
-	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira`)
-var pathh = 'out.png'
-haha = async () => {
+case 'anim':{
+	if(!text) return m.reply(`Masukkan teks!
+*Contoh :* ${prefix+command} gura/Text
+
+*List Type Anim Maker*
+gura
+loli
+loli2
+neko
+catboy
+ghoul`)
+    let jeo = args.join(" ")
+    let jenis = jeo.split("/")[0]
+    let texts = jeo.split("/")[1]
+    let texts2 = jeo.split("/")[2]
+	var pathh = 'out.png'
+	if(jenis === 'ghoul') {
+		haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx1()
-    .setName(text)
+    .setName(texts)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
 conn.sendMessage(m.chat, {image: {url: pathh}})
 }
 haha()
-}
-break
-case 'gura':{
-	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira`)
-var pathh = 'out.png'
-haha = async () => {
+		} else if(jenis === 'gura') {
+			haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gura()
-    .setName(text)
+    .setName(texts)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
 conn.sendMessage(m.chat, {image: {url: pathh}})
 }
 haha()
-}
-
-break
-case 'loli':{
-	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira`)
-var pathh = 'out.png'
-haha = async () => {
+		} else if(jenis === 'loli') {
+			haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx2()
-    .setName(text)
+    .setName(texts)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
 conn.sendMessage(m.chat, {image: {url: pathh}})
 }
 haha()
-}
-
-break
-case 'catboy':{
-	if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira/Bot`)
-let textn = args.join(" ")
-let text1 = textn.split("/")[0]
-let text2 = textn.split("/")[1]
-var pathh = 'out.png'
+		} else if(jenis === 'catboy') {
+			if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
+			if(texts2.length < 1) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx3()
-    .setText1(text1)
-    .setText2(text2)
+    .setText1(texts)
+    .setText2(texts2)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
 conn.sendMessage(m.chat, {image: {url: pathh}})
 }
 haha()
-}
-break
-case 'neko':{
-	if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Perwira/Bot`)
-let textn = args.join(" ")
-let text1 = textn.split("/")[0]
-let text2 = textn.split("/")[1]
-var pathh = 'out.png'
+		} else if(jenis === 'neko') {
+			if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
+			if(texts2.length < 1) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}//Bot`)
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx4()
-    .setText1(text1)
-    .setText2(text2)
+    .setText1(texts)
+    .setText2(texts2)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
 conn.sendMessage(m.chat, {image: {url: pathh}})
 }
 haha()
-}
-break
-case 'loli2':{
-var pathh = 'out.png'
-haha = async () => {
+		} else if(jenis === 'loli2') {
+			haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx5()
-    .setText(text)
+    .setText(texts)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
 conn.sendMessage(m.chat, {image: {url: pathh}})
 }
 haha()
-}
-break
+		} else {
+			m.reply(`Type *${args[0]}* tidak ada
+*Contoh :* ${prefix}anim gura/Text
+
+*List Type Anim Maker*
+gura
+loli
+loli2
+neko
+catboy
+ghoul`)
+			}
+	}
+	break
+
 /*case 'virtex':{
 let mes = await conn.sendMessage(m.chat, {text: 'Virtex Boom', contextInfo: {externalAdReply: {title: 'Virtex', body: 'This is Virtex', sourceUrl: `https://github.com`, mediaUrl: `https://github.com`, mediaType: 1, thumbnail: fs.readFileSync(`./vir.jpg`) }}})
 setTimeout(() => {
