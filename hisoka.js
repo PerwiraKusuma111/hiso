@@ -2791,17 +2791,18 @@ m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6y
 break*/
 case 'igdl':
 case 'instagram':
-case 'ig':{
+case 'ig':
+mimeaxig= ''
+{
 	try {
 	if(text.includes("instagram.com")) {
 		(async () => { helo = await require('mumaker').instagram(text)
 			})()
-mimeax = ''
 let res = await axios.head(helo[0].url)
-mimeax = res.headers['content-type']
-if(mimeax.split("/")[0] === "image"){
+mimeaxig= res.headers['content-type']
+if(mimeaxig.split("/")[0] === "image"){
 return conn.sendMessage(m.chat, { image: await getBuffer(helo[0].url)}, {quoted: m})
-} else if(mimeax.split("/")[0] === "video"){
+} else if(mimeaxig.split("/")[0] === "video"){
 return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted: m})
 }
 		} else {
