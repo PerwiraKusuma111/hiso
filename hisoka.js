@@ -2481,7 +2481,7 @@ await textpro(graffititext, isi).then(async res => {
 	})
 } else if(jenis === 'graffitiwall') {
 if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
-await textpro(graffitiwall, isi).then(async res => {
+await textpro(graffitiwall, [isi, isi2]).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'luxurygold') {
@@ -3899,7 +3899,7 @@ anu = `*List Menu*
 ⊳ ${prefix}neko
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
-⊳ ${prefix}textpro [cooming soon]
+⊳ ${prefix}textpro
 
 *Template Maker*
 ⊳ ${prefix}gay
@@ -3994,7 +3994,7 @@ anu = `*List Menu*
 ⊳ ${prefix}neko
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
-⊳ ${prefix}textpro [cooming soon]
+⊳ ${prefix}textpro
 
 *Template Maker*
 ⊳ ${prefix}gay
