@@ -2369,6 +2369,7 @@ if(!text.includes("/")) return m.reply(`Cara menggunakan Contoh ${prefix+command
 tex = args.join(" ")
 jenis = tex.split("/")[0]
 isi = tex.split("/")[1]
+isi2 = tex.split("/")[2]
 let { textpro } = require('mumaker')
 
 sketch = `https://textpro.me/create-a-sketch-text-effect-online-1044.html`
@@ -2399,107 +2400,111 @@ ice = `https://textpro.me/ice-cold-text-effect-862.html`
 chrome = `https://textpro.me/3d-chrome-text-effect-827.html`
 
 if(jenis === 'sketch') {
-await textpro(sketch, text).then(async res => {
+await textpro(sketch, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'magma') {
-await textpro(magma, text).then(async res => {
+await textpro(magma, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'stone') {
-await textpro(stone, text).then(async res => {
+await textpro(stone, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'glitch') {
-await textpro(glitch, text).then(async res => {
+if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+await textpro(glitch, [isi, isi2]).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'retro') {
-await textpro(retro, text).then(async res => {
+if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+await textpro(retro, [isi, isi2]).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'glass') {
-await textpro(glass, text).then(async res => {
+await textpro(glass, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'papercut') {
-await textpro(papercut, text).then(async res => {
+await textpro(papercut, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'papercolor') {
-await textpro(papercolor, text).then(async res => {
+await textpro(papercolor, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'windowfog') {
-await textpro(windowfog, text).then(async res => {
+await textpro(windowfog, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'wings') {
-await textpro(wings, text).then(async res => {
+await textpro(wings, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'bear') {
-await textpro(bear, text).then(async res => {
+await textpro(bear, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'graffititext') {
-await textpro(graffititext, text).then(async res => {
+await textpro(graffititext, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'graffitiwall') {
-await textpro(graffitiwall, text).then(async res => {
+await textpro(graffitiwall, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'luxurygold') {
-await textpro(luxurygold, text).then(async res => {
+await textpro(luxurygold, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'sand') {
-await textpro(sand, text).then(async res => {
+await textpro(sand, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'tiktokglitch') {
-await textpro(tiktokglitch, text).then(async res => {
+if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+await textpro(tiktokglitch, [isi, isi2]).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === '1917') {
-await textpro(tahun, text).then(async res => {
+await textpro(tahun, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'exposure') {
-await textpro(exposure, text).then(async res => {
+await textpro(exposure, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'neon') {
-await textpro(neon, text).then(async res => {
+await textpro(neon, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'galaxywolf') {
-await textpro(galaxywolf, text).then(async res => {
+if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+await textpro(galaxywolf, [isi, isi2]).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'ninja') {
-await textpro(ninja, text).then(async res => {
+await textpro(ninja, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'matrix') {
-await textpro(matrix, text).then(async res => {
+await textpro(matrix, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'thunder') {
-await textpro(thunder, text).then(async res => {
+await textpro(thunder, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'dropwater') {
-await textpro(dropwater, text).then(async res => {
+await textpro(dropwater, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'ice') {
-await textpro(ice, text).then(async res => {
+await textpro(ice, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'chrome') {
-await textpro(chrome, text).then(async res => {
+await textpro(chrome, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else {
