@@ -2515,7 +2515,7 @@ await textpro(galaxywolf, [isi, isi2]).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'ninja') {
-await textpro(ninja, isi).then(async res => {
+await textpro(ninja, [isi, isi2]).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'matrix') {
