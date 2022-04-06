@@ -2398,107 +2398,107 @@ dropwater = `https://textpro.me/dropwater-text-effect-872.html`
 ice = `https://textpro.me/ice-cold-text-effect-862.html`
 chrome = `https://textpro.me/3d-chrome-text-effect-827.html`
 
-if(args[0] === 'sketch') {
+if(jenis === 'sketch') {
 await textpro(sketch, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'magma') {
+} else if(jenis === 'magma') {
 await textpro(magma, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'stone') {
+} else if(jenis === 'stone') {
 await textpro(stone, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'glitch') {
+} else if(jenis === 'glitch') {
 await textpro(glitch, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'retro') {
+} else if(jenis === 'retro') {
 await textpro(retro, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'glass') {
+} else if(jenis === 'glass') {
 await textpro(glass, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'papercut') {
+} else if(jenis === 'papercut') {
 await textpro(papercut, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'papercolor') {
+} else if(jenis === 'papercolor') {
 await textpro(papercolor, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'windowfog') {
+} else if(jenis === 'windowfog') {
 await textpro(windowfog, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'wings') {
+} else if(jenis === 'wings') {
 await textpro(wings, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'bear') {
+} else if(jenis === 'bear') {
 await textpro(bear, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'graffititext') {
+} else if(jenis === 'graffititext') {
 await textpro(graffititext, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'graffitiwall') {
+} else if(jenis === 'graffitiwall') {
 await textpro(graffitiwall, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'luxurygold') {
+} else if(jenis === 'luxurygold') {
 await textpro(luxurygold, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'sand') {
+} else if(jenis === 'sand') {
 await textpro(sand, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'tiktokglitch') {
+} else if(jenis === 'tiktokglitch') {
 await textpro(tiktokglitch, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === '1917') {
+} else if(jenis === '1917') {
 await textpro(tahun, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'exposure') {
+} else if(jenis === 'exposure') {
 await textpro(exposure, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'neon') {
+} else if(jenis === 'neon') {
 await textpro(neon, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'galaxywolf') {
+} else if(jenis === 'galaxywolf') {
 await textpro(galaxywolf, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'ninja') {
+} else if(jenis === 'ninja') {
 await textpro(ninja, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'matrix') {
+} else if(jenis === 'matrix') {
 await textpro(matrix, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'thunder') {
+} else if(jenis === 'thunder') {
 await textpro(thunder, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'dropwater') {
+} else if(jenis === 'dropwater') {
 await textpro(dropwater, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'ice') {
+} else if(jenis === 'ice') {
 await textpro(ice, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
-} else if(args[0] === 'chrome') {
+} else if(jenis === 'chrome') {
 await textpro(chrome, text).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
