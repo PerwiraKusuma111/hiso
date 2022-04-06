@@ -10,7 +10,7 @@
 */
 const fs = require('fs')
 const chalk = require('chalk')
-const axios = require('axios')
+/*const axios = require('axios')*/
 
 // Website Api
 global.APIs = {

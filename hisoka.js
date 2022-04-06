@@ -2813,6 +2813,32 @@ return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted:
 				}
 	}
 	break
+
+case 'igdl2':
+case 'instagram2':
+case 'ig2':
+mimeaxig= ''
+{
+	try {
+	if(text.includes("instagram.com")) {
+let {instagram} = require('mumaker')
+await instagram(text).then(async helo => {
+let res = await axios.head(helo[0].url)
+mimeaxig= res.headers['content-type']
+if(mimeaxig.split("/")[0] === "image"){
+return conn.sendMessage(m.chat, { image: await getBuffer(helo[0].url)}, {quoted: m})
+} else if(mimeaxig.split("/")[0] === "video"){
+return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted: m})
+}
+})
+		} else {
+			m.reply("Pastikan menggunakan link Instagram")
+			}
+			} catch(e) {
+				m.reply(`Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`)
+				}
+	}
+	break
 /*case 'igmp3':
 case 'igvaudio':
 case 'instagramaudio':
