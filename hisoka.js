@@ -1728,92 +1728,79 @@ case 'trigger':{
 create();
 }
 break
-case 'gay':{
-	if (!quoted) throw 'Reply Image'
-    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
-	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'gay.jpg')
-	yuricanvas = require("yuri-canvas");
-    async function create() {
-    let img = await yuricanvas.gay('gay.jpg');
-    yuricanvas.write(img, "jadigay.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jadigay.jpg`), 'Done', m)
-}
+case 'template':{
+	if(!text) return m.reply(`*Contoh :* /template gay(reply gambar)
 
-create();
-}
-break
-case 'jail':{
+*List Type Template*
+gay
+jail
+wanted
+wasted
+trash
+burn`)
 	if (!quoted) throw 'Reply Image'
     if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
-	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'jail.jpg')
-	yuricanvas = require("yuri-canvas");
-    async function create() {
-    let img = await yuricanvas.jail('jail.jpg');
-    yuricanvas.write(img, "jadijail.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jadijail.jpg`), 'Done', m)
-}
-
-create();
-}
-break
-case 'wanted':{
-	if (!quoted) throw 'Reply Image'
-    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
-	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wanted.jpg')
-	yuricanvas = require("yuri-canvas");
-    async function create() {
-    let img = await yuricanvas.wanted('wanted.jpg');
-    yuricanvas.write(img, "jadiwanted.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jadiwanted.jpg`), 'Done', m)
-}
-
-create();
-}
-break
-case 'trash':{
-	if (!quoted) throw 'Reply Image'
-    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
-	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trash.jpg')
-	yuricanvas = require("yuri-canvas");
-    async function create() {
-    let img = await yuricanvas.trash('trash.jpg');
-    yuricanvas.write(img, "jaditrash.jpg");
-    conn.sendImage(m.chat, fs.readFileSync(`./jaditrash.jpg`), 'Done', m)
-}
-
-create();
-}
-break
-case 'burn':{
-	if (!quoted) throw 'Reply Image'
-    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
-	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'sponge.jpg')
+    yuricanvas = require("yuri-canvas");
+    if(args[0] === 'burn') {
+let media = await conn.downloadAndSaveMediaMessage2(quoted, 'sponge.jpg')
 var pathh = 'ouit.png'
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Burn()
     .setAvatar('sponge.jpg')
     .toAttachment();
-  data = image.toBuffer();
-  await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}, caption: 'Done'}, {quoted: m})
+    data = image.toBuffer();
+    await fs.writeFileSync(pathh, data)
+    conn.sendMessage(m.chat, {image: {url: pathh}, caption: 'Done'}, {quoted: m})
 }
-haha()
-}break
-case 'wasted':{
-	if (!quoted) throw 'Reply Image'
-    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+} else if(args[0] === 'gay') {
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'gay.jpg')
+    	async function create() {
+    let img = await yuricanvas.gay('gay.jpg');
+    yuricanvas.write(img, "jadigay.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jadigay.jpg`), 'Done', m)
+    	}
+} else if(args[0] === 'jail') {
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'jail.jpg')
+    	async function create() {
+    let img = await yuricanvas.jail('jail.jpg');
+    yuricanvas.write(img, "jadijail.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jadijail.jpg`), 'Done', m)
+    	}
+} else if(args[0] === 'wanted') {
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wanted.jpg')
+    	async function create() {
+    let img = await yuricanvas.wanted('wanted.jpg');
+    yuricanvas.write(img, "jadiwanted.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jadiwanted.jpg`), 'Done', m)
+    	}
+} else if(args[0] === 'trash') {
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trash.jpg')
+    	async function create() {
+    let img = await yuricanvas.trash('trash.jpg');
+    yuricanvas.write(img, "jaditrash.jpg");
+    conn.sendImage(m.chat, fs.readFileSync(`./jaditrash.jpg`), 'Done', m)
+    	}
+} else if(args[0] === 'wasted') {
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wasted.jpg')
-	yuricanvas = require("yuri-canvas");
-    async function create() {
+    	async function create() {
     let img = await yuricanvas.wasted('wasted.jpg');
     yuricanvas.write(img, "jadiwasted.jpg");
     conn.sendImage(m.chat, fs.readFileSync(`./jadiwasted.jpg`), 'Done', m)
-}
+    }
+    	} else { m.reply(`Maaf ${args[0]} tidak ada di Type Template
+*Contoh :* /template gay(reply gambar)
 
-create();
-}
-break
+*List Type Template*
+gay
+jail
+wanted
+wasted
+trash
+burn`) }
+	}
+	break
+
 	case 'tomp4': case 'tovideo': {
 if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
@@ -2365,7 +2352,8 @@ conn.sendMessage(m.chat, { image: { url: api('zenz', '/ephoto/' + command, { tex
 }
 break*/
 case 'textpro':{
-if(!text.includes("/")) return m.reply(`Cara menggunakan Contoh ${prefix+command} magma/Text
+if(!text.includes("/")) return m.reply(`Cara menggunakan
+*Contoh :* ${prefix+command} magma/Text
 
 Type yang tersedia
 
@@ -3892,7 +3880,7 @@ anu = `*List Menu*
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
 
-*Text Maker*
+*Maker Menu*
 ⊳ ${prefix}gura
 ⊳ ${prefix}loli
 ⊳ ${prefix}loli2
@@ -3900,14 +3888,7 @@ anu = `*List Menu*
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
 ⊳ ${prefix}textpro
-
-*Template Maker*
-⊳ ${prefix}gay
-⊳ ${prefix}jail
-⊳ ${prefix}wanted
-⊳ ${prefix}wasted
-⊳ ${prefix}trash
-⊳ ${prefix}burn
+⊳ ${prefix}template
 
 *Other Menu*
 ⊳ ${prefix}simi
@@ -3987,7 +3968,7 @@ anu = `*List Menu*
 ⊳ ${prefix}telesticker
 ⊳ ${prefix}emojimix
 
-*Text Maker*
+*Maker Menu*
 ⊳ ${prefix}gura
 ⊳ ${prefix}loli
 ⊳ ${prefix}loli2
@@ -3995,14 +3976,7 @@ anu = `*List Menu*
 ⊳ ${prefix}catboy
 ⊳ ${prefix}ghoul
 ⊳ ${prefix}textpro
-
-*Template Maker*
-⊳ ${prefix}gay
-⊳ ${prefix}jail
-⊳ ${prefix}wanted
-⊳ ${prefix}wasted
-⊳ ${prefix}trash
-⊳ ${prefix}burn
+⊳ ${prefix}template
 
 *Other Menu*
 ⊳ ${prefix}simi
