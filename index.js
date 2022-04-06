@@ -457,7 +457,7 @@ conn.downloadAndSaveMediaMessage2 = async (message, filename, attachExtension = 
      * @param {*} options 
      * @returns 
      */
-     conn.sendImgVid = async (jid, lik) => {
+   /*  conn.sendImgVid = async (jid, lik) => {
 mimeaxig = ''
 let res = axios.head(lik)
 mimeaxig = res.headers['content-type']
@@ -466,7 +466,7 @@ return conn.sendMessage(jid, { image: await getBuffer(lik)}, {quoted: m})
 } else if(mimeaxig.split("/")[0] === "video"){
 return conn.sendMessage(jid, { video: await getBuffer(lik)}, {quoted: m})
 }
-     	}
+     	}*/
     conn.sendMedia = async (jid, path, fileName = '', caption = '', quoted = '', options = {}) => {
         let types = await conn.getFile(path, true)
            let { mime, ext, res, data, filename } = types

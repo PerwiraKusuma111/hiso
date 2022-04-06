@@ -2798,7 +2798,7 @@ mimeaxig= ''
 	if(text.includes("instagram.com")) {
 let {instagram} = require('mumaker')
 helo = await instagram(text)
-let res = axios.head(helo[0].url)
+let res = await axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
 return conn.sendMessage(m.chat, { image: await getBuffer(helo[0].url)}, {quoted: m})
