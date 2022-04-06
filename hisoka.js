@@ -39,7 +39,7 @@ const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 
 // read database
-/*
+
 global.db = JSON.parse(fs.readFileSync('./src/database.json'))
 if (global.db) global.db = {
 sticker: {},
@@ -51,7 +51,7 @@ chats: {},
 settings: {},
 ...(global.db || {})
 }
-*/
+
 /*let tebaklagu = db.data.game.tebaklagu = []
 let _family100 = db.data.game.family100 = []
 let kuismath = db.data.game.math = []
