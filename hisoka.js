@@ -2789,7 +2789,7 @@ conn.sendMedia(m.chat, res.result.link, '', `Instagram Downloader`, m)*/
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
 break*/
-case 'igdl':
+/*case 'igdl':
 case 'instagram':
 case 'ig':
 mimeaxig= ''
@@ -2812,11 +2812,11 @@ return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted:
 				m.reply(`Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`)
 				}
 	}
-	break
+	break*/
 
-case 'igdl2':
-case 'instagram2':
-case 'ig2':
+case 'igdl':
+case 'instagram':
+case 'ig':
 mimeaxig= ''
 {
 	try {
