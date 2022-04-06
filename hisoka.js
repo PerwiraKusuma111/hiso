@@ -3863,33 +3863,30 @@ anu = `*List Menu*
 ⊳ ${prefix}setname
 ⊳ ${prefix}setppgc
 
-*Tools Menu*
-⊳ ${prefix}translate
+*Search Menu*
 ⊳ ${prefix}google
+⊳ ${prefix}ytsearch
+⊳ ${prefix}translate
 ⊳ ${prefix}wikipedia
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-⊳ ${prefix}tourl
-⊳ ${prefix}get
+⊳ ${prefix}pinterest
 
 *Sticker Menu*
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
-⊳ ${prefix}tovideo
 ⊳ ${prefix}attp
 ⊳ ${prefix}togif
+⊳ ${prefix}toimg
+⊳ ${prefix}sticker
+⊳ ${prefix}tovideo
 ⊳ ${prefix}triggered
+⊳ ${prefix}emojimix
 
 *Download Menu*
 ⊳ ${prefix}play
-⊳ ${prefix}ytsearch
+⊳ ${prefix}igdl
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
-⊳ ${prefix}igdl
 ⊳ ${prefix}telesticker
-⊳ ${prefix}emojimix
 
 *Maker Menu*
 ⊳ ${prefix}anim
@@ -3897,11 +3894,13 @@ anu = `*List Menu*
 ⊳ ${prefix}template
 
 *Other Menu*
+⊳ ${prefix}get
+⊳ ${prefix}tourl
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
+⊳ ${prefix}tomp3
 ⊳ ${prefix}styletext
-⊳ ${prefix}pinterest
 
 *Attention!*
   Harap baca *rules*
@@ -3947,32 +3946,30 @@ await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(!m.isGroup) {
 anu = `*List Menu*
 
-*Tools Menu*
-⊳ ${prefix}translate
+*Search Menu*
 ⊳ ${prefix}google
+⊳ ${prefix}ytsearch
+⊳ ${prefix}translate
 ⊳ ${prefix}wikipedia
-⊳ ${prefix}tomp3
-⊳ ${prefix}tourl
-⊳ ${prefix}get
+⊳ ${prefix}pinterest
 
 *Sticker Menu*
-⊳ ${prefix}sticker
-⊳ ${prefix}toimg
-⊳ ${prefix}tovideo
-⊳ ${prefix}togif
 ⊳ ${prefix}attp
+⊳ ${prefix}togif
+⊳ ${prefix}toimg
+⊳ ${prefix}sticker
+⊳ ${prefix}tovideo
 ⊳ ${prefix}triggered
+⊳ ${prefix}emojimix
 
 *Download Menu*
 ⊳ ${prefix}play
-⊳ ${prefix}ytsearch
+⊳ ${prefix}igdl
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
 ⊳ ${prefix}ttmp3
 ⊳ ${prefix}ttmp4
-⊳ ${prefix}igdl
 ⊳ ${prefix}telesticker
-⊳ ${prefix}emojimix
 
 *Maker Menu*
 ⊳ ${prefix}anim
@@ -3980,11 +3977,13 @@ anu = `*List Menu*
 ⊳ ${prefix}template
 
 *Other Menu*
+⊳ ${prefix}get
+⊳ ${prefix}tourl
 ⊳ ${prefix}simi
 ⊳ ${prefix}nulis
 ⊳ ${prefix}tahta
+⊳ ${prefix}tomp3
 ⊳ ${prefix}styletext
-⊳ ${prefix}pinterest
 
 *Attention!*
   Harap baca *rules*
