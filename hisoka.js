@@ -2794,11 +2794,16 @@ case 'instagram':
 case 'ig':{
 	try {
 	if(text.includes("instagram.com")) {
-		(async () => { helo = await require('mumaker').instagram(text).then(() => {
-		conn.sendMedia(m.chat, helo[0].url, '', `Instagram Downloader`, m)
-		})
+		(async () => { helo = await require('mumaker').instagram(text)
 			})()
-		
+mimeax = ''
+let res = await axios.head(helo[0].url)
+mimeax = res.headers['content-type']
+if(mimeax.split("/")[0] === "image"){
+return conn.sendMessage(m.chat, { image: await getBuffer(helo[0].url)}, {quoted: m})
+} else if(mimeax.split("/")[0] === "video"){
+return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted: m})
+}
 		} else {
 			m.reply("Pastikan menggunakan link Instagram")
 			}
