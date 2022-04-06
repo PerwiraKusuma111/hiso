@@ -2364,6 +2364,149 @@ m.reply(mess.wait)
 conn.sendMessage(m.chat, { image: { url: api('zenz', '/ephoto/' + command, { text: text }, 'apikey') }, caption: `Ephoto ${command}` }, { quoted: m })
 }
 break*/
+case 'textpro':{
+if(text.includes("/")) return m.reply(`Cara menggunakan Contoh ${prefix+command} magma/Text`)
+tex = args.join(" ")
+jenis = tex.split("/")[0]
+isi = tex.split("/")[1]
+let { textpro } = require('mumaker')
+
+sketch = `https://textpro.me/create-a-sketch-text-effect-online-1044.html`
+magma = `https://textpro.me/create-a-magma-hot-text-effect-online-1030.html`
+stone = `https://textpro.me/3d-stone-cracked-cool-text-effect-1029.html`
+glitch = `https://textpro.me/create-a-glitch-text-effect-online-free-1026.html`
+retro = `https://textpro.me/create-3d-retro-text-effect-online-free-1065.html`
+glass = `https://textpro.me/broken-glass-text-effect-free-online-1023.html`
+papercut = `https://textpro.me/create-art-paper-cut-text-effect-online-1022.html`
+papercolor = `https://textpro.me/online-multicolor-3d-paper-cut-text-effect-1016.html`
+windowfog = `https://textpro.me/write-text-on-foggy-window-online-free-1015.html`
+wings = `https://textpro.me/create-neon-devil-wings-text-effect-online-free-1014.html`
+bear = `https://textpro.me/online-black-and-white-bear-mascot-logo-creation-1012.html`
+graffititext = `https://textpro.me/create-wonderful-graffiti-art-text-effect-1011.html`
+graffitiwall = `https://textpro.me/create-a-cool-graffiti-text-on-the-wall-1010.html`
+luxurygold = `https://textpro.me/3d-luxury-gold-text-effect-online-1003.html`
+sand = `https://textpro.me/sand-engraved-3d-text-effect-989.html`
+tiktokglitch = `https://textpro.me/create-glitch-text-effect-style-tik-tok-983.html`
+tahun = `https://textpro.me/1917-style-text-effect-online-980.html`
+exposure = `https://textpro.me/double-exposure-text-effect-black-white-976.html`
+neon = `https://textpro.me/neon-text-effect-online-963.html`
+galaxywolf = `https://textpro.me/create-wolf-logo-galaxy-online-936.html`
+ninja = `https://textpro.me/create-ninja-logo-online-935.html`
+matrix = `https://textpro.me/matrix-style-text-effect-online-884.html`
+thunder = `https://textpro.me/create-thunder-text-effect-online-881.html`
+dropwater = `https://textpro.me/dropwater-text-effect-872.html`
+ice = `https://textpro.me/ice-cold-text-effect-862.html`
+chrome = `https://textpro.me/3d-chrome-text-effect-827.html`
+
+if(args[0] === 'sketch') {
+await textpro(sketch, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'magma') {
+await textpro(magma, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'stone') {
+await textpro(stone, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'glitch') {
+await textpro(glitch, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'retro') {
+await textpro(retro, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'glass') {
+await textpro(glass, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'papercut') {
+await textpro(papercut, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'papercolor') {
+await textpro(papercolor, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'windowfog') {
+await textpro(windowfog, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'wings') {
+await textpro(wings, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'bear') {
+await textpro(bear, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'graffititext') {
+await textpro(graffititext, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'graffitiwall') {
+await textpro(graffitiwall, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'luxurygold') {
+await textpro(luxurygold, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'sand') {
+await textpro(sand, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'tiktokglitch') {
+await textpro(tiktokglitch, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === '1917') {
+await textpro(tahun, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'exposure') {
+await textpro(exposure, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'neon') {
+await textpro(neon, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'galaxywolf') {
+await textpro(galaxywolf, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'ninja') {
+await textpro(ninja, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'matrix') {
+await textpro(matrix, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'thunder') {
+await textpro(thunder, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'dropwater') {
+await textpro(dropwater, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'ice') {
+await textpro(ice, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else if(args[0] === 'chrome') {
+await textpro(chrome, text).then(async res => {
+	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
+	})
+} else {
+	m.reply(`Cara menggunakan`)
+	}
+	}
+	break
 	case 'nomerhoki': case 'nomorhoki': {
 if (!Number(text)) throw `Contoh : ${prefix + command} 6288292024190`
 let anu = await primbon.nomer_hoki(Number(text))
