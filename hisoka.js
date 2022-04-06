@@ -2365,7 +2365,37 @@ conn.sendMessage(m.chat, { image: { url: api('zenz', '/ephoto/' + command, { tex
 }
 break*/
 case 'textpro':{
-if(!text.includes("/")) return m.reply(`Cara menggunakan Contoh ${prefix+command} magma/Text`)
+if(!text.includes("/")) return m.reply(`Cara menggunakan Contoh ${prefix+command} magma/Text
+
+Type yang tersedia
+
+*List type*
+sketch 
+magma 
+stone 
+glitch
+retro
+glass
+papercut
+papercolor
+windowfog
+wings
+bear
+graffititext
+graffitiwall
+luxurygold
+sand
+tiktokglitch
+tahun
+exposure
+neon
+galaxywolf
+ninja
+matrix
+thunderl
+dropwater
+ice
+chrome`)
 tex = args.join(" ")
 jenis = tex.split("/")[0]
 isi = tex.split("/")[1]
@@ -2450,6 +2480,7 @@ await textpro(graffititext, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else if(jenis === 'graffitiwall') {
+if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(graffitiwall, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
@@ -2508,7 +2539,37 @@ await textpro(chrome, isi).then(async res => {
 	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
 	})
 } else {
-	m.reply(`Cara menggunakan`)
+	lun = `Maaf *${jenis}* tidak ada
+Type yang tersedia
+
+*List type*
+sketch 
+magma 
+stone 
+glitch
+retro
+glass
+papercut
+papercolor
+windowfog
+wings
+bear
+graffititext
+graffitiwall
+luxurygold
+sand
+tiktokglitch
+tahun
+exposure
+neon
+galaxywolf
+ninja
+matrix
+thunderl
+dropwater
+ice
+chrome`
+	m.reply(lun)
 	}
 	}
 	break
