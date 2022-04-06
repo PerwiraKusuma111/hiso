@@ -2794,10 +2794,9 @@ case 'instagram':
 case 'ig':{
 	try {
 	if(text.includes("instagram.com")) {
-		let { instagram } = require('mumaker')
-		(async () => { let helo = await instagram(text)
+		(async () => { let helo = await require('mumaker').instagram(text)
+		conn.sendMedia(m.chat, helo[0].url, '', `Instagram Downloader`, m)
 			})
-			conn.sendMedia(m.chat, res[0].url, '', `Instagram Downloader`, m)
 		} else {
 			m.reply("Pastikan menggunakan link Instagram")
 			}
