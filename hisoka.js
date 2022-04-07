@@ -2364,12 +2364,7 @@ conn.sendMessage(m.chat, { image: { url: api('zenz', '/ephoto/' + command, { tex
 }
 break*/
 case 'textpro':{
-if(!text.includes("/")) return m.reply(`Cara menggunakan
-*Contoh :* ${prefix+command} magma/Text
-
-Type yang tersedia
-
-*List type*
+let typetext = `*List type*
 sketch 
 magma 
 stone 
@@ -2395,12 +2390,357 @@ matrix
 thunderl
 dropwater
 ice
-chrome`)
+chrome
+
+*Baru ditambahkan*
+Error? lapor owner
+
+dmetal
+whitegolddgiraffe
+lightglow
+texteffects
+batmandretro
+thorlogo
+lightglitch
+neonlight
+glowingneon
+goldenancient
+leddisplay
+newyear
+treetext
+christmascandy
+christmastext
+merrychristmasddeep
+onlinecountry
+americanflagdsci
+rainbowcolordwater
+halloweenskeleton
+spooky
+cinematic
+sketch
+bluecircuit
+spacetext
+metallic
+glossymetalic
+captain
+ciencefiction
+gameclassic
+greenhorror
+transformer
+berrytext
+layeredtext
+thundertext
+magma
+stonecrackeddneon
+impressiveglitch
+glitch
+harrypotter
+embossedtext
+glasstext
+artpaper
+artisticblackdgradientdglossydrealistic
+watercolor
+multicolor3d
+texton
+neondevil
+underwatertext
+blackand
+wonderfulgraffiti
+graffiti
+graffitiwall
+christmas
+futuristic
+snowtext
+cloud
+luxurygold
+gradienttext
+blackpinklogo
+realisticvintage
+realisticcloud
+cloudfly
+insand
+writingtext
+engraved3d
+summery
+balloontextdglue
+space3d
+darkgold
+glitchtext
+stone
+lighttext
+styletext
+sretro
+minioneffect
+stylelogo
+exposuretextdtextdavengers
+purpledual
+marvelstyle
+silvertext
+fullluxury
+bluemetal
+goldtext
+carbontext
+fabriceffect
+tneoneffect
+yearcards
+metaltextlogo
+avatargold
+logo3d
+cards3d
+firetext
+lionlogo
+wolflogo
+wolfglogo
+ninjalogo
+logojoker
+wickereffect
+leavestext
+sparkletext
+skeletoneffect
+foilballoon
+steeleffect
+glosstext
+denimeffect
+greentext
+purpletext
+stonetext
+rockeffect
+lavaeffect
+shinyglass
+americatext
+robotd2
+equalizertext
+toxiceffect
+sparklingjewelry
+caketext
+berryeffect
+fishtext
+breadeffect
+bloodtext
+boxtext
+neoneffect
+warningtext
+steeltext
+bokeheffect
+neontext
+advancedglow
+watereffect
+walltext
+gifttext
+honeyeffect
+bagdrug
+horrortext
+slabstext
+marbleeffect
+coldtext
+juicetext
+metaltext
+biscuiteffect
+bageleffect
+woodeffect
+fitext
+rainbowtext
+gemtext
+jewelrytext
+goldentext
+carboneffect
+candytext
+glowingmetal
+`
+if(!text.includes("/")) return m.reply(`Cara menggunakan
+*Contoh :* ${prefix+command} magma/Text
+
+Type yang tersedia
+
+${typetext}`)
 tex = args.join(" ")
 jenis = tex.split("/")[0]
 isi = tex.split("/")[1]
 isi2 = tex.split("/")[2]
 let { textpro } = require('mumaker')
+
+dmetal = `https://textpro.me/create-a-3d-luxury-metallic-text-effect-for-free-1071.html`
+whitegold = `https://textpro.me/elegant-white-gold-3d-text-effect-online-free-1070.html`
+dgiraffe = `https://textpro.me/create-3d-giraffe-text-effect-online-1069.html`
+lightglow = `https://textpro.me/create-light-glow-sliced-text-effect-online-1068.html`
+texteffects = `https://textpro.me/create-text-effects-arcane-tv-series-online-1067.html`
+batman = `https://textpro.me/make-a-batman-logo-online-free-1066.html`
+dretro = `https://textpro.me/create-3d-retro-text-effect-online-free-1065.html`
+thorlogo = `https://textpro.me/create-thor-logo-style-text-effect-online-1064.html`
+lightglitch = `https://textpro.me/neon-light-glitch-text-generator-online-1063.html`
+neonlight = `https://textpro.me/create-neon-light-on-brick-wall-online-1062.html`
+glowingneon = `https://textpro.me/create-glowing-neon-light-text-effect-online-free-1061.html`
+goldenancient = `https://textpro.me/3d-golden-ancient-text-effect-online-free-1060.html`
+leddisplay = `https://textpro.me/color-led-display-screen-text-effect-1059.html`
+newyear = `https://textpro.me/happy-new-year-2022-greeting-3d-card-1058.html`
+treetext = `https://textpro.me/christmas-tree-text-effect-online-free-1057.html`
+christmascandy = `https://textpro.me/create-christmas-candy-cane-text-effect-1056.html`
+christmastext = `https://textpro.me/3d-christmas-text-effect-by-name-1055.html`
+merrychristmas = `https://textpro.me/sparkles-merry-christmas-text-effect-1054.html`
+ddeep = `https://textpro.me/create-3d-deep-sea-metal-text-effect-online-1053.html`
+onlinecountry = `https://textpro.me/free-online-country-flag-3d-text-effect-generator-1052.html`
+americanflag = `https://textpro.me/create-american-flag-3d-text-effect-online-1051.html`
+dsci = `https://textpro.me/create-3d-sci-fi-text-effect-online-1050.html`
+rainbowcolor = `https://textpro.me/3d-rainbow-color-calligraphy-text-effect-1049.html`
+dwater = `https://textpro.me/create-3d-water-pipe-text-effects-online-1048.html`
+halloweenskeleton = `https://textpro.me/create-halloween-skeleton-text-effect-online-1047.html`
+spooky = `https://textpro.me/create-a-spooky-halloween-text-effect-online-1046.html`
+cinematic = `https://textpro.me/create-a-cinematic-horror-text-effect-1045.html`
+sketch = `https://textpro.me/create-a-sketch-text-effect-online-1044.html`
+bluecircuit = `https://textpro.me/create-blue-circuit-style-text-effect-online-1043.html`
+spacetext = `https://textpro.me/create-space-text-effects-online-free-1042.html`
+metallic = `https://textpro.me/create-a-metallic-text-effect-free-online-1041.html`
+glossymetalic = `https://textpro.me/creat-glossy-metalic-text-effect-free-online-1040.html`
+captain = `https://textpro.me/create-a-captain-america-text-effect-free-online-1039.html`
+ciencefiction = `https://textpro.me/create-science-fiction-text-effect-online-free-1038.html`
+gameclassic = `https://textpro.me/video-game-classic-8-bit-text-effect-1037.html`
+greenhorror = `https://textpro.me/create-green-horror-style-text-effect-online-1036.html`
+transformer = `https://textpro.me/create-a-transformer-text-effect-online-1035.html`
+berrytext = `https://textpro.me/create-berry-text-effect-online-free-1033.html`
+layeredtext = `https://textpro.me/create-layered-text-effects-online-free-1032.html`
+thundertext = `https://textpro.me/online-thunder-text-effect-generator-1031.html`
+magma = `https://textpro.me/create-a-magma-hot-text-effect-online-1030.html`
+stonecracked = `https://textpro.me/3d-stone-cracked-cool-text-effect-1029.html`
+dneon = `https://textpro.me/create-3d-neon-light-text-effect-online-1028.html`
+impressiveglitch = `https://textpro.me/create-impressive-glitch-text-effects-online-1027.html`
+glitch = `https://textpro.me/create-a-glitch-text-effect-online-free-1026.html`
+harrypotter = `https://textpro.me/create-harry-potter-text-effect-online-1025.html`
+embossedtext = `https://textpro.me/create-embossed-text-effect-on-cracked-surface-1024.html`
+glasstext = `https://textpro.me/broken-glass-text-effect-free-online-1023.html`
+artpaper = `https://textpro.me/create-art-paper-cut-text-effect-online-1022.html`
+artisticblack = `https://textpro.me/create-artistic-black-and-white-status-and-quote-with-your-photos-1021.html`
+dgradient = `https://textpro.me/online-3d-gradient-text-effect-generator-1020.html`
+dglossy = `https://textpro.me/create-a-3d-glossy-metal-text-effect-1019.html`
+drealistic = `https://textpro.me/create-3d-realistic-text-effect-on-the-beach-online-1018.html`
+watercolor = `https://textpro.me/create-a-free-online-watercolor-text-effect-1017.html`
+multicolor3d = `https://textpro.me/online-multicolor-3d-paper-cut-text-effect-1016.html`
+texton = `https://textpro.me/write-text-on-foggy-window-online-free-1015.html`
+neondevil = `https://textpro.me/create-neon-devil-wings-text-effect-online-free-1014.html`
+underwatertext = `https://textpro.me/3d-underwater-text-effect-generator-online-1013.html`
+blackand = `https://textpro.me/online-black-and-white-bear-mascot-logo-creation-1012.html`
+wonderfulgraffiti = `https://textpro.me/create-wonderful-graffiti-art-text-effect-1011.html`
+graffiti = `https://textpro.me/create-a-cool-graffiti-text-on-the-wall-1010.html`
+graffitiwall = `https://textpro.me/create-cool-wall-graffiti-text-effect-online-1009.html`
+christmas = `https://textpro.me/create-a-christmas-holiday-snow-text-effect-1007.html`
+futuristic = `https://textpro.me/create-a-futuristic-technology-neon-light-text-effect-1006.html`
+snowtext = `https://textpro.me/create-snow-text-effects-for-winter-holidays-1005.html`
+cloud = `https://textpro.me/create-a-cloud-text-effect-on-the-sky-online-1004.html`
+luxurygold = `https://textpro.me/3d-luxury-gold-text-effect-online-1003.html`
+gradienttext = `https://textpro.me/3d-gradient-text-effect-online-free-1002.html`
+blackpinklogo = `https://textpro.me/create-blackpink-logo-style-online-1001.html`
+realisticvintage = `https://textpro.me/create-realistic-vintage-style-light-bulb-1000.html`
+realisticcloud = `https://textpro.me/create-realistic-cloud-text-effect-online-free-999.html`
+cloudfly = `https://textpro.me/create-a-cloud-text-effect-in-the-sky-online-997.html`
+insand = `https://textpro.me/write-in-sand-summer-beach-free-online-991.html`
+writingtext = `https://textpro.me/sand-writing-text-effect-online-990.html`
+engraved3d = `https://textpro.me/sand-engraved-3d-text-effect-989.html`
+summery = `https://textpro.me/create-a-summery-sand-writing-text-effect-988.html`
+balloontext = `https://textpro.me/foil-balloon-text-effect-for-birthday-987.html`
+dglue = `https://textpro.me/create-3d-glue-text-effect-with-realistic-style-986.html`
+space3d = `https://textpro.me/create-space-3d-text-effect-online-985.html`
+darkgold = `https://textpro.me/metal-dark-gold-text-effect-984.html`
+glitchtext = `https://textpro.me/create-glitch-text-effect-style-tik-tok-983.html`
+stone = `https://textpro.me/create-a-stone-text-effect-online-982.html`
+lighttext = `https://textpro.me/neon-light-text-effect-with-galaxy-style-981.html`
+numbtext = `https://textpro.me/1917-style-text-effect-online-980.html`
+sretro = `https://textpro.me/80-s-retro-neon-text-effect-online-979.html`
+minioneffect = `https://textpro.me/minion-text-effect-3d-online-978.html`
+stylelogo = `https://textpro.me/pornhub-style-logo-online-generator-free-977.html`
+exposuretext = `https://textpro.me/double-exposure-text-effect-black-white-976.html`
+dholotext = `https://textpro.me/holographic-3d-text-effect-975.html`
+avengers = `https://textpro.me/create-3d-avengers-logo-online-974.html`
+purpledual = `https://textpro.me/metal-purple-dual-effect-973.html`
+marvelstyle = `https://textpro.me/create-logo-style-marvel-studios-online-971.html`
+silvertext = `https://textpro.me/deluxe-silver-text-effect-970.html`
+fullluxury = `https://textpro.me/color-full-luxury-metal-text-effect-969.html`
+bluemetal = `https://textpro.me/glossy-blue-metal-text-effect-967.html`
+goldtext = `https://textpro.me/deluxe-gold-text-effect-966.html`
+carbontext = `https://textpro.me/glossy-carbon-text-effect-965.html`
+fabriceffect = `https://textpro.me/fabric-text-effect-online-964.html`
+tneoneffect = `https://textpro.me/neon-text-effect-online-963.html`
+yearcards = `https://textpro.me/new-year-cards-3d-by-name-960.html`
+newyear = `https://textpro.me/happ-new-year-card-firework-gif-959.html`
+balloontext = `https://textpro.me/fullcolor-balloon-text-effect-958.html`
+metaltextlogo = `https://textpro.me/create-text-logo-3d-metal-online-957.html`
+avatargold = `https://textpro.me/create-avatar-gold-online-956.html`
+logo3d = `https://textpro.me/text-logo-3d-metal-galaxy-943.html`
+cards3d = `https://textpro.me/xmas-cards-3d-online-942.html`
+texton = `https://textpro.me/blood-text-on-the-frosted-glass-941.html`
+firetext = `https://textpro.me/halloween-fire-text-effect-940.html`
+darkgold = `https://textpro.me/metal-dark-gold-text-effect-online-939.html`
+lionlogo = `https://textpro.me/create-lion-logo-mascot-online-938.html`
+wolflogo = `https://textpro.me/create-wolf-logo-black-white-937.html`
+wolfgalaxy = `https://textpro.me/create-wolf-logo-galaxy-online-936.html`
+ninjalogo = `https://textpro.me/create-ninja-logo-online-935.html`
+logojoker = `https://textpro.me/create-logo-joker-online-934.html`
+wickereffect = `https://textpro.me/wicker-text-effect-online-932.html`
+leavestext = `https://textpro.me/natural-leaves-text-effect-931.html`
+sparkletext = `https://textpro.me/firework-sparkle-text-effect-930.html`
+skeletoneffect = `https://textpro.me/skeleton-text-effect-online-929.html`
+foilballoon = `https://textpro.me/red-foil-balloon-text-effect-928.html`
+steeleffect = `https://textpro.me/steel-text-effect-online-921.html`
+glosstext = `https://textpro.me/ultra-gloss-text-effect-online-920.html`
+denimeffect = `https://textpro.me/denim-text-effect-online-919.html`
+greentext = `https://textpro.me/decorate-green-text-effect-918.html`
+purpletext = `https://textpro.me/decorate-purple-text-effect-917.html`
+stonetext = `https://textpro.me/peridot-stone-text-effect-916.html`
+rockeffect = `https://textpro.me/rock-text-effect-online-915.html`
+lavaeffect = `https://textpro.me/lava-text-effect-online-914.html`
+glasstext = `https://textpro.me/yellow-glass-text-effect-913.html`
+shinyglass = `https://textpro.me/purple-shiny-glass-text-effect-906.html`
+americatext = `https://textpro.me/captain-america-text-effect-905.html`
+robotd2 = `https://textpro.me/robot-r2-d2-text-effect-903.html`
+equalizertext = `https://textpro.me/rainbow-equalizer-text-effect-902.html`
+toxiceffect = `https://textpro.me/toxic-text-effect-online-901.html`
+sparklingjewelry = `https://textpro.me/pink-sparkling-jewelry-text-effect-899.html`
+glasstext = `https://textpro.me/decorative-glass-text-effect-891.html`
+caketext = `https://textpro.me/chocolate-cake-text-effect-890.html`
+berryeffect = `https://textpro.me/strawberry-text-effect-online-889.html`
+fishtext = `https://textpro.me/koi-fish-text-effect-online-888.html`
+breadeffect = `https://textpro.me/bread-text-effect-online-887.html`
+matrixtext = `https://textpro.me/matrix-style-text-effect-online-884.html`
+bloodtext = `https://textpro.me/horror-blood-text-effect-online-883.html`
+lighttext = `https://textpro.me/neon-light-text-effect-online-882.html`
+thundertext = `https://textpro.me/create-thunder-text-effect-online-881.html`
+boxtext = `https://textpro.me/3d-box-text-effect-online-880.html`
+neoneffect = `https://textpro.me/neon-text-effect-online-879.html`
+warningtext = `https://textpro.me/road-warning-text-effect-878.html`
+steeltext = `https://textpro.me/3d-steel-text-effect-877.html`
+bokeheffect = `https://textpro.me/bokeh-text-effect-876.html`
+neontext = `https://textpro.me/green-neon-text-effect-874.html`
+advancedglow = `https://textpro.me/free-advanced-glow-text-effect-873.html`
+watereffect = `https://textpro.me/dropwater-text-effect-872.html`
+walltext = `https://textpro.me/break-wall-text-effect-871.html`
+gifttext = `https://textpro.me/chrismast-gift-text-effect-869.html`
+honeyeffect = `https://textpro.me/honey-text-effect-868.html`
+bagdrug = `https://textpro.me/plastic-bag-drug-text-effect-867.html`
+horrortext = `https://textpro.me/horror-gift-text-effect-866.html`
+slabstext = `https://textpro.me/marble-slabs-text-effect-864.html`
+marbleeffect = `https://textpro.me/marble-text-effect-863.html`
+coldtext = `https://textpro.me/ice-cold-text-effect-862.html`
+juicetext = `https://textpro.me/fruit-juice-text-effect-861.html`
+metaltext = `https://textpro.me/rusty-metal-text-effect-860.html`
+goldtext = `https://textpro.me/abstra-gold-text-effect-859.html`
+biscuiteffect = `https://textpro.me/biscuit-text-effect-858.html`
+bageleffect = `https://textpro.me/bagel-text-effect-857.html`
+woodeffect = `https://textpro.me/wood-text-effect-856.html`
+fitext = `https://textpro.me/sci-fi-text-effect-855.html`
+rainbowtext = `https://textpro.me/metal-rainbow-text-effect-854.html`
+gemtext = `https://textpro.me/purple-gem-text-effect-853.html`
+metaltext = `https://textpro.me/shiny-metal-text-effect-852.html`
+jewelrytext = `https://textpro.me/yellow-jewelry-text-effect-851.html`
+metaltext = `https://textpro.me/hot-metal-text-effect-843.html`
+goldentext = `https://textpro.me/hexa-golden-text-effect-842.html`
+metaltext = `https://textpro.me/eroded-metal-text-effect-834.html`
+carboneffect = `https://textpro.me/carbon-text-effect-833.html`
+candytext = `https://textpro.me/pink-candy-text-effect-832.html`
+metaltext = `https://textpro.me/blue-metal-text-effect-831.html`
+gemtext = `https://textpro.me/blue-gem-text-effect-830.html`
+metaltext = `https://textpro.me/black-metal-text-effect-829.html`
+glowingmetal = `https://textpro.me/3d-glowing-metal-text-effect-828.html`
+
+////////////////PERWIRAJJSJSJSJSJSJSJDJJDJDJDJ
+
 
 sketch = `https://textpro.me/create-a-sketch-text-effect-online-1044.html`
 magma = `https://textpro.me/create-a-magma-hot-text-effect-online-1030.html`
@@ -2429,148 +2769,409 @@ dropwater = `https://textpro.me/dropwater-text-effect-872.html`
 ice = `https://textpro.me/ice-cold-text-effect-862.html`
 chrome = `https://textpro.me/3d-chrome-text-effect-827.html`
 
+try {
 if(jenis === 'sketch') {
-await textpro(sketch, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(sketch, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'magma') {
-await textpro(magma, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(magma, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'stone') {
-await textpro(stone, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(stone, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'glitch') {
 if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(glitch, [isi, isi2]).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'retro') {
 if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(retro, [isi, isi2]).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'glass') {
-await textpro(glass, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(glass, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'papercut') {
-await textpro(papercut, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(papercut, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'papercolor') {
-await textpro(papercolor, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(papercolor, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'windowfog') {
-await textpro(windowfog, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(windowfog, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'wings') {
-await textpro(wings, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(wings, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'bear') {
-await textpro(bear, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(bear, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'graffititext') {
-await textpro(graffititext, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(graffititext, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'graffitiwall') {
 if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(graffitiwall, [isi, isi2]).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'luxurygold') {
-await textpro(luxurygold, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(luxurygold, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'sand') {
-await textpro(sand, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(sand, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'tiktokglitch') {
 if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(tiktokglitch, [isi, isi2]).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === '1917') {
-await textpro(tahun, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(tahun, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'exposure') {
-await textpro(exposure, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(exposure, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'neon') {
-await textpro(neon, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(neon, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'galaxywolf') {
 if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(galaxywolf, [isi, isi2]).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'ninja') {
 await textpro(ninja, [isi, isi2]).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'matrix') {
-await textpro(matrix, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(matrix, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'thunder') {
-await textpro(thunder, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(thunder, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'dropwater') {
-await textpro(dropwater, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(dropwater, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'ice') {
-await textpro(ice, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(ice, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'chrome') {
-await textpro(chrome, isi).then(async res => {
-	conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')
-	})
+await textpro(chrome, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
+	//////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////
+} else if(jenis === 'dmetal') {
+await textpro(dmetal, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'whitegold') {
+await textpro(whitegold, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dgiraffe') {
+await textpro(dgiraffe, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'lightglow') {
+await textpro(lightglow, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'texteffects') {
+await textpro(texteffects, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'batman') {
+await textpro(batman, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dretro') {
+await textpro(dretro, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'thorlogo') {
+await textpro(thorlogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'lightglitch') {
+await textpro(lightglitch, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'neonlight') {
+await textpro(neonlight, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'glowingneon') {
+await textpro(glowingneon, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'goldenancient') {
+await textpro(goldenancient, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'leddisplay') {
+await textpro(leddisplay, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'newyear') {
+await textpro(newyear, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'treetext') {
+await textpro(treetext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'christmascandy') {
+await textpro(christmascandy, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'christmastext') {
+await textpro(christmastext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'merrychristmas') {
+await textpro(merrychristmas, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'ddeep') {
+await textpro(ddeep, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'onlinecountry') {
+await textpro(onlinecountry, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'americanflag') {
+await textpro(americanflag, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dsci') {
+await textpro(dsci, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'rainbowcolor') {
+await textpro(rainbowcolor, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dwater') {
+await textpro(dwater, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'halloweenskeleton') {
+await textpro(halloweenskeleton, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'spooky') {
+await textpro(spooky, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'cinematic') {
+await textpro(cinematic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'sketcht') {
+await textpro(sketch, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'bluecircuit') {
+await textpro(bluecircuit, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'spacetext') {
+await textpro(spacetext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'metallic') {
+await textpro(metallic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'glossymetalic') {
+await textpro(glossymetalic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'captain') {
+await textpro(captain, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'ciencefiction') {
+await textpro(ciencefiction, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'gameclassic') {
+await textpro(gameclassic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'greenhorror') {
+await textpro(greenhorror, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'transformer') {
+await textpro(transformer, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'berrytext') {
+await textpro(berrytext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'layeredtext') {
+await textpro(layeredtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'thundertext') {
+await textpro(thundertext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'magm') {
+await textpro(sketch, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'stonecracked') {
+await textpro(stonecracked, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dneon') {
+await textpro(dneon, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'impressiveglitch') {
+await textpro(impressiveglitch, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'glitch') {
+await textpro(glitch, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'harrypotter') {
+await textpro(harrypotter, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'embossedtext') {
+await textpro(embossedtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'glasstext') {
+await textpro(glasstext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'artpaper') {
+await textpro(artpaper, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'artisticblack') {
+await textpro(artisticblack, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dgradient') {
+await textpro(dgradient, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dglossy') {
+await textpro(dglossy, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'drealistic') {
+await textpro(drealistic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'watercolor') {
+await textpro(watercolor, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'multicolor3d') {
+await textpro(multicolor3d, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'texton') {
+await textpro(texton, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'neondevil') {
+await textpro(neondevil, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'underwatertext') {
+await textpro(underwatertext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'blackand') {
+await textpro(blackand, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'wonderfulgraffiti') {
+await textpro(wonderfulgraffiti, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'graffiti') {
+await textpro(graffiti, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'graffitiwal') {
+await textpro(graffitiwall, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'christmas') {
+await textpro(christmas, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'futuristic') {
+await textpro(futuristic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'snowtext') {
+await textpro(snowtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'cloud') {
+await textpro(cloud, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'luxurygold') {
+await textpro(luxurygold, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'gradienttext') {
+await textpro(gradienttext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'blackpinklogo') {
+await textpro(blackpinklogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'realisticvintage') {
+await textpro(realisticvintage, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'realisticcloud') {
+await textpro(realisticcloud, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'cloudfly') {
+await textpro(cloudfly, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'insand') {
+await textpro(insand, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'writingtext') {
+await textpro(writingtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'engraved3d') {
+await textpro(engraved3d, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'summery') {
+await textpro(summery, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'balloontext') {
+await textpro(balloontext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dglue') {
+await textpro(dglue, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'space3d') {
+await textpro(space3d, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'darkgold') {
+await textpro(darkgold, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'glitchtext') {
+await textpro(glitchtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'ston') {
+await textpro(stone, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'lighttext') {
+await textpro(lighttext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'matrixtext') {
+await textpro(matrixtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'sretro') {
+await textpro(sretro, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'minioneffect') {
+await textpro(minioneffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'stylelogo') {
+await textpro(stylelogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'exposuretext') {
+await textpro(exposuretext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'dtext') {
+await textpro(dtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'avengers') {
+await textpro(avengers, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'purpledual') {
+await textpro(purpledual, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'marvelstyle') {
+await textpro(marvelstyle, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'silvertext') {
+await textpro(silvertext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'fullluxury') {
+await textpro(fullluxury, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'bluemetal') {
+await textpro(bluemetal, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'goldtext') {
+await textpro(goldtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'carbontext') {
+await textpro(carbontext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'fabriceffect') {
+await textpro(fabriceffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'tneoneffect') {
+await textpro(tneoneffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'yearcards') {
+await textpro(yearcards, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'metaltextlogo') {
+await textpro(metaltextlogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'avatargold') {
+await textpro(avatargold, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'logo3d') {
+await textpro(logo3d, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'cards3d') {
+await textpro(cards3d, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'firetext') {
+await textpro(firetext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'lionlogo') {
+await textpro(lionlogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'wolflogo') {
+await textpro(wolflogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'wolfglogo') {
+await textpro(wolfglogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'ninjalogo') {
+await textpro(ninjalogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'logojoker') {
+await textpro(logojoker, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'wickereffect') {
+await textpro(wickereffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'leavestext') {
+await textpro(leavestext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'sparkletext') {
+await textpro(sparkletext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'skeletoneffect') {
+await textpro(skeletoneffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'foilballoon') {
+await textpro(foilballoon, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'steeleffect') {
+await textpro(steeleffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'glosstext') {
+await textpro(glosstext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'denimeffect') {
+await textpro(denimeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'greentext') {
+await textpro(greentext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'purpletext') {
+await textpro(purpletext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'stonetext') {
+await textpro(stonetext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'rockeffect') {
+await textpro(rockeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'lavaeffect') {
+await textpro(lavaeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'shinyglass') {
+await textpro(shinyglass, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'americatext') {
+await textpro(americatext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'robotd2') {
+await textpro(robotd2, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'equalizertext') {
+await textpro(equalizertext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'toxiceffect') {
+await textpro(toxiceffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'sparklingjewelry') {
+await textpro(sparklingjewelry, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'caketext') {
+await textpro(caketext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'berryeffect') {
+await textpro(berryeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'fishtext') {
+await textpro(fishtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'breadeffect') {
+await textpro(breadeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'bloodtext') {
+await textpro(bloodtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'boxtext') {
+await textpro(boxtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'neoneffect') {
+await textpro(neoneffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'warningtext') {
+await textpro(warningtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'steeltext') {
+await textpro(steeltext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'bokeheffect') {
+await textpro(bokeheffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'neontext') {
+await textpro(neontext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'advancedglow') {
+await textpro(advancedglow, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'watereffect') {
+await textpro(watereffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'walltext') {
+await textpro(walltext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'gifttext') {
+await textpro(gifttext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'honeyeffect') {
+await textpro(honeyeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'bagdrug') {
+await textpro(bagdrug, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'horrortext') {
+await textpro(horrortext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'slabstext') {
+await textpro(slabstext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'marbleeffect') {
+await textpro(marbleeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'coldtext') {
+await textpro(coldtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'juicetext') {
+await textpro(juicetext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'metaltext') {
+await textpro(metaltext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'biscuiteffect') {
+await textpro(biscuiteffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'bageleffect') {
+await textpro(bageleffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'woodeffect') {
+await textpro(woodeffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'fitext') {
+await textpro(fitext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'rainbowtext') {
+await textpro(rainbowtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'gemtext') {
+await textpro(gemtext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'jewelrytext') {
+await textpro(jewelrytext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'goldentext') {
+await textpro(goldentext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'carboneffect') {
+await textpro(carboneffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'candytext') {
+await textpro(candytext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'glowingmetal') {
+await textpro(glowingmetal, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else {
 	lun = `Maaf *${jenis}* tidak ada
 Type yang tersedia
 
-*List type*
-sketch 
-magma 
-stone 
-glitch
-retro
-glass
-papercut
-papercolor
-windowfog
-wings
-bear
-graffititext
-graffitiwall
-luxurygold
-sand
-tiktokglitch
-tahun
-exposure
-neon
-galaxywolf
-ninja
-matrix
-thunderl
-dropwater
-ice
-chrome`
-	m.reply(lun)
+${typetext}
+`
+m.reply(lun)
 	}
+	} catch(e) {
+		conn.sendMessage("6281232646925@s.whatsapp.net", {text: `${prefix+command} ${args.join(" ")}\n${e}`}, {quoted: m})
+		}
 	}
 	break
 	/*case 'nomerhoki': case 'nomorhoki': {
