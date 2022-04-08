@@ -2258,7 +2258,7 @@ case 'wallpaper':{
 	try {
 	let { wallpaper1 } = require('./lib/wallpaper')
     let res = await wallpaper1(text)
-	conn.sendMessage(m.chat, {image: {url: res.result.link}, caption: `*${wall.result.title}*`}, {quoted: m})
+	conn.sendMessage(m.chat, {image: {url: res.result.link}, caption: `*${res.result.title}*`}, {quoted: m})
 	} catch(e) {
 		m.reply(e)
 		}
