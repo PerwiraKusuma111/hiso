@@ -2493,7 +2493,7 @@ lighttext
 matrixtext
 sretro
 minioneffect
-stylelogo
+pornhub
 exposuretext
 dholotext
 avengers
@@ -2669,7 +2669,7 @@ lighttext = `https://textpro.me/neon-light-text-effect-with-galaxy-style-981.htm
 numbtext = `https://textpro.me/1917-style-text-effect-online-980.html`
 sretro = `https://textpro.me/80-s-retro-neon-text-effect-online-979.html`
 minioneffect = `https://textpro.me/minion-text-effect-3d-online-978.html`
-stylelogo = `https://textpro.me/pornhub-style-logo-online-generator-free-977.html`
+pornhub = `https://textpro.me/pornhub-style-logo-online-generator-free-977.html`
 exposuretext = `https://textpro.me/double-exposure-text-effect-black-white-976.html`
 dholotext = `https://textpro.me/holographic-3d-text-effect-975.html`
 avengers = `https://textpro.me/create-3d-avengers-logo-online-974.html`
@@ -2802,12 +2802,12 @@ await textpro(magma, isi).then(async res => {conn.sendMessage(m.chat, {image: { 
 await textpro(stone, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'glitch') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(glitch, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'retro') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(retro, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'glass') {
@@ -2826,7 +2826,7 @@ await textpro(bear, isi).then(async res => {conn.sendMessage(m.chat, {image: { u
 await textpro(graffititext, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'graffitiwall') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(graffitiwall, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'luxurygold') {
@@ -2835,25 +2835,25 @@ await textpro(luxurygold, isi).then(async res => {conn.sendMessage(m.chat, {imag
 await textpro(sand, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'tiktokglitch') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(tiktokglitch, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === '1917') {
 await textpro(tahun, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'exposure') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(exposure, [isi, isi2]).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'neon') {
 await textpro(neon, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'galaxywolf') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(galaxywolf, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'ninja') {
 	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(ninja, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'matrix') {
@@ -2920,8 +2920,7 @@ await textpro(dwater, isi).then(async res => { conn.sendMessage(m.chat, {image: 
 await textpro(halloweenskeleton, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'spooky') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(spooky, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'cinematic') {
 await textpro(cinematic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -2961,7 +2960,7 @@ await textpro(dneon, isi).then(async res => { conn.sendMessage(m.chat, {image: {
 await textpro(impressiveglitch, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'glitch') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(glitch, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'harrypotter') {
 await textpro(harrypotter, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -2997,7 +2996,7 @@ await textpro(wonderfulgraffiti, isi).then(async res => { conn.sendMessage(m.cha
 await textpro(graffiti, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'graffitiwal') {
 if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(graffitiwall, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'christmas') {
 await textpro(christmas, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -3037,7 +3036,7 @@ await textpro(space3d, isi).then(async res => { conn.sendMessage(m.chat, {image:
 await textpro(darkgold, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'glitchtext') {
 	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(glitchtext, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'ston') {
 await textpro(stone, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -3049,8 +3048,9 @@ await textpro(matrixtext, isi).then(async res => { conn.sendMessage(m.chat, {ima
 await textpro(sretro, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'minioneffect') {
 await textpro(minioneffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
-} else if(jenis === 'stylelogo') {
-await textpro(stylelogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+} else if(jenis === 'pornhub') {
+	if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+await textpro(pornhub, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'exposuretext') {
 await textpro(exposuretext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'dholotext') {
@@ -3061,7 +3061,7 @@ await textpro(avengers, isi).then(async res => { conn.sendMessage(m.chat, {image
 await textpro(purpledual, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'marvelstyle') {
 	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
-if(isi2.length < 1) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
+if(!isi.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/text1/text2`)
 await textpro(marvelstyle, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'silvertext') {
 await textpro(silvertext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -3214,6 +3214,7 @@ ${typetext}
 m.reply(lun)
 	}
 	} catch(e) {
+		m.reply(`*Error*\n${util.format(e)}`)
 		conn.sendMessage("6281232646925@s.whatsapp.net", {text: `${prefix+command} ${args.join(" ")}\n${e}`}, {quoted: m})
 		}
 	}
@@ -4199,7 +4200,7 @@ try {
   stik = await getBuffer(`https://api.xteam.xyz/attp?file&text=${encodeURI(q)}`)
   conn.sendMessage(m.chat, {sticker: stik, mimetype: 'image/webp'}, {quoted: m})
   } catch(e) {
-	m.reply(String(e))
+	m.reply(util.format(e))
 	}
   }
   break
@@ -4485,7 +4486,7 @@ if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira
 gimgt = await getBuffer(`https://api.zeks.me/api/hartatahta?apikey=PerwiraGans&text=${q}`)
 await conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "_Sudah jadi kak_"}, {quoted: m}).catch((e) => m.reply(`*Error*\n${String(e)}`))
 } catch(e) {
-	m.reply(`${String(e)}`)
+	m.reply(`${util.format(e)}`)
 	}
 break
 case 'owner': case 'creator': {
@@ -4515,7 +4516,6 @@ anu = `*List Menu*
 ⊳ ${prefix}translate
 ⊳ ${prefix}wikipedia
 ⊳ ${prefix}pinterest
-⊳ ${prefix}wallpaper
 
 *Sticker Menu*
 ⊳ ${prefix}attp
@@ -4601,7 +4601,6 @@ anu = `*List Menu*
 ⊳ ${prefix}translate
 ⊳ ${prefix}wikipedia
 ⊳ ${prefix}pinterest
-⊳ ${prefix}wallpaper
 
 *Sticker Menu*
 ⊳ ${prefix}attp
