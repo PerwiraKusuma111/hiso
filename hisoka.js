@@ -2255,9 +2255,14 @@ ${util.format(err)}`))*/
 
 case 'wallpaper':{
 	if(!q) return m.reply(`Masukkan query\n*Contoh :* ${prefix+command} Naruto`)
+	try {
 	let wallpaper1 = require('./lib/wallpaper')
-	wall = await wallpaper1(text)
+    await wallpaper1(text).then(async wall => {
 	conn.sendMessage(m.chat, {image: {url: wall.result.link}, caption: `*${wall.result.title}*`}, {quoted: m})
+	})
+	} catch(e) {
+		m.reply(e)
+		}
 	}break
 /*case 'anime': case 'waifu': case 'husbu': case 'neko': case 'shinobu': case 'megumin': case 'waifus': case 'nekos': case 'trap': case 'blowjob': {
 m.reply(mess.wait)
