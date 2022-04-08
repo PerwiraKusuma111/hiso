@@ -2577,10 +2577,13 @@ if(!text.includes("/")) return m.reply(`Cara menggunakan
 Type yang tersedia
 
 ${typetext}`)
+
 tex = args.join(" ")
+tuul = args.join("/")[0]
+lou = tuul.split("&")[1]
 jenis = tex.split("/")[0]
 isi = tex.split("/")[1]
-isi2 = tex.split("&")[1]
+isi2 = lou
 let { textpro } = require('mumaker')
 
 dmetal = `https://textpro.me/create-a-3d-luxury-metallic-text-effect-for-free-1071.html`
