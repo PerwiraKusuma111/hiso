@@ -2256,10 +2256,9 @@ ${util.format(err)}`))*/
 case 'wallpaper':{
 	if(!q) return m.reply(`Masukkan query\n*Contoh :* ${prefix+command} Naruto`)
 	try {
-	let wallpaper1 = require('./lib/wallpaper')
-    await wallpaper1(text).then(async wall => {
-	conn.sendMessage(m.chat, {image: {url: wall.result.link}, caption: `*${wall.result.title}*`}, {quoted: m})
-	})
+	let { wallpaper1 } = require('./lib/wallpaper')
+    let res = await wallpaper1(text)
+	conn.sendMessage(m.chat, {image: {url: res.result.link}, caption: `*${wall.result.title}*`}, {quoted: m})
 	} catch(e) {
 		m.reply(e)
 		}
