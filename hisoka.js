@@ -2577,13 +2577,10 @@ if(!text.includes("/")) return m.reply(`Cara menggunakan
 Type yang tersedia
 
 ${typetext}`)
-
 tex = args.join(" ")
-tuul = args.join("/")[0]
-lou = tuul.split("&")[1]
 jenis = tex.split("/")[0]
 isi = tex.split("/")[1]
-isi2 = lou
+isi2 = tex.split("/")[2]
 let { textpro } = require('mumaker')
 
 dmetal = `https://textpro.me/create-a-3d-luxury-metallic-text-effect-for-free-1071.html`
@@ -2804,13 +2801,13 @@ await textpro(magma, isi).then(async res => {conn.sendMessage(m.chat, {image: { 
 } else if(jenis === 'stone') {
 await textpro(stone, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'glitch') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(glitch, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'retro') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(retro, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'glass') {
@@ -2828,8 +2825,8 @@ await textpro(bear, isi).then(async res => {conn.sendMessage(m.chat, {image: { u
 } else if(jenis === 'graffititext') {
 await textpro(graffititext, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'graffitiwall') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(graffitiwall, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'luxurygold') {
@@ -2837,26 +2834,26 @@ await textpro(luxurygold, isi).then(async res => {conn.sendMessage(m.chat, {imag
 } else if(jenis === 'sand') {
 await textpro(sand, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'tiktokglitch') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(tiktokglitch, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === '1917') {
 await textpro(tahun, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'exposure') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(exposure, [isi, isi2]).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'neon') {
 await textpro(neon, isi).then(async res => {conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'galaxywolf') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(galaxywolf, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'ninja') {
-	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(ninja, [isi, isi2]).then(async res => {
 conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '')})
 } else if(jenis === 'matrix') {
@@ -2922,8 +2919,8 @@ await textpro(dwater, isi).then(async res => { conn.sendMessage(m.chat, {image: 
 } else if(jenis === 'halloweenskeleton') {
 await textpro(halloweenskeleton, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'spooky') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(spooky, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'cinematic') {
 await textpro(cinematic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -2962,8 +2959,8 @@ await textpro(dneon, isi).then(async res => { conn.sendMessage(m.chat, {image: {
 } else if(jenis === 'impressiveglitch') {
 await textpro(impressiveglitch, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'glitch') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(glitch, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'harrypotter') {
 await textpro(harrypotter, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -2998,8 +2995,8 @@ await textpro(wonderfulgraffiti, isi).then(async res => { conn.sendMessage(m.cha
 } else if(jenis === 'graffiti') {
 await textpro(graffiti, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'graffitiwal') {
-if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(graffitiwall, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'christmas') {
 await textpro(christmas, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -3038,8 +3035,8 @@ await textpro(space3d, isi).then(async res => { conn.sendMessage(m.chat, {image:
 } else if(jenis === 'darkgold') {
 await textpro(darkgold, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'glitchtext') {
-	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(glitchtext, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'ston') {
 await textpro(stone, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -3052,7 +3049,7 @@ await textpro(sretro, isi).then(async res => { conn.sendMessage(m.chat, {image: 
 } else if(jenis === 'minioneffect') {
 await textpro(minioneffect, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'pornhub') {
-	if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+	if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(pornhub, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'exposuretext') {
 await textpro(exposuretext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
@@ -3063,8 +3060,8 @@ await textpro(avengers, isi).then(async res => { conn.sendMessage(m.chat, {image
 } else if(jenis === 'purpledual') {
 await textpro(purpledual, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'marvelstyle') {
-	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
-if(!isi.includes("&")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1&Text2`)
+	if(!text.includes("/")) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
 await textpro(marvelstyle, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'silvertext') {
 await textpro(silvertext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
