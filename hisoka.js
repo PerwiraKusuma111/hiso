@@ -2377,198 +2377,196 @@ break*/
 case 'textpro':{
 let typetext = `*List type*
 
-*[ 1 ]*. sketch
-*[ 2 ]*. magma
-*[ 3 ]*. stone
-*[ 4 ]*. glitch
-*[ 5 ]*. retro
-*[ 6 ]*. glass
-*[ 7 ]*. papercut
-*[ 8 ]*. papercolor
-*[ 9 ]*. windowfog
-*[ 10 ]*. wings
-*[ 11 ]*. bear
-*[ 12 ]*. graffititext
-*[ 13 ]*. graffitiwall
-*[ 14 ]*. luxurygold
-*[ 15 ]*. sand
-*[ 16 ]*. tiktokglitch
-*[ 17 ]*. tahun
-*[ 18 ]*. neon
-*[ 19 ]*. galaxywolf
-*[ 20 ]*. ninja
-*[ 21 ]*. matrix
-*[ 22 ]*. thunderl
-*[ 23 ]*. dropwater
-*[ 24 ]*. ice
-*[ 25 ]*. chrome
-_________________________
+*1*. sketch
+*2*. magma
+*3*. stone
+*4*. glitch
+*5*. retro
+*6*. glass
+*7*. papercut
+*8*. papercolor
+*9*. windowfog
+*10*. wings
+*11*. bear
+*12*. graffititext
+*13*. graffitiwall
+*14*. luxurygold
+*15*. sand
+*16*. tiktokglitch
+*17*. tahun
+*18*. neon
+*19*. galaxywolf
+*20*. ninja
+*21*. matrix
+*22*. thunderl
+*23*. dropwater
+*24*. ice
+*25*. chrome
+
 *Baru ditambahkan*
 Error? lapor owner
 
-*[ 1 ]*. dmetal
-*[ 2 ]*. whitegold
-*[ 3 ]*. dgiraffe
-*[ 4 ]*. lightglow
-*[ 5 ]*. texteffects
-*[ 6 ]*. batman
-*[ 7 ]*. dretro
-*[ 8 ]*. thorlogo
-*[ 9 ]*. lightglitch
-*[ 10 ]*. neonlight
-*[ 11 ]*. glowingneon
-*[ 12 ]*. goldenancient
-*[ 13 ]*. leddisplay
-*[ 14 ]*. newyear
-*[ 15 ]*. treetext
-*[ 16 ]*. christmascandy
-*[ 17 ]*. christmastext
-*[ 18 ]*. merrychristmas
-*[ 19 ]*. ddeep
-*[ 20 ]*. onlinecountry
-*[ 21 ]*. americanflag
-*[ 22 ]*. dsci
-*[ 23 ]*. rainbowcolor
-*[ 24 ]*. dwater
-*[ 25 ]*. halloweenskeleton
-*[ 26 ]*. spooky
-*[ 27 ]*. cinematic
-*[ 28 ]*. sketch
-*[ 29 ]*. bluecircuit
-*[ 30 ]*. spacetext
-*[ 31 ]*. metallic
-*[ 32 ]*. captain
-*[ 33 ]*. ciencefiction
-*[ 34 ]*. gameclassic
-*[ 35 ]*. greenhorror
-*[ 36 ]*. transformer
-*[ 37 ]*. berrytext
-*[ 38 ]*. layeredtext
-*[ 39 ]*. thundertext
-*[ 40 ]*. magma
-*[ 41 ]*. stonecracked
-*[ 42 ]*. dneon
-*[ 43 ]*. impressive
-*[ 44 ]*. glitch
-*[ 45 ]*. glitch
-*[ 46 ]*. harrypotter
-*[ 47 ]*. embossedtext
-*[ 48 ]*. glasstext
-*[ 49 ]*. artpaper
-*[ 50 ]*. dgradient
-*[ 51 ]*. marveltext
-*[ 52 ]*. dglossy
-*[ 53 ]*. drealistic
-*[ 54 ]*. watercolor
-*[ 55 ]*. multicolor3d
-*[ 56 ]*. hororblood
-*[ 57 ]*. neondevil
-*[ 58 ]*. underwatertext
-*[ 59 ]*. blackand
-*[ 60 ]*. wonderfulgraffiti
-*[ 61 ]*. graffiti
-*[ 62 ]*. graffitiwall
-*[ 63 ]*. christmas
-*[ 64 ]*. futuristic
-*[ 65 ]*. snowtext
-*[ 66 ]*. cloud
-*[ 67 ]*. luxurygold
-*[ 68 ]*. gradienttext
-*[ 69 ]*. blackpinklogo
-*[ 70 ]*. realisticvintage
-*[ 71 ]*. realisticcloud
-*[ 72 ]*. cloudfly
-*[ 73 ]*. insand
-*[ 74 ]*. writingtext
-*[ 75 ]*. engraved3d
-*[ 76 ]*. summery
-*[ 77 ]*. balloontext
-*[ 78 ]*. dglue
-*[ 79 ]*. space3d
-*[ 80 ]*. darkgold
-*[ 81 ]*. glitchtext
-*[ 82 ]*. stone
-*[ 83 ]*. lighttext
-*[ 84 ]*. matrixtext
-*[ 85 ]*. minioneffect
-*[ 86 ]*. pornhub
-*[ 87 ]*. dholotext
-*[ 88 ]*. avengers
-*[ 89 ]*. purpledual
-*[ 90 ]*. marvelstyle
-*[ 91 ]*. silvertext
-*[ 92 ]*. fullluxury
-*[ 93 ]*. bluemetal
-*[ 94 ]*. goldtext
-*[ 95 ]*. carbontext
-*[ 96 ]*. fabriceffect
-*[ 97 ]*. tneoneffect
-*[ 98 ]*. yearcards
-*[ 99 ]*. metaltextlogo
-*[ 100 ]*. avatargold
-*[ 101 ]*. logo3d
-*[ 102 ]*. cards3d
-*[ 103 ]*. firetext
-*[ 104 ]*. lionlogo
-*[ 105 ]*. wolflogo
-*[ 106 ]*. wolfglogo
-*[ 107 ]*. ninjalogo
-*[ 108 ]*. logojoker
-*[ 109 ]*. wickereffect
-*[ 110 ]*. leavestext
-*[ 111 ]*. sparkletext
-*[ 112 ]*. skeletoneffect
-*[ 113 ]*. foilballoon
-*[ 114 ]*. steeleffect
-*[ 115 ]*. glosstext
-*[ 116 ]*. denimeffect
-*[ 117 ]*. greentext
-*[ 118 ]*. purpletext
-*[ 119 ]*. stonetext
-*[ 120 ]*. rockeffect
-*[ 121 ]*. lavaeffect
-*[ 122 ]*. shinyglass
-*[ 123 ]*. americatext
-*[ 124 ]*. robotd2
-*[ 125 ]*. equalizertext
-*[ 126 ]*. toxiceffect
-*[ 127 ]*. sparklingjewelry
-*[ 128 ]*. caketext
-*[ 129 ]*. berryeffect
-*[ 130 ]*. fishtext
-*[ 131 ]*. breadeffect
-*[ 132 ]*. bloodtext
-*[ 133 ]*. boxtext
-*[ 134 ]*. neoneffect
-*[ 135 ]*. warningtext
-*[ 136 ]*. steeltext
-*[ 137 ]*. bokeheffect
-*[ 138 ]*. neontext
-*[ 139 ]*. advancedglow
-*[ 140 ]*. watereffect
-*[ 141 ]*. walltext
-*[ 142 ]*. gifttext
-*[ 143 ]*. honeyeffect
-*[ 144 ]*. bagdrug
-*[ 145 ]*. horrortext
-*[ 146 ]*. slabstext
-*[ 147 ]*. marbleeffect
-*[ 148 ]*. coldtext
-*[ 149 ]*. juicetext
-*[ 150 ]*. metaltext
-*[ 151 ]*. biscuiteffect
-*[ 152 ]*. bageleffect
-*[ 153 ]*. woodeffect
-*[ 154 ]*. fitext
-*[ 155 ]*. rainbowtext
-*[ 156 ]*. gemtext
-*[ 157 ]*. jewelrytext
-*[ 158 ]*. goldentext
-*[ 159 ]*. carboneffect
-*[ 160 ]*. candytext
-*[ 161 ]*. glowingmetal
-
-`
+*1*. dmetal
+*2*. whitegold
+*3*. dgiraffe
+*4*. lightglow
+*5*. texteffects
+*6*. batman
+*7*. dretro
+*8*. thorlogo
+*9*. lightglitch
+*10*. neonlight
+*11*. glowingneon
+*12*. goldenancient
+*13*. leddisplay
+*14*. newyear
+*15*. treetext
+*16*. christmascandy
+*17*. christmastext
+*18*. merrychristmas
+*19*. ddeep
+*20*. onlinecountry
+*21*. americanflag
+*22*. dsci
+*23*. rainbowcolor
+*24*. dwater
+*25*. halloweenskeleton
+*26*. spooky
+*27*. cinematic
+*28*. sketch
+*29*. bluecircuit
+*30*. spacetext
+*31*. metallic
+*32*. captain
+*33*. ciencefiction
+*34*. gameclassic
+*35*. greenhorror
+*36*. transformer
+*37*. berrytext
+*38*. layeredtext
+*39*. thundertext
+*40*. magma
+*41*. stonecracked
+*42*. dneon
+*43*. impressive
+*44*. glitch
+*45*. glitch
+*46*. harrypotter
+*47*. embossedtext
+*48*. glasstext
+*49*. artpaper
+*50*. dgradient
+*51*. marveltext
+*52*. dglossy
+*53*. drealistic
+*54*. watercolor
+*55*. multicolor3d
+*56*. hororblood
+*57*. neondevil
+*58*. underwatertext
+*59*. blackand
+*60*. wonderfulgraffiti
+*61*. graffiti
+*62*. graffitiwall
+*63*. christmas
+*64*. futuristic
+*65*. snowtext
+*66*. cloud
+*67*. luxurygold
+*68*. gradienttext
+*69*. blackpinklogo
+*70*. realisticvintage
+*71*. realisticcloud
+*72*. cloudfly
+*73*. insand
+*74*. writingtext
+*75*. engraved3d
+*76*. summery
+*77*. balloontext
+*78*. dglue
+*79*. space3d
+*80*. darkgold
+*81*. glitchtext
+*82*. stone
+*83*. lighttext
+*84*. matrixtext
+*85*. minioneffect
+*86*. pornhub
+*87*. dholotext
+*88*. avengers
+*89*. purpledual
+*90*. marvelstyle
+*91*. silvertext
+*92*. fullluxury
+*93*. bluemetal
+*94*. goldtext
+*95*. carbontext
+*96*. fabriceffect
+*97*. tneoneffect
+*98*. yearcards
+*99*. metaltextlogo
+*100*. avatargold
+*101*. logo3d
+*102*. cards3d
+*103*. firetext
+*104*. lionlogo
+*105*. wolflogo
+*106*. wolfglogo
+*107*. ninjalogo
+*108*. logojoker
+*109*. wickereffect
+*110*. leavestext
+*111*. sparkletext
+*112*. skeletoneffect
+*113*. foilballoon
+*114*. steeleffect
+*115*. glosstext
+*116*. denimeffect
+*117*. greentext
+*118*. purpletext
+*119*. stonetext
+*120*. rockeffect
+*121*. lavaeffect
+*122*. shinyglass
+*123*. americatext
+*124*. robotd2
+*125*. equalizertext
+*126*. toxiceffect
+*127*. sparklingjewelry
+*128*. caketext
+*129*. berryeffect
+*130*. fishtext
+*131*. breadeffect
+*132*. bloodtext
+*133*. boxtext
+*134*. neoneffect
+*135*. warningtext
+*136*. steeltext
+*137*. bokeheffect
+*138*. neontext
+*139*. advancedglow
+*140*. watereffect
+*141*. walltext
+*142*. gifttext
+*143*. honeyeffect
+*144*. bagdrug
+*145*. horrortext
+*146*. slabstext
+*147*. marbleeffect
+*148*. coldtext
+*149*. juicetext
+*150*. metaltext
+*151*. biscuiteffect
+*152*. bageleffect
+*153*. woodeffect
+*154*. fitext
+*155*. rainbowtext
+*156*. gemtext
+*157*. jewelrytext
+*158*. goldentext
+*159*. carboneffect
+*160*. candytext
+*161*. glowingmetal`
 if(!text.includes("/")) return m.reply(`Cara menggunakan
 *Contoh :* ${prefix+command} magma/Text
 
