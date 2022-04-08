@@ -2254,29 +2254,14 @@ ${util.format(err)}`))*/
  break
 
 case 'wallpaper':{
-	if(!text) return m.reply(`Masukkan wallpaper yang ingin dicari\n*Contoh :* ${prefix+command} opsi1/Naruto`)
-	quer = args.join(" ")
-	text1 = quer.split("/")[0]
-	text2 = quer.split("/")[1]
-	if(text1 === 'opsi1') {
-	if(!q) return m.reply(`Masukkan query\n*Contoh :* ${prefix+command} Naruto`)
+	if(!text) return m.reply(`Masukkan wallpaper yang ingin dicari\n*Contoh :* ${prefix+command} Naruto`)
 	try {
 	let { wallpaper1 } = require('./lib/wallpaper')
     let res = await wallpaper1(text2)
 	conn.sendMessage(m.chat, {image: {url: res.result.link}, caption: `*${res.result.title}*`}, {quoted: m})
 	} catch(e) {
 		m.reply(e)
-		} } else if(text1 === 'opsi2') {
-	if(!q) return m.reply(`Masukkan query\n*Contoh :* ${prefix+command} Naruto`)
-	try {
-	let { wallpaper2 } = require('./lib/wallpaper')
-    let res = await wallpaper2(text2)
-	conn.sendMessage(m.chat, {image: {url: res.result.url}, caption: `*${res.result.title}*`}, {quoted: m})
-	} catch(e) {
-		m.reply(e)
-		} 
-			
-			}
+		}
 	}break
 /*case 'anime': case 'waifu': case 'husbu': case 'neko': case 'shinobu': case 'megumin': case 'waifus': case 'nekos': case 'trap': case 'blowjob': {
 m.reply(mess.wait)
