@@ -146,10 +146,10 @@ if (!m.key.fromMe) return
 }
 
 // Push Message To Console && Auto Read
-/*if (m.message) {
+if (m.message) {
 /*conn.sendReadReceipt(m.chat, m.sender, [m.key.id])*/
 console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
-}*/
+}
 	//Antidelte
 
 	// write database every 1 minute
@@ -4925,8 +4925,8 @@ await conn.sendButtonText(m.chat, [{ buttonId: 'tebak tebakan', buttonText: { di
 delete tebaktebakan[m.sender.split('@')[0]]
 } else m.reply('*Jawaban Salah!*')
 }*/
-
- /*if (budy.startsWith('=>')) {
+/*
+ if (budy.startsWith('=>')) {
  if (!isCreator) return m.reply(mess.owner)
  function Return(sul) {
  sat = JSON.stringify(sul, null, 2)
@@ -4945,11 +4945,11 @@ m.reply(String(e))
 */
 
 
-
 break
 
  }
- if (budy.startsWith('>')) {
+ 
+if (budy.startsWith('>')) {
 if (!isCreator) return 
 try {
 let evaled = await eval(budy.slice(2))
@@ -4972,8 +4972,6 @@ if(err) return m.reply(err)
 if (stdout) return m.reply(stdout)
 })
 }
- 
-
 
 		 /*if (m.chat.endsWith('@s.whatsapp.net') && isCmd) {
 this.anonymous = this.anonymous ? this.anonymous : {}
