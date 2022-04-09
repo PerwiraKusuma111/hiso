@@ -116,7 +116,7 @@ afkReason: '',
 limit: limitUser,
 }
 */
-let chats = global.db.data.chats[m.chat]
+/*let chats = global.db.data.chats[m.chat]*/
 /* if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
 if (chats) {
 if (!('mute' in chats)) chats.mute = false
@@ -126,7 +126,7 @@ mute: false,
 antilink: false,
 }
 		*/
-	let setting = global.db.data.settings[botNumber]
+	/*let setting = global.db.data.settings[botNumber]*/
 /*if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
 	if (setting) {
 		if (!isNumber(setting.status)) setting.status = 0
@@ -1175,47 +1175,17 @@ id: 'sc'
 m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
 }
 break
-case 'bc': case 'broadcast': case 'bcall': {
-if (!isCreator) throw mess.owner
-if (!text) throw `Text mana?\n\nContoh : ${prefix + command} fatih-san`
-let anu = await store.chats.all().map(v => v.id)
-  /*  m.reply(`Mengirim Broadcast Ke ${anu.length} Chat\nWaktu Selesai ${anu.length * 1.5} detik`)*/
-		for (let yoi of anu) {
-		
-		/* let btn = [{
-urlButton: {
-displayText: 'Script',
-url: 'https://github.com/DikaArdnt/Hisoka-Morou'
-}
-}, {
-callButton: {
-displayText: 'Owner',
-phoneNumber: '+62 882-9202-4190'
-}
-}, {
-quickReplyButton: {
-displayText: 'Info Bot',
-id: 'ping'
-}
-}, {
-quickReplyButton: {
-displayText: 'Contact Owner',
-id: 'owner'
-}  
-}, {
-quickReplyButton: {
-displayText: 'Script',
-id: 'sc'
-}
-}]
-  let txt = `「 Broadcast Bot 」\n\n${text}`
-  conn.send5ButImg(yoi, txt, conn.user.name, global.thumb, btn)*/
-  await sleep(4000)
-  conn.sendMessage(yoi, {text: `${text}`}, '')
+case 'bc':{
+	if (!isCreator) throw mess.owner
+	let anu = Object.keys(store.contacts)
+	for(let ui of anu) {
+		await sleep(4000)
+        conn.sendMessage(yoi, {text: `${text}`}, '')
 		}
-		m.reply('Sukses Broadcast')
-}
-break
+		m.reply('succes')
+	}
+	break
+
 case 'bckhus':{
 	if (!isCreator) throw mess.owner
 if (!text) throw `Text mana?\n\nContoh : ${prefix + command} fatih-san`
@@ -3685,6 +3655,32 @@ return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted:
 				}
 	}
 	break*/
+	
+	case 'ringtone':{
+		if(!text) return m.reply(`Ringtone apa yang mau dicari?\nContoh ${prefix+command} nokia`)
+		let ringtone = require('./lib/scraper')
+		res = await ringtone(text)
+		nomor = 1
+		isinya = []
+		for(let i of res) {
+			isinya.push({
+				'title': `${nomor++}. ${i.title}`,
+				'descriprion': `Ringtone`,
+				'rowId': `ringring ${i.audio}`
+				})
+			}
+			let listMessage = {
+text: 'Hasil penelusuran lain',
+footer: `Perwira Bot WhatsApp`,
+title: `*YouTube Search*\n\nIni adalah penelusuran yang ditemukan.`,
+buttonText: "Click Here",
+sections: [{
+"title": `Hasil penelusuran yang ditemukan`,
+"rows": isinya}],
+}
+conn.sendMessage(m.chat, listMessage, {quoted: m})
+		}
+		break
 
 case 'igdl':
 case 'instagram':
