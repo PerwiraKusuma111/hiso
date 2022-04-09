@@ -1897,7 +1897,7 @@ kunn.push({
 let listMessage = {
 text: 'Hasil penelusuran lain',
 footer: `Perwira Bot WhatsApp`,
-title: `*YouTube Search*\n\nIni adalah penelusuran yang ditemukan.`,
+title: `*YouTube Search*\n\nVideo YouTube yang ditemukan.`,
 buttonText: "Click Here",
 sections: [{
 "title": `Hasil penelusuran yang ditemukan`,
@@ -3665,14 +3665,14 @@ return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted:
 		for(let i of res) {
 			isinya.push({
 				'title': `${nomor++}. ${i.title}`,
-				'descriprion': `Ringtone`,
+				'description': `Ringtone`,
 				'rowId': `ringring ${i.audio}`
 				})
 			}
 			let listMessage = {
-text: 'Hasil penelusuran lain',
+text: 'Hasil penelusuran',
 footer: `Perwira Bot WhatsApp`,
-title: `*YouTube Search*\n\nIni adalah penelusuran yang ditemukan.`,
+title: `Ringtone search\n\nRingtone yang ditemukan.`,
 buttonText: "Click Here",
 sections: [{
 "title": `Hasil penelusuran yang ditemukan`,
@@ -3681,6 +3681,12 @@ sections: [{
 conn.sendMessage(m.chat, listMessage, {quoted: m})
 		}
 		break
+
+case 'ringring': {
+	if(!text.includes("btones")) return
+	conn.sendMessage(m.chat, {audio: {url: text}, mimetype: 'audio/mpeg'}, {quoted: m})
+	}
+	break
 
 case 'igdl':
 case 'instagram':
@@ -4483,7 +4489,7 @@ case 'owner': case 'creator': {
 conn.sendContact(m.chat, global.owner, '')
 }
 break
-case 'list': case 'menu': case 'help': case '?': 
+case 'list': case 'menu': case 'help':
 if(m.isGroup) {
 anu = `*List Menu*
 
@@ -4502,10 +4508,11 @@ anu = `*List Menu*
 
 *Search Menu*
 ⊳ ${prefix}google
+⊳ ${prefix}ringtone
 ⊳ ${prefix}ytsearch
 ⊳ ${prefix}translate
-⊳ ${prefix}wikipedia
 ⊳ ${prefix}pinterest
+⊳ ${prefix}wikipedia
 
 *Sticker Menu*
 ⊳ ${prefix}attp
@@ -4587,10 +4594,11 @@ anu = `*List Menu*
 
 *Search Menu*
 ⊳ ${prefix}google
+⊳ ${prefix}ringtone
 ⊳ ${prefix}ytsearch
 ⊳ ${prefix}translate
-⊳ ${prefix}wikipedia
 ⊳ ${prefix}pinterest
+⊳ ${prefix}wikipedia
 
 *Sticker Menu*
 ⊳ ${prefix}attp
