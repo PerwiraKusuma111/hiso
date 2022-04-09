@@ -852,7 +852,8 @@ break
 case 'hidetag': {
 if (!m.isGroup) return m.reply(mess.group)
 if (!isAdmins && !isCreator) return m.reply(mess.admin)
-conn.sendMessage(m.chat, { text : q ? q : '' , mentions: participants.map(a => a.id)}, { quoted: m })
+textag = args.join(" ")
+conn.sendMessage(m.chat, { text : textag ? textag : 'undefined' , mentions: participants.map(a => a.id)}, { quoted: m })
 }
 break
 	case 'style': case 'styletext': {
@@ -4195,120 +4196,120 @@ case 'alquran':{
 	dataqur = `
 *List Surat dan Jumlah ayat*
 
-*1.* *Al-Fatihah* [ 7 ayat ]
-*2.* *Al-Baqarah* [ 286 ayat ]
-*3.* *Ali 'Imran* [ 200 ayat ]
-*4.* *An-Nisa'* [ 176 ayat ]
-*5.* *Al-Ma'idah* [ 120 ayat ]
-*6.* *Al-An'am* [ 165 ayat ]
-*7.* *Al-A'raf* [ 206 ayat ]
-*8.* *Al-Anfal* [ 75 ayat ]
-*9.* *At-Taubah* [ 129 ayat ]
-*10.* *Yunus* [ 109 ayat ]
-*11.* *Hud* [ 123 ayat ]
-*12.* *Yusuf* [ 111 ayat ]
-*13.* *Ar-Ra'd* [ 43 ayat ]
-*14.* *Ibrahim* [ 52 ayat ]
-*15.* *Al-Hijr* [ 99 ayat ]
-*16.* *An-Nahl* [ 128 ayat ]
-*17.* *Al-Isra'* [ 111 ayat ]
-*18.* *Al-Kahf* [ 110 ayat ]
-*19.* *Maryam* [ 98 ayat ]
-*20.* *Taha* [ 135 ayat ]
-*21.* *Al-Anbiya'* [ 112 ayat ]
-*22.* *Al-Hajj* [ 78 ayat ]
-*23.* *Al-Mu'minun* [ 118 ayat ]
-*24.* *An-Nur* [ 64 ayat ]
-*25.* *Al-Furqan* [ 77 ayat ]
-*26.* *Asy-Syu'ara'* [ 227 ayat ]
-*27.* *An-Naml* [ 93 ayat ]
-*28.* *Al-Qasas* [ 88 ayat ]
-*29.* *Al-'Ankabut* [ 69 ayat ]
-*30.* *Ar-Rum* [ 60 ayat ]
-*31.* *Luqman* [ 34 ayat ]
-*32.* *As-Sajdah* [ 30 ayat ]
-*33.* *Al-Ahzab* [ 73 ayat ]
-*34.* *Saba'* [ 54 ayat ]
-*35.* *Fatir* [ 45 ayat ]
-*36.* *Yasin* [ 83 ayat ]
-*37.* *As-Saffat* [ 182 ayat ]
-*38.* *Sad* [ 88 ayat ]
-*39.* *Az-Zumar* [ 75 ayat ]
-*40.* *Gafir* [ 85 ayat ]
-*41.* *Fussilat* [ 54 ayat ]
-*42.* *Asy-Syura* [ 53 ayat ]
-*43.* *Az-Zukhruf* [ 89 ayat ]
-*44.* *Ad-Dukhan* [ 59 ayat ]
-*45.* *Al-Jasiyah* [ 37 ayat ]
-*46.* *Al-Ahqaf* [ 35 ayat ]
-*47.* *Muhammad* [ 38 ayat ]
-*48.* *Al-Fath* [ 29 ayat ]
-*49.* *Al-Hujurat* [ 18 ayat ]
-*50.* *Qaf* [ 45 ayat ]
-*51.* *Az-Zariyat* [ 60 ayat ]
-*52.* *At-Tur* [ 49 ayat ]
-*53.* *An-Najm* [ 62 ayat ]
-*54.* *Al-Qamar* [ 55 ayat ]
-*55.* *Ar-Rahman* [ 78 ayat ]
-*56.* *Al-Waqi'ah* [ 96 ayat ]
-*57.* *Al-Hadid* [ 29 ayat ]
-*58.* *Al-Mujadalah* [ 22 ayat ]
-*59.* *Al-Hasyr* [ 24 ayat ]
-*60.* *Al-Mumtahanah* [ 13 ayat ]
-*61.* *As-Saff* [ 14 ayat ]
-*62.* *Al-Jumu'ah* [ 11 ayat ]
-*63.* *Al-Munafiqun* [ 11 ayat ]
-*64.* *At-Tagabun* [ 18 ayat ]
-*65.* *At-Talaq* [ 12 ayat ]
-*66.* *At-Tahrim* [ 12 ayat ]
-*67.* *Al-Mulk* [ 30 ayat ]
-*68.* *Al-Qalam* [ 52 ayat ]
-*69.* *Al-Haqqah* [ 52 ayat ]
-*70.* *Al-Ma'arij* [ 44 ayat ]
-*71.* *Nuh* [ 28 ayat ]
-*72.* *Al-Jinn* [ 28 ayat ]
-*73.* *Al-Muzzammil* [ 20 ayat ]
-*74.* *Al-Muddassir* [ 56 ayat ]
-*75.* *Al-Qiyamah* [ 40 ayat ]
-*76.* *Al-Insan* [ 31 ayat ]
-*77.* *Al-Mursalat* [ 50 ayat ]
-*78.* *An-Naba'* [ 40 ayat ]
-*79.* *An-Nazi'at* [ 46 ayat ]
-*80.* *'Abasa* [ 42 ayat ]
-*81.* *At-Takwir* [ 29 ayat ]
-*82.* *Al-Infitar* [ 19 ayat ]
-*83.* *Al-Mutaffifin* [ 36 ayat ]
-*84.* *Al-Insyiqaq* [ 25 ayat ]
-*85.* *Al-Buruj* [ 22 ayat ]
-*86.* *At-Tariq* [ 17 ayat ]
-*87.* *Al-A'la* [ 19 ayat ]
-*88.* *Al-Gasyiyah* [ 26 ayat ]
-*89.* *Al-Fajr* [ 30 ayat ]
-*90.* *Al-Balad* [ 20 ayat ]
-*91.* *Asy-Syams* [ 15 ayat ]
-*92.* *Al-Lail* [ 21 ayat ]
-*93.* *Ad-Duha* [ 11 ayat ]
-*94.* *Asy-Syarh* [ 8 ayat ]
-*95.* *At-Tin* [ 8 ayat ]
-*96.* *Al-'Alaq* [ 19 ayat ]
-*97.* *Al-Qadr* [ 5 ayat ]
-*98.* *Al-Bayyinah* [ 8 ayat ]
-*99.* *Az-Zalzalah* [ 8 ayat ]
-*100.* *Al-'Adiyat* [ 11 ayat ]
-*101.* *Al-Qari'ah* [ 11 ayat ]
-*102.* *At-Takasur* [ 8 ayat ]
-*103.* *Al-'Asr* [ 3 ayat ]
-*104.* *Al-Humazah* [ 9 ayat ]
-*105.* *Al-Fil* [ 5 ayat ]
-*106.* *Quraisy* [ 4 ayat ]
-*107.* *Al-Ma'un* [ 7 ayat ]
-*108.* *Al-Kausar* [ 3 ayat ]
-*109.* *Al-Kafirun* [ 6 ayat ]
-*110.* *An-Nasr* [ 3 ayat ]
-*111.* *Al-Lahab* [ 5 ayat ]
-*112.* *Al-Ikhlas* [ 4 ayat ]
-*113.* *Al-Falaq* [ 5 ayat ]
-*114.* *An-Nas* [ 6 ayat ]
+*1.* *Al-Fatihah* || 7 ayat
+*2.* *Al-Baqarah* || 286 ayat
+*3.* *Ali 'Imran* || 200 ayat
+*4.* *An-Nisa'* || 176 ayat
+*5.* *Al-Ma'idah* || 120 ayat
+*6.* *Al-An'am* || 165 ayat
+*7.* *Al-A'raf* || 206 ayat
+*8.* *Al-Anfal* || 75 ayat
+*9.* *At-Taubah* || 129 ayat
+*10.* *Yunus* || 109 ayat
+*11.* *Hud* || 123 ayat
+*12.* *Yusuf* || 111 ayat
+*13.* *Ar-Ra'd* || 43 ayat
+*14.* *Ibrahim* || 52 ayat
+*15.* *Al-Hijr* || 99 ayat
+*16.* *An-Nahl* || 128 ayat
+*17.* *Al-Isra'* || 111 ayat
+*18.* *Al-Kahf* || 110 ayat
+*19.* *Maryam* || 98 ayat
+*20.* *Taha* || 135 ayat
+*21.* *Al-Anbiya'* || 112 ayat
+*22.* *Al-Hajj* || 78 ayat
+*23.* *Al-Mu'minun* || 118 ayat
+*24.* *An-Nur* || 64 ayat
+*25.* *Al-Furqan* || 77 ayat
+*26.* *Asy-Syu'ara'* || 227 ayat
+*27.* *An-Naml* || 93 ayat
+*28.* *Al-Qasas* || 88 ayat
+*29.* *Al-'Ankabut* || 69 ayat
+*30.* *Ar-Rum* || 60 ayat
+*31.* *Luqman* || 34 ayat
+*32.* *As-Sajdah* || 30 ayat
+*33.* *Al-Ahzab* || 73 ayat
+*34.* *Saba'* || 54 ayat
+*35.* *Fatir* || 45 ayat
+*36.* *Yasin* || 83 ayat
+*37.* *As-Saffat* || 182 ayat
+*38.* *Sad* || 88 ayat
+*39.* *Az-Zumar* || 75 ayat
+*40.* *Gafir* || 85 ayat
+*41.* *Fussilat* || 54 ayat
+*42.* *Asy-Syura* || 53 ayat
+*43.* *Az-Zukhruf* || 89 ayat
+*44.* *Ad-Dukhan* || 59 ayat
+*45.* *Al-Jasiyah* || 37 ayat
+*46.* *Al-Ahqaf* || 35 ayat
+*47.* *Muhammad* || 38 ayat
+*48.* *Al-Fath* || 29 ayat
+*49.* *Al-Hujurat* || 18 ayat
+*50.* *Qaf* || 45 ayat
+*51.* *Az-Zariyat* || 60 ayat
+*52.* *At-Tur* || 49 ayat
+*53.* *An-Najm* || 62 ayat
+*54.* *Al-Qamar* || 55 ayat
+*55.* *Ar-Rahman* || 78 ayat
+*56.* *Al-Waqi'ah* || 96 ayat
+*57.* *Al-Hadid* || 29 ayat
+*58.* *Al-Mujadalah* || 22 ayat
+*59.* *Al-Hasyr* || 24 ayat
+*60.* *Al-Mumtahanah* || 13 ayat
+*61.* *As-Saff* || 14 ayat
+*62.* *Al-Jumu'ah* || 11 ayat
+*63.* *Al-Munafiqun* || 11 ayat
+*64.* *At-Tagabun* || 18 ayat
+*65.* *At-Talaq* || 12 ayat
+*66.* *At-Tahrim* || 12 ayat
+*67.* *Al-Mulk* || 30 ayat
+*68.* *Al-Qalam* || 52 ayat
+*69.* *Al-Haqqah* || 52 ayat
+*70.* *Al-Ma'arij* || 44 ayat
+*71.* *Nuh* || 28 ayat
+*72.* *Al-Jinn* || 28 ayat
+*73.* *Al-Muzzammil* || 20 ayat
+*74.* *Al-Muddassir* || 56 ayat
+*75.* *Al-Qiyamah* || 40 ayat
+*76.* *Al-Insan* || 31 ayat
+*77.* *Al-Mursalat* || 50 ayat
+*78.* *An-Naba'* || 40 ayat
+*79.* *An-Nazi'at* || 46 ayat
+*80.* *'Abasa* || 42 ayat
+*81.* *At-Takwir* || 29 ayat
+*82.* *Al-Infitar* || 19 ayat
+*83.* *Al-Mutaffifin* || 36 ayat
+*84.* *Al-Insyiqaq* || 25 ayat
+*85.* *Al-Buruj* || 22 ayat
+*86.* *At-Tariq* || 17 ayat
+*87.* *Al-A'la* || 19 ayat
+*88.* *Al-Gasyiyah* || 26 ayat
+*89.* *Al-Fajr* || 30 ayat
+*90.* *Al-Balad* || 20 ayat
+*91.* *Asy-Syams* || 15 ayat
+*92.* *Al-Lail* || 21 ayat
+*93.* *Ad-Duha* || 11 ayat
+*94.* *Asy-Syarh* || 8 ayat
+*95.* *At-Tin* || 8 ayat
+*96.* *Al-'Alaq* || 19 ayat
+*97.* *Al-Qadr* || 5 ayat
+*98.* *Al-Bayyinah* || 8 ayat
+*99.* *Az-Zalzalah* || 8 ayat
+*100.* *Al-'Adiyat* || 11 ayat
+*101.* *Al-Qari'ah* || 11 ayat
+*102.* *At-Takasur* || 8 ayat
+*103.* *Al-'Asr* || 3 ayat
+*104.* *Al-Humazah* || 9 ayat
+*105.* *Al-Fil* || 5 ayat
+*106.* *Quraisy* || 4 ayat
+*107.* *Al-Ma'un* || 7 ayat
+*108.* *Al-Kausar* || 3 ayat
+*109.* *Al-Kafirun* || 6 ayat
+*110.* *An-Nasr* || 3 ayat
+*111.* *Al-Lahab* || 5 ayat
+*112.* *Al-Ikhlas* || 4 ayat
+*113.* *Al-Falaq* || 5 ayat
+*114.* *An-Nas* || 6 ayat
 `
 	try {
 	if(!text.includes("/")) return m.reply(`*Cara menggunakan*\n${prefix+command} urutan surat/ayat\n*Contoh :* ${prefix+command} 1/2\n\n${dataqur}`)
@@ -4333,8 +4334,6 @@ _*Artinya:*_ _${artitext}_
 
 *Info*
 ${penjelasan}
-
-*Pilihan penjelasan*
 `
 	let btna = [{
 quickReplyButton: {
@@ -4353,7 +4352,7 @@ id: `baca ${text}`
 }
 }]
 
-await conn.sendButtonText2(m.chat, anau, `Perwira Bot WhatsApp`, btna)
+await conn.sendButtonText2(m.chat, anau, `Opsi pilihan penjelasan`, btna)
 } catch(err) {
 		m.reply(util.format(err))
 		}
@@ -4369,7 +4368,7 @@ case 'textlong': {
 	penjelasanp = resa.result.data.tafsir.id.long
 	anuo = `*Alquran*
 	
-	*Penjelasan panjang*
+*Penjelasan secara panjang*
 	${penjelasanp}
 	`
 	m.reply(anuo)
@@ -4387,7 +4386,7 @@ case 'textshort': {
 	penjelasans = resa.result.data.tafsir.id.short
 	anuoi = `*Alquran*
 	
-	*Penjelasan panjang*
+*Penjelasan secara singkat*
 	${penjelasans}
 	`
 	m.reply(anuoi)
