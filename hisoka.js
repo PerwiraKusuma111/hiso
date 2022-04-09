@@ -4189,6 +4189,226 @@ await conn.sendButtonText(m.chat, buttons, `\`\`\`Mohon Tunggu Sedang Mencari Pa
 break
 
 }*/
+case 'alquran':{
+	surah = q.split("/")[0]
+	ayat = q.split("/")[1]
+	dataqur = `
+*List Surat dan Jumlah ayat*
+
+*1.* *Al-Fatihah* || jumlah ayat 7
+*2.* *Al-Baqarah* || jumlah ayat 286
+*3.* *Ali 'Imran* || jumlah ayat 200
+*4.* *An-Nisa'* || jumlah ayat 176
+*5.* *Al-Ma'idah* || jumlah ayat 120
+*6.* *Al-An'am* || jumlah ayat 165
+*7.* *Al-A'raf* || jumlah ayat 206
+*8.* *Al-Anfal* || jumlah ayat 75
+*9.* *At-Taubah* || jumlah ayat 129
+*10.* *Yunus* || jumlah ayat 109
+*11.* *Hud * || jumlah ayat 123
+*12.* *Yusuf* || jumlah ayat 111
+*13.* *Ar-Ra'd* || jumlah ayat 43
+*14.* *Ibrahim* || jumlah ayat 52
+*15.* *Al-Hijr* || jumlah ayat 99
+*16.* *An-Nahl* || jumlah ayat 128
+*17.* *Al-Isra'* || jumlah ayat 111
+*18.* *Al-Kahf* || jumlah ayat 110
+*19.* *Maryam* || jumlah ayat 98
+*20.* *Taha* || jumlah ayat 135
+*21.* *Al-Anbiya'* || jumlah ayat 112
+*22.* *Al-Hajj* || jumlah ayat 78
+*23.* *Al-Mu'minun* || jumlah ayat 118
+*24.* *An-Nur* || jumlah ayat 64
+*25.* *Al-Furqan* || jumlah ayat 77
+*26.* *Asy-Syu'ara'* || jumlah ayat 227
+*27.* *An-Naml* || jumlah ayat 93
+*28.* *Al-Qasas* || jumlah ayat 88
+*29.* *Al-'Ankabut* || jumlah ayat 69
+*30.* *Ar-Rum* || jumlah ayat 60
+*31.* *Luqman* || jumlah ayat 34
+*32.* *As-Sajdah* || jumlah ayat 30
+*33.* *Al-Ahzab* || jumlah ayat 73
+*34.* *Saba'* || jumlah ayat 54
+*35.* *Fatir* || jumlah ayat 45
+*36.* *Yasin* || jumlah ayat 83
+*37.* *As-Saffat* || jumlah ayat 182
+*38.* *Sad* || jumlah ayat 88
+*39.* *Az-Zumar* || jumlah ayat 75
+*40.* *Gafir* || jumlah ayat 85
+*41.* *Fussilat* || jumlah ayat 54
+*42.* *Asy-Syura* || jumlah ayat 53
+*43.* *Az-Zukhruf* || jumlah ayat 89
+*44.* *Ad-Dukhan* || jumlah ayat 59
+*45.* *Al-Jasiyah* || jumlah ayat 37
+*46.* *Al-Ahqaf* || jumlah ayat 35
+*47.* *Muhammad* || jumlah ayat 38
+*48.* *Al-Fath* || jumlah ayat 29
+*49.* *Al-Hujurat* || jumlah ayat 18
+*50.* *Qaf* || jumlah ayat 45
+*51.* *Az-Zariyat* || jumlah ayat 60
+*52.* *At-Tur* || jumlah ayat 49
+*53.* *An-Najm* || jumlah ayat 62
+*54.* *Al-Qamar* || jumlah ayat 55
+*55.* *Ar-Rahman* || jumlah ayat 78
+*56.* *Al-Waqi'ah* || jumlah ayat 96
+*57.* *Al-Hadid* || jumlah ayat 29
+*58.* *Al-Mujadalah* || jumlah ayat 22
+*59.* *Al-Hasyr* || jumlah ayat 24
+*60.* *Al-Mumtahanah* || jumlah ayat 13
+*61.* *As-Saff* || jumlah ayat 14
+*62.* *Al-Jumu'ah* || jumlah ayat 11
+*63.* *Al-Munafiqun* || jumlah ayat 11
+*64.* *At-Tagabun* || jumlah ayat 18
+*65.* *At-Talaq* || jumlah ayat 12
+*66.* *At-Tahrim* || jumlah ayat 12
+*67.* *Al-Mulk* || jumlah ayat 30
+*68.* *Al-Qalam* || jumlah ayat 52
+*69.* *Al-Haqqah* || jumlah ayat 52
+*70.* *Al-Ma'arij* || jumlah ayat 44
+*71.* *Nuh* || jumlah ayat 28
+*72.* *Al-Jinn* || jumlah ayat 28
+*73.* *Al-Muzzammil* || jumlah ayat 20
+*74.* *Al-Muddassir* || jumlah ayat 56
+*75.* *Al-Qiyamah* || jumlah ayat 40
+*76.* *Al-Insan* || jumlah ayat 31
+*77.* *Al-Mursalat* || jumlah ayat 50
+*78.* *An-Naba'* || jumlah ayat 40
+*79.* *An-Nazi'at* || jumlah ayat 46
+*80.* *'Abasa* || jumlah ayat 42
+*81.* *At-Takwir* || jumlah ayat 29
+*82.* *Al-Infitar* || jumlah ayat 19
+*83.* *Al-Mutaffifin* || jumlah ayat 36
+*84.* *Al-Insyiqaq* || jumlah ayat 25
+*85.* *Al-Buruj* || jumlah ayat 22
+*86.* *At-Tariq* || jumlah ayat 17
+*87.* *Al-A'la* || jumlah ayat 19
+*88.* *Al-Gasyiyah* || jumlah ayat 26
+*89.* *Al-Fajr* || jumlah ayat 30
+*90.* *Al-Balad* || jumlah ayat 20
+*91.* *Asy-Syams* || jumlah ayat 15
+*92.* *Al-Lail* || jumlah ayat 21
+*93.* *Ad-Duha* || jumlah ayat 11
+*94.* *Asy-Syarh* || jumlah ayat 8
+*95.* *At-Tin* || jumlah ayat 8
+*96.* *Al-'Alaq* || jumlah ayat 19
+*97.* *Al-Qadr* || jumlah ayat 5
+*98.* *Al-Bayyinah* || jumlah ayat 8
+*99.* *Az-Zalzalah* || jumlah ayat 8
+*100.* *Al-'Adiyat* || jumlah ayat 11
+*101.* *Al-Qari'ah* || jumlah ayat 11
+*102.* *At-Takasur* || jumlah ayat 8
+*103.* *Al-'Asr* || jumlah ayat 3
+*104.* *Al-Humazah* || jumlah ayat 9
+*105.* *Al-Fil* || jumlah ayat 5
+*106.* *Quraisy* || jumlah ayat 4
+*107.* *Al-Ma'un* || jumlah ayat 7
+*108.* *Al-Kausar* || jumlah ayat 3
+*109.* *Al-Kafirun* || jumlah ayat 6
+*110.* *An-Nasr* || jumlah ayat 3
+*111.* *Al-Lahab* || jumlah ayat 5
+*112.* *Al-Ikhlas* || jumlah ayat 4
+*113.* *Al-Falaq* || jumlah ayat 5
+*114.* *An-Nas* || jumlah ayat 6
+`
+	try {
+	if(!text.includes("/")) return m.reply(`*Cara menggunakan*\n${prefix+command} urutan surat/ayat\n*Contoh :* ${prefix+command} 1/2\n\n${dataqur}`)
+	res = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
+	nama = res.result.data.surah.name.short
+	namal = res.result.data.surah.name.transliteration.id
+	namaar = res.result.data.surah.name.translation.id
+	wahyu = res.result.data.surah.name.revelation.arab
+	wahyui = res.result.data.surah.name.revelation.id
+	penjelasan = res.result.data.surah.tafsir.id
+	text = res.result.data.text.arab
+	artitext = res.result.data.translation.id
+	
+	anau = `*Alquran Feature*
+
+*Surah:* ${nama}(${namal})
+*Artinya:* ${namaar}
+*Wahyu:* ${wahyu}(${wahyui})
+
+${text}
+_*Artinya:*_ _${artitext}_
+
+*Info*
+${penjelasan}
+
+*Pilihan penjelasan*
+`
+	let btna = [{
+quickReplyButton: {
+displayText: 'Singkat',
+id: `textshort ${text}`
+}
+}, {
+quickReplyButton: {
+displayText: 'Panjang',
+id: `textlong ${text}`
+}  
+}, {
+quickReplyButton: {
+displayText: 'Audio',
+id: `baca ${text}`
+}
+}]
+
+await conn.sendButtonText2(m.chat, anau, `Perwira Bot WhatsApp`, btna)
+} catch(err) {
+		m.reply(util.format(err))
+		}
+	}
+	break
+
+case 'textlong': {
+	surah = q.split("/")[0]
+	ayat = q.split("/")[1]
+	try {
+	if(!text.includes("/")) return
+	resa = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
+	penjelasanp = resa.result.data.tafsir.id.long
+	anuo = `*Alquran*
+	
+	*Penjelasan panjang*
+	${resa}
+	`
+	m.reply(anuo)
+	} catch(err) {
+		m.reply(util.format(err))
+		}
+	}
+	break
+case 'textshort': {
+	surah = q.split("/")[0]
+	ayat = q.split("/")[1]
+	try {
+	if(!text.includes("/")) return
+	resai = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
+	penjelasanp = resa.result.data.tafsir.id.short
+	anuoi = `*Alquran*
+	
+	*Penjelasan panjang*
+	${resai}
+	`
+	m.reply(anuoi)
+	} catch(err) {
+		m.reply(util.format(err))
+		}
+		}
+	break
+case 'baca':{
+	surah = q.split("/")[0]
+	ayat = q.split("/")[1]
+	try {
+	if(!text.includes("/")) return
+	aad = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
+	audiio = aad.result.data.audio.primary
+	conn.sendMessage(m.chat,{audio: {url: audiio}, mimetype: 'audio/mpeg'}, {quoted: m})
+	} catch(err) {
+		m.reply(util.format(err))
+		}
+	}
+	break
 case 'attp':
 {
 try {
@@ -4489,8 +4709,83 @@ case 'owner': case 'creator': {
 conn.sendContact(m.chat, global.owner, '')
 }
 break
-case 'list': case 'menu': case 'help':
-if(m.isGroup) {
+case 'list': case 'menu': case 'help':{
+/*let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]*/
+let btn = [{
+callButton: {
+displayText: 'Phone',
+phoneNumber: '+62 8123-3264-6925'
+}
+}, {
+urlButton: {
+displayText: 'Instagram',
+url: 'https://www.instagram.com/perwira_kusuma1/'
+}
+}, {
+quickReplyButton: {
+displayText: 'Rules',
+id: 'rules'
+}
+}, {
+quickReplyButton: {
+displayText: 'Owner',
+id: 'owner'
+}  
+}, {
+quickReplyButton: {
+displayText: 'Speed',
+id: 'ping'
+}
+}]
+themen = `*Islam Menu*
+⊳ ${prefix}alquran
+
+*Search Menu*
+⊳ ${prefix}google
+⊳ ${prefix}ringtone
+⊳ ${prefix}ytsearch
+⊳ ${prefix}translate
+⊳ ${prefix}pinterest
+⊳ ${prefix}wikipedia
+
+*Sticker Menu*
+⊳ ${prefix}attp
+⊳ ${prefix}sticker
+⊳ ${prefix}triggered
+⊳ ${prefix}emojimix
+
+*Tools Menu*
+⊳ ${prefix}get
+⊳ ${prefix}tourl
+⊳ ${prefix}togif
+⊳ ${prefix}toimg
+⊳ ${prefix}tomp3
+⊳ ${prefix}tovideo
+
+*Download Menu*
+⊳ ${prefix}play
+⊳ ${prefix}igdl
+⊳ ${prefix}ytmp3
+⊳ ${prefix}ytmp4
+⊳ ${prefix}ttmp3
+⊳ ${prefix}ttmp4
+⊳ ${prefix}telesticker
+
+*Maker Menu*
+⊳ ${prefix}anim
+⊳ ${prefix}textpro
+⊳ ${prefix}template
+
+*Other Menu*
+⊳ ${prefix}simi
+⊳ ${prefix}nulis
+⊳ ${prefix}tahta
+⊳ ${prefix}styletext
+
+*Attention!*
+  Harap baca *rules*`
+  
+if (isAdmins) {
 anu = `*List Menu*
 
 *Group Menu*
@@ -4506,177 +4801,23 @@ anu = `*List Menu*
 ⊳ ${prefix}setname
 ⊳ ${prefix}setppgc
 
-*Search Menu*
-⊳ ${prefix}google
-⊳ ${prefix}ringtone
-⊳ ${prefix}ytsearch
-⊳ ${prefix}translate
-⊳ ${prefix}pinterest
-⊳ ${prefix}wikipedia
-
-*Sticker Menu*
-⊳ ${prefix}attp
-⊳ ${prefix}sticker
-⊳ ${prefix}triggered
-⊳ ${prefix}emojimix
-
-*Tools Menu*
-⊳ ${prefix}get
-⊳ ${prefix}tourl
-⊳ ${prefix}togif
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-
-*Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}igdl
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
-
-*Maker Menu*
-⊳ ${prefix}anim
-⊳ ${prefix}textpro
-⊳ ${prefix}template
-
-*Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}styletext
-
-*Attention!*
-  Harap baca *rules*
+${themen}
 `
-/*let term = {
-contextInfo: {
-participant: "0@s.whatsapp.net",
-quotedMessage: {
-extendedTextMessage: {
-text: "Nama Bot",
-}
-}
-}
-}*/
-let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
-let btn = [{
-callButton: {
-displayText: 'Phone',
-phoneNumber: '+62 8123-3264-6925'
-}
-}, {
-urlButton: {
-displayText: 'Instagram',
-url: 'https://www.instagram.com/perwira_kusuma1/'
-}
-}, {
-quickReplyButton: {
-displayText: 'Rules',
-id: 'rules'
-}
-}, {
-quickReplyButton: {
-displayText: 'Owner',
-id: 'owner'
-}  
-}, {
-quickReplyButton: {
-displayText: 'Speed',
-id: 'ping'
-}
-}]
+await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
+	} else if(m.isGroup) {
+anu = `*List Menu*
+
+${themen}
+`
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(!m.isGroup) {
 anu = `*List Menu*
 
-*Search Menu*
-⊳ ${prefix}google
-⊳ ${prefix}ringtone
-⊳ ${prefix}ytsearch
-⊳ ${prefix}translate
-⊳ ${prefix}pinterest
-⊳ ${prefix}wikipedia
-
-*Sticker Menu*
-⊳ ${prefix}attp
-⊳ ${prefix}sticker
-⊳ ${prefix}triggered
-⊳ ${prefix}emojimix
-
-*Tools Menu*
-⊳ ${prefix}get
-⊳ ${prefix}tourl
-⊳ ${prefix}togif
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
-
-*Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}igdl
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
-
-*Maker Menu*
-⊳ ${prefix}anim
-⊳ ${prefix}textpro
-⊳ ${prefix}template
-
-*Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}styletext
-
-*Attention!*
-  Harap baca *rules*
+${themen}
 `
-/*let terem = {
-contextInfo: {
-participant: "0@s.whatsapp.net",
-quotedMessage: {
-extendedTextMessage: {
-text: "Nama Bot"
-}
-}
-}
-}*/
-let btntz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]
-let btn = [{
-callButton: {
-displayText: 'Phone',
-phoneNumber: '+62 8123-3264-6925'
-}
-}, {
-urlButton: {
-displayText: 'Instagram',
-url: 'https://www.instagram.com/perwira_kusuma1/'
-}
-}, {
-quickReplyButton: {
-displayText: 'Rules',
-id: 'rules'
-}
-}, {
-quickReplyButton: {
-displayText: 'Owner',
-id: 'owner'
-}  
-}, {
-quickReplyButton: {
-displayText: 'Speed',
-id: 'ping'
-}
-}]
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
-break
+}break
 case 'anim':{
 	if(!text) return m.reply(`Masukkan teks!
 *Contoh :* ${prefix+command} gura/Text
