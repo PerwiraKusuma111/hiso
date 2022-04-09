@@ -4944,11 +4944,6 @@ m.reply(String(e))
 }
 */
 
-
-break
-
- }
- 
 if (budy.startsWith('>')) {
 if (!isCreator) return 
 try {
@@ -4972,6 +4967,10 @@ if(err) return m.reply(err)
 if (stdout) return m.reply(stdout)
 })
 }
+
+
+ }
+ 
 
 		 /*if (m.chat.endsWith('@s.whatsapp.net') && isCmd) {
 this.anonymous = this.anonymous ? this.anonymous : {}
