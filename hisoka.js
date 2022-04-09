@@ -146,10 +146,10 @@ if (!m.key.fromMe) return
 }
 
 // Push Message To Console && Auto Read
-if (m.message) {
+/*if (m.message) {
 /*conn.sendReadReceipt(m.chat, m.sender, [m.key.id])*/
 console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
-}
+}*/
 	//Antidelte
 
 	// write database every 1 minute
@@ -4926,7 +4926,7 @@ delete tebaktebakan[m.sender.split('@')[0]]
 } else m.reply('*Jawaban Salah!*')
 }*/
 
- if (budy.startsWith('=>')) {
+ /*if (budy.startsWith('=>')) {
  if (!isCreator) return m.reply(mess.owner)
  function Return(sul) {
  sat = JSON.stringify(sul, null, 2)
@@ -4942,9 +4942,15 @@ delete tebaktebakan[m.sender.split('@')[0]]
 m.reply(String(e))
 }
 }
+*/
 
-if (budy.startsWith('>')) {
-if (!isCreator) return m.reply(mess.owner)
+
+
+break
+
+ }
+ if (budy.startsWith('>')) {
+if (!isCreator) return 
 try {
 let evaled = await eval(budy.slice(2))
 if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
@@ -4955,21 +4961,17 @@ await m.reply(String(err))
 }
 
 if (budy.startsWith('x')){
-if (!isCreator) return m.reply("_Owner Only_")
+if (!isCreator) return 
 return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'\t')},{quoted: m}).catch(err => reply(util.format(err)))
 }
 
 if (budy.startsWith('$')) {
-if (!isCreator) return m.reply(mess.owner)
+if (!isCreator) return 
 exec(budy.slice(2), (err, stdout) => {
 if(err) return m.reply(err)
 if (stdout) return m.reply(stdout)
 })
 }
-
-break
-
- }
  
 
 
