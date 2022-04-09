@@ -4316,8 +4316,8 @@ case 'alquran':{
 	nama = res.result.data.surah.name.short
 	namal = res.result.data.surah.name.transliteration.id
 	namaar = res.result.data.surah.name.translation.id
-	wahyu = res.result.data.surah.name.revelation.arab
-	wahyui = res.result.data.surah.name.revelation.id
+	wahyu = res.result.data.surah.revelation.arab
+	wahyui = res.result.data.surah.revelation.id
 	penjelasan = res.result.data.surah.tafsir.id
 	text = res.result.data.text.arab
 	artitext = res.result.data.translation.id
