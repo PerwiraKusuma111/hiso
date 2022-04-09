@@ -4319,7 +4319,7 @@ case 'alquran':{
 	wahyu = res.result.data.surah.revelation.arab
 	wahyui = res.result.data.surah.revelation.id
 	penjelasan = res.result.data.surah.tafsir.id
-	text = res.result.data.text.arab
+	textar = res.result.data.text.arab
 	artitext = res.result.data.translation.id
 	
 	anau = `*Alquran Feature*
@@ -4328,7 +4328,7 @@ case 'alquran':{
 *Artinya:* ${namaar}
 *Wahyu:* ${wahyu}(${wahyui})
 
-${text}
+${textar}
 _*Artinya:*_ _${artitext}_
 
 *Info*
@@ -4370,7 +4370,7 @@ case 'textlong': {
 	anuo = `*Alquran*
 	
 	*Penjelasan panjang*
-	${resa}
+	${penjelasanp}
 	`
 	m.reply(anuo)
 	} catch(err) {
@@ -4384,11 +4384,11 @@ case 'textshort': {
 	try {
 	if(!text.includes("/")) return
 	resai = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
-	penjelasanp = resa.result.data.tafsir.id.short
+	penjelasans = resa.result.data.tafsir.id.short
 	anuoi = `*Alquran*
 	
 	*Penjelasan panjang*
-	${resai}
+	${penjelasans}
 	`
 	m.reply(anuoi)
 	} catch(err) {
