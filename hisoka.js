@@ -3658,8 +3658,8 @@ return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted:
 	
 	case 'ringtone':{
 		if(!text) return m.reply(`Ringtone apa yang mau dicari?\nContoh ${prefix+command} nokia`)
-		let ringtone = require('./lib/scraper')
-		res = await ringtone(text)
+		let { ringtone } = require('./lib/scraper')
+		let res = await ringtone(text)
 		nomor = 1
 		isinya = []
 		for(let i of res) {
