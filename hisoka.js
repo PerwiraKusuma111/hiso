@@ -41,7 +41,7 @@ const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, 
 // read database
 
 global.db = JSON.parse(fs.readFileSync('./src/database.json'))
-if (global.db) global.db = {
+if (global.db) global.db.data = {
 sticker: {},
 database: {},
 game: {},
