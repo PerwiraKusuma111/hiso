@@ -4949,6 +4949,7 @@ anu = `*List Menu*
 
 *Download Menu*
 ⊳ ${prefix}play
+⊳ ${prefix}fbdl [coming soon]
 ⊳ ${prefix}igdl
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
@@ -5004,6 +5005,7 @@ anu = `*List Menu*
 
 *Download Menu*
 ⊳ ${prefix}play
+⊳ ${prefix}fbdl [coming soon]
 ⊳ ${prefix}igdl
 ⊳ ${prefix}ytmp3
 ⊳ ${prefix}ytmp4
@@ -5028,6 +5030,14 @@ anu = `*List Menu*
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
 }break
+case 'tiktokv2':{
+let {tiktokdlv3} = require("@bochilteam/scraper")
+await tiktokdlv3("https://vt.tiktok.com/ZSdrntSbF/").then(async tikk => {
+	m.reply(tikk.video)
+	})
+
+	}
+	break
 case 'anim':{
 	if(!text) return m.reply(`Masukkan teks!
 *Contoh :* ${prefix+command} gura/Text
