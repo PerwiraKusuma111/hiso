@@ -4867,6 +4867,11 @@ displayText: 'Instagram',
 url: 'https://www.instagram.com/perwira_kusuma1/'
 }
 }, {
+urlButton: {
+displayText: 'YouTube',
+url: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w'
+}
+}, {
 quickReplyButton: {
 displayText: 'Rules',
 id: 'rules'
@@ -4876,11 +4881,6 @@ quickReplyButton: {
 displayText: 'Owner',
 id: 'owner'
 }  
-}, {
-quickReplyButton: {
-displayText: 'Speed',
-id: 'ping'
-}
 }]
   
 /*if (isAdmins) {
