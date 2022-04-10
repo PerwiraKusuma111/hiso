@@ -4290,13 +4290,6 @@ _${id}_`)
 	
 	break
 case 'iqra':{
-	iqra1 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra1`
-	iqra2 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra2`
-	iqra3 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra3`
-	iqra4 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra4`
-	iqra5 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra5`
-	iqra6 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra6`
-	
 	let listiqraMessage = {
 text: 'Silahkan pilih list iqra',
 footer: `Perwira Bot WhatsApp`,
@@ -4307,29 +4300,29 @@ sections: [{
 "rows": [{
 "title": `Iqra 1`,
 "description": `Iqra 1 format pdf`,
-"rowId": `iqrapdf ${iqra1}`
+"rowId": `iqrapdf https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra1`
 },
 {
 "title": `Iqra 2`,
 "description": `Iqra 2 format pdf`,
-"rowId": `iqrapdf ${iqra2}`
+"rowId": `iqrapdf https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra2`
 },
 {
 "title": `Iqra 3`,
 "description": `Iqra 3 format pdf`,
-"rowId": `iqrapdf ${iqra3}`
+"rowId": `iqrapdf https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra3`
 },{
 "title": `Iqra 4`,
 "description": `Iqra 4 format pdf`,
-"rowId": `iqrapdf ${iqra4}`
+"rowId": `iqrapdf https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra4`
 },{
 "title": `Iqra 5`,
 "description": `Iqra 5 format pdf`,
-"rowId": `iqrapdf ${iqra5}`
+"rowId": `iqrapdf https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra5`
 },{
 "title": `Iqra 6`,
 "description": `Iqra 6 format pdf`,
-"rowId": `iqrapdf ${iqra6}`
+"rowId": `iqrapdf https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra6`
 }]}],
 }
 
@@ -4348,7 +4341,8 @@ case 'iqrapdf':{
 case 'alquran':{
 	surah = q.split("/")[0]
 	ayat = q.split("/")[1]
-	dataqur = `
+	try {
+	if(!text.includes("/")) return m.reply(`*Cara menggunakan*\n${prefix+command} urutan surat/ayat\n*Contoh :* ${prefix+command} 1/2\n\n
 *List Surat dan Jumlah ayat*
 
 *1.* *Al-Fatihah* || 7 ayat
@@ -4464,28 +4458,16 @@ case 'alquran':{
 *111.* *Al-Lahab* || 5 ayat
 *112.* *Al-Ikhlas* || 4 ayat
 *113.* *Al-Falaq* || 5 ayat
-*114.* *An-Nas* || 6 ayat
-`
-	try {
-	if(!text.includes("/")) return m.reply(`*Cara menggunakan*\n${prefix+command} urutan surat/ayat\n*Contoh :* ${prefix+command} 1/2\n\n${dataqur}`)
-	res = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
-	nama = res.result.data.surah.name.short
-	namal = res.result.data.surah.name.transliteration.id
-	namaar = res.result.data.surah.name.translation.id
-	wahyu = res.result.data.surah.revelation.arab
-	wahyui = res.result.data.surah.revelation.id
-	penjelasan = res.result.data.surah.tafsir.id
-	textar = res.result.data.text.arab
-	artitext = res.result.data.translation.id
-	
+*114.* *An-Nas* || 6 ayat`)
+	res = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
 	anau = `*Alquran Feature*
 
-*Surah:* ${nama}(${namal})
-*Artinya:* ${namaar}
-*Wahyu:* ${wahyu}(${wahyui})
+*Surah:* ${res.result.data.surah.name.short}(${res.result.data.surah.name.transliteration.id})
+*Artinya:* ${res.result.data.surah.name.translation.id}
+*Wahyu:* ${res.result.data.surah.revelation.arab}(${res.result.data.surah.revelation.id})
 
-${textar}
-_*Artinya:*_ _${artitext}_
+${res.result.data.text.arab}
+_*Artinya:*_ _${res.result.data.translation.id}_
 
 *Tentang surah*
 ${penjelasan}
@@ -4519,7 +4501,7 @@ case 'textlong': {
 	ayat = q.split("/")[1]
 	try {
 	if(!text.includes("/")) return
-	resa = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
+	resa = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
 	penjelasanp = resa.result.data.tafsir.id.long
 	anuo = `*Alquran*
 	
@@ -4537,7 +4519,7 @@ case 'textshort': {
 	ayat = q.split("/")[1]
 	try {
 	if(!text.includes("/")) return
-	resai = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
+	resai = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
 	penjelasans = resa.result.data.tafsir.id.short
 	anuoi = `*Alquran*
 	
@@ -4555,7 +4537,7 @@ case 'baca':{
 	ayat = q.split("/")[1]
 	try {
 	if(!text.includes("/")) return
-	aad = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/quran?surah=${surah}&ayat=${ayat}`)
+	aad = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
 	audiio = aad.result.data.audio.primary
 	conn.sendMessage(m.chat,{audio: {url: audiio}, mimetype: 'audio/mpeg'}, {quoted: m})
 	} catch(err) {
