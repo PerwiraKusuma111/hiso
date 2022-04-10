@@ -5032,10 +5032,27 @@ await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 }break
 case 'tiktokv2':{
 let {tiktokdlv3} = require("@bochilteam/scraper")
-await tiktokdlv3("https://vt.tiktok.com/ZSdrntSbF/").then(async tikk => {
-	m.reply(tikk.video)
+try {
+await tiktokdlv3(text).then(async tikk => {
+	conn.sendMessage(m.chat, {video: {url: tikk.video.no_watermark}, caption: `*Tiktok downloader*`}, {quoted: m})
 	})
-
+} catch(err) {
+	m.reply(util.format(err))
+	}
+	}
+	break
+case 'facebook':
+case 'fb':
+case 'fbdl': {
+if(!text.includes("fb.watch")) return m.reply(`Contoh link ${prefix+comnand} https://fb.watch/cj0zWfjCNl/`)
+facebookdl = require("@bochilteam/scraper")
+try {
+await facebookdl(text).then(async tes => {
+conn.sendMessage(m.chat, {video: {url: tes.result[2].url}, caption: `*Facebook downloader*`}, {quoted: m})
+	})
+	} catch(err) {
+	m.reply(util.format(err))
+	}
 	}
 	break
 case 'anim':{
