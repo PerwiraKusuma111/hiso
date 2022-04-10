@@ -4541,7 +4541,7 @@ case 'baca':{
 	try {
 	if(!text.includes("/")) return
 	aad = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
-	audiio = aad.result.data.audio.primary
+	audiio = aad.data.audio.primary
 	conn.sendMessage(m.chat,{audio: {url: audiio}, mimetype: 'audio/mpeg'}, {quoted: m})
 	} catch(err) {
 		m.reply(util.format(err))
