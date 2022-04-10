@@ -3949,7 +3949,7 @@ ${id}`)
 *English* : ${res.result.data.translation.en}
 *Indonesia* : ${res.result.data.translation.id}
 
-( Q.S ${res.result.data.surah.name.transliteration.id} : ${res.result.data.number.inSurah} )`
+( Q.S ${res.data.surah.name.transliteration.id} : ${res.result.data.number.inSurah} )`
 		m.reply(txt)
 		conn.sendMessage(m.chat, {audio: { url: res.result.data.audio.primary }, mimetype: 'audio/mpeg'}, { quoted : m })
 		}
@@ -3964,7 +3964,7 @@ ${id}`)
 
 *Panjang* : ${res.result.data.tafsir.id.long}
 
-( Q.S ${res.result.data.surah.name.transliteration.id} : ${res.result.data.number.inSurah} )`
+( Q.S ${res.data.surah.name.transliteration.id} : ${res.result.data.number.inSurah} )`
 		m.reply(txt)
 		}
 		break
@@ -4462,15 +4462,15 @@ case 'alquran':{
 	res = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
 	anau = `*Alquran Feature*
 
-*Surah:* ${res.result.data.surah.name.short}(${res.result.data.surah.name.transliteration.id})
-*Artinya:* ${res.result.data.surah.name.translation.id}
-*Wahyu:* ${res.result.data.surah.revelation.arab}(${res.result.data.surah.revelation.id})
+*Surah:* ${res.data.surah.name.short}(${res.data.surah.name.transliteration.id})
+*Artinya:* ${res.data.surah.name.translation.id}
+*Wahyu:* ${res.data.surah.revelation.arab}(${res.data.surah.revelation.id})
 
 ${res.result.data.text.arab}
-_*Artinya:*_ _${res.result.data.translation.id}_
+_*Artinya:*_ _${res.data.translation.id}_
 
 *Tentang surah*
-${penjelasan}
+${res.data.tafsir.id}
 `
 	let btna = [{
 quickReplyButton: {
@@ -4491,7 +4491,7 @@ id: `baca ${text}`
 
 await conn.sendButtonText2(m.chat, anau, `Opsi pilihan penjelasan`, btna)
 } catch(err) {
-		m.reply(`*Ulangi kembali*\nTetap error? Lapor owner`)
+		m.reply(`*Ulangi kembali*\nTetap error? Lapor owner\n\n${err}`)
 		}
 	}
 	break
@@ -4502,7 +4502,7 @@ case 'textlong': {
 	try {
 	if(!text.includes("/")) return
 	resa = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
-	penjelasanp = resa.result.data.tafsir.id.long
+	penjelasanp = resa.data.tafsir.id.long
 	anuo = `*Alquran*
 	
 *Penjelasan secara panjang*
@@ -4520,7 +4520,7 @@ case 'textshort': {
 	try {
 	if(!text.includes("/")) return
 	resai = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
-	penjelasans = resa.result.data.tafsir.id.short
+	penjelasans = resa.data.tafsir.id.short
 	anuoi = `*Alquran*
 	
 *Penjelasan secara singkat*
