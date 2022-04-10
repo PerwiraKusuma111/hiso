@@ -4192,6 +4192,97 @@ await conn.sendButtonText(m.chat, buttons, `\`\`\`Mohon Tunggu Sedang Mencari Pa
 break
 
 }*/
+case 'juzama': {
+	let listjuzMessage = {
+text: 'Hasil penelusuran lain',
+footer: `Perwira Bot WhatsApp`,
+title: `*YouTube Search*\n\nVideo YouTube yang ditemukan.`,
+buttonText: "Click Here",
+sections: [{
+"title": `Hasil penelusuran yang ditemukan`,
+"rows": [{
+"title": `1. Juzama`,
+"description": `Format Document(pdf)`,
+"rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.pdf`
+},
+{
+"title": `2. Juzama`,
+"description": `Format Document(docx)`,
+"rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.docx`
+},
+{
+"title": `3. Juzama`,
+"description": `Format Powerpoint(pptx)`,
+"rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.pptx`
+},
+{
+"title": `4. Juzama`,
+"description": `Format Excel(xlsx)`,
+"rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.xlsx}`
+}
+]}],
+}
+conn.sendMessage(m.chat, listjuzMessage, {quoted: m})
+	}
+	break
+case 'juzdl':{
+	try {
+	   if(text.includes("pdf")) {
+	    conn.sendMessage(m.chat, {document: {url: 'https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.pdf'}, mimetype: 'application/pdf', fileName: 'juz-amma-arab-latin-indonesia.pdf'}, {quoted:m})
+		} else if (text.includes('docx')) {
+		conn.sendMessage(m.chat, {document: {url: 'https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.docx'}, mimetype: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', fileName: 'juz-amma-arab-latin-indonesia.docx'}, {quoted:m})
+		} else if (text.includes('pptx')) {
+		conn.sendMessage(m.chat, {document: {url: 'https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.pptx'}, mimetype: 'application/vnd.openxmlformats-officedocument.presentationml.presentation', fileName: 'juz-amma-arab-latin-indonesia.pptx'}, {quoted:m})
+		} else if (text.includes('xlsx')) {
+		conn.sendMessage(m.chat, {document: {url: 'https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.xlsx'}, mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', fileName: 'juz-amma-arab-latin-indonesia.xlsx'}, {quoted:m})
+		}
+		} catch(err) {
+			m.reply(`Ulangi kembali\nTetap error? lapor owner`)
+			}
+	}break
+case 'hadist':{
+	if(!text.includes("/")) return m.reply(`Pilihan hadist yang tersedia:
+
+*Hadist:* abu-daud
+*Nomor:* 1-4590
+
+*Hadist:* ahmad
+*Nomor:* 1-26363
+
+*Hadist:* bukhari
+*Nomor:* 1-7008
+
+*Hadist:* darimi
+*Nomor:* 1-3367
+
+*Hadist:* ibu-majah
+*Nomor:* 1-4331
+
+*Hadist:* nasai
+*Nomor:* 1-5662
+
+*Hadist:* malik
+*Nomor:* 1-1594
+
+*Hadist:* muslim
+*Nomor:* 1-5362`)
+hadisit = args.join(" ")
+texthd1 = hadisit.split("/")[0]
+texthd2 = hadisit.split("/")[1]
+
+let ries = await fetchJson(`https://islamic-api-indonesia.herokuapp.com/api/data/json/hadith/${texthd1}`)
+let { number, arab, id } = ries.find(v => v.number == texthd2)
+
+m.reply(`*Hadist feature*
+
+*Hadis:*
+${arab}
+_*Artinya:*_
+_${id}_`)
+
+	}
+	
+	break
 case 'iqra':{
 	iqra1 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra1`
 	iqra2 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra2`
@@ -4390,7 +4481,7 @@ case 'alquran':{
 ${textar}
 _*Artinya:*_ _${artitext}_
 
-*Info*
+*Tentang surah*
 ${penjelasan}
 `
 	let btna = [{
@@ -4412,7 +4503,7 @@ id: `baca ${text}`
 
 await conn.sendButtonText2(m.chat, anau, `Opsi pilihan penjelasan`, btna)
 } catch(err) {
-		m.reply(util.format(err))
+		m.reply(`*Ulangi kembali*\nTetap error? Lapor owner`)
 		}
 	}
 	break
@@ -4817,6 +4908,7 @@ await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else*/ 
  if(m.isGroup) {
 anu = `*List Menu*
+
 *Group Menu*
 ⊳ ${prefix}kick
 ⊳ ${prefix}add
@@ -4831,8 +4923,10 @@ anu = `*List Menu*
 ⊳ ${prefix}setppgc
 
 *Islam Menu*
-⊳ ${prefix}alquran
 ⊳ ${prefix}iqra
+⊳ ${prefix}hadist
+⊳ ${prefix}juzama
+⊳ ${prefix}alquran
 
 *Search Menu*
 ⊳ ${prefix}google
@@ -4884,8 +4978,10 @@ await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 anu = `*List Menu*
 
 *Islam Menu*
-⊳ ${prefix}alquran
 ⊳ ${prefix}iqra
+⊳ ${prefix}hadist
+⊳ ${prefix}juzama
+⊳ ${prefix}alquran
 
 *Search Menu*
 ⊳ ${prefix}google
