@@ -4529,7 +4529,7 @@ case 'textshort': {
 	try {
 	if(!text.includes("/")) return
 	resai = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
-	penjelasans = resa.data.tafsir.id.short
+	penjelasans = resai.data.tafsir.id.short
 	anuoi = `*Alquran*
 	
 *Penjelasan secara singkat*
