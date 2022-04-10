@@ -2451,7 +2451,7 @@ Error? lapor owner
 *74*. writingtext
 *75*. engraved3d
 *76*. summery
-*77*. balloontext
+*77*. glowingmetal
 *78*. dglue
 *79*. space3d
 *80*. darkgold
@@ -2624,7 +2624,7 @@ insand = `https://textpro.me/write-in-sand-summer-beach-free-online-991.html`
 writingtext = `https://textpro.me/sand-writing-text-effect-online-990.html`
 engraved3d = `https://textpro.me/sand-engraved-3d-text-effect-989.html`
 summery = `https://textpro.me/create-a-summery-sand-writing-text-effect-988.html`
-balloontext = `https://textpro.me/foil-balloon-text-effect-for-birthday-987.html`
+birthday = `https://textpro.me/foil-balloon-text-effect-for-birthday-987.html`
 dglue = `https://textpro.me/create-3d-glue-text-effect-with-realistic-style-986.html`
 space3d = `https://textpro.me/create-space-3d-text-effect-online-985.html`
 darkgold = `https://textpro.me/metal-dark-gold-text-effect-984.html`
@@ -2893,7 +2893,8 @@ await textpro(spacetext, isi).then(async res => { conn.sendMessage(m.chat, {imag
 } else if(jenis === 'metallic') {
 await textpro(metallic, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'captain') {
-await textpro(captain, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+	if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+await textpro(captain, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'ciencefiction') {
 await textpro(ciencefiction, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'gameclassic') {
@@ -2983,8 +2984,6 @@ await textpro(writingtext, isi).then(async res => { conn.sendMessage(m.chat, {im
 await textpro(engraved3d, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'summery') {
 await textpro(summery, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
-} else if(jenis === 'balloontext') {
-await textpro(balloontext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'dglue') {
 await textpro(dglue, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'space3d') {
@@ -3052,13 +3051,16 @@ await textpro(cards3d, isi).then(async res => { conn.sendMessage(m.chat, {image:
 } else if(jenis === 'firetext') {
 await textpro(firetext, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'lionlogo') {
-await textpro(lionlogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+	if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+await textpro(lionlogo, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'wolflogo') {
 await textpro(wolflogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'wolfglogo') {
-await textpro(wolfglogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+	if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+await textpro(wolfglogo, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'ninjalogo') {
-await textpro(ninjalogo, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
+	if(isi2 === undefined) return m.reply(`Contoh ${prefix+command} ${jenis}/Text1/Text2`)
+await textpro(ninjalogo, [isi, isi2]).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'logojoker') {
 await textpro(logojoker, isi).then(async res => { conn.sendMessage(m.chat, {image: { url: res},  caption: 'Done'}, '') })
 } else if(jenis === 'wickereffect') {
@@ -4830,7 +4832,7 @@ anu = `*List Menu*
 
 *Islam Menu*
 ⊳ ${prefix}alquran
-⊳ ${prefix}alquran
+⊳ ${prefix}iqra
 
 *Search Menu*
 ⊳ ${prefix}google
@@ -4883,7 +4885,7 @@ anu = `*List Menu*
 
 *Islam Menu*
 ⊳ ${prefix}alquran
-⊳ ${prefix}alquran
+⊳ ${prefix}iqra
 
 *Search Menu*
 ⊳ ${prefix}google
