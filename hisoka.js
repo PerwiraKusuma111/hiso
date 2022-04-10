@@ -4341,7 +4341,7 @@ case 'iqrapdf':{
 case 'alquran':{
 	surah = q.split("/")[0]
 	ayat = q.split("/")[1]
-	try {
+	
 	if(!text.includes("/")) return m.reply(`*Cara menggunakan*\n${prefix+command} urutan surat/ayat\n*Contoh :* ${prefix+command} 1/2\n\n
 *List Surat dan Jumlah ayat*
 
@@ -4459,18 +4459,19 @@ case 'alquran':{
 *112.* *Al-Ikhlas* || 4 ayat
 *113.* *Al-Falaq* || 5 ayat
 *114.* *An-Nas* || 6 ayat`)
-	res = await fetchJson(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`)
-	anau = `*Alquran Feature*
+	axios(`https://api.quran.sutanlab.id/surah/${surah}/${ayat}`).then(({data}) => {
+	try {
+anau = `*Alquran Feature*
 
-*Surah:* ${res.data.surah.name.short}(${res.data.surah.name.transliteration.id})
-*Artinya:* ${res.data.surah.name.translation.id}
-*Wahyu:* ${res.data.surah.revelation.arab}(${res.data.surah.revelation.id})
+*Surah:* ${data.data.surah.name.short}(${data.data.surah.name.transliteration.id})
+*Artinya:* ${data.data.surah.name.translation.id}
+*Wahyu:* ${data.data.surah.revelation.arab}(${data.data.surah.revelation.id})
 
-${res.result.data.text.arab}
-_*Artinya:*_ _${res.data.translation.id}_
+${data.data.text.arab}
+_*Artinya:*_ _${data.data.translation.id}_
 
 *Tentang surah*
-${res.data.tafsir.id}
+${data.data.surah.tafsir.id}
 `
 	let btna = [{
 quickReplyButton: {
@@ -4488,11 +4489,13 @@ displayText: 'Audio',
 id: `baca ${text}`
 }
 }]
-
-await conn.sendButtonText2(m.chat, anau, `Opsi pilihan penjelasan`, btna)
+conn.sendButtonText2(m.chat, anau, `Opsi pilihan penjelasan`, btna)
 } catch(err) {
-		m.reply(`*Ulangi kembali*\nTetap error? Lapor owner\n\n${err}`)
+		m.reply(`*Ulangi kembali*\nTetap error? Lapor owner\n\n${util.format(err)}`)
 		}
+		})
+
+
 	}
 	break
 
