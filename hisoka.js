@@ -2023,9 +2023,9 @@ let search = await yts(text)
 let aramat = search.all
 /*search.videos[Math.floor(Math.random() * search.videos.length)]*/
 let res = await yta(`${search.videos[0].url}`)
-/*let get_img = await getBuffer(res.thumb)*/
+let get_img = await getBuffer(res.thumb)
 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
-conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {}).catch((e) => m.reply(String(e))).then(() => {
+conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 2, thumbnail: get_img}}}, {}).catch((e) => m.reply(String(e))).then(() => {
 
 let kunnu = []
 let no = 1
@@ -2065,9 +2065,9 @@ let { yta } = require('./lib/y2mate')
 if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
 /*let quality = args[1] ? args[1] : '360p'*/
 let res = await yta(text)
-  /*  let ythumb = await getBuffer(res.thumb)*/
+  let ythumb = await getBuffer(res.thumb)
 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}}, {}).catch((e) => m.reply(String(e)))
+conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, thumbnail: ythumb}}}, {}).catch((e) => m.reply(String(e)))
 } else {
 	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
 }
@@ -2084,9 +2084,11 @@ if(text.includes("youtu")) {
 let { ytv } = require('./lib/y2mate')
 if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
 /*let quality = args[1] ? args[1] : '360p'*/
+
 let res = await ytv(text)
+let ythum = await getBuffer(res.thumb)
 if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
-conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'video/mp4', fileName: `${res.title}.mp4`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync(`./yt.png`)}}},{})
+conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'video/mp4', fileName: `${res.title}.mp4`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, thumbnail: ythum}}},{})
 } else {
 	m.reply(`Masukkan link YouTube.\n*Contoh :* ${prefix+command} https://youtu.be/FIeUzNdApMA`)
 }
@@ -2170,7 +2172,7 @@ wikipedia(text).then(res => {
 	*Hasil penelusuran*
 	${res.result.isi}
 	`
-conn.sendMessage(m.chat, {image: {url: res.result.thumb }, caption: kunu})
+conn.sendMessage(m.chat, {image: {url: res.result.thumb }, caption: kunu, contextInfo: {externalAdReply: {title: `${title}`, body: "Perwira Bot WhatsApp", mediaUrl: `https://id.wikipedia.org/wiki/${text}`, sourceUrl: `https://id.wikipedia.org/wiki/${text}`, mediaType: 1, thumbnail: thumb}}})
 })
 }break
 case 'pinterest': 
