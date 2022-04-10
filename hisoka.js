@@ -2152,7 +2152,7 @@ for (let i of isi) {
 status: link.status,
 result: {
   judul: judul,
-  thumb: thumb,
+  thumb: thumbwik,
   isi: i
 }
   }
@@ -2174,7 +2174,7 @@ wikipedia(text).then(res => {
 	*Hasil penelusuran*
 	${res.result.isi}
 	`
-conn.sendMessage(m.chat, {image: {url: thumbwik }, caption: kunu, contextInfo: {externalAdReply: {title: `${res.result.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `https://id.wikipedia.org/wiki/${text}`, sourceUrl: `https://id.wikipedia.org/wiki/${text}`, mediaType: 1, thumbnail: thumbw}}})
+conn.sendMessage(m.chat, {image: {url: res.result.thumb }, caption: kunu, contextInfo: {externalAdReply: {title: `${res.result.title}`, body: "Perwira Bot WhatsApp", mediaUrl: `https://id.wikipedia.org/wiki/${text}`, sourceUrl: `https://id.wikipedia.org/wiki/${text}`, mediaType: 1, thumbnail: thumbw}}})
 })
 } catch(err) {
 	m.reply(util.format(err))
