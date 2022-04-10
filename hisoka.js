@@ -4194,29 +4194,29 @@ break
 }*/
 case 'juzama': {
 	let listjuzMessage = {
-text: 'Hasil penelusuran lain',
+text: 'Pilih JuzAma type media',
 footer: `Perwira Bot WhatsApp`,
-title: `*YouTube Search*\n\nVideo YouTube yang ditemukan.`,
+title: `JuzAma feature`,
 buttonText: "Click Here",
 sections: [{
-"title": `Hasil penelusuran yang ditemukan`,
+"title": `List JuzAma`,
 "rows": [{
-"title": `1. Juzama`,
+"title": `1. JuzAma`,
 "description": `Format Document(pdf)`,
 "rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.pdf`
 },
 {
-"title": `2. Juzama`,
+"title": `2. JuzAma`,
 "description": `Format Document(docx)`,
 "rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.docx`
 },
 {
-"title": `3. Juzama`,
+"title": `3. JuzAma`,
 "description": `Format Powerpoint(pptx)`,
 "rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.pptx`
 },
 {
-"title": `4. Juzama`,
+"title": `4. JuzAma`,
 "description": `Format Excel(xlsx)`,
 "rowId": `juzdl https://fatiharridho.my.id/database/islam/juz-amma-arab-latin-indonesia.xlsx}`
 }
@@ -4241,7 +4241,11 @@ case 'juzdl':{
 			}
 	}break
 case 'hadist':{
-	if(!text.includes("/")) return m.reply(`Pilihan hadist yang tersedia:
+	try {
+	if(!text.includes("/")) return m.reply(`*Cara penggunaan*
+*Contoh:* ${prefix+command} muslim/1
+
+Pilihan hadist yang tersedia:
 
 *Hadist:* abu-daud
 *Nomor:* 1-4590
@@ -4279,7 +4283,9 @@ m.reply(`*Hadist feature*
 ${arab}
 _*Artinya:*_
 _${id}_`)
-
+} catch(err) {
+	m.reply(`Ulangi kembali\nTetap error? lapor owner`)
+	}
 	}
 	
 	break
@@ -4294,7 +4300,7 @@ case 'iqra':{
 	let listiqraMessage = {
 text: 'Silahkan pilih list iqra',
 footer: `Perwira Bot WhatsApp`,
-title: `*Iqra*`,
+title: `*Iqra Feature*`,
 buttonText: "Click Here",
 sections: [{
 "title": `Hasil penelusuran yang ditemukan`,
