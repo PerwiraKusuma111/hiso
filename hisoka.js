@@ -4190,6 +4190,62 @@ await conn.sendButtonText(m.chat, buttons, `\`\`\`Mohon Tunggu Sedang Mencari Pa
 break
 
 }*/
+case 'iqra':{
+	iqra1 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra1`
+	iqra2 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra2`
+	iqra3 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra3`
+	iqra4 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra4`
+	iqra5 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra5`
+	iqra6 = `https://islamic-api-indonesia.herokuapp.com/api/data/pdf/iqra6`
+	
+	let listiqraMessage = {
+text: 'Silahkan pilih list iqra',
+footer: `Perwira Bot WhatsApp`,
+title: `*Iqra*`,
+buttonText: "Click Here",
+sections: [{
+"title": `Hasil penelusuran yang ditemukan`,
+"rows": [{
+"title": `Iqra 1`,
+"description": `Iqra 1 format pdf`,
+"rowId": `iqrapdf ${iqra1}`
+},
+{
+"title": `Iqra 2`,
+"description": `Iqra 2 format pdf`,
+"rowId": `iqrapdf ${iqra2}`
+},
+{
+"title": `Iqra 3`,
+"description": `Iqra 3 format pdf`,
+"rowId": `iqrapdf ${iqra3}`
+},{
+"title": `Iqra 4`,
+"description": `Iqra 4 format pdf`,
+"rowId": `iqrapdf ${iqra4}`
+},{
+"title": `Iqra 5`,
+"description": `Iqra 5 format pdf`,
+"rowId": `iqrapdf ${iqra5}`
+},{
+"title": `Iqra 6`,
+"description": `Iqra 6 format pdf`,
+"rowId": `iqrapdf ${iqra6}`
+}]}],
+}
+
+conn.sendMessage(m.chat, listiqraMessage, {quoted: m})
+	}
+	break
+case 'iqrapdf':{
+	if(!text) return
+	try {
+	conn.sendMessage(m.chat, {document: {url: text}, mimetype: 'application/pdf', fileName: `${text.split("/")[6]}`}, {quoted: m})
+	} catch(err) {
+		m.reply(util.format(err))
+		}
+	}
+	break
 case 'alquran':{
 	surah = q.split("/")[0]
 	ayat = q.split("/")[1]
@@ -4736,7 +4792,44 @@ displayText: 'Speed',
 id: 'ping'
 }
 }]
-themen = `*Islam Menu*
+  
+/*if (isAdmins) {
+anu = `*List Menu*
+
+*Group Menu*
+⊳ ${prefix}kick
+⊳ ${prefix}add
+⊳ ${prefix}promote
+⊳ ${prefix}demote
+⊳ ${prefix}group
+⊳ ${prefix}linkgc
+⊳ ${prefix}tagall
+⊳ ${prefix}hidetag
+⊳ ${prefix}sider
+⊳ ${prefix}setname
+⊳ ${prefix}setppgc
+
+${themen}
+`
+await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
+	} else*/ 
+ if(m.isGroup) {
+anu = `*List Menu*
+*Group Menu*
+⊳ ${prefix}kick
+⊳ ${prefix}add
+⊳ ${prefix}promote
+⊳ ${prefix}demote
+⊳ ${prefix}group
+⊳ ${prefix}linkgc
+⊳ ${prefix}tagall
+⊳ ${prefix}hidetag
+⊳ ${prefix}sider
+⊳ ${prefix}setname
+⊳ ${prefix}setppgc
+
+*Islam Menu*
+⊳ ${prefix}alquran
 ⊳ ${prefix}alquran
 
 *Search Menu*
@@ -4782,37 +4875,60 @@ themen = `*Islam Menu*
 ⊳ ${prefix}styletext
 
 *Attention!*
-  Harap baca *rules*`
-  
-if (isAdmins) {
-anu = `*List Menu*
-
-*Group Menu*
-⊳ ${prefix}kick
-⊳ ${prefix}add
-⊳ ${prefix}promote
-⊳ ${prefix}demote
-⊳ ${prefix}group
-⊳ ${prefix}linkgc
-⊳ ${prefix}tagall
-⊳ ${prefix}hidetag
-⊳ ${prefix}sider
-⊳ ${prefix}setname
-⊳ ${prefix}setppgc
-
-${themen}
-`
-await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
-	} else if(m.isGroup) {
-anu = `*List Menu*
-
-${themen}
+  Harap baca *rules*
 `
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(!m.isGroup) {
 anu = `*List Menu*
 
-${themen}
+*Islam Menu*
+⊳ ${prefix}alquran
+⊳ ${prefix}alquran
+
+*Search Menu*
+⊳ ${prefix}google
+⊳ ${prefix}ringtone
+⊳ ${prefix}ytsearch
+⊳ ${prefix}translate
+⊳ ${prefix}pinterest
+⊳ ${prefix}wikipedia
+
+*Sticker Menu*
+⊳ ${prefix}attp
+⊳ ${prefix}sticker
+⊳ ${prefix}triggered
+⊳ ${prefix}emojimix
+
+*Tools Menu*
+⊳ ${prefix}get
+⊳ ${prefix}tourl
+⊳ ${prefix}togif
+⊳ ${prefix}toimg
+⊳ ${prefix}tomp3
+⊳ ${prefix}tovideo
+
+*Download Menu*
+⊳ ${prefix}play
+⊳ ${prefix}igdl
+⊳ ${prefix}ytmp3
+⊳ ${prefix}ytmp4
+⊳ ${prefix}ttmp3
+⊳ ${prefix}ttmp4
+⊳ ${prefix}telesticker
+
+*Maker Menu*
+⊳ ${prefix}anim
+⊳ ${prefix}textpro
+⊳ ${prefix}template
+
+*Other Menu*
+⊳ ${prefix}simi
+⊳ ${prefix}nulis
+⊳ ${prefix}tahta
+⊳ ${prefix}styletext
+
+*Attention!*
+  Harap baca *rules*
 `
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
