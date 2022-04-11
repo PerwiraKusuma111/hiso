@@ -5044,6 +5044,7 @@ await tiktokdlv3(text).then(async tikk => {
 	}
 	}
 	break
+case 'fbmp4':
 case 'facebook':
 case 'fb':
 case 'fbdl': {
