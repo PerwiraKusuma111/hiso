@@ -3709,9 +3709,9 @@ await instagram(text).then(async helo => {
 let res = await axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { image: await getBuffer(helo[0].url)}, {quoted: m})
+return conn.sendMessage(m.chat, { image: {url: helo[0].url}}, {quoted: m})
 } else if(mimeaxig.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { video: await getBuffer(helo[0].url)}, {quoted: m})
+return conn.sendMessage(m.chat, { video: {url: helo[0].url}}, {quoted: m})
 }
 })
 		} else {
