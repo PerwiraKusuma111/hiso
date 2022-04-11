@@ -584,7 +584,7 @@ return conn.sendMessage(jid, { video: await getBuffer(lik)}, {quoted: m})
        imageMessage: message.imageMessage,
        	caption: `Hmmm`	
  }))*/
-            conn.relayMessage(jid, template.message, { messageId: template.key.id })
+      /*      conn.relayMessage(jid, template.message, { messageId: template.key.id })*/
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
