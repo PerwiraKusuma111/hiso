@@ -5181,7 +5181,7 @@ haha()
 var pathh = 'out2.png'
 var knights = require("./lib/knights-canvas")
 var image = await new knights.Hacker1()
-    .setText(text)
+    .setText(texts)
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
