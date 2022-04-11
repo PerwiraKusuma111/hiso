@@ -5061,7 +5061,7 @@ conn.sendMessage(m.chat, {video: {url: tes.result[2].url}, caption: `*Facebook d
 case 'facebookaudio':
 case 'fbmp3':
 case 'fbaudio': {
-if(!text.includes("fb.watch")) return m.reply(`Contoh link ${prefix+command} https://fb.watch/cj0zWfjCNl/`)
+if(!text.includes("fb")) return m.reply(`Contoh link ${prefix+command} https://fb.watch/cj0zWfjCNl/`)
 try {
 require("@bochilteam/scraper").facebookdl(text).then(async tes => {
 conn.sendMessage(m.chat, {audio: {url: tes.result[0].url}, mimetype: 'audio/mpeg'}, {quoted: m})
