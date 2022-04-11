@@ -1181,7 +1181,7 @@ case 'bc':{
 	let anu = Object.keys(store.contacts)
 	for(let ui of anu) {
 		await sleep(4000)
-        conn.sendMessage(yoi, {text: `${text}`}, '')
+        conn.sendMessage(ui, {text: `${text}`}, '')
 		}
 		m.reply('succes')
 	}
@@ -1708,7 +1708,8 @@ jail
 wanted
 wasted
 trash
-burn`)
+burn
+scary`)
 	if (!quoted) throw 'Reply Image'
     if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
     if(args[0] === 'burn') {
@@ -1760,6 +1761,19 @@ haha();
     conn.sendImage(m.chat, fs.readFileSync(`./jaditrash.jpg`), 'Done', m)
     	}
     create();
+} else if(args[0] === 'scary') {
+	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'scae.jpg')
+    	hacker = async () => {
+var pathh = 'out.png'
+var knights = require("./lib/knights-canvas")
+var image = await new knights.Patrick()
+    .setAvatar(media)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
+}
+hacker()
 } else if(args[0] === 'wasted') {
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'wasted.jpg')
     	async function create() {
@@ -1778,7 +1792,8 @@ jail
 wanted
 wasted
 trash
-burn`) }
+burn
+scary`) }
 	}
 	break
 
@@ -5073,7 +5088,7 @@ conn.sendMessage(m.chat, {audio: {url: tes.result[0].url}, mimetype: 'audio/mpeg
 	}
 	break
 case 'anim':{
-	if(!text) return m.reply(`Masukkan teks!
+	if(!text.includes("/")) return m.reply(`Masukkan teks!
 *Contoh :* ${prefix+command} gura/Text
 
 *List Type Anim Maker*
@@ -5082,7 +5097,8 @@ loli
 loli2
 neko
 catboy
-ghoul`)
+ghoul
+hacker`)
     let jeo = args.join(" ")
     let jenis = jeo.split("/")[0]
     let texts = jeo.split("/")[1]
@@ -5096,7 +5112,7 @@ var image = await new knights.Gfx1()
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}})
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 }
 haha()
 		} else if(jenis === 'gura') {
@@ -5107,7 +5123,7 @@ var image = await new knights.Gura()
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}})
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 }
 haha()
 		} else if(jenis === 'loli') {
@@ -5118,7 +5134,7 @@ var image = await new knights.Gfx2()
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}})
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 }
 haha()
 		} else if(jenis === 'catboy') {
@@ -5132,7 +5148,7 @@ var image = await new knights.Gfx3()
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}})
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 }
 haha()
 		} else if(jenis === 'neko') {
@@ -5146,7 +5162,7 @@ var image = await new knights.Gfx4()
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}})
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 }
 haha()
 		} else if(jenis === 'loli2') {
@@ -5157,9 +5173,21 @@ var image = await new knights.Gfx5()
     .toAttachment();
   data = image.toBuffer();
   await fs.writeFileSync(pathh, data)
-conn.sendMessage(m.chat, {image: {url: pathh}})
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 }
 haha()
+		} else if(jenis === 'hacker') {
+			hacker = async () => {
+var pathh = 'out2.png'
+var knights = require("./lib/knights-canvas")
+var image = await new knights.Hacker1()
+    .setText(text)
+    .toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathh, data)
+conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
+}
+hacker()
 		} else {
 			m.reply(`Type *${args[0]}* tidak ada
 *Contoh :* ${prefix}anim gura/Text
@@ -5170,7 +5198,8 @@ loli
 loli2
 neko
 catboy
-ghoul`)
+ghoul
+hacker`)
 			}
 	}
 	break
