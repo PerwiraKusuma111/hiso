@@ -5222,7 +5222,7 @@ break
 case 'simi':{
 	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Haiii`)
 try {
-let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
+let simi = await fetchJson(`https://api-sv2.simsimi.net/v2/?text=${text}&lc=id`)
 conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
 } catch(err) {
 m.reply(`*Error*\n${String(err)}`)

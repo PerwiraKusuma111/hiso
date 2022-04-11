@@ -593,7 +593,7 @@ return conn.sendMessage(jid, { video: await getBuffer(lik)}, {quoted: m})
                 }
 
                 if (anu.action == 'add') {
-                    conn.sendMessage(anu.id, {text: `Halo @${num.split("@")[0]}\nSelamat datang di *${metadata.subject}*\n\nKenalkan diri anda\n\n*Baca deskripsi grup!*`, contextInfo: {mentionedJid: [num]}})
+                    conn.sendMessage(anu.id, {text: `Halo @${num.split("@")[0]}\nSelamat datang di Grup\n*${metadata.subject}*\n\nKenalkan diri anda\n\n*Baca deskripsi grup!*`, contextInfo: {mentionedJid: [num]}})
                 } else if (anu.action == 'remove') {
                   /*  conn.relayMessage(anu.id, template.message)*/
                 }
