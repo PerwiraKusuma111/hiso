@@ -860,7 +860,7 @@ break
 	/*if (!isPremium && global.db.data.users[m.sender].limit < 1) return m.reply(mess.endLimit) // respon ketika limit habis
 		db.users[m.sender].limit -= 1 // -1 limit*/
 		let { styletext } = require('./lib/scraper')
-		if (!text) throw 'Masukkan Query text!'
+		if (!text) return m.reply(`*Masukkan text*\n*Contoh:* ${prefix+command} Textnya`)
 let anu = await styletext(text)
 let teks = `Style Text From ${text}\n\n`
 for (let i of anu) {
@@ -5123,7 +5123,7 @@ conn.sendMessage(m.chat, {image: {url: pathh}})
 haha()
 		} else if(jenis === 'catboy') {
 			if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
-			if(texts2.length < 1) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
+			if(texts2 === undefined) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx3()
@@ -5137,7 +5137,7 @@ conn.sendMessage(m.chat, {image: {url: pathh}})
 haha()
 		} else if(jenis === 'neko') {
 			if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
-			if(texts2.length < 1) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}//Bot`)
+			if(texts2 === undefined) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}//Bot`)
 haha = async () => {
 var knights = require("knights-canvas")
 var image = await new knights.Gfx4()
@@ -5246,10 +5246,7 @@ default:
 
 */
  
-/*if(budy.startsWith(`${prefix}${command}`)) {
-let non = [{buttonId: "owner", buttonText: {displayText: "Owner"}, type: 1}, {buttonId: "menu", buttonText: {displayText: "Menu"}, type: 1}]
-conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list men`, `Perwira Bot WhatsApp`, m, {})
-}
+/*
 */
 /*if (tebaklagu.hasOwnProperty(m.sender.split('@')[0]) && !isCmd) {
 kuis = true
@@ -5366,7 +5363,10 @@ if(err) return m.reply(err)
 if (stdout) return m.reply(stdout)
 })
 }
-
+if(budy.startsWith(`${prefix}${command}`)) {
+let non = [{buttonId: "owner", buttonText: {displayText: "Owner"}, type: 1}, {buttonId: "menu", buttonText: {displayText: "Menu"}, type: 1}]
+conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list menu`, `Perwira Bot WhatsApp`, m, {})
+}
 
  }
  
