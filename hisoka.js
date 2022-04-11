@@ -4863,11 +4863,6 @@ phoneNumber: '+62 8123-3264-6925'
 }
 }, {
 urlButton: {
-displayText: 'Instagram',
-url: 'https://www.instagram.com/perwira_kusuma1/'
-}
-}, {
-urlButton: {
 displayText: 'YouTube',
 url: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w'
 }
@@ -4880,6 +4875,12 @@ id: 'rules'
 quickReplyButton: {
 displayText: 'Owner',
 id: 'owner'
+}  
+},
+{
+quickReplyButton: {
+displayText: 'Statistic Bot',
+id: 'ping'
 }  
 }]
   

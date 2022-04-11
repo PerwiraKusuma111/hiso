@@ -59,8 +59,7 @@ fs.watchFile(file, () => {
 	console.log(chalk.redBright(`Update'${__filename}'`))
 	delete require.cache[file]
 	require(file)
-})
-*/
+})*/
 
 const { default: connConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
@@ -567,7 +566,7 @@ return conn.sendMessage(jid, { video: await getBuffer(lik)}, {quoted: m})
      * @param {*} path 
      * @returns 
      */
-/*     conn.ev.on('group-participants.update', async (anu) => {
+     conn.ev.on('group-participants.update', async (anu) => {
         console.log(anu)
         try {
             let metadata = await conn.groupMetadata(anu.id)
@@ -579,12 +578,12 @@ return conn.sendMessage(jid, { video: await getBuffer(lik)}, {quoted: m})
                 } catch {
                     ppuser = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
                 }
-                ppnya = await getBuffer(ppuser)
+    /*            ppnya = await getBuffer(ppuser)
         let message = await prepareWAMessageMedia({ image: ppnya}, { upload: conn.waUploadToServer })
         var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
        imageMessage: message.imageMessage,
        	caption: `Hmmm`	
- }))
+ }))*/
             conn.relayMessage(jid, template.message, { messageId: template.key.id })
                 // Get Profile Picture Group
                 try {
@@ -594,16 +593,16 @@ return conn.sendMessage(jid, { video: await getBuffer(lik)}, {quoted: m})
                 }
 
                 if (anu.action == 'add') {
-                    conn.relayMessage(anu.id, template.message)
+                    conn.sendMessage(anu.id, {text: `Halo @${num.split("@")[0]}\nSelamat datang di *${metadata.subject}*\n\nKenalkan diri anda\n\n*Baca deskripsi grup!*`, contextInfo: {mentionedJid: [num]}})
                 } else if (anu.action == 'remove') {
-                    conn.relayMessage(anu.id, template.message)
+                  /*  conn.relayMessage(anu.id, template.message)*/
                 }
             }
         } catch (err) {
             console.log(err)
         }
     })
-	*/
+	
     conn.getFile = async (PATH, save) => {
         let res
         let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
