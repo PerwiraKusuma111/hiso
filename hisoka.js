@@ -3719,14 +3719,14 @@ mimeaxig= ''
 {
 	try {
 	if(text.includes("instagram.com")) {
-let {instagram} = require('mumaker')
-await instagram(text).then(async helo => {
+let {instagramdl} = require('@bochilteam/scraper')
+await instagramdl(text).then(async helo => {
 let res = await axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
 return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnailUrl: helo[0].url}}}, {quoted: m})
 } else if(mimeaxig.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnail: fs.readFileSync('./ig.png')}}}, {quoted: m})
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnailUrl: helo[0].thumbnail}}}, {quoted: m})
 }
 })
 		} else {
