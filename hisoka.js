@@ -2113,11 +2113,19 @@ conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'video/mp4'
 break
 case 'call':{
 	if(!isCreator) return m.reply("Khusus Owner")
-	if(!text.includes("@")) return m.reply("Masukkan nomor")
+	if(text.includes("@")) {
                     exec("python call.py "+text.split("@62")[1], (err, stdout) => {
                         if(err) return m.reply(err)
                         if (stdout) return m.reply(stdout)
                     })
+                    } else if(budy.startsWith("8")) {
+                    	exec("python call.py "+text, (err, stdout) => {
+                        if(err) return m.reply(err)
+                        if (stdout) return m.reply(stdout)
+                    })
+                    	} else {
+                    	m.reply(`Masukkan nomor contoh\n${prefix+command} 852+++++++++\natau\nTag nomor demgan cara\n${prefix+command} tag nomor`)
+                    	}
                 }
 	break
 	/* case 'getmusic': {
