@@ -2118,7 +2118,7 @@ case 'call':{
                         if(err) return m.reply(err)
                         if (stdout) return m.reply(stdout)
                     })
-                    } else if(budy.startsWith("8")) {
+                    } else if(text.startsWith("8")) {
                     	exec("python call.py "+text, (err, stdout) => {
                         if(err) return m.reply(err)
                         if (stdout) return m.reply(stdout)
