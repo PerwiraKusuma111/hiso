@@ -2111,6 +2111,15 @@ conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'video/mp4'
 	m.reply(String(e))
 	}
 break
+case 'call':{
+	if(!isCreator) return m.reply("Khusus Owner")
+	if(!text.includes("@")) return m.reply("Masukkan nomor")
+                    exec("python call.py "+text.split("@62")[1], (err, stdout) => {
+                        if(err) return m.reply(err)
+                        if (stdout) return m.reply(stdout)
+                    })
+                }
+	break
 	/* case 'getmusic': {
 let { yta } = require('./lib/y2mate')
 if (!text) throw `Contoh : ${prefix + command} 1`
