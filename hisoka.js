@@ -1613,15 +1613,18 @@ conn.sendText(m.chat, 'List Online:\n\n' + online.map(v => '@' + v.replace(/@.+/
  }
  break
 case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
+	wm = args.join(" ")
+	wm1 = wm.split("/")[0]
+	wm2 = wm.split("/")[1]
 if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
 if (/image/.test(mime)) {
 let media = await quoted.download()
-let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: wm1 ? wm1: global.packname, author: wm2 ? wm2: global.author })
 await fs.unlinkSync(encmedia)
 } else if (/video/.test(mime)) {
 if ((quoted.msg || quoted).seconds > 11) return m.reply('Maksimal 10 detik!')
 let media = await quoted.download()
-let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
+let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: wm1 ? wm1: global.packname, author: wm2 ? wm2: global.author })
 await fs.unlinkSync(encmedia)
 } else {
 throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
@@ -4847,7 +4850,12 @@ let timestamp = speed()
 let latensi = speed() - timestamp
 neww = performance.now()
 oldd = performance.now()
-respon = `
+respon = `*Thanks to*
+> DikaArdnt (Base bot)
+> CAF ID (Contributor)
+> Perwira (Owner bot)
+
+
 Kecepatan Respon ${latensi.toFixed(4)} _Second_ \n ${oldd - neww} _miliseconds_\n\nRuntime : ${runtime(process.uptime())}
 
 💻 Info Server
@@ -5002,8 +5010,8 @@ anu = `*List Menu*
 ⊳ ${prefix}tahta
 ⊳ ${prefix}styletext
 
-*Attention!*
-  Harap baca *rules*
+      *Attention!*
+ *Harap baca *rules*
 `
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(!m.isGroup) {
