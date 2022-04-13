@@ -2258,7 +2258,7 @@ image: data[0].link
 pinterest(q).then(async res => {
  /*  	let we = await getBuffer(res.image).catch(err => reply(`*Error*
 ${util.format(err)}`))*/
-  	  conn.sendMessage(m.chat, {document: {url : res.image}, mimetype: 'image/jpeg', fileName: `${res.image}.jpg`,contextInfo: {externalAdReply: {title: `Pinterest Random Image`, body: "Perwira Bot WhatsApp", mediaUrl: `https://pin.it/7AoBw2I`, sourceUrl: `https://pin.it/7AoBw2I`, mediaType: 2, thumbnailUrl: res.image}}}, {quoted: m}).catch(e => m.reply(`*Error* ${String(e)}`))
+  	  conn.sendMessage(m.chat, {document: {url : res.image}, mimetype: 'image/jpeg', fileName: `${res.image}.jpg`}, {quoted: m}).catch(e => m.reply(`*Error* ${String(e)}`))
   }).catch(e => m.reply(`*Error* ${String(e)}`))
  break
 
