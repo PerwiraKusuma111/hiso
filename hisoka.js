@@ -1606,12 +1606,12 @@ mes += `*Name :* ${name}\n*Id :* ${_}\n\n`
  conn.sendTextWithMentions(m.chat, teks, m)
  }
  break*/
- case 'listonline': case 'liston': {
+ /*case 'listonline': case 'liston': {
 let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
 let online = [...Object.keys(store.presences[id]), botNumber]
 conn.sendText(m.chat, 'List Online:\n\n' + online.map(v => '@' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
  }
- break
+ break*/
 case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
 	wm = args.join(" ")
 	wm1 = wm.split("/")[0]
