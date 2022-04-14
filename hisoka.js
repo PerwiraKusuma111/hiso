@@ -3663,12 +3663,13 @@ case 'igvideo':
 case 'instagramvideo2':
 if (text.includes("instagram.com")) {
 	try {
-await require('./lib/igdown').igdownloader(text).then(async ries => {
+let igdownloader = require('./lib/igdown')
+await igdownloader(text).then(async ries => {
 let resiop = await axios.head(ries.result.link)
-mmimeaxig= resiop.headers['content-type']
-if(mmimeaxig.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnailUrl: helo[0].url}}}, {quoted: m})
-} else if(mmimeaxig.split("/")[0] === "video"){
+mmimeaxigg= resiop.headers['content-type']
+if(mmimeaxigg.split("/")[0] === "image"){
+return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 1,thumbnail: fs.readFileSync('./ig.png') }}}, {quoted: m})
+} else if(mmimeaxigg.split("/")[0] === "video"){
 return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnail: fs.readFileSync('./ig.png')}}}, {quoted: m})
 }
 })
