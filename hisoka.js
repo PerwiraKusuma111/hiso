@@ -3663,8 +3663,8 @@ case 'igvideo':
 case 'instagramvideo2':
 if (text.includes("instagram.com")) {
 	try {
-let igdownloader = require('./lib/igdown')
-await igdownloader(text).then(async ries => {
+let {igdownloader} = require('./lib/igdown')
+igdownloader(text).then(async ries => {
 let resiop = await axios.head(ries.result.link)
 mmimeaxigg= resiop.headers['content-type']
 if(mmimeaxigg.split("/")[0] === "image"){
