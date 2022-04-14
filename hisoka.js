@@ -1544,7 +1544,7 @@ conn.sendMessage(yop, {text: `${text}`}, '')
   }
 }
 break
-case 'infochat': case 'sider':{
+/*case 'infochat': case 'sider':{
 if (!m.quoted) m.reply('Reply Pesan')
 let msg = await m.getQuotedObj()
 if (!m.quoted.isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
@@ -1558,7 +1558,7 @@ teks += ` ┗━*Waktu :* ${moment(waktu * 1000).format('DD/MM/YY HH:mm:ss')} *S
 }
 conn.sendTextWithMentions(m.chat, teks, m)
 }
-break
+break*/
 case 'q': case 'quoted': {
 		if (!m.quoted) return m.reply('Reply Pesannya!!')
 		let wokwol = await conn.serializeM(await m.getQuotedObj())
@@ -3657,24 +3657,28 @@ conn.sendAudio(m.chat, audio, '', ptt = false, {mimetype: 'audio/mpeg', contextI
 }
 }
 break
-/*case 'igdl':
-case 'igmp4':
+case 'igdl2':
+case 'igmp42':
 case 'igvideo':
-case 'instagramvideo':
+case 'instagramvideo2':
 if (text.includes("instagram.com")) {
 	try {
-let { igdownloader } = require('./lib/igdown')
-igdownloader(text).then(async res => {
-conn.sendMedia(m.chat, res.result.link, '', `Instagram Downloader`, m)*/
-/*conn.sendMessage(m.chat, {video: {url: `${res.result.link}`}, mimetype: 'video/mp4', caption: '*Instagram Downloader*'}, {quoted: m})*//*.catch(err => m.reply(`*Error*\n${String(err)}`))*/
-/*})
+await require('./lib/igdown').igdownloader(text).then(async ries => {
+let resiop = await axios.head(ries.result.link)
+mmimeaxig= resiop.headers['content-type']
+if(mmimeaxig.split("/")[0] === "image"){
+return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnailUrl: helo[0].url}}}, {quoted: m})
+} else if(mmimeaxig.split("/")[0] === "video"){
+return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnail: fs.readFileSync('./ig.png')}}}, {quoted: m})
+}
+})
 } catch(e) {
 	m.reply(String(e))
 	}
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
-break*/
+break
 /*case 'igdl':
 case 'instagram':
 case 'ig':
@@ -5089,7 +5093,7 @@ case 'fbmp4':
 case 'facebook':
 case 'fb':
 case 'fbdl': {
-if(!text.includes("fb")) return m.reply(`Contoh link ${prefix+command} https://fb.watch/cj0zWfjCNl/`)
+if(!text.includes("fb") && !text.includes("facebook")) return m.reply(`Contoh link ${prefix+command} https://fb.watch/cj0zWfjCNl/`)
 try {
 require("@bochilteam/scraper").facebookdl(text).then(async tes => {
 conn.sendMessage(m.chat, {video: {url: tes.result[2].url}, caption: `*Facebook downloader*`}, {quoted: m})
