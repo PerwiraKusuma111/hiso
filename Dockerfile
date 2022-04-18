@@ -16,5 +16,3 @@ RUN npm i -g pm2
 COPY . .
 
 RUN pm2 start index.js
-RUN pm2 save
-RUN pm2 monit
