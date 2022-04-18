@@ -1,6 +1,6 @@
 FROM node:lts-buster
 
-RUN apt-get update && \
+RUN apt-get update -y && \
   apt-get install -y \
   ffmpeg \
   imagemagick \
