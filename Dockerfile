@@ -11,7 +11,7 @@ RUN apt-get update -y && \
 COPY package.json .
 
 RUN npm install
-RUN npm i -g pm20
+RUN npm i -g pm2
 
 COPY . .
 
