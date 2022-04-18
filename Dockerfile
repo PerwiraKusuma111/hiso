@@ -11,7 +11,6 @@ RUN apt-get update -y && \
 COPY package.json .
 
 RUN npm install
-RUN node index
 
 COPY . .
 
