@@ -13,7 +13,7 @@ COPY package.json .
 RUN npm install
 RUN npm i -g pm2
 RUN pm2 start index.js
-RUN pm2 logs
+RUN pm2 monit
 
 COPY . .
 
