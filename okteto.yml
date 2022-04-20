@@ -1,6 +1,6 @@
 build:
   api:
-    context: index.js
+    context: hiso
   frontend:
     context: frontend
 deploy:
