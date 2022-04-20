@@ -1,0 +1,19 @@
+build:
+  api:
+    context: api
+  frontend:
+    context: frontend
+deploy:
+  - npm i
+dev:
+  api:
+    command: ["node"]
+    forward:
+      - 8080:8080
+      - 9229:9229
+    sync:
+      - api:/usr/src/app
+  frontend:
+    command: node index
+    sync:
+      - frontend:/usr/src/app
