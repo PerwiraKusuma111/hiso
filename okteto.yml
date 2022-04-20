@@ -1,6 +1,6 @@
 build:
   api:
-    context: index
+    context: index.js
   frontend:
     context: frontend
 deploy:
@@ -12,7 +12,7 @@ dev:
       - 8080:8080
       - 9229:9229
     sync:
-      - index:/usr/src/app
+      - api:/usr/src/app
   frontend:
     command: node index
     sync:
