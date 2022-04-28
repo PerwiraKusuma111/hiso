@@ -239,12 +239,58 @@ async function startHisoka() {
      * @param {*} options
      * @returns
      */
-    conn.send5ButImg = async (jid , text = '' , footer = '', img, but = [], options = {}) =>{
+    conn.sendButImg = async (jid , text = '' , footer = '', img, but = [], options = {}) =>{
         let message = await prepareWAMessageMedia({ image: img }, { upload: conn.waUploadToServer })
         var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
         templateMessage: {
         hydratedTemplate: {
         imageMessage: message.imageMessage,
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            conn.relayMessage(jid, template.message, { messageId: template.key.id })
+    }
+    
+    conn.sendButVid = async (jid , text = '' , footer = '', iurl, but = [], options = {}) =>{
+        let message = await prepareWAMessageMedia({video: {url: iurl}}, { upload: conn.waUploadToServer })
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+        videoMessage: message.videoMessage,
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            conn.relayMessage(jid, template.message, { messageId: template.key.id })
+    }
+    
+    conn.sendButGif = async (jid , text = '' , footer = '', iurl, but = [], options = {}) =>{
+        let message = await prepareWAMessageMedia({video: iurl, gifPlayback:true, fileLength: 333}, { upload: conn.waUploadToServer })
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+        videoMessage: message.videoMessage,
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            conn.relayMessage(jid, template.message, { messageId: template.key.id })
+    }
+    
+    conn.sendButLoc = async (jid , text = '' , footer = '', img, but = [], options = {}) =>{
+       /* let message = await prepareWAMessageMedia({ image: img }, { upload: conn.waUploadToServer })*/
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+        locationMessage: {
+               "jpegThumbnail": img},
                "hydratedContentText": text,
                "hydratedFooterText": footer,
                "hydratedButtons": but

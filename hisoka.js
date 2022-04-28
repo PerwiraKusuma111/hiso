@@ -64,9 +64,10 @@ let tebaklirik = db.data.game.lirik = []
 let tebaktebakan = db.data.game.tebakan = []
 let vote = db.data.others.vote = []
 */
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 module.exports = conn = async (conn, m, chatUpdate, store) => {
 try {
-	var cmd = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+var cmd = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
 var prefix = /^[!?#/.,]/.test(cmd) ? cmd.match(/^[!?#/.,]/gi) : "/"
 var body = (m.mtype === 'conversation' && m.message.conversation.startsWith(prefix)) ? m.message.conversation : (m.mtype == 'imageMessage') && m.message.imageMessage.caption.startsWith(prefix) ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') && m.message.videoMessage.caption.startsWith(prefix) ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') && m.message.extendedTextMessage.text.startsWith(prefix) ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
 var budy = (typeof m.text == 'string' ? m.text : '')
@@ -83,7 +84,7 @@ const isSimi = [...global.simi]/*.map(v => v.replace(/[^0-9]/g, '') + '@g.us')*/
 const itsMe = m.sender == botNumber ? true : false
 const text = q = args.join(" ")
 const isOffline = !m.isGroup ? global.offline.includes("offline") : false
-const simo = args.join("")
+const simo = budy.slice(0)
 const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 	const isMedia = /image|video|sticker|audio/.test(mime)
@@ -1719,7 +1720,7 @@ scary`)
 let media = await conn.downloadAndSaveMediaMessage2(quoted, 'sponge.jpg')
 var pathh = 'ouit.png'
 haha = async () => {
-var knights = require("knights-canvas")
+var knights = require('./lib/knights-canvas')
 var image = await new knights.Burn()
     .setAvatar('sponge.jpg')
     .toAttachment();
@@ -1916,13 +1917,26 @@ kunn.push({
 let listMessage = {
 text: 'Hasil penelusuran lain',
 footer: `Perwira Bot WhatsApp`,
-title: `*YouTube Search*\n\nVideo YouTube yang ditemukan.`,
+title: `*YouTube Search*\n\nVideo yang ditemukan.`,
 buttonText: "Click Here",
 sections: [{
 "title": `Hasil penelusuran yang ditemukan`,
-"rows": kunn}],
+"rows": kunn}]
 }
-conn.sendMessage(m.chat, listMessage, {quoted: m})
+conn.sendMessage(m.chat, listMessage, {quoted: {
+	    	      	       	  key: { 
+       	      	   	      	  fromMe: false,
+	      	      	          participant: `${quoted.sender}`
+                           },
+                         	  message: { 
+		                      "extendedTextMessage": {
+                              "text": `*YouTube Search*`,
+                              "title": ``,
+                              'jpegThumbnail': fs.readFileSync('./yt.png')
+                           }
+	                            } 
+                                     }, contextInfo: {mentionedJid: [quoted.sender]
+	}})
   /*teks += `No : ${no++}\nType : ${i.type}\nVideo ID : ${i.videoId}\nTitle : ${i.title}\nViews : ${i.views}\nDuration : ${i.timestamp}\nUpload At : ${i.ago}\nAuthor : ${i.author.name}\nUrl : ${i.url}\n\n─────────────────\n\n`*/
 
 /* conn.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })*/
@@ -1931,7 +1945,7 @@ break
 case 'ytdl':{
 	pesan = `Silahkan pilih type media`
 	let btnz = [{buttonId: `ytmp3 ${text}`, buttonText: {displayText: 'Audio'}, type:1},{buttonId: `ytmp4 ${text}`, buttonText: {displayText: 'Video'}, type:1}]
-	conn.sendButtonText(m.chat, btnz, pesan, `Perwira Bot WhatsApp`)
+	conn.sendButtonText(m.chat, btnz, pesan, `Perwira Bot WhatsApp`, m)
 	}break
 case 'google': {
 if (!text) throw `Contoh : ${prefix + command} fatih arridho`
@@ -3579,6 +3593,35 @@ headerType: 5
 conn.sendMessage(m.chat, buttonMessage, { quoted: m })
 }
 break*/
+case 'tiktokaudio':
+case 'ttmp3':
+case 'tiktokmp3': {
+	kuyi = {
+	    	      	       	  key: { 
+       	      	   	      	  fromMe: false,
+	      	      	          participant: `${quoted.sender}`
+                           },
+                         	  message: { 
+		                      "extendedTextMessage": {
+                              "text": `*TikTok Downloader*`,
+                              "title": ``,
+                              'jpegThumbnail': fs.readFileSync('./tiktok.png')
+                           }
+	                            } 
+                                     }
+if (text.includes("tiktok.com")) {
+	try {
+tiktok = require('./lib/tiktok')
+resioni = await tiktok(text)
+conn.sendMessage(m.chat, {document: {url: `${resioni.medias.audio.url}`}, ptt: false, mimetype: 'audio/mpeg', fileName: `${resioni.medias.audio.sound}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}}, {quoted: m})
+} catch(e) {
+	m.reply(String(e))
+	}
+} else {
+	m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)
+}
+}
+break
 case 'ttmp4':
 case 'tiktok':
 case 'ttdl':
@@ -3586,10 +3629,11 @@ case 'tiktokdl':
 case 'tiktoknowm':{
 if (text.includes("tiktok.com")) {
 	try {
-let { TiktokDownloader } = require('./lib/scraper')
-let res = await TiktokDownloader(text)
-got_vid = await getBuffer(res.result.nowatermark).catch(e => m.reply("Error"))
-conn.sendMessage(m.chat, {video: got_vid, mimetype: 'video/mp4'}, {quoted: m})
+tiktok = require('./lib/tiktok')
+resion = await tiktok(text)
+/*got_vid = await getBuffer(resion.medias.nowm.url).catch(e => m.reply("Error"))*/
+/*conn.sendMessage(m.chat, {video: {url: `${resion.medias.nowm.url}` }, mimetype: 'video/mp4', caption: "*Tiktok Downloader*"}, {quoted: m})*/
+conn.sendButVid(m.chat, '*TikTok Downloader*', 'Perwira Bot WhatsApp', `${resion.medias.nowm.url}`, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}])
 } catch(e) {
 	m.reply(String(e))
 	}
@@ -3638,25 +3682,7 @@ if(text.includes("tiktok.com")) {
 	} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 	}
 break
-case 'tiktokaudio':
-case 'ttmp3':
-case 'tiktokmp3': {
-if (text.includes("tiktok.com")) {
-	try {
-let { TiktokDownloader } = require('./lib/scraper')
-let res = await TiktokDownloader(text)
-let media = await getBuffer(res.result.nowatermark)
-let { toAudio } = require('./lib/converter')
-let audio = await toAudio(media, 'mp4')
-conn.sendAudio(m.chat, audio, '', ptt = false, {mimetype: 'audio/mpeg', contextInfo: {externalAdReply: {title: `Tiktok Downloader`, body: "Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, thumbnail: fs.readFileSync('./tiktok.png')}}})
-} catch(e) {
-	m.reply(String(e))
-	}
-} else {
-	m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)
-}
-}
-break
+
 case 'igdl2':
 case 'igmp42':
 case 'igvideo':
@@ -3740,6 +3766,7 @@ case 'ringring': {
 case 'igdl':
 case 'instagram':
 case 'ig':
+if(text.includes("/stories/")) return m.reply("_Bot belum support download stories_")
 mimeaxig= ''
 {
 	try {
@@ -3749,13 +3776,13 @@ await instagram(text).then(async helo => {
 let res = await axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnailUrl: helo[0].url}}}, {quoted: m})
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 1, thumbnail: fs.readFileSync('./instagram.png')}}}, {quoted: m})
 } else if(mimeaxig.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 2, thumbnail: fs.readFileSync('./ig.png')}}}, {quoted: m})
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 1, thumbnail: fs.readFileSync('./instagram.png')}}}, {quoted: m})
 }
 })
 		} else {
-			m.reply("Pastikan menggunakan link Instagram")
+			m.reply(`Masukkan link!\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
 			}
 			} catch(e) {
 				m.reply(`Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`)
@@ -4634,14 +4661,14 @@ conn.public = false
 m.reply('Sukses Change To Self Usage')
 }
 break
-/* case 'nulis':{
+/*case 'folio':{
  	try {
 									if (args.length < 1) return m.reply(`Kirim perintah *${prefix+command}* teks`)
 									let tulisan = q
 									let splitText = tulisan.replace(/(\S+\s*){1,9}/g, '$&\n')
 									let fixHeight = splitText.split('\n').slice(0, 31).join('\n')
 									spawn('convert', [
-									'./src/snulis.jpg',
+									'./src/sbuku.jpg',
 									'-font',
 									'./src/Indie-Flower.ttf',
 									'-size',
@@ -4855,25 +4882,31 @@ let timestamp = speed()
 let latensi = speed() - timestamp
 neww = performance.now()
 oldd = performance.now()
-respon = `*Thanks to*
-> DikaArdnt (Base bot)
-> CAF ID (Contributor)
-> Perwira (Owner bot)
+respon = `*Info Bot*
+_Last update on 24, Maret_
 
+*Thanks to*
+DikaArdnt (Base bot)
+CAF ID (Contributor)
+Perwira (Owner bot)
 
-Kecepatan Respon ${latensi.toFixed(4)} _Second_ \n ${oldd - neww} _miliseconds_\n\nRuntime : ${runtime(process.uptime())}
+*Base Bot:*
+https://github.com/DikaArdnt/Hisoka-Morou
 
-💻 Info Server
+*Speed* ${latensi.toFixed(4)} second
+*Runtime* : ${runtime(process.uptime())}
+
+*Info Server*
 RAM: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
 
-_NodeJS Memory Usaage_
+*NodeJS Memory Usaage*
 ${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
 
-${cpus[0] ? `_Total CPU Usage_
-${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}
+${cpus[0] ? `*Total CPU Usage*
+\`\`\`${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- ${(type + '').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}
 _CPU Core(s) Usage (${cpus.length} Core CPU)_
-${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
-`.trim()
+${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- ${(type + '').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
+\`\`\``.trim()
 m.reply(respon)
 }
 break
@@ -4913,8 +4946,8 @@ url: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w'
 }
 }, {
 quickReplyButton: {
-displayText: 'Rules',
-id: 'rules'
+displayText: 'Info Bot',
+id: 'ping'
 }
 }, {
 quickReplyButton: {
@@ -4924,8 +4957,8 @@ id: 'owner'
 },
 {
 quickReplyButton: {
-displayText: 'Statistic Bot',
-id: 'ping'
+displayText: 'Rules Bot',
+id: 'rules'
 }  
 }]
   
@@ -4933,147 +4966,141 @@ id: 'ping'
 anu = `*List Menu*
 
 *Group Menu*
-⊳ ${prefix}kick
-⊳ ${prefix}add
-⊳ ${prefix}promote
-⊳ ${prefix}demote
-⊳ ${prefix}group
-⊳ ${prefix}linkgc
-⊳ ${prefix}tagall
-⊳ ${prefix}hidetag
-⊳ ${prefix}sider
-⊳ ${prefix}setname
-⊳ ${prefix}setppgc
+▣ ${prefix}kick
+▣ ${prefix}add
+▣ ${prefix}promote
+▣ ${prefix}demote
+▣ ${prefix}group
+▣ ${prefix}linkgc
+▣ ${prefix}tagall
+▣ ${prefix}hidetag
+▣ ${prefix}sider
+▣ ${prefix}setname
+▣ ${prefix}setppgc
 
 ${themen}
 `
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else*/ 
  if(m.isGroup) {
-anu = `*List Menu*
+anu = `*Simple Bot WhatsApp*
+   
+*List Menu*
 
 *Group Menu*
-⊳ ${prefix}kick
-⊳ ${prefix}add
-⊳ ${prefix}promote
-⊳ ${prefix}demote
-⊳ ${prefix}group
-⊳ ${prefix}linkgc
-⊳ ${prefix}tagall
-⊳ ${prefix}hidetag
-⊳ ${prefix}sider
-⊳ ${prefix}setname
-⊳ ${prefix}setppgc
+▣ ${prefix}kick
+▣ ${prefix}add
+▣ ${prefix}promote
+▣ ${prefix}demote
+▣ ${prefix}group
+▣ ${prefix}linkgc
+▣ ${prefix}tagall
+▣ ${prefix}hidetag
+▣ ${prefix}sider
+▣ ${prefix}setname
+▣ ${prefix}setppgc
 
 *Islam Menu*
-⊳ ${prefix}iqra
-⊳ ${prefix}hadist
-⊳ ${prefix}juzama
-⊳ ${prefix}alquran
+▣ ${prefix}iqra
+▣ ${prefix}hadist
+▣ ${prefix}juzama
+▣ ${prefix}alquran
 
 *Search Menu*
-⊳ ${prefix}google
-⊳ ${prefix}ringtone
-⊳ ${prefix}ytsearch
-⊳ ${prefix}translate
-⊳ ${prefix}pinterest
-⊳ ${prefix}wikipedia
+▣ ${prefix}google
+▣ ${prefix}ringtone
+▣ ${prefix}ytsearch
+▣ ${prefix}translate
+▣ ${prefix}pinterest
+▣ ${prefix}wikipedia
 
 *Sticker Menu*
-⊳ ${prefix}attp
-⊳ ${prefix}sticker
-⊳ ${prefix}triggered
-⊳ ${prefix}emojimix
+▣ ${prefix}attp
+▣ ${prefix}sticker
+▣ ${prefix}triggered
+▣ ${prefix}emojimix
 
 *Tools Menu*
-⊳ ${prefix}get
-⊳ ${prefix}tourl
-⊳ ${prefix}togif
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
+▣ ${prefix}get
+▣ ${prefix}tourl
+▣ ${prefix}togif
+▣ ${prefix}toimg
+▣ ${prefix}tomp3
+▣ ${prefix}tovideo
 
 *Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}igdl
-⊳ ${prefix}fbmp3
-⊳ ${prefix}fbmp4
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
+▣ ${prefix}play
+▣ ${prefix}igdl
+▣ ${prefix}fbdl
+▣ ${prefix}ytmp3
+▣ ${prefix}ytmp4
+▣ ${prefix}ttmp3
+▣ ${prefix}ttmp4
+▣ ${prefix}telesticker
 
 *Maker Menu*
-⊳ ${prefix}anim
-⊳ ${prefix}textpro
-⊳ ${prefix}template
+▣ ${prefix}anim
+▣ ${prefix}textpro
+▣ ${prefix}template
 
 *Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}styletext
-
-      *Attention!*
- *Harap baca *rules*
+▣ ${prefix}nulis
+▣ ${prefix}tahta
+▣ ${prefix}styletext
 `
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	} else if(!m.isGroup) {
-anu = `*List Menu*
+anu = `*Simple Bot WhatsApp*
+
+*List Menu*
 
 *Islam Menu*
-⊳ ${prefix}iqra
-⊳ ${prefix}hadist
-⊳ ${prefix}juzama
-⊳ ${prefix}alquran
+▣ ${prefix}iqra
+▣ ${prefix}hadist
+▣ ${prefix}juzama
+▣ ${prefix}alquran
 
 *Search Menu*
-⊳ ${prefix}google
-⊳ ${prefix}ringtone
-⊳ ${prefix}ytsearch
-⊳ ${prefix}translate
-⊳ ${prefix}pinterest
-⊳ ${prefix}wikipedia
+▣ ${prefix}google
+▣ ${prefix}ringtone
+▣ ${prefix}ytsearch
+▣ ${prefix}translate
+▣ ${prefix}pinterest
+▣ ${prefix}wikipedia
 
 *Sticker Menu*
-⊳ ${prefix}attp
-⊳ ${prefix}sticker
-⊳ ${prefix}triggered
-⊳ ${prefix}emojimix
+▣ ${prefix}attp
+▣ ${prefix}sticker
+▣ ${prefix}triggered
+▣ ${prefix}emojimix
 
 *Tools Menu*
-⊳ ${prefix}get
-⊳ ${prefix}tourl
-⊳ ${prefix}togif
-⊳ ${prefix}toimg
-⊳ ${prefix}tomp3
-⊳ ${prefix}tovideo
+▣ ${prefix}get
+▣ ${prefix}tourl
+▣ ${prefix}togif
+▣ ${prefix}toimg
+▣ ${prefix}tomp3
+▣ ${prefix}tovideo
 
 *Download Menu*
-⊳ ${prefix}play
-⊳ ${prefix}igdl
-⊳ ${prefix}fbmp3
-⊳ ${prefix}fbmp4
-⊳ ${prefix}ytmp3
-⊳ ${prefix}ytmp4
-⊳ ${prefix}ttmp3
-⊳ ${prefix}ttmp4
-⊳ ${prefix}telesticker
+▣ ${prefix}play
+▣ ${prefix}igdl
+▣ ${prefix}fbdl
+▣ ${prefix}ytmp3
+▣ ${prefix}ytmp4
+▣ ${prefix}ttmp3
+▣ ${prefix}ttmp4
+▣ ${prefix}telesticker
 
 *Maker Menu*
-⊳ ${prefix}anim
-⊳ ${prefix}textpro
-⊳ ${prefix}template
+▣ ${prefix}anim
+▣ ${prefix}textpro
+▣ ${prefix}template
 
 *Other Menu*
-⊳ ${prefix}simi
-⊳ ${prefix}nulis
-⊳ ${prefix}tahta
-⊳ ${prefix}styletext
-
-*Attention!*
-  Harap baca *rules*
+▣ ${prefix}nulis
+▣ ${prefix}tahta
+▣ ${prefix}styletext
 `
 await conn.sendButtonText2(m.chat, anu, `Perwira Bot WhatsApp`, btn)
 	}
@@ -5136,7 +5163,7 @@ hacker`)
 	var pathh = 'out.png'
 	if(jenis === 'ghoul') {
 		haha = async () => {
-var knights = require("knights-canvas")
+var knights = require('./lib/knights-canvas')
 var image = await new knights.Gfx1()
     .setName(texts)
     .toAttachment();
@@ -5147,7 +5174,7 @@ conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 haha()
 		} else if(jenis === 'gura') {
 			haha = async () => {
-var knights = require("knights-canvas")
+var knights = require('./lib/knights-canvas')
 var image = await new knights.Gura()
     .setName(texts)
     .toAttachment();
@@ -5158,7 +5185,7 @@ conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 haha()
 		} else if(jenis === 'loli') {
 			haha = async () => {
-var knights = require("knights-canvas")
+var knights = require('./lib/knights-canvas')
 var image = await new knights.Gfx2()
     .setName(texts)
     .toAttachment();
@@ -5171,7 +5198,7 @@ haha()
 			if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
 			if(texts2 === undefined) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
 haha = async () => {
-var knights = require("knights-canvas")
+var knights = require('./lib/knights-canvas')
 var image = await new knights.Gfx3()
     .setText1(texts)
     .setText2(texts2)
@@ -5185,7 +5212,7 @@ haha()
 			if(!text.includes("/")) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}/Perwira/Bot`)
 			if(texts2 === undefined) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} ${jenis}//Bot`)
 haha = async () => {
-var knights = require("knights-canvas")
+var knights = require('./lib/knights-canvas')
 var image = await new knights.Gfx4()
     .setText1(texts)
     .setText2(texts2)
@@ -5197,7 +5224,7 @@ conn.sendMessage(m.chat, {image: {url: pathh}}, {quoted: m})
 haha()
 		} else if(jenis === 'loli2') {
 			haha = async () => {
-var knights = require("knights-canvas")
+var knights = require('./lib/knights-canvas')
 var image = await new knights.Gfx5()
     .setText(texts)
     .toAttachment();
@@ -5278,15 +5305,9 @@ m.reply(bu)
 m.reply(e)
 }
 break
-case 'simi':{
-	if(!text) return m.reply(`Masukkan teks!\n*Contoh :* ${prefix+command} Haiii`)
-try {
-let simi = await fetchJson(`https://simsimi.info/api/?text=${text}&lc=id`)
-conn.sendMessage(m.chat, {text: `${simi.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`}, {quoted: m})
-} catch(err) {
-m.reply(`*Error*\n${String(err)}`)
-}
-}
+/*case 'simi':{
+m.reply(`Kirim pesan sambil reply chat yang dikirim oleh bot`)
+}*/
 /*let btnz = [{buttonId: 'simi off', buttonText: {displayText: 'Off'}, type:1},{buttonId: 'simi on', buttonText: {displayText: 'On'}, type:1}]
 					if (args.length < 1) return conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					if ((args[0]) === 'on') {
@@ -5299,7 +5320,7 @@ m.reply(`*Error*\n${String(err)}`)
 					} else {
 						conn.sendButtonText(m.chat, btnz, `Pilih opsi dibawah untuk mengunakan`, `Perwira Bot WhatsApp`)
 					}*/
-					break
+					/*break*/
 default:
 /*
 
@@ -5427,6 +5448,14 @@ let non = [{buttonId: "owner", buttonText: {displayText: "Owner"}, type: 1}, {bu
 conn.sendButtonText(m.chat,non ,`Command *${prefix+command}* tidak ada di Menu\nLihat kembali list menu`, `Perwira Bot WhatsApp`, m, {})
 }
 
+/*if(!isCmd) {
+	if(sisMedia) return
+	if(!m.quoted) return
+	let { chat, fromMe, id, isBaileys } = m.quoted
+	if(!isBaileys) return
+chatsim = await fetchJson(`https://simsimi.info/api/?text=${simo}&lc=id`)
+m.reply(`${chatsim.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`)
+	}*/
  }
  
 
