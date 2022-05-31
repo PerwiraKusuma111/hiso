@@ -26,10 +26,14 @@ global.APIKeys = {
 
 global.chatDB = []
 global.udah = []
-global.ban = ["6281553391495@s.whatsapp.net"]
 global.offline = []
 global.simi = []
-global.owner = ['6281232646925', '6282230819722@s.whatsapp.net', '6283167714830@s.whatsapp.net']
+kickadd = JSON.parse(fs.readFileSync('./kick.json'))
+global.bug = JSON.parse(fs.readFileSync('./bug.json'))
+global.insta = JSON.parse(fs.readFileSync('./insta.json'))
+global.coomd = JSON.parse(fs.readFileSync('./user.json'))
+global.ban = ["6281553391495@s.whatsapp.net"]
+global.owner = ['6281232646925', '6283167714830', '85298460539']
 global.premium = ['6288292024190']
 global.packname = 'Sticker'
 global.author = 'Perwira Bot WhatsApp'
@@ -51,7 +55,6 @@ global.limitawal = {
     premium: "Infinity",
     free: 100
 }
-global.thumb = fs.readFileSync('./lib/hisoka.jpg')
 
 /*let file = require.resolve(__filename)
 fs.watchFile(file, () => {
@@ -83,7 +86,7 @@ const { Low, JSONFile } = low
 
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
-global.db = new Low(new JSONFile(`src/database.json`))
+/*global.db = new Low(new JSONFile(`src/database.json`))
 global.db.data = {
     users: {},
     chats: {},
@@ -94,7 +97,7 @@ global.db.data = {
     others: {},
     ...(global.db.data || {})
 }
-
+*/
 /*if (global.db) setInterval(async () => {
     if (global.db.data) await global.db.write()
   }, 30 * 1000)*/
@@ -147,7 +150,7 @@ async function startHisoka() {
         } else return jid
     }
     
-    conn.ev.on('contacts.update', update => {
+   conn.ev.on('contacts.update', update => {
         for (let contact of update) {
             let id = conn.decodeJid(contact.id)
             if (store && store.contacts) store.contacts[id] = { id, name: contact.notify }
@@ -177,13 +180,15 @@ async function startHisoka() {
   /*  conn.sendPresenceUpdate("composing", jid) => {
     	jid = args.join(" ")
     }*/
-    
-    conn.sendContact = async (jid, kon, quoted = '', opts = {}) => {
+ 
+ 
+	
+conn.sendContact = async (jid, kon, quoted = '', opts = {}) => {
 	let list = []
 	for (let i of kon) {
 	    list.push({
 	    	displayName: await conn.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i + '@s.whatsapp.net')}\nFN:P${await conn.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:perwiraanjay111@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/perwira_kusuma1\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(i + '@s.whatsapp.net')}\nFN:${await conn.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:perwiraanjay111@gmail.com\nitem2.X-ABLabel:Email\nitem3.URL:https://instagram.com/perwira_kusuma1\nitem3.X-ABLabel:Instagram\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
 	    })
 	}
 	conn.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
@@ -208,7 +213,7 @@ async function startHisoka() {
 	
     conn.public = true
 
-    conn.serializeM = (m) => smsg(conn, m, store)
+  conn.serializeM = (m) => smsg(conn, m, store)
 
     conn.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update	    
@@ -253,6 +258,47 @@ async function startHisoka() {
             }), options)
             conn.relayMessage(jid, template.message, { messageId: template.key.id })
     }
+    
+    conn.sendButDoc = async (jid , text = '' , footer = '', docu, ic, mi, logos, but = [], options = {}) =>{
+        let mgDoc = await prepareWAMessageMedia({ document: docu, jpegThumbnail: logos, fileName: ic, mimetype: mi}, { upload: conn.waUploadToServer })
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+        templateMessage: {
+        hydratedTemplate: {
+documentMessage: mgDoc.documentMessage,
+               "hydratedContentText": text,
+               "hydratedFooterText": footer,
+               "hydratedButtons": but
+            }
+            }
+            }), options)
+            conn.relayMessage(jid, template.message, { messageId: template.key.id })
+    }
+    
+conn.sendButDoc2 = async (jid, foot = '', text1 = '', titl = '', bud = '',thum, surce, typ, _finame = '', doc = '', mimer= '', but = [], pio, gen = false) => {
+conn.sendMessage(jid, {document: {url: doc},
+fileName: _finame, mimetype: mimer, contextInfo: {
+externalAdReply: {
+title: titl,
+body: bud,
+sourceUrl: surce, 
+mediaUrl: surce, 
+renderLargerThumbnail: gen,
+mediaType: typ, 
+thumbnail: thum}},
+                    caption: text1,
+                    footer: foot,
+                    buttons: but,
+                    headerType: 4}, 
+                   {quoted: pio})
+                   }
+    conn.sendVid = async (jid, uirl, options= {}) => {
+    	let message = await prepareWAMessageMedia({video: {url: uirl}, caption: "Tiktok Downloader"}, { upload: conn.waUploadToServer })
+        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+        videoMessage: message.videoMessage,
+            }), options)
+            
+            conn.relayMessage(jid, template.message, { messageId: template.key.id })
+    	}
     
     conn.sendButVid = async (jid , text = '' , footer = '', iurl, but = [], options = {}) =>{
         let message = await prepareWAMessageMedia({video: {url: iurl}}, { upload: conn.waUploadToServer })
@@ -324,6 +370,27 @@ conn.sendButtonText2 = async (jid , text = '' , footer = '', but = [], options =
      * @param {*} quoted 
      * @param {*} options 
      */
+     conn.sendButDocLink = (jid, buttons = [], text, footer, link, img, doc, mim, namfile, quoted = '', options = {}) => {
+     	let buttonMessage = {
+     	doc,
+         mimetype: mim,
+         fileName: namfile,
+         contextInfo: {
+         externalAdReply: {
+sourceUrl: link, 
+mediaUrl: link, 
+mediaType: 2, 
+thumbnail: img}
+         	},
+         text,
+         footer,
+         buttons,
+         headerType: 4,
+         ...options
+     	}
+     conn.sendMessage(jid, buttonMessage, {quoted, ...options})
+     	}
+     
     conn.sendButtonText = (jid, buttons = [], text, footer, quoted = '', options = {}) => {
         let buttonMessage = {
             text,
@@ -616,31 +683,72 @@ return conn.sendMessage(jid, { video: await getBuffer(lik)}, {quoted: m})
         console.log(anu)
         try {
             let metadata = await conn.groupMetadata(anu.id)
+/**
+* @return 
+* @param {string} length Enter the length of the character you want to create.
+*/
+
+function gen(length) {
+  if(length < 1) Err('You must enter a number greater than 1!')
+  else{
+    let a = 'ABCDEFGHIJKLNMOPQRSTUVWXYZ0123456789abcdefghijklnmopqrstuvwxyz'
+    let temp = ''
+    for (let i = 0; i < length; i++) {
+      var land = Math.floor(Math.random() * a.length)
+      temp += a[land]
+    }
+    return temp
+  }
+}
+
             let participants = anu.participants
             for (let num of participants) {
                 // Get Profile Picture User
                 try {
                     ppuser = await conn.profilePictureUrl(num, 'image')
                 } catch {
-                    ppuser = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
+                    ppuser = fs.readFileSync('./nothing.jpg')
                 }
-    /*            ppnya = await getBuffer(ppuser)
-        let message = await prepareWAMessageMedia({ image: ppnya}, { upload: conn.waUploadToServer })
-        var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-       imageMessage: message.imageMessage,
-       	caption: `Hmmm`	
- }))*/
-      /*      conn.relayMessage(jid, template.message, { messageId: template.key.id })*/
+
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
                 } catch {
-                    ppgroup = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"
+                	ppgroup = fs.readFileSync('./nothing.jpg')
+                    /*ppgroup = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"*/
                 }
 
                 if (anu.action == 'add') {
-                    conn.sendMessage(anu.id, {text: `Halo @${num.split("@")[0]}\nSelamat datang di Grup\n*${metadata.subject}*\n\nKenalkan diri anda\n\n*Baca deskripsi grup!*`, contextInfo: {mentionedJid: [num]}})
-                } else if (anu.action == 'remove') {
+                	var pathw = 'ouuti.png'
+                gon = gen(123456)
+           /*     namanya = conn.getName(num)*/
+                capti = `*Selamat datang di grup*
+*${metadata.subject.replace(/[\n]/g, ' ')}*
+
+Halo @${num.split("@")[0]}
+Perkenalkan diri anda
+
+*Nama Panggilan:* ...
+*Asal kota:* ...
+*Umur:* ...
+
+*Baca rules grup!!!*`
+
+salma = async () => {
+var knights = require('./lib/knights-canvas')
+var image = await new knights.Welcome()
+.setAvatar(ppuser)
+.setUsername(`+${num.split("@")[0]}`)
+.setGuildIcon(ppgroup)
+.setMemberCount(`${metadata.participants.length}`) 
+.setGuildName(`${metadata.subject.replace(/[\n]/g, ' ')}`)
+.toAttachment();
+  data = image.toBuffer();
+  await fs.writeFileSync(pathw, data)
+  }
+await salma()
+conn.sendMessage(anu.id, {text: capti, contextInfo: {mentionedJid: [num], externalAdReply: {mediaUrl: `https://whatsapp.com/${gon}`, sourceUrl: `https://whatsapp.com/${gon}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync('./ouuti.png')}}})
+      } else if (anu.action == 'remove') {
                   /*  conn.relayMessage(anu.id, template.message)*/
                 }
             }
