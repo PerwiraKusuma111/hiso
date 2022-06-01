@@ -1610,7 +1610,7 @@ scary`) }
 case 'convert': 
 case 'to': {
 	if(!text) return m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\img`)
-	if(text.includes(["img", "gambar", "image"])) {
+	if(text.includes("img", "gambar", "image")) {
 		if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
 let media = await conn.downloadAndSaveMediaMessage(quoted)
@@ -1622,7 +1622,7 @@ let buffer = fs.readFileSync(ran)
 conn.sendMessage(m.chat, { image: buffer }, { quoted: m })
 fs.unlinkSync(ran)
 })
-		} else if(text.includes(["mp3", "audio"])) {
+		} else if(text.includes("mp3", "audio")) {
 			if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
 if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
 if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
@@ -1631,7 +1631,7 @@ let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
 conn.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert tomp3.mp3`}, { quoted : m })
-		} else if(text.includes(["mp4", "video", "vidio"])) {
+		} else if(text.includes("mp4", "video", "vidio")) {
 			if (!quoted) throw 'Reply sticker animated'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
 
@@ -1650,7 +1650,7 @@ let webpToMp4 = await webp2mp4File(media)
 await conn.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m })
 await fs.unlinkSync(media)
 		} else {
-			m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\img`)
+			m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\nimg`)
 			}
 	}
 	break
