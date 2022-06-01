@@ -5973,7 +5973,8 @@ conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 		}*/
 } catch(err) {
 m.reply(`*Attention*\n${String(err)}`)
-if(String(err) === "Cannot read properties of undefined (reading 'replace')") {
+io = String(err)
+if(io.includes("Cannot read properties of undefined (reading 'replace')")) {
 let evaled = await eval("process.exit()")
 if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
 	}
