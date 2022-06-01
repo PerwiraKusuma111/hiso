@@ -1606,8 +1606,57 @@ scary`) }
 	}
 	break
 
+
+case 'convert': 
+case 'to': {
+	if(!text) return m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\img`)
+	if(text.includes(["img", "gambar", "image"])) {
+		if (!quoted) throw 'Reply Image'
+if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+let media = await conn.downloadAndSaveMediaMessage(quoted)
+let ran = await getRandom('.png')
+exec(`ffmpeg -i ${media} ${ran}`, (err) => {
+fs.unlinkSync(media)
+if (err) throw err
+let buffer = fs.readFileSync(ran)
+conn.sendMessage(m.chat, { image: buffer }, { quoted: m })
+fs.unlinkSync(ran)
+})
+		} else if(text.includes(["mp3", "audio"])) {
+			if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+
+let media = await quoted.download()
+let { toAudio } = require('./lib/converter')
+let audio = await toAudio(media, 'mp4')
+conn.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert tomp3.mp3`}, { quoted : m })
+		} else if(text.includes(["mp4", "video", "vidio"])) {
+			if (!quoted) throw 'Reply sticker animated'
+if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+
+		let { webp2mp4File } = require('./lib/uploader')
+let media = await conn.downloadAndSaveMediaMessage(quoted)
+let webpToMp4 = await webp2mp4File(media)
+await conn.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m })
+await fs.unlinkSync(media)
+		} else if(text.includes("gif")) {
+			if (!quoted) throw 'Reply Image'
+if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+
+		let { webp2mp4File } = require('./lib/uploader')
+let media = await conn.downloadAndSaveMediaMessage(quoted)
+let webpToMp4 = await webp2mp4File(media)
+await conn.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m })
+await fs.unlinkSync(media)
+		} else {
+			m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\img`)
+			}
+	}
+	break
+
 	case 'tomp4': case 'tovideo': {
-if (!quoted) throw 'Reply Image'
+if (!quoted) throw 'Reply sticker animated'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
 
 		let { webp2mp4File } = require('./lib/uploader')
@@ -1635,7 +1684,7 @@ if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Capt
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
-conn.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert tomp3.mp3`}, { quoted : m })
+conn.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert tomp3 ${new Date()}.mp3`}, { quoted : m })
 }
 break
 case 'tovn': case 'toptt': {
@@ -2180,8 +2229,8 @@ case 'wikipedia': {
 	
 	for(let w of swi) {
 	listmes.push({
-	"title": `${noi++}.Wikipedia`,
-	"description": `${w.data}`,
+	"title": `${noi++}.${w.data.split("/")[4].replace(/_/g, " ")}`,
+	"description": `Wikiedia result ${w.data.split("/")[4].replace(/_/g, " ")}`,
 	"rowId": `wikipedia ${w.data}`
     })
     }
@@ -5174,6 +5223,7 @@ Last update on 24, Mei
 *Thanks to*
 *DikaArdnt* (Base bot)
 *CAF ID* (Contributor)
+*Mr_Dark* (Python script)
 *Perwira* (Recode and fix bug)
 
 
@@ -5232,7 +5282,7 @@ phoneNumber: '+62 8123-3264-6925'
 }, {
 urlButton: {
 displayText: 'Owner',
-url: 'wa.me/6281232646925'
+url: 'https://wa.me/6281232646925'
 }
 }, {
 quickReplyButton: {
@@ -5247,12 +5297,38 @@ id: 'owner'
 },
 {
 quickReplyButton: {
-displayText: 'Rules Bot',
-id: 'rules'
+displayText: 'Spesifikasi',
+id: 'ping'
 }  
 }]
+
+info = `*Simple Bot WhatsApp*
+
+*Thanks to*
+*DikaArdnt* (Base bot)
+*CAF ID* (Contributor)
+*Mr_Dark* (Python script)
+*Perwira* (Recode and fix bug)
+
+*Base Bot:*
+https://github.com/DikaArdnt/Hisoka-Morou
+
+*Sewa Bot*
+Sewa bot join grup selamanya bot aktif
+Cuman 5k pembayaran via Pulsa/Dana
+Chat owner untuk melanjutkan
+
+
+*Rules Bot*
+
+#Dilarang spam
+#Dilarang menelfon
+
+Fitur error? chat owner!
+Melanggar? block
+`
   
-await conn.sendButGif(m.chat, "More info of this Bot", `©Perwira Bot WhatsApp`, fs.readFileSync('./gify.mp4'), btn)
+await conn.sendButGif(m.chat, info, `©Perwira Bot WhatsApp`, fs.readFileSync('./gify.mp4'), btn)
 	}break
 
 case 'igstalk':
@@ -5265,8 +5341,7 @@ case 'stalkig': {
 	prif = ''
 	preif = ''
 	datast = await igstalk(text)
-	datastalke = `━━━━━━━━━━
-  *Profile user*
+	datastalke = `  *Profile user*
 ━━━━━━━━━━
 *${datast.full_name}*
 ${datast.username}
@@ -5278,7 +5353,6 @@ ${datast.edge_owner_to_timeline_media.count} Post
 ${datast.biography}
 
 
-━━━━━━━━━━
   *Account info*
 ━━━━━━━━━━
 Professional: ${datast.is_professional_account}
@@ -5290,7 +5364,7 @@ Verivied: ${datast.is_verified}
 _${datast.profile_pic_url_hd}_
 `
 imgsr = await getBuffer(datast.profile_pic_url_hd)
-conn.sendMessage(m.chat, {text: datastalke, contextInfo: {externalAdReply: {title: "Instagram Stalk", body: "©Perwira Bot WhatsApp", sourceUrl: `https://instagram.com/${text}`, mediaUrl: `https://instagram.com/${text}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: imgsr}}})
+conn.sendMessage(m.chat, {text: datastalke, contextInfo: {externalAdReply: {title: "Instagram Stalk", body: "©Perwira Bot WhatsApp", sourceUrl: `https://www.instagram.com/${text}`, mediaUrl: `https://www.instagram.com/${text}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: imgsr}}})
 	} catch(err) {
 		m.reply(String(err))
 		}
@@ -5302,7 +5376,7 @@ let buttono = [{buttonId: 'info', buttonText: {displayText: 'More Info'}, type:1
 let btn = [{
 urlButton: {
 displayText: 'Channel',
-phoneNumber: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w'
+url: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w'
 }
 }, {
 urlButton: {
@@ -5322,8 +5396,8 @@ id: 'owner'
 },
 {
 quickReplyButton: {
-displayText: 'Baca sebelum menggunakan',
-id: 'rules'
+displayText: 'Info Bot',
+id: 'info'
 }  
 }]
   
@@ -5377,12 +5451,11 @@ anu = `*List Menu*
 
 *Search Menu*
 ≻ ${prefix}play
+≻ ${prefix}igstalk
 ≻ ${prefix}igstory
 ≻ ${prefix}google
-≻ ${prefix}igstalk
 ≻ ${prefix}ringtone
 ≻ ${prefix}ytsearch
-≻ ${prefix}translate
 ≻ ${prefix}wikipedia
 ≻ ${prefix}wikihow
 
@@ -5394,13 +5467,10 @@ anu = `*List Menu*
 ≻ ${prefix}emojimix
 
 *Tools Menu*
-≻ ${prefix}get
 ≻ ${prefix}tts
 ≻ ${prefix}tourl
-≻ ${prefix}togif
-≻ ${prefix}toimg
-≻ ${prefix}tomp3
-≻ ${prefix}tomp4
+≻ ${prefix}convert
+≻ ${prefix}translate
 ≻ ${prefix}download
 
 *Maker Menu*
@@ -5423,7 +5493,7 @@ thumbnail: fs.readFileSync(`./icon.jpeg`)}},
                     buttons: buttono,
                     headerType:4})*/
                     /*conn.sendMessage(m.chat, {text: anu, contextInfo: {externalAdReply: {title: '©Perwira Bot Official', sourceUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./icon.jpeg`)}}})*/
-                    conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp', btn)
+                    conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp\nThis is simple Bot WhatsApp', btn)
 	} else if(!m.isGroup) {
 anu = `*List Menu*
 *Islam Menu*
@@ -5447,7 +5517,6 @@ anu = `*List Menu*
 ≻ ${prefix}igstalk
 ≻ ${prefix}ringtone
 ≻ ${prefix}ytsearch
-≻ ${prefix}translate
 ≻ ${prefix}wikipedia
 ≻ ${prefix}wikihow
 
@@ -5459,13 +5528,10 @@ anu = `*List Menu*
 ≻ ${prefix}emojimix
 
 *Tools Menu*
-≻ ${prefix}get
 ≻ ${prefix}tts
 ≻ ${prefix}tourl
-≻ ${prefix}togif
-≻ ${prefix}toimg
-≻ ${prefix}tomp3
-≻ ${prefix}tomp4
+≻ ${prefix}convert
+≻ ${prefix}translate
 ≻ ${prefix}download
 
 *Maker Menu*
@@ -5488,7 +5554,7 @@ thumbnail: fs.readFileSync(`./icon.jpeg`)}},
                     buttons: buttono,
                     headerType:4})*/
                  /*   conn.sendMessage(m.chat, {text: anu, contextInfo: {externalAdReply: {title: '©Perwira Bot Official', sourceUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./icon.jpeg`)}}})*/
-                 conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp', btn)
+                 conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp\nThis is simple Bot WhatsApp', btn)
 	}
 }break
 case 'tiktokv2':{
@@ -5665,11 +5731,12 @@ text: "Nama Bot"
 }
 }
 }*/
-anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block\n\n*Informasi*\n\nJika file tidak muncul di galeri/music cari file melalui aplikasi file manager dengan lokasi folder file sebagai berikut.\n\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp_Documents"
+anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `©Perwira Bot WhatsApp`, m)
 } break
 case 'get':{
+	if(!isCreator) return
 	if(!text) return m.reply(`Cara penggunaan\n*Contoh :* ${prefix+command} https://news.com`)
 let mimeax = ''
 try {
