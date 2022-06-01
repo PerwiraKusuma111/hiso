@@ -1750,6 +1750,7 @@ case 'download':
 case 'dl': {
 	if(!text) return m.reply(`Masukkan linknya\n*Contoh:* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
 	if(text.includes("youtu")) {
+		pesan = `Silahkan pilih type media`
 		let btnz = [{buttonId: `ytmp3 ${text}`, buttonText: {displayText: 'Audio'}, type:1},{buttonId: `ytmp4 ${text}`, buttonText: {displayText: 'Video'}, type:1}]
 	    conn.sendButtonText(m.chat, btnz, pesan, `©Perwira Bot WhatsApp`, m)
 		} else if(text.includes("instagram.com")) {
@@ -5718,7 +5719,7 @@ default:
 kuis = true
 jawaban = tebaklagu[m.sender.split('@')[0]]
 if (budy.toLowerCase() == jawaban) {
-await conn.sendButtonText(m.chat, [{ buttonId: 'tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu 🎮\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, `©Perwira Bot WhatsApp`, m)
+await conn.sendButtonText(m.chat, [{ buttonId: 'tebak lagu', buttonText: { displayText: 'Tebak Lagu' }, type: 1 }], `🎮 Tebak Lagu ??\n\nJawaban Benar 🎉\n\nIngin bermain lagi? tekan button dibawah`, `©Perwira Bot WhatsApp`, m)
 delete tebaklagu[m.sender.split('@')[0]]
 } else m.reply('*Jawaban Salah!*')
 }
