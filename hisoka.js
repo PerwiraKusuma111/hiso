@@ -1745,6 +1745,89 @@ conn.sendMessage(m.chat, listMessage, {quoted:
 /* conn.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })*/
 }
 break
+
+case 'download':
+case 'dl': {
+	if(!text) return m.reply(`Masukkan linknya\n*Contoh:* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
+	if(text.includes("youtu")) {
+		let btnz = [{buttonId: `ytmp3 ${text}`, buttonText: {displayText: 'Audio'}, type:1},{buttonId: `ytmp4 ${text}`, buttonText: {displayText: 'Video'}, type:1}]
+	    conn.sendButtonText(m.chat, btnz, pesan, `©Perwira Bot WhatsApp`, m)
+		} else if(text.includes("instagram.com")) {
+			if(text.includes("/stories/")) return m.reply(`_Gunakan perintah ${prefix}igstory_`)
+mimeaxig= ''
+{
+	try {
+	if(text.includes("instagram.com")) {
+let {instagram} = require('mumaker')
+helo = await instagram(text)
+let res = await axios.head(helo[0].url)
+mimeaxig= res.headers['content-type']
+if(mimeaxig.split("/")[0] === "image"){
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
+} else if(mimeaxig.split("/")[0] === "video"){
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./ig.jpeg')}}})
+}
+		} else {
+			m.reply(`Masukkan link!\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
+			}
+			} catch(e) {
+				conn.sendButtonText(m.chat, [{buttonId: `igdl2 ${text}`, buttonText: {displayText: 'Versi lain'}, type: 1}, {buttonId: `igdl ${text}`, buttonText: {displayText: 'Coba lagi'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
+				}
+	}
+		} else if(text.includes("tiktok.com")) {
+			try {
+tiktok = require('./lib/tiktok')
+resion = await tiktok(text)
+/*got_vid = await getBuffer(resion.medias.nowm.url).catch(e => m.reply("Error"))*/
+/*conn.sendMessage(m.chat, {video: {url: `${resion.medias.nowm.url}` }, mimetype: 'video/mp4', caption: "*Tiktok Downloader*"}, {quoted: m})*/
+conn.sendButVid(m.chat, '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${resion.medias.nowm.url}`, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}])
+} catch(e) {
+	conn.sendButtonText(m.chat, [{buttonId: `tiktok2 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
+	}
+		} else if(text.includes("mediafire.com")) {
+			try {
+	if(text.includes('mediafire.com')) {
+		let {mediafire} = require('mumaker')
+		await mediafire(text).then(async datan => {
+			if(datan[0].mime === 'zip') {
+			conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/zip', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+			} else if(datan[0].mime === '9') {
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/vnd.android.package-archive', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+					} else if(datan[0].mime === '7z') {
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/7z', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+					} else if(datan[0].nama.endsWith('.mp4')) {
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'video/mp4', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					} else if(datan[0].nama.endsWith('.pdf')) {
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/pdf', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					} else {
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/octet-stream', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					m.reply('Buka document melalui apk File manager anda')
+					}
+})
+		} else {
+			m.reply(`*Cara Penggunaan*\n\n*Contoh :* ${prefix+command} https://www.mediafire.com/file/jqxsuqn83s0f2wp/PIXELLAB+DARK+BLUE+1.9.9.apk/file`)
+			}
+		} catch (e) {
+			m.reply("Error")
+			}
+		} else if(text.includes("t.me")) {
+			try {
+			if (m.isGroup) return m.reply("Tidak bisa digunakan di group")
+			if (!text) return m.reply(`Contoh: ${prefix+command} https://t.me/addstickers/geestickerpack`)
+			if (!text.includes('t.me/addstickers')) return m.reply('Bukan link telegram stiker')
+			let { Tstick } = require('./lib/scraper')
+var telestc = await Tstick(`${q}`).catch(err => m.reply(`*Error*\n${util.format(err)}`))
+			for (let unduh of telestc) {
+			conn.sendMessage(m.chat, {sticker: await getBuffer(unduh.url), mimetype:'image/webp'},{quoted: m}).catch(err => m.reply(`*Error*\n${util.format(err)}`))
+			}
+			} catch(e) {
+	m.reply(String(e))
+	}
+			} else {
+				m.reply(`Belum tersedia untuk download link ${text}`)
+				}
+	}
+	break
 case 'ytdl':{
 	pesan = `Silahkan pilih type media`
 	let btnz = [{buttonId: `ytmp3 ${text}`, buttonText: {displayText: 'Audio'}, type:1},{buttonId: `ytmp4 ${text}`, buttonText: {displayText: 'Video'}, type:1}]
@@ -1925,7 +2008,7 @@ if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh
 /*let quality = args[1] ? args[1] : '360p'*/
 let res = await yta(text)
   let ythumb = await getBuffer(res.thumb)
-if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
+if (res.filesize >= 10000) return m.reply('Ukuran file melebihi batas dari yang ditetapkan bot'+util.format(res))
 conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, showAdAttribution: true, thumbnail: ythumb}}}, {}).catch((e) => m.reply(String(e)))
 /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `${res.title}`, "©Perwira Bot WhatsApp", ythumb, text, 2, `${res.title}.mp3` , res.dl_link, "audio/mpeg", [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m)*/
 } else {
@@ -1947,7 +2030,7 @@ if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh
 
 let res = await ytv(text)
 let ythum = await getBuffer(res.thumb)
-if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(res))
+if (res.filesize >= 10000) return m.reply('Ukuran file melebihi batas dari yang ditetapkan bot'+util.format(res))
 conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'video/mp4', fileName: `${res.title}.mp4`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, showAdAttribution: true, thumbnail: ythum}}},{})
 /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `${res.title}`, "©Perwira Bot WhatsApp", ythum, text, 2, `${res.title}.mp4` , res.dl_link, "video/mp4", [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m)*/
 } else {
@@ -5292,6 +5375,8 @@ anu = `*List Menu*
 ≻ ${prefix}image
 
 *Search Menu*
+≻ ${prefix}play
+≻ ${prefix}igstory
 ≻ ${prefix}google
 ≻ ${prefix}igstalk
 ≻ ${prefix}ringtone
@@ -5314,20 +5399,8 @@ anu = `*List Menu*
 ≻ ${prefix}togif
 ≻ ${prefix}toimg
 ≻ ${prefix}tomp3
-≻ ${prefix}tovideo
-
-*Download Menu*
-≻ ${prefix}play
-≻ ${prefix}igdl
-≻ ${prefix}fbdl
-≻ ${prefix}ghdl
-≻ ${prefix}ytmp3
-≻ ${prefix}ytmp4
-≻ ${prefix}ttmp3
-≻ ${prefix}ttmp4
-≻ ${prefix}igstory
-≻ ${prefix}mediafire
-≻ ${prefix}telesticker
+≻ ${prefix}tomp4
+≻ ${prefix}download
 
 *Maker Menu*
 ≻ ${prefix}anim
@@ -5367,6 +5440,8 @@ anu = `*List Menu*
 ≻ ${prefix}image
 
 *Search Menu*
+≻ ${prefix}play
+≻ ${prefix}igstory
 ≻ ${prefix}google
 ≻ ${prefix}igstalk
 ≻ ${prefix}ringtone
@@ -5390,19 +5465,7 @@ anu = `*List Menu*
 ≻ ${prefix}toimg
 ≻ ${prefix}tomp3
 ≻ ${prefix}tomp4
-
-*Download Menu*
-≻ ${prefix}play
-≻ ${prefix}igdl
-≻ ${prefix}fbdl
-≻ ${prefix}ghdl
-≻ ${prefix}ytmp3
-≻ ${prefix}ytmp4
-≻ ${prefix}ttmp3
-≻ ${prefix}ttmp4
-≻ ${prefix}igstory
-≻ ${prefix}mediafire
-≻ ${prefix}telesticker
+≻ ${prefix}download
 
 *Maker Menu*
 ≻ ${prefix}anim
