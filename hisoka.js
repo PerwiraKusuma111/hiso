@@ -1939,7 +1939,7 @@ let aramat = search.all
 /*search.videos[Math.floor(Math.random() * search.videos.length)]*/
 let res = await yta(`${search.videos[0].url}`)
 let get_img = await getBuffer(res.thumb)
-if (res.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+if (res.filesize >= 10000) return m.reply('File Melebihi Batas '+util.format(media))
 conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "©Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 2, showAdAttribution: true, thumbnail: get_img}}}, {}).catch((e) => m.reply(String(e))).then(() => {
 
 let kunnu = []
@@ -2031,7 +2031,7 @@ if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh
 
 let res = await ytv(text)
 let ythum = await getBuffer(res.thumb)
-if (res.filesize >= 10000) return m.reply('Ukuran file melebihi batas dari yang ditetapkan bot'+util.format(res))
+if (res.filesize >= 20000) return m.reply('Ukuran file melebihi batas dari yang ditetapkan bot'+util.format(res))
 conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'video/mp4', fileName: `${res.title}.mp4`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, showAdAttribution: true, thumbnail: ythum}}},{})
 /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `${res.title}`, "©Perwira Bot WhatsApp", ythum, text, 2, `${res.title}.mp4` , res.dl_link, "video/mp4", [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m)*/
 } else {
@@ -5973,6 +5973,10 @@ conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 		}*/
 } catch(err) {
 m.reply(`*Attention*\n${String(err)}`)
+if(String(err) === "Cannot read properties of undefined (reading 'replace')") {
+let evaled = await eval("process.exit()")
+if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
+	}
 }
 }
 
