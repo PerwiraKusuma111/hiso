@@ -148,10 +148,10 @@ if (!m.key.fromMe) return
 }
 
 // Push Message To Console && Auto Read
-/*if (m.message) {*/
-/*conn.sendReadReceipt(m.chat, m.sender, [m.key.id])*/
-/*console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
-}*/
+if (m.message) {
+conn.sendReadReceipt(m.chat, m.sender, [m.key.id])
+console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
+}
 	//Antidelte
 
 	// write database every 1 minute
@@ -214,7 +214,7 @@ return !0
 [5] Mungkin Tidak
 
 Ketik angka/teksnya!`
-conn.sendMessage(m.chat, {text: yuk, contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/2`, mediaUrl: `https://akinator.com/2`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./aki2.jpeg`)}}})
+conn.sendMessage(m.chat, {text: yuk, contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/2`, mediaUrl: `https://akinator.com/2`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/aki2.jpeg`)}}})
         }
 /*
 // Respon Cmd with media
@@ -564,14 +564,14 @@ Cuman 5k pembayaran via Pulsa/Dana
 Chat owner untuk melanjutkan
 
 ©Perwira Bot WhatsApp`
-	conn.sendMessage(m.chat, {text: respons, contextInfo: {externalAdReply: {title: 'Owner Bot', body: 'Klik disini untuk menuju nomor Owner', sourceUrl: `https://wa.me/6281232646925`, mediaUrl: `https://wa.me/6281232646925`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./pem.jpg`)}}})
+	conn.sendMessage(m.chat, {text: respons, contextInfo: {externalAdReply: {title: 'Owner Bot', body: 'Klik disini untuk menuju nomor Owner', sourceUrl: `https://wa.me/6281232646925`, mediaUrl: `https://wa.me/6281232646925`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/pem.jpg`)}}})
 	}
 break
 
 case 'akinator': case 'aki': {
 	if(!isCreator && m.isGroup) return m.reply("Tidak bisa digunakan didalam grup")
             if(typeof this.akinator[m.sender] == 'object') return m.reply("Kamu Masih Berada Dalam Sesi Akinator")
-            conn.sendMessage(m.chat, {text: "Pikirkan salah satu tokoh saya akan menebaknya\nWaktu 10 detik", contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/1`, mediaUrl: `https://akinator.com/1`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./aki.jpeg`)}}})
+            conn.sendMessage(m.chat, {text: "Pikirkan salah satu tokoh saya akan menebaknya\nWaktu 10 detik", contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/1`, mediaUrl: `https://akinator.com/1`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/aki.jpeg`)}}})
           /*  m.reply("Pikirkan salah satu tokoh saya akan menebak\nSaya tunggu 10 detik")*/
             await sleep(10000)
             let { Aki } = require("aki-api")
@@ -588,7 +588,7 @@ case 'akinator': case 'aki': {
 [5] Mungkin Tidak
 
 Ketik angka/teksnya!`
-conn.sendMessage(m.chat, {text: akn, contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/2`, mediaUrl: `https://akinator.com/2`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./aki2.jpeg`)}}})
+conn.sendMessage(m.chat, {text: akn, contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/2`, mediaUrl: `https://akinator.com/2`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/aki2.jpeg`)}}})
             }
             break
          /*   case 'delakinator': {
@@ -1296,7 +1296,7 @@ id: 'menu'
 }  
 }]
   let txt = `Broadcast by Owner\n\n${text}`
-  conn.sendButImg(i, txt, '©Perwira Bot WhatsApp', fs.readFileSync('./pem.jpg'), btn)
+  conn.sendButImg(i, txt, '©Perwira Bot WhatsApp', fs.readFileSync('./image/pem.jpg'), btn)
 }
 m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
 }
@@ -1328,7 +1328,7 @@ id: 'menu'
 }  
 }]
   let txt = `Broadcast Owner Bot\n\n${text}\n`
-  conn.sendButImg(i, txt, '©Perwira Bot WhatsApp', fs.readFileSync('./pem.jpg'), btn)
+  conn.sendButImg(i, txt, '©Perwira Bot WhatsApp', fs.readFileSync('./image/pem.jpg'), btn)
 }
 		m.reply('succes')
 	}
@@ -1609,7 +1609,7 @@ scary`) }
 
 case 'convert': 
 case 'to': {
-	if(!text) return m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\img`)
+	if(!text) return m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\nimg`)
 	if(text.includes("img", "gambar", "image")) {
 		if (!quoted) throw 'Reply Image'
 if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
@@ -1786,7 +1786,7 @@ conn.sendMessage(m.chat, listMessage, {quoted:
                               "extendedTextMessage": {
                               "text": `*YouTube Search*`,
                               "title": ``,
-                              'jpegThumbnail': fs.readFileSync('./yt.png')
+                              'jpegThumbnail': fs.readFileSync('./image/yt.png')
                                }} 
                                }, contextInfo: {mentionedJid: [quoted.sender]}})
   /*teks += `No : ${no++}\nType : ${i.type}\nVideo ID : ${i.videoId}\nTitle : ${i.title}\nViews : ${i.views}\nDuration : ${i.timestamp}\nUpload At : ${i.ago}\nAuthor : ${i.author.name}\nUrl : ${i.url}\n\n─────────────────\n\n`*/
@@ -1813,9 +1813,9 @@ helo = await instagram(text)
 let res = await axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
 } else if(mimeaxig.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./ig.jpeg')}}})
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
 }
 		} else {
 			m.reply(`Masukkan link!\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
@@ -1840,17 +1840,17 @@ conn.sendButVid(m.chat, '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${resi
 		let {mediafire} = require('mumaker')
 		await mediafire(text).then(async datan => {
 			if(datan[0].mime === 'zip') {
-			conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/zip', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+			conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/zip', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}}) 
 			} else if(datan[0].mime === '9') {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/vnd.android.package-archive', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/vnd.android.package-archive', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}}) 
 					} else if(datan[0].mime === '7z') {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/7z', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/7z', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}}) 
 					} else if(datan[0].nama.endsWith('.mp4')) {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'video/mp4', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'video/mp4', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}})
 					} else if(datan[0].nama.endsWith('.pdf')) {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/pdf', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/pdf', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}})
 					} else {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/octet-stream', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/octet-stream', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}})
 					m.reply('Buka document melalui apk File manager anda')
 					}
 })
@@ -1899,13 +1899,13 @@ m.reply(teks)
 break
 case 'tesbut':{
 conn.sendMessage(m.chat, 
-{document: fs.readFileSync('./pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+{document: fs.readFileSync('./image/pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 fileName: '𝗟𝗶𝘀𝘁 𝗠𝗲𝗻𝘂', contextInfo: {
 externalAdReply: {
 sourceUrl: `https://©Perwira Bot WhatsApp`, 
 mediaUrl: `https://Perwira Not WhatsApp`, 
 mediaType: 1, renderLargerThumbnail: true,
-thumbnail: fs.readFileSync(`./ig.jpeg`)}},
+thumbnail: fs.readFileSync(`./image/ig.jpeg`)}},
                     caption: 'Hello World',
                     footer: 'CAF BOTz - Bot MD',
                     buttons: buttonLoc,
@@ -1988,7 +1988,7 @@ let aramat = search.all
 /*search.videos[Math.floor(Math.random() * search.videos.length)]*/
 let res = await yta(`${search.videos[0].url}`)
 let get_img = await getBuffer(res.thumb)
-if (res.filesize >= 10000) return m.reply('File Melebihi Batas '+util.format(media))
+if (res.filesize >= 10000) return m.reply('File Melebihi Batas, maximal 10m')
 conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "©Perwira Bot WhatsApp", mediaUrl: `${search.videos[0].url}`, sourceUrl: `${search.videos[0].url}`, mediaType: 2, showAdAttribution: true, thumbnail: get_img}}}, {}).catch((e) => m.reply(String(e))).then(() => {
 
 let kunnu = []
@@ -2058,7 +2058,7 @@ if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh
 /*let quality = args[1] ? args[1] : '360p'*/
 let res = await yta(text)
   let ythumb = await getBuffer(res.thumb)
-if (res.filesize >= 10000) return m.reply('Ukuran file melebihi batas dari yang ditetapkan bot'+util.format(res))
+if (res.filesize >= 10000) return m.reply('File Melebihi Batas, maximal 10mb')
 conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'audio/mpeg', fileName: `${res.title}.mp3`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, showAdAttribution: true, thumbnail: ythumb}}}, {}).catch((e) => m.reply(String(e)))
 /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `${res.title}`, "©Perwira Bot WhatsApp", ythumb, text, 2, `${res.title}.mp3` , res.dl_link, "audio/mpeg", [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m)*/
 } else {
@@ -2080,7 +2080,7 @@ if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh
 
 let res = await ytv(text)
 let ythum = await getBuffer(res.thumb)
-if (res.filesize >= 20000) return m.reply('Ukuran file melebihi batas dari yang ditetapkan bot'+util.format(res))
+if (res.filesize >= 20000) return m.reply('File Melebihi Batas, maximal 20mb')
 conn.sendMessage(m.chat, { document: { url: res.dl_link }, mimetype: 'video/mp4', fileName: `${res.title}.mp4`,contextInfo: {externalAdReply: {title: `${res.title}`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 2, showAdAttribution: true, thumbnail: ythum}}},{})
 /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `${res.title}`, "©Perwira Bot WhatsApp", ythum, text, 2, `${res.title}.mp4` , res.dl_link, "video/mp4", [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m)*/
 } else {
@@ -2145,8 +2145,8 @@ break*/
 case 'wikihow': {
 	if(!text) return m.reply("*Contoh:* /wikihow cara tidur")
 	try {
-	let { wihow } = require("./wikihow")
-	let { wikihow } = require("./wikihow")
+	let { wihow } = require("./lib/wikihow")
+	let { wikihow } = require("./lib/wikihow")
 	
 	if(text.includes("https://id.wikihow.com")) {
 		hw = ``
@@ -2155,7 +2155,7 @@ case 'wikihow': {
 			hw += `*${wio.title}*
 			${wio.data}\n\n`
 			}
-			conn.sendMessage(m.chat, {text: hw, contextInfo: {externalAdReply: {title: "Wikihow", body: "©Perwira Bot WhatsApp", sourceUrl: text, mediaUrl: text, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./howiki.png`)}}})
+			conn.sendMessage(m.chat, {text: hw, contextInfo: {externalAdReply: {title: "Wikihow", body: "©Perwira Bot WhatsApp", sourceUrl: text, mediaUrl: text, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/howiki.png`)}}})
 		} else {
 	
 		dwt = await wihow(text)
@@ -2189,14 +2189,14 @@ sections: [{
 "rows": mehow}]
 }
 			
-			conn.sendMessage(m.chat, {text: dat, contextInfo: {externalAdReply: {title: "Wikihow", body: "©Perwira Bot WhatsApp", sourceUrl: `${dwt[0].link}`, mediaUrl: `${dwt[0].link}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./howiki.png`)}}}).then(() => {conn.sendMessage(m.chat, listhow, {quoted: 
+			conn.sendMessage(m.chat, {text: dat, contextInfo: {externalAdReply: {title: "Wikihow", body: "©Perwira Bot WhatsApp", sourceUrl: `${dwt[0].link}`, mediaUrl: `${dwt[0].link}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/howiki.png`)}}}).then(() => {conn.sendMessage(m.chat, listhow, {quoted: 
                                {
 	    	      	         key: { fromMe: false, participant: `${quoted.sender}`},
                          	  message: {
                               "extendedTextMessage": {
                               "text": `*Wikihow*`,
                               "title": ``,
-                              'jpegThumbnail': fs.readFileSync('./how2.png')
+                              'jpegThumbnail': fs.readFileSync('./image/how2.png')
                                }} 
                                }, contextInfo: {mentionedJid: [quoted.sender]}})
                                })
@@ -2211,15 +2211,15 @@ case 'wikipedia': {
 	if(!text) return m.reply("*Contoh:* /wikipedia apa itu globalisasi")
 	try {
 		
-	let { wikipedia } = require('./wikipedia')
-	let { swiki } = require('./wikipedia')
+	let { wikipedia } = require('./lib/wikipedia')
+	let { swiki } = require('./lib/wikipedia')
 	
 	if(text.includes("https://id.m.wikipedia.org")) {
 		lw = await wikipedia(text)
 		dwk = `*${lw.title[0]}*
     
     ${lw.result[0].data}`
-	conn.sendMessage(m.chat, {image: {url: lw.img[0]}, caption: dwk }, {quoted: m})
+	conn.sendMessage(m.chat, {image: {url: lw.img[0] || "https://github.com/PerwiraKusuma111/PerwiraKusuma111/raw/main/images%20(2)-picsay.png"}, caption: dwk }, {quoted: m})
 		} else {
 	
 	swi = await swiki(encodeURI(text))
@@ -2248,14 +2248,14 @@ sections: [{
 "title": `Hasil penelusuran yang ditemukan`,
 "rows": listmes}]
 }
-conn.sendMessage(m.chat, {image: {url: wikped.img[0]}, caption: dw }, {quoted: m}).then(() => {conn.sendMessage(m.chat, listMessagew, {quoted: 
+conn.sendMessage(m.chat, {image: {url: wikped.img[0] || "https://github.com/PerwiraKusuma111/PerwiraKusuma111/raw/main/images%20(2)-picsay.png"}, caption: dw }, {quoted: m}).then(() => {conn.sendMessage(m.chat, listMessagew, {quoted: 
                                {
 	    	      	         key: { fromMe: false, participant: `${quoted.sender}`},
                          	  message: {
                               "extendedTextMessage": {
                               "text": `*Wikipedia*`,
                               "title": ``,
-                              'jpegThumbnail': fs.readFileSync('./wiki.png')
+                              'jpegThumbnail': fs.readFileSync('./image/wiki.png')
                                }} 
                                }, contextInfo: {mentionedJid: [quoted.sender]}})
                                })
@@ -2264,12 +2264,12 @@ conn.sendMessage(m.chat, {image: {url: wikped.img[0]}, caption: dw }, {quoted: m
                                
                              } catch(err) {
                              	try {
-        let { wikipedia } = require('./wikipedia')
+        let { wikipedia } = require('./lib/wikipedia')
         lw = await wikipedia("https://id.m.wikipedia.org/wiki/" + text)
 		dwk = `*${lw.title[0]}*
     
     ${lw.result[0].data}`
-	conn.sendMessage(m.chat, {image: {url: lw.img[0]}, caption: dwk }, {quoted: m})
+	conn.sendMessage(m.chat, {image: {url: lw.img[0] || "https://github.com/PerwiraKusuma111/PerwiraKusuma111/raw/main/images%20(2)-picsay.png"}, caption: dwk }, {quoted: m})
                              	} catch(err) {
                              	m.reply(String(err))
                              	}
@@ -2394,7 +2394,7 @@ case 'github': {
 	if(!text.includes("https://github.com")) return m.reply("Masukkan link dengan benar!\n*Contoh:* /github https://github.com/DARK-02/DarkBotMD")
 	if(!text.split("/")[4]) return
 	try {
-	conn.sendMessage(m.chat, {document: {url: text + "/archive/refs/heads/main.zip"}, mimetype: 'application/zip', fileName: `${text}.zip`, contextInfo: {externalAdReply: {title: "Github Download", body: "©Perwira Bot WhatsApp", sourceUrl: text, mediaUrl: text, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./gh.png`)}}}, {quoted: m})
+	conn.sendMessage(m.chat, {document: {url: text + "/archive/refs/heads/main.zip"}, mimetype: 'application/zip', fileName: `${text}.zip`, contextInfo: {externalAdReply: {title: "Github Download", body: "©Perwira Bot WhatsApp", sourceUrl: text, mediaUrl: text, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/gh.png`)}}}, {quoted: m})
 	} catch(e) {
 		m.reply(String(e))
 		}
@@ -3716,7 +3716,7 @@ case 'tiktokmp3': {
 		                      "extendedTextMessage": {
                               "text": `*TikTok Downloader*`,
                               "title": ``,
-                              'jpegThumbnail': fs.readFileSync('./tiktok.png')
+                              'jpegThumbnail': fs.readFileSync('./image/tiktok.png')
                            }
 	                            } 
                                      }*/
@@ -3724,7 +3724,7 @@ if (text.includes("tiktok.com")) {
 	try {
 tiktok = require('./lib/tiktok')
 resioni = await tiktok(text)
-conn.sendMessage(m.chat, {document: {url: `${resioni.medias.audio.url}`}, ptt: false, mimetype: 'audio/mpeg', fileName: `${resioni.medias.audio.sound}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Tiktok Downloader`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./tiktok.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `TikTok Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./tiktok.jpeg'), text, 1, `${resioni.medias.audio.sound}.mp3`, `${resioni.medias.audio.url}`, 'audio/mpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
+conn.sendMessage(m.chat, {document: {url: `${resioni.medias.audio.url}`}, ptt: false, mimetype: 'audio/mpeg', fileName: `${resioni.medias.audio.sound}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Tiktok Downloader`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./image/tiktok.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `TikTok Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/tiktok.jpeg'), text, 1, `${resioni.medias.audio.sound}.mp3`, `${resioni.medias.audio.url}`, 'audio/mpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
 } catch(e) {
 	conn.sendButtonText(m.chat, [{buttonId: `ttmp32 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
 	}
@@ -3787,7 +3787,7 @@ if(text.includes("tiktok.com")) {
 let media = await getBuffer(res.result.nowatermark)
 let { toAudio } = require('./lib/converter')
 let audii = await toAudio(media, 'mp4')
-conn.sendMessage(m.chat, {document: audii, ptt: false, mimetype: 'audio/mpeg', fileName: `${new Date()}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Tiktok Downloader`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./tiktok.jpeg')}}})
+conn.sendMessage(m.chat, {document: audii, ptt: false, mimetype: 'audio/mpeg', fileName: `${new Date()}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Tiktok Downloader`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./image/tiktok.jpeg')}}})
 	} catch(e) {
 	m.reply(String(e))
 	}
@@ -3826,9 +3826,9 @@ igdownloader(text).then(async ries => {
 let resiop = await axios.head(ries.result.link)
 mmimeaxigg= resiop.headers['content-type']
 if(mmimeaxigg.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true,thumbnail: fs.readFileSync('./ig.jpeg') }}})
+return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true,thumbnail: fs.readFileSync('./image/ig.jpeg') }}})
 } else if(mmimeaxigg.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./ig.jpeg')}}})
+return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
 }
 })
 } catch(e) {
@@ -3901,17 +3901,17 @@ case 'mediafire': {
 		let {mediafire} = require('mumaker')
 		await mediafire(text).then(async datan => {
 			if(datan[0].mime === 'zip') {
-			conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/zip', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+			conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/zip', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}}) 
 			} else if(datan[0].mime === '9') {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/vnd.android.package-archive', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/vnd.android.package-archive', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}}) 
 					} else if(datan[0].mime === '7z') {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/7z', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}}) 
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/7z', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}}) 
 					} else if(datan[0].nama.endsWith('.mp4')) {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'video/mp4', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'video/mp4', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}})
 					} else if(datan[0].nama.endsWith('.pdf')) {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/pdf', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/pdf', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}})
 					} else {
-					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/octet-stream', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./mfire.jpg')}}})
+					conn.sendMessage(m.chat, {document: {url: datan[0].link}, fileName: datan[0].nama, mimetype: 'application/octet-stream', contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `MediaFire Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/mfire.jpg')}}})
 					m.reply('Buka document melalui apk File manager anda')
 					}
 })
@@ -3926,7 +3926,7 @@ break
 
 case 'wlp': {
 	try {
-	let { linked } = require('./wallpaper.js')
+	let { linked } = require('./lib/wallpaper.js')
 	imhg = await linked(text)
 	conn.sendMessage(m.chat, {image: {url: imhg[0]}, caption: `Random Hd Wallpaper `}, {quoted: m})
 	} catch(err) {
@@ -3937,7 +3937,7 @@ case 'wlp': {
 
 case 'wallpaper': {
 	
-	let { wallpaperhd } = require('./wallpaper.js')
+	let { wallpaperhd } = require('./lib/wallpaper.js')
 	enm = await text.split("order=desc&page=")[1] ? text.split("order=desc&page=")[1]: 0
 	if(text.includes("//wallhaven.cc/search")) {
 		try {
@@ -3947,8 +3947,8 @@ case 'wallpaper': {
 	npi = 1
 	for(let li of swo) {
 		lostii.push({
-			"title": `${npi++}Wallpaper ${text.split("/search?q=")[1].split("&categories")[0]}`,
-			"description": "HD Wallpaper Quality",
+			"title": `${npi++}.Wallpaper ${text.split("/search?q=")[1].split("&categories")[0].replace(/%20/g, " ")} ${li.width}`,
+			"description": `HD Wallpaper Quality size image ${li.width}`,
 			"rowId": `wlp ${li.link}`
 			})
 		}
@@ -3975,13 +3975,15 @@ conn.sendMessage(m.chat, listWall, {}).then(() => {
 	if(!text) return m.reply("*Contoh:* /wallpaper doctor strange")
 	/*enm = await text.split("order=desc&page=")[1] ? text.split("order=desc&page=")[1]: 0*/
 	sw = await wallpaperhd(`https://wallhaven.cc/search?q=${encodeURI(text)}&categories=110&purity=100&sorting=relevance&order=desc&page=1`)
+	
+	lui = `https://wallhaven.cc/search?q=${encodeURI(text)}&categories=110&purity=100&sorting=relevance&order=desc&page=1`
 	if(sw.length === 0) return conn.sendButtonText(m.chat, [{buttonId: `i`, buttonText: {displayText: 'Oke'}, type:1}], `Wallpaper ${text} tidak tersedia`, `©Perwira Bot WhatsApp`)
 	losti = []
 	np = 1
 	for(let l of sw) {
 		losti.push({
-			"title": `${np++}.Wallpaper ${text}`,
-			"description": "HD Wallpaper Quality",
+			"title": `${np++}.Wallpaper ${lui.split("/search?q=")[1].split("&categories")[0].replace(/%20/g, " ")} ${l.width}`,
+			"description": `HD Wallpaper Quality size image ${l.width}`,
 			"rowId": `wlp ${l.link}`
 			})
 		}
@@ -4014,7 +4016,7 @@ case 'igs':{
 	data = []
 	thennn = 0
 	thenn = 1
-	tres = await igstory(text)
+	tres = await igstory(text).then(() => {
 		for(let newd of tres) {
 			data.push({
 				"title": `${thenn++}. Story Instagram`,
@@ -4022,6 +4024,7 @@ case 'igs':{
 				"rowId": `igos ${newd.url}`
 				              })
 			                               }
+			})
 			                                           
 let listMess = {
 text: 'Hasil penelusuran',
@@ -4040,7 +4043,7 @@ conn.sendMessage(m.chat, listMess, {quoted:
                               "extendedTextMessage": {
                               "text": `*Instagram Story*`,
                               "title": ``,
-                              'jpegThumbnail': fs.readFileSync('./ig.png')
+                              'jpegThumbnail': fs.readFileSync('./image/ig.png')
                                }} 
                                }, contextInfo: {mentionedJid: [quoted.sender]}})
 	} catch(err) {
@@ -4080,9 +4083,9 @@ helo = await instagram(text)
 let res = await axios.head(helo[0].url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
 } else if(mimeaxig.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./ig.jpeg')}}})
+return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
 }
 		} else {
 			m.reply(`Masukkan link!\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
@@ -5247,7 +5250,7 @@ ${cpus[0] ? `*Total CPU Usage*
 _CPU Core(s) Usage (${cpus.length} Core CPU)_
 ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- ${(type + '').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
 \`\`\``.trim()
-conn.sendMessage(m.chat, {text: respon, contextInfo: {externalAdReply: {sourceUrl: `https://chat.whatsapp.com/GZrVcHNc8EN3k8hMbEjmJr`, mediaUrl: `https://chat.whatsapp.com/GZrVcHNc8EN3k8hMbEjmJr`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./pem.jpg`)}}})
+conn.sendMessage(m.chat, {text: respon, contextInfo: {externalAdReply: {sourceUrl: `https://chat.whatsapp.com/GZrVcHNc8EN3k8hMbEjmJr`, mediaUrl: `https://chat.whatsapp.com/GZrVcHNc8EN3k8hMbEjmJr`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/pem.jpg`)}}})
 }
 break
 case 'nulis':{
@@ -5270,7 +5273,7 @@ await conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "
 	}
 break
 case 'owner': case 'creator': {
-conn.sendMessage(m.chat, {text: 'Owner Bot @6281232646925', contextInfo: {mentionedJid: ["6281232646925@s.whatsapp.net"], externalAdReply: {title: 'Owner Bot', body: 'Klik disini untuk menuju nomor Owner', sourceUrl: `https://wa.me/6281232646925`, mediaUrl: `https://wa.me/6281232646925`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./pem.jpg`)}}})
+conn.sendMessage(m.chat, {text: 'Owner Bot @6281232646925', contextInfo: {mentionedJid: ["6281232646925@s.whatsapp.net"], externalAdReply: {title: 'Owner Bot', body: 'Klik disini untuk menuju nomor Owner', sourceUrl: `https://wa.me/6281232646925`, mediaUrl: `https://wa.me/6281232646925`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/pem.jpg`)}}})
 }
 break
 case 'info':{
@@ -5328,7 +5331,7 @@ Fitur error? chat owner!
 Melanggar? block
 `
   
-await conn.sendButGif(m.chat, info, `©Perwira Bot WhatsApp`, fs.readFileSync('./gify.mp4'), btn)
+await conn.sendButGif(m.chat, info, `©Perwira Bot WhatsApp`, fs.readFileSync('./image/gify.mp4'), btn)
 	}break
 
 case 'igstalk':
@@ -5336,7 +5339,7 @@ case 'stalkig': {
 	if(!text) return m.reply(`Masukkan username instagram yang tepat\n*Contoh :* ${prefix+command} perwira_kusuma1`)
 	if(text.includes(`https://`)) return m.reply(`Masukkan username instagram yang tepat\n*Contoh :* ${prefix+command} perwira_kusuma1`)
 	try {
-	let { igstalk } = require("./stalk.js")
+	let { igstalk } = require("./lib/stalk.js")
 	prof = ''
 	prif = ''
 	preif = ''
@@ -5479,9 +5482,9 @@ anu = `*List Menu*
 ≻ ${prefix}template
 ≻ ${prefix}styletext
 `
-/*await conn.sendButGif(m.chat, anu, `©Perwira Bot WhatsApp`, fs.readFileSync('./gify.mp4'), btn)*/
+/*await conn.sendButGif(m.chat, anu, `©Perwira Bot WhatsApp`, fs.readFileSync('./image/gify.mp4'), btn)*/
 /*conn.sendMessage(m.chat, 
-{document: fs.readFileSync('./pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+{document: fs.readFileSync('./image/pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 fileName: '𝗦𝗶𝗺𝗽𝗹𝗲 𝗕𝗼𝘁 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽', contextInfo: {
 externalAdReply: {
 sourceUrl: `https://©Perwira Bot WhatsApp `, 
@@ -5540,9 +5543,9 @@ anu = `*List Menu*
 ≻ ${prefix}template
 ≻ ${prefix}styletext
 `
-/*await conn.sendButGif(m.chat, anu, `©Perwira Bot WhatsApp`, fs.readFileSync('./gify.mp4'), btn)*/
+/*await conn.sendButGif(m.chat, anu, `©Perwira Bot WhatsApp`, fs.readFileSync('./image/gify.mp4'), btn)*/
 /*conn.sendMessage(m.chat, 
-{document: fs.readFileSync('./pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+{document: fs.readFileSync('./image/pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 fileName: '𝗦𝗶𝗺𝗽𝗹𝗲 𝗕𝗼𝘁 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽', contextInfo: {
 externalAdReply: {
 sourceUrl: `https://©Perwira Bot WhatsApp `, 
@@ -6015,7 +6018,7 @@ global.udah.push(m.chat)
 }
 */
 
-/*if (db.data.chats[m.chat].antilink) {
+/* if (db.data.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
 m.reply(`「 ANTI LINK 」\n\nKamu terdeteksi mengirim link group, maaf kamu akan di kick !`)
 if (!isBotAdmins) return m.reply(`Ehh bot gak admin T_T`)

@@ -28,10 +28,10 @@ global.chatDB = []
 global.udah = []
 global.offline = []
 global.simi = []
-kickadd = JSON.parse(fs.readFileSync('./kick.json'))
-global.bug = JSON.parse(fs.readFileSync('./bug.json'))
-global.insta = JSON.parse(fs.readFileSync('./insta.json'))
-global.coomd = JSON.parse(fs.readFileSync('./user.json'))
+kickadd = JSON.parse(fs.readFileSync('./database/kick.json'))
+global.bug = JSON.parse(fs.readFileSync('./database/bug.json'))
+global.insta = JSON.parse(fs.readFileSync('./database/insta.json'))
+global.coomd = JSON.parse(fs.readFileSync('./database/user.json'))
 global.ban = ["6281553391495@s.whatsapp.net"]
 global.owner = ['6281232646925', '6283167714830', '85298460539']
 global.premium = ['6288292024190']
@@ -707,20 +707,20 @@ function gen(length) {
                 try {
                     ppuser = await conn.profilePictureUrl(num, 'image')
                 } catch {
-                    ppuser = fs.readFileSync('./nothing.jpg')
+                    ppuser = fs.readFileSync('./image/nothing.jpg')
                 }
 
                 // Get Profile Picture Group
                 try {
                     ppgroup = await conn.profilePictureUrl(anu.id, 'image')
                 } catch {
-                	ppgroup = fs.readFileSync('./nothing.jpg')
+                	ppgroup = fs.readFileSync('./image/nothing.jpg')
                     /*ppgroup = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"*/
                 }
 
                 if (anu.action == 'add') {
                 	var pathw = 'ouuti.png'
-                gon = gen(123456)
+                gon = gen(12345)
            /*     namanya = conn.getName(num)*/
                 capti = `*Selamat datang di grup*
 *${metadata.subject.replace(/[\n]/g, ' ')}*
@@ -743,8 +743,8 @@ var image = await new knights.Welcome()
 .setMemberCount(`${metadata.participants.length}`) 
 .setGuildName(`${metadata.subject.replace(/[\n]/g, ' ')}`)
 .toAttachment();
-  data = image.toBuffer();
-  await fs.writeFileSync(pathw, data)
+  datai = image.toBuffer();
+  await fs.writeFileSync(pathw, datai)
   }
 await salma()
 conn.sendMessage(anu.id, {text: capti, contextInfo: {mentionedJid: [num], externalAdReply: {mediaUrl: `https://whatsapp.com/${gon}`, sourceUrl: `https://whatsapp.com/${gon}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync('./ouuti.png')}}})
