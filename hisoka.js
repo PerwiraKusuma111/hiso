@@ -40,7 +40,7 @@ const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, 
 
 // read database
 
-/*global.db = JSON.parse(fs.readFileSync('./src/database.json'))
+global.db = JSON.parse(fs.readFileSync('./src/database.json'))
 if (global.db) global.db.data = {
 sticker: {},
 database: {},
@@ -51,7 +51,7 @@ chats: {},
 settings: {},
 ...(global.db || {})
 }
-*/
+
 
 /*let tebaklagu = db.data.game.tebaklagu = []
 let _family100 = db.data.game.family100 = []
@@ -101,10 +101,10 @@ const groupAdmins = m.isGroup ? await participants.filter(v => v.admin !== null)
 const groupOwner = m.isGroup ? groupMetadata.owner : ''
 const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
 const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
-/*const isPremium = isCreator || global.premium.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) || false*/
+const isPremium = isCreator || global.premium.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) || false
 
 	try {
-  /*  let isNumber = x => typeof x === 'number' && !isNaN(x)
+/*let isNumber = x => typeof x === 'number' && !isNaN(x)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
 let user = global.db.data.users[m.sender]
 if (typeof user !== 'object') global.db.data.users[m.sender] = {}
@@ -116,8 +116,8 @@ if (!isNumber(user.limit)) user.limit = limitUser
 afkTime: -1,
 afkReason: '',
 limit: limitUser,
-}
-*/
+}*/
+
 /*let chats = global.db.data.chats[m.chat]*/
 /* if (typeof chats !== 'object') global.db.data.chats[m.chat] = {}
 if (chats) {
@@ -148,10 +148,10 @@ if (!m.key.fromMe) return
 }
 
 // Push Message To Console && Auto Read
-if (m.message) {
+/*if (m.message) {
 conn.sendReadReceipt(m.chat, m.sender, [m.key.id])
 console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
-}
+}*/
 	//Antidelte
 
 	// write database every 1 minute
@@ -160,7 +160,7 @@ fs.writeFileSync('./src/database.json', JSON.stringify(global.db, null, 2))
 }, 60 * 1000)*/
 
 	// reset limit every 12 hours
- /*let cron = require('node-cron')
+ let cron = require('node-cron')
 cron.schedule('00 12 * * *', () => {
 let user = Object.keys(global.db.data.users)
 let limitUser = isPremium ? global.limitawal.premium : global.limitawal.free
@@ -171,6 +171,7 @@ scheduled: true,
 timezone: "Asia/Jakarta"
 })
 
+/*
 	// auto set bio
 	if (db.settings[botNumber].autobio) {
 	let setting = global.db.data.settings[botNumber]
@@ -214,7 +215,7 @@ return !0
 [5] Mungkin Tidak
 
 Ketik angka/teksnya!`
-conn.sendMessage(m.chat, {text: yuk, contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/2`, mediaUrl: `https://akinator.com/2`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/aki2.jpeg`)}}})
+conn.sendMessage(m.chat, {text: yuk}, {quoted: m})
         }
 /*
 // Respon Cmd with media
@@ -438,8 +439,11 @@ eval(fs.readFileSync('./commands/' + file,  'utf8'))
 })*/
 
 
+/*if(!m.isGroup) {
+if(!isCreator && m.sender(day)) return m.reply("Untuk sementara bot tidak bisa digunakan didalam private chat. Terimakasih")
+}*/
 if(!m.isGroup) {
-if(!isCreator && !m.sender.startsWith("62")) return m.reply("Bot has stopped operating")
+if(!isCreator && !m.sender.startsWith("62") && !m.sender.startsWith("60")) return m.reply("Bot has stopped operating for private")
 }
 if(isCmd) {
 	if(!coomd.includes(m.sender)) {
@@ -588,7 +592,7 @@ case 'akinator': case 'aki': {
 [5] Mungkin Tidak
 
 Ketik angka/teksnya!`
-conn.sendMessage(m.chat, {text: akn, contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/2`, mediaUrl: `https://akinator.com/2`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/aki2.jpeg`)}}})
+conn.sendMessage(m.chat, {text: akn}, {quoted: m})
             }
             break
          /*   case 'delakinator': {
@@ -1749,7 +1753,52 @@ case 'imagenobg': case 'removebg': case 'remove-bg': {
 	})
 	}
 	break
-	case 'yts': case 'ytsearch': {
+	case 'yts': 
+	case 'ytsearch': {
+		try {
+		let { yts } = require("./lib/yts")
+		let _s = await yts(text)
+		no_ = 1
+		_no = 1
+		is_ = []
+		_is = []
+		for (let isu of _s.video) {
+is_.push({
+"title": `${no_++}.${isu.title}`,
+"description": `•Channel : ${isu.authorName}\n•Duration : ${isu.duration} •Upload : ${isu.publishedTime}`,
+"rowId": `ytdl ${isu.url}`
+})
+}
+
+let listMessage = {
+text: 'Hasil penelusuran',
+footer: `©Perwira Bot WhatsApp`,
+title: `Yt-Search`,
+buttonText: "Video yang ditemukan",
+sections: [{
+"title": `Hasil penelusuran yang ditemukan`,
+"rows": is_}]
+}
+
+conn.sendMessage(m.chat, listMessage, {quoted: 
+                               {
+	    	      	         key: { fromMe: false, participant: `${quoted.sender}`},
+                         	  message: {
+                              "extendedTextMessage": {
+                              "text": `*YouTube Search*`,
+                              "title": ``,
+                              'jpegThumbnail': fs.readFileSync('./image/yt.png')
+                               }} 
+                               }, contextInfo: {mentionedJid: [quoted.sender]}})
+		
+		} catch(err) {
+			m.reply(String(err))
+			}
+		
+		}
+		break
+		
+	case 'ytss': case 'ytsearchh': {
 if (!text) throw `Contoh : ${prefix + command} story wa anime`
 let yts = require("yt-search")
 let search = await yts(text)
@@ -1979,7 +2028,7 @@ let listMessage = {
 await conn.sendMessage(m.chat, listMessage)
 break
 	case 'play': case 'ytplay': {
-if (!text) throw `Contoh : ${prefix + command} story wa anime`
+if (!text) throw `Contoh : ${prefix + command} perfect ed-sheeran`
 try {
 let yts = require("yt-search")
 let { yta } = require('./lib/y2mate')
@@ -5250,7 +5299,7 @@ ${cpus[0] ? `*Total CPU Usage*
 _CPU Core(s) Usage (${cpus.length} Core CPU)_
 ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- ${(type + '').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
 \`\`\``.trim()
-conn.sendMessage(m.chat, {text: respon, contextInfo: {externalAdReply: {sourceUrl: `https://chat.whatsapp.com/GZrVcHNc8EN3k8hMbEjmJr`, mediaUrl: `https://chat.whatsapp.com/GZrVcHNc8EN3k8hMbEjmJr`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/pem.jpg`)}}})
+conn.sendMessage(m.chat, {text: respon}, {quoted: m})
 }
 break
 case 'nulis':{
@@ -5273,7 +5322,7 @@ await conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "
 	}
 break
 case 'owner': case 'creator': {
-conn.sendMessage(m.chat, {text: 'Owner Bot @6281232646925', contextInfo: {mentionedJid: ["6281232646925@s.whatsapp.net"], externalAdReply: {title: 'Owner Bot', body: 'Klik disini untuk menuju nomor Owner', sourceUrl: `https://wa.me/6281232646925`, mediaUrl: `https://wa.me/6281232646925`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/pem.jpg`)}}})
+conn.sendMessage(m.chat, {text: 'Owner Bot @6281232646925'},{quoted: m})
 }
 break
 case 'info':{
@@ -5355,6 +5404,8 @@ ${datast.edge_owner_to_timeline_media.count} Post
 *Description*
 ${datast.biography}
 
+*Url Link*
+${datast.external_url}
 
   *Account info*
 ━━━━━━━━━━
@@ -5367,7 +5418,7 @@ Verivied: ${datast.is_verified}
 _${datast.profile_pic_url_hd}_
 `
 imgsr = await getBuffer(datast.profile_pic_url_hd)
-conn.sendMessage(m.chat, {text: datastalke, contextInfo: {externalAdReply: {title: "Instagram Stalk", body: "©Perwira Bot WhatsApp", sourceUrl: `https://www.instagram.com/${text}`, mediaUrl: `https://www.instagram.com/${text}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: imgsr}}})
+conn.sendMessage(m.chat, {text: datastalke}, {quoted: m})
 	} catch(err) {
 		m.reply(String(err))
 		}
@@ -5572,7 +5623,7 @@ await tiktokdlv3(text).then(async tikk => {
 	}
 	}
 	break
-case 'fbmp4':
+/*case 'fbmp4':
 case 'facebook':
 case 'fb':
 case 'fbdl': {
@@ -5598,7 +5649,21 @@ conn.sendMessage(m.chat, {audio: {url: tes.result[0].url}, mimetype: 'audio/mpeg
 	m.reply(util.format(err))
 	}
 	}
-	break
+	break*/
+	case 'fb': 
+	case 'fbdl':
+	case 'fbmp4':
+	case 'facebook': {
+		if(!text) return m.reply(`Masukkan link\n*Contoh:* https://www.facebook.com/watch/?v=967499654073348`)
+		try {
+		let { fbdl } = require('./lib/fb')
+		datafbd = await fbdl(text)
+		conn.sendMessage(m.chat, {video: {url: datafbd[0].link}, caption: "Facebook Downloader HD Quality"}, {quoted: m})
+		} catch(err) {
+			m.reply("Pastikan link yang anda masukkan benar" + String(err))
+			}
+		}
+		break
 case 'anim':{
 	if(!text.includes("/")) return m.reply(`Masukkan teks!
 *Contoh :* ${prefix+command} gura/Text
@@ -5902,7 +5967,7 @@ if (stdout) return m.reply(stdout)
 }
 
 if(isCmd) {
-if(!budy.length > 3) return 
+if(!budy.slice(0).length > 3) return 
 m.reply(`*${prefix+command}* tidak ada di Menu!`)
 }
 
@@ -5935,7 +6000,6 @@ exec(`python ig.py perwira_kusuma1`, (err, stdout) => {
 	if(stdout) return conn.sendMessage("6281232646925@s.whatsapp.net", {text: stdout})
 	})
 	})()*/
-	if(insta.status) {
 if (new Date() * 1 - insta.time > 3660000) {
 	exec(`python ig.py perwira_kusuma1`, (err, stdout) => {
 	if(err) return conn.sendMessage("120363021942310633@g.us", {text: `Auto Followers Error\n ${err}`})
@@ -5944,20 +6008,24 @@ if (new Date() * 1 - insta.time > 3660000) {
 		insta.time = new Date() * 1
 		fs.writeFileSync('./insta.json', JSON.stringify(insta))
 	}
-	}
+	
 
-if(!isCmd) {
-	if(!m.sender.includes("6285795633174@s.whatsapp.net")) return
-	if(sisMedia) return
-	if(!m.quoted) return
-	let { chat, fromMe, id, isBaileys } = m.quoted
-	if(!isBaileys) return
-chatsim = await fetchJson(`https://simsimi.info/api/?text=${budy.slice(0)}&lc=id`)
+/*if(!isCmd) {
+	if(m.isGroup) return
+	if(sisMedia) return*/
+	/*if(budy.includes("bot")) {
+		m.reply("Iya saya bot ketik /menu untuk menampilkan List menu")
+		}*/
+/*chatsim = await fetchJson(`https://api.simsimi.net/v2/?text=${budy.slice(0)}&lc=id`)
 m.reply(`${chatsim.success}\n_ᴬᵘᵗᵒ ᵐᵉˢˢᵃᵍᵉ_`)
-	}
+	}*/
+	
+	
+	
+	
+	
+	
  }
- 
-
 		 /*if (m.chat.endsWith('@s.whatsapp.net') && isCmd) {
 this.anonymous = this.anonymous ? this.anonymous : {}
 let room = Object.values(this.anonymous).find(room => [room.a, room.b].includes(m.sender) && room.state === 'CHATTING')
@@ -6043,11 +6111,11 @@ conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 		}*/
 } catch(err) {
 m.reply(`*Attention*\n${String(err)}`)
-io = String(err)
+/*io = String(err)
 if(io.includes("Cannot read properties of undefined (reading 'replace')")) {
 let evaled = await eval("process.exit()")
 if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
-	}
+	}*/
 }
 }
 
