@@ -139,7 +139,7 @@ antilink: false,
 	}
 	*/
 } catch (err) {
-console.error(err)
+console.log(err)
 }
 	
 // Public & Self
@@ -148,10 +148,10 @@ if (!m.key.fromMe) return
 }
 
 // Push Message To Console && Auto Read
-/*if (m.message) {
+if (m.message) {
 conn.sendReadReceipt(m.chat, m.sender, [m.key.id])
 console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
-}*/
+}
 	//Antidelte
 
 	// write database every 1 minute
@@ -631,7 +631,7 @@ conn.sendMessage(m.chat, {text: akn}, {quoted: m})
             break
 
 case 'chat': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 if (!q) return m.reply('*Option :*\n1. archive\n2. unarchive\n3. read\n4. unread\n5. delete')
 if (args[0] === 'archive') {
 conn.chatModify({  archive: true }, m.chat, []).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
@@ -806,22 +806,22 @@ await conn.sendButtonText(m.chat, buttons, jawab, conn.user.name, m, {mentions: 
 break
 */
 case 'join': {
-if (!isCreator) throw mess.owner
-if (!text) throw 'Masukkan Link Group!'
-if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Link Invalid!'
+if (!isCreator) return m.reply(mess.owner)
+if (!text) return m.reply('Masukkan Link Group!')
+if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) return m.reply('Link Invalid!')
 m.reply(mess.wait)
 let result = args[0].split('https://chat.whatsapp.com/')[1]
 await conn.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 }
 break
 case 'leave': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 await conn.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 }
 break
 case 'setexif': {
-if (!isCreator) throw mess.owner
-if (!text) throw `Contoh : ${prefix + command} packname|author`
+if (!isCreator) return m.reply(mess.owner)
+if (!text) return m.reply(`Contoh : ${prefix + command} packname|author`)
   global.packname = text.split("|")[0]
   global.author = text.split("|")[1]
   m.reply(`Exif berhasil diubah menjadi\n\nPackname : ${global.packname}\nAuthor : ${global.author}`)
@@ -831,8 +831,8 @@ break
 case 'kick': {
 if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
 if (new Date() * 1 - kickadd.time > 20000) {
 kickadd.time = new Date() * 1
 fs.writeFileSync('./kick.json', JSON.stringify(kickadd))
@@ -853,8 +853,8 @@ break
 case 'add': {
 if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
 if (new Date() * 1 - kickadd.time > 20000) {
 kickadd.time = new Date() * 1
 fs.writeFileSync('./kick.json', JSON.stringify(kickadd))
@@ -875,8 +875,8 @@ break
 case 'promote': {
 if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
 if (text) { 
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
@@ -891,8 +891,8 @@ break
 case 'demote': {
 if (!m.isGroup) return m.reply(mess.group)
 /*if (!isCreator) return m.reply("_Only for Owner_")*/
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
 if (text) { 
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply('Done')).catch((err) => m.reply(jsonformat(err)))
@@ -905,46 +905,46 @@ await conn.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.re
 }
 break
 case 'block': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await conn.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 }
 break
 case 'unblock': {
-		if (!isCreator) throw mess.owner
+		if (!isCreator) return m.reply(mess.owner)
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		await conn.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 	}
 	break
 	case 'setname': case 'setsubject': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
-if (!text) throw 'Text ?'
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
+if (!text) return m.reply('Text ?')
 await conn.groupUpdateSubject(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
 }
 break
 case 'setnam': case 'setsub': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
-if (!text) throw 'Text ?'
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
+if (!text) return m.reply('Text ?')
 await conn.groupUpdateSubject(`${text}`, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
 }
 break
   case 'setdesc': case 'setdesk': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
-if (!text) throw 'Text ?'
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
+if (!text) return m.reply('Text ?')
 await conn.groupUpdateDescription(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)))
 }
 break
   case 'setppbot': {
-if (!isCreator) throw mess.owner
-if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+if (!isCreator) return m.reply(mess.owner)
+if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 let media = await conn.downloadAndSaveMediaMessage(quoted)
 await conn.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
 m.reply(mess.success)
@@ -952,9 +952,9 @@ m.reply(mess.success)
 break
 case 'setpp': case 'ppchange': case 'changepp': {
 	if(!isCreator) return m.reply("Khusus Owner")
-if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 let media = await conn.downloadAndSaveMediaMessage(quoted)
 await conn.updateProfilePicture(`${text}`, { url: media }).catch((err) => fs.unlinkSync(media))
 m.reply(mess.success)
@@ -962,10 +962,10 @@ m.reply(mess.success)
 break
 case 'setppgrouup': case 'setppgrup': case 'setppgc': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isAdmins) throw mess.admin
-if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+if (!isAdmins) return m.reply(mess.admin)
+if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 let media = await conn.downloadAndSaveMediaMessage(quoted)
 await conn.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
 m.reply(mess.success)
@@ -1165,8 +1165,8 @@ m.reply('Berhasil Menghapus Sesi Vote Di Grup Ini')
 break*/
 case 'group': case 'grup': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
 if (args[0] === 'close'){
 await conn.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`Sukses Menutup Group`)).catch((err) => m.reply(jsonformat(err)))
 } else if (args[0] === 'open'){
@@ -1183,8 +1183,8 @@ await conn.sendButtonText(m.chat, buttons, `Mode Group`, conn.user.name, m)
 break
 case 'editinfo': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
  if (args[0] === 'open'){
 await conn.groupSettingUpdate(m.chat, 'unlocked').then((res) => m.reply(`Sukses Membuka Edit Info Group`)).catch((err) => m.reply(jsonformat(err)))
  } else if (args[0] === 'close'){
@@ -1201,8 +1201,8 @@ await conn.sendButtonText(m.chat, buttons, `Mode Edit Info`, conn.user.name, m)
 break
  /*case 'antilink': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
 if (args[0] === "on") {
 if (db.data.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
 db.data.chats[m.chat].antilink = true
@@ -1222,8 +1222,8 @@ await conn.sendButtonText(m.chat, buttons, `Mode Antilink`, conn.user.name, m)
  break*/
  /*case 'mute': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
 if (args[0] === "on") {
 if (db.data.chats[m.chat].mute) return m.reply(`Sudah Aktif Sebelumnya`)
 db.data.chats[m.chat].mute = true
@@ -1243,16 +1243,16 @@ await conn.sendButtonText(m.chat, buttons, `Mute Bot`, conn.user.name, m)
  break*/
 case 'linkgroup': case 'linkgc': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
+if (!isBotAdmins) return m.reply(mess.botAdmin)
 let response = await conn.groupInviteCode(m.chat)
 conn.sendText(m.chat, `*Link to Join*\nhttps://chat.whatsapp.com/${response}\n\nLink Group\n*${groupMetadata.subject.replace(/[\n]/g, ' ')}*`, m, { detectLink: true })
 }
 break
 case 'ephemeral': {
 if (!m.isGroup) return m.reply(mess.group)
-if (!isBotAdmins) throw mess.botAdmin
-if (!isAdmins) throw mess.admin
-if (!text) throw 'Masukkan value enable/disable'
+if (!isBotAdmins) return m.reply(mess.botAdmin)
+if (!isAdmins) return m.reply(mess.admin)
+if (!text) return m.reply('Masukkan value enable/disable')
 if (args[0] === 'enable') {
 await conn.sendMessage(m.chat, { disappearingMessagesInChat: WA_DEFAULT_EPHEMERAL }).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 } else if (args[0] === 'disable') {
@@ -1261,17 +1261,17 @@ await conn.sendMessage(m.chat, { disappearingMessagesInChat: false }).then((res)
 }
 break
 case 'delete': case 'del': {
-if (!isAdmins) throw mess.admin
-if (!m.quoted) throw false
+if (!isAdmins) return m.reply(mess.admin)
+if (!m.quoted) return m.reply('false')
 let { chat, fromMe, id, isBaileys } = m.quoted
-if (!isBaileys) throw 'Pesan tersebut bukan dikirim oleh bot!'
+if (!isBaileys) return m.reply('Pesan tersebut bukan dikirim oleh bot!')
 conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
 }
 break
 
 case 'bcgc': case 'bcgroup': {
-if (!isCreator) throw mess.owner
-if (!text) throw `Text mana?\n\nContoh : ${prefix + command} fatih-san`
+if (!isCreator) return m.reply(mess.owner)
+if (!text) return m.reply(`Text mana?\n\nContoh : ${prefix + command} fatih-san`)
 let getGroups = await conn.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
 let anu = groups.map(v => v.id)
@@ -1306,7 +1306,7 @@ m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
 }
 break
 case 'bc':{
-	if (!isCreator) throw mess.owner
+	if (!isCreator) return m.reply(mess.owner)
 	m.reply(`${coomd.length * 3} detik`)
 	for (let i of coomd) {
 await sleep(3000)
@@ -1354,9 +1354,9 @@ conn.sendTextWithMentions(m.chat, teks, m)
 }
 break*/
 case 'totag': {
-            if (!m.isGroup) throw mess.group
-            if (!isBotAdmins) throw mess.botAdmin
-            if (!isAdmins) throw mess.admin
+            if (!m.isGroup) return m.reply(mess.group)
+            if (!isBotAdmins) return m.reply(mess.botAdmin)
+            if (!isAdmins) return m.reply(mess.admin)
             if (quoted.mtype == 'conversation') {
             conn.sendMessage(m.chat, { text : quoted.text , mentions: participants.map(a => a.id), contextInfo: { forwardingScore: 5, isForwarded: true } }, { quoted: m })
             } else {
@@ -1426,7 +1426,7 @@ case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
 	wm = args.join(" ")
 	wm1 = wm.split("/")[0]
 	wm2 = wm.split("/")[1]
-if (!quoted) throw `Balas Video/Image Dengan Caption ${prefix + command}`
+if (!quoted) return m.reply(`Balas Video/Image Dengan Caption ${prefix + command}`)
 if (/image/.test(mime)) {
 let media = await quoted.download()
 let encmedia = await conn.sendImageAsSticker(m.chat, media, m, { packname: wm1 ? wm1: global.packname, author: wm2 ? wm2: global.author })
@@ -1437,7 +1437,7 @@ let media = await quoted.download()
 let encmedia = await conn.sendVideoAsSticker(m.chat, media, m, { packname: wm1 ? wm1: global.packname, author: wm2 ? wm2: global.author })
 await fs.unlinkSync(encmedia)
 } else {
-throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
+return m.reply(`Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`)
 }
 }
 break
@@ -1485,13 +1485,13 @@ case 'emojimix': {
 	}
 	break*/
 case 'toimage': case 'toimg': {
-if (!quoted) throw 'Reply Image'
-if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+if (!quoted) return m.reply('Reply Image')
+if (!/webp/.test(mime)) return m.reply(`balas stiker dengan caption *${prefix + command}*`)
 let media = await conn.downloadAndSaveMediaMessage(quoted)
 let ran = await getRandom('.png')
 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 fs.unlinkSync(media)
-if (err) throw err
+if (err) return m.reply(err)
 let buffer = fs.readFileSync(ran)
 conn.sendMessage(m.chat, { image: buffer }, { quoted: m })
 fs.unlinkSync(ran)
@@ -1500,8 +1500,8 @@ fs.unlinkSync(ran)
 break
 case 'triggered':
 case 'trigger':{
-	if (!quoted) throw 'Reply Image'
-    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	if (!quoted) return m.reply('Reply Image')
+    if (!/image/.test(mime)) return m.reply(`Balas gambar dengan caption *${prefix + command}*`)
 	let media = await conn.downloadAndSaveMediaMessage2(quoted, 'trigger.jpg')
 	yuricanvas = require("yuri-canvas");
     async function create() {
@@ -1523,8 +1523,8 @@ wasted
 trash
 burn
 scary`)
-	if (!quoted) throw 'Reply Image'
-    if (!/image/.test(mime)) throw `Balas gambar dengan caption *${prefix + command}*`
+	if (!quoted) return m.reply('Reply Image')
+    if (!/image/.test(mime)) return m.reply(`Balas gambar dengan caption *${prefix + command}*`)
     if(args[0] === 'burn') {
 let media = await conn.downloadAndSaveMediaMessage2(quoted, 'sponge.jpg')
 var pathh = 'ouit.png'
@@ -1615,29 +1615,29 @@ case 'convert':
 case 'to': {
 	if(!text) return m.reply(`*Contoh:* ${prefix+command} mp3(sambil reply media)\n\n*List yang tersedia*\nmp3\nmp4\ngif\nimg`)
 	if(text.includes("img", "gambar", "image")) {
-		if (!quoted) throw 'Reply Image'
-if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+		if (!quoted) return m.reply('Reply Image')
+if (!/webp/.test(mime)) return m.reply(`balas stiker dengan caption *${prefix + command}*`)
 let media = await conn.downloadAndSaveMediaMessage(quoted)
 let ran = await getRandom('.png')
 exec(`ffmpeg -i ${media} ${ran}`, (err) => {
 fs.unlinkSync(media)
-if (err) throw err
+if (err) return m.reply(err)
 let buffer = fs.readFileSync(ran)
 conn.sendMessage(m.chat, { image: buffer }, { quoted: m })
 fs.unlinkSync(ran)
 })
 		} else if(text.includes("mp3", "audio")) {
-			if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+			if (/document/.test(mime)) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
+if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
+if (!quoted) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
 
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
 let audio = await toAudio(media, 'mp4')
 conn.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Convert tomp3.mp3`}, { quoted : m })
 		} else if(text.includes("mp4", "video", "vidio")) {
-			if (!quoted) throw 'Reply sticker animated'
-if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+			if (!quoted) return m.reply('Reply sticker animated')
+if (!/webp/.test(mime)) return m.reply(`balas stiker dengan caption *${prefix + command}*`)
 
 		let { webp2mp4File } = require('./lib/uploader')
 let media = await conn.downloadAndSaveMediaMessage(quoted)
@@ -1645,8 +1645,8 @@ let webpToMp4 = await webp2mp4File(media)
 await conn.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m })
 await fs.unlinkSync(media)
 		} else if(text.includes("gif")) {
-			if (!quoted) throw 'Reply Image'
-if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+			if (!quoted) return m.reply('Reply Image')
+if (!/webp/.test(mime)) return m.reply(`balas stiker dengan caption *${prefix + command}*`)
 
 		let { webp2mp4File } = require('./lib/uploader')
 let media = await conn.downloadAndSaveMediaMessage(quoted)
@@ -1660,8 +1660,8 @@ await fs.unlinkSync(media)
 	break
 
 	case 'tomp4': case 'tovideo': {
-if (!quoted) throw 'Reply sticker animated'
-if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+if (!quoted) return m.reply('Reply sticker animated')
+if (!/webp/.test(mime)) return m.reply(`balas stiker dengan caption *${prefix + command}*`)
 
 		let { webp2mp4File } = require('./lib/uploader')
 let media = await conn.downloadAndSaveMediaMessage(quoted)
@@ -1671,8 +1671,8 @@ await fs.unlinkSync(media)
 }
 break
 case 'toaud': case 'toaudio': {
-if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
-if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`
+if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`)
+if (!quoted) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan Audio Dengan Caption ${prefix + command}`)
 
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
@@ -1681,9 +1681,9 @@ conn.sendMessage(m.chat, {audio: audio, mimetype: 'audio/mpeg'}, { quoted : m })
 }
 break
 case 'tomp3': {
-if (/document/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-if (!/video/.test(mime) && !/audio/.test(mime)) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
-if (!quoted) throw `Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`
+if (/document/.test(mime)) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
+if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
+if (!quoted) return m.reply(`Kirim/Reply Video/Audio Yang Ingin Dijadikan MP3 Dengan Caption ${prefix + command}`)
 
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
@@ -1692,8 +1692,8 @@ conn.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `Co
 }
 break
 case 'tovn': case 'toptt': {
-if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
-if (!quoted) throw `Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`
+if (!/video/.test(mime) && !/audio/.test(mime)) return m.reply(`Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`)
+if (!quoted) return m.reply(`Reply Video/Audio Yang Ingin Dijadikan VN Dengan Caption ${prefix + command}`)
 
 let media = await quoted.download()
 let { toPTT } = require('./lib/converter')
@@ -1702,8 +1702,8 @@ conn.sendMessage(m.chat, {audio: audio, mimetype:'audio/mpeg', ptt:true }, {quot
 }
 break
 case 'togif': {
-if (!quoted) throw 'Reply Image'
-if (!/webp/.test(mime)) throw `balas stiker dengan caption *${prefix + command}*`
+if (!quoted) return m.reply('Reply Image')
+if (!/webp/.test(mime)) return m.reply(`balas stiker dengan caption *${prefix + command}*`)
 
 		let { webp2mp4File } = require('./lib/uploader')
 let media = await conn.downloadAndSaveMediaMessage(quoted)
@@ -1713,9 +1713,9 @@ await fs.unlinkSync(media)
 }
 break
 	case 'tourl': {
-if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 		let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 let media = await conn.downloadAndSaveMediaMessage(quoted)
 if (/image/.test(mime)) {
@@ -1729,9 +1729,9 @@ await fs.unlinkSync(media)
 }
 break
 case 'imagenobg': case 'removebg': case 'remove-bg': {
-	if (!quoted) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	if (!/image/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
-	if (/webp/.test(mime)) throw `Kirim/Reply Image Dengan Caption ${prefix + command}`
+	if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+	if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 	let remobg = require('remove.bg')
 	let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU','S258diZhcuFJooAtHTaPEn4T','5LjfCVAp4vVNYiTjq9mXJWHF','aT7ibfUsGSwFyjaPZ9eoJc61','BY63t7Vx2tS68YZFY6AJ4HHF','5Gdq1sSWSeyZzPMHqz7ENfi8','86h6d6u4AXrst4BVMD9dzdGZ','xp8pSDavAgfE5XScqXo9UKHF','dWbCoCb3TacCP93imNEcPxcL']
 	let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)]
@@ -1799,7 +1799,7 @@ conn.sendMessage(m.chat, listMessage, {quoted:
 		break
 		
 	case 'ytss': case 'ytsearchh': {
-if (!text) throw `Contoh : ${prefix + command} story wa anime`
+if (!text) return m.reply(`Contoh : ${prefix + command} story wa anime`)
 let yts = require("yt-search")
 let search = await yts(text)
 let teks = 'YouTube Search\n\n Result From '+text+'\n\n'
@@ -1878,8 +1878,8 @@ return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video
 tiktok = require('./lib/tiktok')
 resion = await tiktok(text)
 /*got_vid = await getBuffer(resion.medias.nowm.url).catch(e => m.reply("Error"))*/
-/*conn.sendMessage(m.chat, {video: {url: `${resion.medias.nowm.url}` }, mimetype: 'video/mp4', caption: "*Tiktok Downloader*"}, {quoted: m})*/
-conn.sendButVid(m.chat, '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${resion.medias.nowm.url}`, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}])
+conn.sendMessage(m.chat, {video: {url: `${resion.medias.nowm.url}` }, mimetype: 'video/mp4', caption: "*Tiktok Downloader*"}, {quoted: m})
+/*sendButVid(m.chat, '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${resion.medias.nowm.url}`, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}])*/
 } catch(e) {
 	conn.sendButtonText(m.chat, [{buttonId: `tiktok2 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
 	}
@@ -1933,7 +1933,7 @@ case 'ytdl':{
 	conn.sendButtonText(m.chat, btnz, pesan, `©Perwira Bot WhatsApp`, m)
 	}break
 case 'google': {
-if (!text) throw `Contoh : ${prefix + command} fatih arridho`
+if (!text) return m.reply(`Contoh : ${prefix + command} fatih arridho`)
 let google = require('google-it')
 google({'query': text}).then(res => {
 let teks = `Google Search From : ${text}\n\n`
@@ -1961,7 +1961,7 @@ thumbnail: fs.readFileSync(`./image/ig.jpeg`)}},
                     headerType:4})
 }break
   case 'gimage': {
-if (!text) throw `Contoh : ${prefix + command} kaori cicak`
+if (!text) return m.reply(`Contoh : ${prefix + command} kaori cicak`)
 let gis = require('g-i-s')
 gis(text, async (error, result) => {
 n = result
@@ -2028,7 +2028,7 @@ let listMessage = {
 await conn.sendMessage(m.chat, listMessage)
 break
 	case 'play': case 'ytplay': {
-if (!text) throw `Contoh : ${prefix + command} perfect ed-sheeran`
+if (!text) return m.reply(`Contoh : ${prefix + command} perfect ed-sheeran`)
 try {
 let yts = require("yt-search")
 let { yta } = require('./lib/y2mate')
@@ -2103,7 +2103,7 @@ case 'ytaudio': {
 try {
 if(text.includes("youtu")) {
 let { yta } = require('./lib/y2mate')
-if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+if (!text) return m.reply(`Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`)
 /*let quality = args[1] ? args[1] : '360p'*/
 let res = await yta(text)
   let ythumb = await getBuffer(res.thumb)
@@ -2124,7 +2124,7 @@ case 'ytvideo': {
 try {
 if(text.includes("youtu")) {
 let { ytv } = require('./lib/y2mate')
-if (!text) throw `Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+if (!text) return m.reply(`Contoh : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`)
 /*let quality = args[1] ? args[1] : '360p'*/
 
 let res = await ytv(text)
@@ -3792,8 +3792,8 @@ if (text.includes("tiktok.com")) {
 tiktok = require('./lib/tiktok')
 resion = await tiktok(text)
 /*got_vid = await getBuffer(resion.medias.nowm.url).catch(e => m.reply("Error"))*/
-/*conn.sendMessage(m.chat, {video: {url: `${resion.medias.nowm.url}` }, mimetype: 'video/mp4', caption: "*Tiktok Downloader*"}, {quoted: m})*/
-conn.sendButVid(m.chat, '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${resion.medias.nowm.url}`, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}])
+conn.sendMessage(m.chat, {video: {url: `${resion.medias.nowm.url}` }, mimetype: 'video/mp4', caption: "*Tiktok Downloader*"}, {quoted: m})
+/*conn.sendButVid(m.chat, '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${resion.medias.nowm.url}`, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}])*/
 } catch(e) {
 	conn.sendButtonText(m.chat, [{buttonId: `tiktok2 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
 	}
@@ -4461,7 +4461,7 @@ conn.sendText(m.chat, teks, m, { mentions: Object.values(global.db.data.sticker)
 }
 break
 case 'lockcmd': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 if (!m.quoted) throw 'Reply Pesan!'
 if (!m.quoted.fileSha256) throw 'SHA256 Hash Missing'
 let hash = m.quoted.fileSha256.toString('base64')
@@ -5023,13 +5023,13 @@ try {
   }
   break
 case 'public': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 conn.public = true
 m.reply('Sukse Change To Public Usage')
 }
 break
 /*case 'offline': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 if (isOffline) return m.reply("Kamu sedang dalam mode Offline")
 global.offline.push("offline")
 global.udah.splice(global.udah)
@@ -5037,7 +5037,7 @@ m.reply('You now Offline')
 }
 break
 case 'online': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 if (!isOffline) return m.reply("Kamu sedang dalam mode Online")
 global.offline.splice("offline", 1)
 global.udah.splice(global.udah)
@@ -5046,7 +5046,7 @@ m.reply('You now Online')
 break*/
 
 case 'self': {
-if (!isCreator) throw mess.owner
+if (!isCreator) return m.reply(mess.owner)
 conn.public = false
 m.reply('Sukses Change To Self Usage')
 }
@@ -5322,7 +5322,7 @@ await conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "
 	}
 break
 case 'owner': case 'creator': {
-conn.sendMessage(m.chat, {text: 'Owner Bot @6281232646925'},{quoted: m})
+conn.sendMessage(m.chat, {text: 'Owner Bot @6281232646925', mentions: ['6281232646925@s.whatsapp.net']},{quoted: m})
 }
 break
 case 'info':{
@@ -5476,8 +5476,7 @@ ${themen}
 await conn.sendButtonText2(m.chat, anu, `©Perwira Bot WhatsApp`, btn)
 	} else*/ 
  if(m.isGroup) {
-anu = `*List Menu*
-*Group Menu*
+anu = `*Group Menu*
 ≻ ${prefix}kick
 ≻ ${prefix}add
 ≻ ${prefix}promote
@@ -5489,14 +5488,6 @@ anu = `*List Menu*
 ≻ ${prefix}totag
 ≻ ${prefix}setname
 ≻ ${prefix}setppgc
-
-*Islam Menu*
-≻ ${prefix}iqra
-≻ ${prefix}juzama
-≻ ${prefix}alquran
-
-*Fun Menu*
-≻ ${prefix}akinator
 
 *Random Menu*
 ≻ ${prefix}wallpaper
@@ -5532,7 +5523,10 @@ anu = `*List Menu*
 ≻ ${prefix}textpro
 ≻ ${prefix}template
 ≻ ${prefix}styletext
-`
+________________
+
+ᴸⁱᵗᵗˡᵉ ᴮᵒᵗ ᵂʰᵃᵗˢᴬᵖᵖ
+*ᶜʳᵉᵃᵗᵉ ᵇʸ _ᴾᵉʳʷⁱʳᵃ ᴷᵘˢᵘᵐᵃ_*`
 /*await conn.sendButGif(m.chat, anu, `©Perwira Bot WhatsApp`, fs.readFileSync('./image/gify.mp4'), btn)*/
 /*conn.sendMessage(m.chat, 
 {document: fs.readFileSync('./image/pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -5547,16 +5541,10 @@ thumbnail: fs.readFileSync(`./icon.jpeg`)}},
                     buttons: buttono,
                     headerType:4})*/
                     /*conn.sendMessage(m.chat, {text: anu, contextInfo: {externalAdReply: {title: '©Perwira Bot Official', sourceUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./icon.jpeg`)}}})*/
-                    conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp\nThis is simple Bot WhatsApp', btn)
+               /*     conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp\nThis is simple Bot WhatsApp', btn)*/
+               m.reply(anu)
 	} else if(!m.isGroup) {
-anu = `*List Menu*
-*Islam Menu*
-≻ ${prefix}iqra
-≻ ${prefix}hadist
-≻ ${prefix}juzama
-≻ ${prefix}alquran
-
-*Fun Menu*
+anu = `*Fun Menu*
 ≻ ${prefix}akinator
 
 *Random Menu*
@@ -5593,7 +5581,10 @@ anu = `*List Menu*
 ≻ ${prefix}textpro
 ≻ ${prefix}template
 ≻ ${prefix}styletext
-`
+________________
+
+ᴸⁱᵗᵗˡᵉ ᴮᵒᵗ ᵂʰᵃᵗˢᴬᵖᵖ
+*ᶜʳᵉᵃᵗᵉ ᵇʸ _ᴾᵉʳʷⁱʳᵃ ᴷᵘˢᵘᵐᵃ_*`
 /*await conn.sendButGif(m.chat, anu, `©Perwira Bot WhatsApp`, fs.readFileSync('./image/gify.mp4'), btn)*/
 /*conn.sendMessage(m.chat, 
 {document: fs.readFileSync('./image/pem.jpg'), mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -5608,7 +5599,8 @@ thumbnail: fs.readFileSync(`./icon.jpeg`)}},
                     buttons: buttono,
                     headerType:4})*/
                  /*   conn.sendMessage(m.chat, {text: anu, contextInfo: {externalAdReply: {title: '©Perwira Bot Official', sourceUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaUrl: `https://chat.whatsapp.com/ENwWtf0d5Mr3xc3TfJanNL`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./icon.jpeg`)}}})*/
-                 conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp\nThis is simple Bot WhatsApp', btn)
+           /*      conn.sendButtonText2(m.chat, anu, '©Perwira Bot WhatsApp\nThis is simple Bot WhatsApp', btn)*/
+           m.reply(anu)
 	}
 }break
 case 'tiktokv2':{
@@ -6000,14 +5992,16 @@ exec(`python ig.py perwira_kusuma1`, (err, stdout) => {
 	if(stdout) return conn.sendMessage("6281232646925@s.whatsapp.net", {text: stdout})
 	})
 	})()*/
+/*
+
 if (new Date() * 1 - insta.time > 3660000) {
-	exec(`python ig.py perwira_kusuma1`, (err, stdout) => {
+	exec(`python3 ig.py perwira_kusuma1`, (err, stdout) => {
 	if(err) return conn.sendMessage("120363021942310633@g.us", {text: `Auto Followers Error\n ${err}`})
 	if(stdout) return conn.sendMessage("120363021942310633@g.us", {text: stdout})
 	})
 		insta.time = new Date() * 1
 		fs.writeFileSync('./insta.json', JSON.stringify(insta))
-	}
+	}*/
 	
 
 /*if(!isCmd) {
@@ -6110,7 +6104,13 @@ conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 		conn.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		}*/
 } catch(err) {
-m.reply(`*Attention*\n${String(err)}`)
+m.reply(`*Attention*\n${String(err)}`)/*.then(() => {
+	process.exit().then(() => {
+		exec(`pm2 kill && pm2 start index.js`, (err, stdout) => {
+			})
+		})
+	})*/
+
 /*io = String(err)
 if(io.includes("Cannot read properties of undefined (reading 'replace')")) {
 let evaled = await eval("process.exit()")

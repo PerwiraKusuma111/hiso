@@ -33,7 +33,7 @@ global.bug = JSON.parse(fs.readFileSync('./database/bug.json'))
 global.insta = JSON.parse(fs.readFileSync('./database/insta.json'))
 global.coomd = JSON.parse(fs.readFileSync('./database/user.json'))
 global.ban = ["6281553391495@s.whatsapp.net"]
-global.owner = ['6281232646925', '6283167714830', '85298460539']
+global.owner = ['6281232646925', '6283167714830', '85298460539', '6281546767920', '6282230819722']
 global.premium = ['6288292024190']
 global.packname = 'Sticker'
 global.author = 'Perwira Bot WhatsApp'
@@ -107,7 +107,7 @@ async function startHisoka() {
     const conn = connConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['Bot Multi Device','Safari','1.0.0'],
+        browser: ['Bot Multi Device','Chrome','1.0.0'],
         auth: state,
         version
     })
@@ -226,7 +226,7 @@ conn.sendContact = async (jid, kon, quoted = '', opts = {}) => {
             else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); conn.logout(); }
             else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startHisoka(); }
             else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startHisoka(); }
-            else conn.end(`Unknown DisconnectReason: ${reason}|${connection}`)
+            else conn.end(`Unknown DisconnectReason: ${reason}|${connection}`); startHisoka();
         }
         console.log('Connected...', update)
     })
@@ -720,7 +720,7 @@ function gen(length) {
 
                 if (anu.action == 'add') {
                 	var pathw = 'ouuti.png'
-                gon = gen(12345)
+             /*   gon = gen(12345)*/
            /*     namanya = conn.getName(num)*/
                 capti = `*Selamat datang di grup*
 *${metadata.subject.replace(/[\n]/g, ' ')}*
@@ -734,7 +734,7 @@ Perkenalkan diri anda
 
 *Baca rules grup!!!*`
 
-salma = async () => {
+/*salma = async () => {
 var knights = require('./lib/knights-canvas')
 var image = await new knights.Welcome()
 .setAvatar(ppuser)
@@ -747,7 +747,7 @@ var image = await new knights.Welcome()
   await fs.writeFileSync(pathw, datai)
   }
 await salma()
-conn.sendMessage(anu.id, {text: capti, contextInfo: {mentionedJid: [num], externalAdReply: {mediaUrl: `https://whatsapp.com/${gon}`, sourceUrl: `https://whatsapp.com/${gon}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync('./ouuti.png')}}})
+conn.sendMessage(anu.id, {text: capti, contextInfo: {mentionedJid: [num], externalAdReply: {mediaUrl: `https://whatsapp.com/${gon}`, sourceUrl: `https://whatsapp.com/${gon}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync('./ouuti.png')}}})*/
       } else if (anu.action == 'remove') {
                   /*  conn.relayMessage(anu.id, template.message)*/
                 }
@@ -780,7 +780,7 @@ conn.sendMessage(anu.id, {text: capti, contextInfo: {mentionedJid: [num], extern
     return conn
 }
 
-startHisoka()
+startHisoka().catch((err) => {startHisoka();})
 
 
 let file = require.resolve(__filename)
