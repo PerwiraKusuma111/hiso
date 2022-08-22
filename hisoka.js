@@ -1,4 +1,4 @@
-/**
+/** 
 * Create By Dika Ardnt.
 * Contact Me on wa.me/6288292024190
 * Follow https://github.com/DikaArdnt
@@ -149,7 +149,7 @@ if (!m.key.fromMe) return
 
 // Push Message To Console && Auto Read
 if (m.message) {
-conn.sendReadReceipt(m.chat, m.sender, [m.key.id])
+/*conn.sendReadReceipt(m.chat, m.sender, [m.key.id])*/
 console.log(chalk.black(chalk.bgWhite('[ PESAN ]')), chalk.black(chalk.bgGreen(new Date)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> Di'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
 }
 	//Antidelte
@@ -1373,7 +1373,7 @@ case 'q': case 'quoted': {
 		if (!m.quoted) return m.reply('Reply Pesannya!!')
 		let wokwol = await conn.serializeM(await m.getQuotedObj())
 		if (!wokwol.quoted) return m.reply('Pesan Yang anda reply tidak mengandung reply')
-		await wokwol.quoted.copyNForward("6281232646925@s.whatsapp.net", true)
+		await wokwol.quoted.copyNForward(m.chat, false, {renderLargerThumbnail: true})
 }
 	break
 /*case 'listpcon':{
@@ -1424,8 +1424,8 @@ conn.sendText(m.chat, 'List Online:\n\n' + online.map(v => '@' + v.replace(/@.+/
  break*/
 case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
 	wm = args.join(" ")
-	wm1 = wm.split("/")[0]
-	wm2 = wm.split("/")[1]
+	wm1 = "©P-Bot 2022" /*wm.split("/")[0]*/
+	wm2 = pushname /*wm.split("/")[1]*/
 if (!quoted) return m.reply(`Balas Video/Image Dengan Caption ${prefix + command}`)
 if (/image/.test(mime)) {
 let media = await quoted.download()
@@ -5008,7 +5008,7 @@ if (kuyin.includes("/")) {
         } break
 case 'ttp': {
 	if(!text) return m.reply(`Cara menggunakan\n*Contoh :* ${prefix+command} Perwira`)
-conn.sendImageAsSticker(m.chat, `https://api.akuari.my.id/other/ttp?file&text=${encodeURI(text)}`, m, {packname: 'halo', author: 'halo'})
+conn.sendImageAsSticker(m.chat, `https://api.akuari.my.id/other/ttp?file&text=${encodeURI(text)}`, m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
 }
 break
 case 'attp':
@@ -5322,10 +5322,29 @@ await conn.sendMessage(m.chat, {image: gimgt, mimetype: 'image/jpeg', caption: "
 	}
 break
 case 'owner': case 'creator': {
-conn.sendMessage(m.chat, {text: 'Owner Bot @6281232646925', mentions: ['6281232646925@s.whatsapp.net']},{quoted: m})
+	tio = `Berikut adalah tag owner dari bot ini
+@6282230819722 (Owner utama)
+@6283167714830 (Owner kedua)`
+conn.sendMessage(m.chat, {text: tio, mentions: ['6282230819722@s.whatsapp.net', '6283167714830@s.whatsapp.net']},{quoted: m})
 }
 break
-case 'info':{
+case 'info': {
+	butp = `*Info Bot*
+Ini adalah simpel bot di WhatsApp yang dapat mempermudah untuk mendownload, membuat sticker ataupun convert beberapa pesan.
+
+*Thanks to* :
+Dika ardiant (Base.bot)
+Perwira         (Owner)
+Arul               (Kontributor)
+Mr_Dark        (Python Script)
+Sauma          (Friend)
+
+*Note!*
+Dilarang menelfon (blokir otomatis)
+Dilarang spam command`
+m.reply(butp)
+	} break
+/*case 'info':{
 	let btn = [{
 callButton: {
 displayText: 'Phone',
@@ -5381,7 +5400,7 @@ Melanggar? block
 `
   
 await conn.sendButGif(m.chat, info, `©Perwira Bot WhatsApp`, fs.readFileSync('./image/gify.mp4'), btn)
-	}break
+	}break*/
 
 case 'igstalk':
 case 'stalkig': {
@@ -5424,7 +5443,126 @@ conn.sendMessage(m.chat, {text: datastalke}, {quoted: m})
 		}
 	}
 	break
-case 'list': case 'menu': case 'help':{
+
+case 'menu': 
+case 'list': 
+case 'help': {
+	
+	let buttonis = [
+{ buttonId: 'owner', buttonText: { displayText: 'Owner' }, type: 1 },
+{ buttonId: 'info', buttonText: { displayText: 'Info' }, type: 1 }
+]
+
+	let ubtn = [{
+urlButton: {
+displayText: 'Channel',
+url: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w'
+}
+}, {
+urlButton: {
+displayText: 'Instagram',
+url: 'https://instagram.com/perwira_kusuma1'
+}
+}, {
+quickReplyButton: {
+displayText: 'Owner',
+id: 'owner'
+}  
+},
+{
+quickReplyButton: {
+displayText: 'Info Bot',
+id: 'info'
+}  
+}]
+	
+annon = `*Stiker Menu*
+≻ ${prefix}ttp
+≻ ${prefix}attp
+≻ ${prefix}sticker
+≻ ${prefix}triggered
+
+*Convert Menu*
+≻ ${prefix}togif
+≻ ${prefix}toimg
+≻ ${prefix}tomp3
+≻ ${prefix}tomp4
+
+*Search Menu*
+≻ ${prefix}play
+≻ ${prefix}igstalk
+≻ ${prefix}igstory (perbaikan)
+≻ ${prefix}ringtone
+≻ ${prefix}ytsearch
+≻ ${prefix}wikipedia
+≻ ${prefix}wikihow
+
+*Download Menu*
+≻ ${prefix}ttdl
+≻ ${prefix}igdl (perbaikan)
+≻ ${prefix}fbdl (perbaikan)
+≻ ${prefix}ytmp3
+≻ ${prefix}ytmp4
+≻ ${prefix}mediafire
+
+*Message Menu*
+≻ ${prefix}menfess
+`
+await conn.sendButtonText(m.chat, buttonis, annon, '©P-Bot 2022\nThis is simple Bot WhatsApp')
+
+/*conn.sendMessage(m.chat, {image: { url: './image/p.png'}, jpegThumbnail: fs.readFileSync('./image/r.png'), caption: annon,  gifPlayback: false,fileLength: 10000000000000000, contextInfo: { externalAdReply: { body: 'Downloader, Stiker maker, and converter', mediaUrl: 'https://wa.me/qr/KFAP5CE6BZ24F1',
+renderLargerThumbnail: true, mediaType: 1, thumbnail: fs.readFileSync('./image/nam.jpg')}}})*/
+/*conn.sendButtonText2(m.chat, annon, '©Perwira Bot WhatsApp\nThis is simple Bot WhatsApp', ubtn)*/
+/*conn.sendMessage(m.chat, {text: annon, mentions: ['6282230819722@s.whatsapp.net']})*/
+	}
+	break
+case 'menfess': {
+	try {
+ret = `Fitur untuk mengirim pesan kepada nomor tujuan
+
+*Cara menggunakan:*
+${prefix}menfess 62xxxx/inisial/pesan
+
+*Contoh:*
+${prefix}menfess 62xxxx/Si kecil/Halo aku suka sama kamu`
+
+if(m.isGroup) return m.reply("Tidak bisa digunakan didalam grup")
+if(!text) return m.reply(ret)
+
+
+    texot = text.split("/")[0].replace(/[^0-9]/g, "")
+	texit = text.split("/")[2]
+	nm = text.split("/")[1]
+	
+	if(nm === undefined) return m.reply(ret + "\n\n*Note*\nAnda belum memasukkan nama samaran\n\n*Perhatikan contoh!!!*")
+	if(texit === undefined) return m.reply(ret + "\n\n*Note*\nAnda belum memasukkan pesan\n\n*Perhatikan contoh!!!*")
+	bi = `               *[ Pesan Rahasia ]*             
+_______________________
+
+From: ${nm}
+Pesan: ${texit}
+_______________________`
+
+let bunis = [
+{ buttonId: `see ${quoted.sender}`, buttonText: { displayText: 'Telah dibaca' }, type: 1 }
+]
+await conn.sendButtonText(`${texot}@s.whatsapp.net`, bunis, bi, '©P-Bot 2022\nThis is simple Bot WhatsApp')
+} catch(err) {
+	m.reply("Error" + String(err))
+	}
+	m.reply("Terkirim")
+/*conn.sendMessage(`${texot}@s.whatsapp.net`, {text: bi}).catch(err => { m.reply(String(err)) })*/
+	}
+	break
+
+case 'see': {
+	
+	nom = text
+	gms = quoted.text.split("_______________________")[1].split("_______________________")[0]
+	conn.sendMessage(nom, {text: `*Pesan Menfess*\n_______________________${gms}_______________________\n\nTelah dibaca oleh @${m.chat.split("@")[0]}`, mentions: [m.chat]})
+	}
+	break 
+case 'list2': case 'menu2': case 'help2':{
 /*let btnz = [{buttonId: 'owner', buttonText: {displayText: 'Owner'}, type:1},{buttonId: 'profile', buttonText: {displayText: 'Profile'}, type:1},{buttonId: 'jebak', buttonText: {displayText: 'Aku\n'}, type:1}]*/
 let buttono = [{buttonId: 'info', buttonText: {displayText: 'More Info'}, type:1}]
 let btn = [{
@@ -5947,7 +6085,7 @@ await m.reply(String(err))
 
 if (budy.startsWith('x')){
 if (!isCreator) return 
-return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'\t')},{quoted: m}).catch(err => reply(util.format(err)))
+return conn.sendMessage(m.chat, {text: JSON.stringify(eval(budy.slice(2)),null,'\t')},{quoted: m}).catch(err => m.reply(util.format(err)))
 }
 
 if (budy.startsWith('$')) {

@@ -35,8 +35,8 @@ global.coomd = JSON.parse(fs.readFileSync('./database/user.json'))
 global.ban = ["6281553391495@s.whatsapp.net"]
 global.owner = ['6281232646925', '6283167714830', '85298460539', '6281546767920', '6282230819722']
 global.premium = ['6288292024190']
-global.packname = 'Sticker'
-global.author = 'Perwira Bot WhatsApp'
+global.packname = 'You'
+global.author = 'Perwira Bot WhatsApp free sticker maker'
 global.sessionName = 'hisoka'
 global.prefa = [',','!','.','?','#','/']
 global.sp = 'тнФ'
@@ -72,6 +72,7 @@ const { Boom } = require('@hapi/boom')
 const chalk = require('chalk')*/
 const FileType = require('file-type')
 const path = require('path')
+const { exec, spawn, execSync } = require("child_process")
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
 const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
@@ -780,7 +781,10 @@ conn.sendMessage(anu.id, {text: capti, contextInfo: {mentionedJid: [num], extern
     return conn
 }
 
-startHisoka().catch((err) => {startHisoka();})
+startHisoka().catch((err) => process.exit().then(() => {
+		exec(`pm2 kill && pm2 start index.js`, (err, stdout) => {
+			})
+		}))
 
 
 let file = require.resolve(__filename)
