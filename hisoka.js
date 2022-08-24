@@ -443,7 +443,11 @@ eval(fs.readFileSync('./commands/' + file,  'utf8'))
 if(!isCreator && m.sender(day)) return m.reply("Untuk sementara bot tidak bisa digunakan didalam private chat. Terimakasih")
 }*/
 if(!m.isGroup) {
-if(!isCreator && !m.sender.startsWith("62") && !m.sender.startsWith("60")) return m.reply("Bot has stopped operating for private")
+if(!isCreator && !m.sender.startsWith("62") && !m.sender.startsWith("60")) return m.reply("Bot has stopped operating for private message")
+if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")
+if(!isCreator) {
+if(!command) return m.reply("Ini adalah *Bot WhatsApp* ketik /menu untuk menampilkan list menu yang tersedia")
+}
 }
 if(isCmd) {
 	if(!coomd.includes(m.sender)) {
@@ -3862,7 +3866,7 @@ case 'addbug': {
 	fs.writeFileSync('./bug.json', JSON.stringify(bug))
 	}
 	break
-case 'igdl2':
+/*case 'igdl2':
 case 'igmp42':
 case 'igvideo2':
 case 'ig2':
@@ -3886,7 +3890,7 @@ return conn.sendMessage(m.chat, { document: {url: ries.result.link}, mimetype: '
 } else {
 m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CA6yOumDruJ/?utm_medium=copy_link`)
 }
-}break
+}break*/
 /*case 'igdl':
 case 'instagram':
 case 'ig':
@@ -4119,6 +4123,7 @@ return conn.sendMessage(m.chat, { video: {url: text}}, {quoted: m})
 		}
 	}
 	break
+
 case 'igdl':
 case 'instagram':
 case 'ig':
@@ -4127,14 +4132,14 @@ mimeaxig= ''
 {
 	try {
 	if(text.includes("instagram.com")) {
-let {instagram} = require('mumaker')
-helo = await instagram(text)
-let res = await axios.head(helo[0].url)
+let {insta_post} = require("@phaticusthiccy/open-apis")
+helo = await insta_post(text)
+let res = await axios.head(helo.post1.url)
 mimeaxig= res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
+return conn.sendMessage(m.chat, { document: {url: helo.post1.url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
 } else if(mimeaxig.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { document: {url: helo[0].url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
+return conn.sendMessage(m.chat, { document: {url: helo.post1.url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
 }
 		} else {
 			m.reply(`Masukkan link!\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
@@ -5312,6 +5317,33 @@ await conn.sendMessage(m.chat, {image: nulli, mimetype: 'image/jpeg', caption: '
 }
 }break
 
+/*case 'igdl': {
+let { igApi, getSessionId } = require('insta-fetcher');
+let ig = new igApi('csrftoken=aoi8Qy0aRdxMTpTvMZ6gpvnKYsu7DjXm; rur=EAG; mid=Yr4AaAALAAHKohvrU-WI6fSSXDyo; ds_user_id=52950990750; sessionid=52950990750%3ADjBTypSk2ft88Q%3A27%3AAYeqbpookGuZerWXm5LAXK4fqkd57BPe5P_JX1Mu1w; ig_did=BCBB70B6-9B2C-4EF6-9A6C-2FD99B7EF601');
+
+ig.fetchPost(text)
+.then(async (v) => {
+let txt = `*User Name:* ${v.username}
+*Name:* ${v.name}
+*Shortcode:* ${v.shortcode}
+*Likes:* ${v.likes}
+*Caption:* ${v.caption}
+*Comment:* ${v.comment_count}`
+
+for (let i of v.links) {
+await delay(2000)
+conn.sendMedia(m.chat, i.url, '', txt, m).catch(e => m.reply('Tidak Di Temukan Pantek :)'))
+}})
+	}
+	
+	break*/
+	/*case 'ig':
+	case 'igdl':
+	case 'instagram': {
+		require("@phaticusthiccy/open-apis")
+insta_post("https://www.instagram.com/reel/ChWRsgjlOzS/?utm_source=ig_web_copy_link")
+		}
+		break*/
 case 'tahta':
 	try {
 if (!text) return m.reply(`Masukkan teksnya\nContoh: ${prefix}${command} Perwira`)
@@ -5499,7 +5531,7 @@ annon = `*Stiker Menu*
 
 *Download Menu*
 ≻ ${prefix}ttdl
-≻ ${prefix}igdl (perbaikan)
+≻ ${prefix}igdl
 ≻ ${prefix}fbdl (perbaikan)
 ≻ ${prefix}ytmp3
 ≻ ${prefix}ytmp4
@@ -5529,14 +5561,21 @@ ${prefix}menfess 62xxxx/Si kecil/Halo aku suka sama kamu`
 if(m.isGroup) return m.reply("Tidak bisa digunakan didalam grup")
 if(!text) return m.reply(ret)
 
-
-    texot = text.split("/")[0].replace(/[^0-9]/g, "")
+texot = ""
+    texiot = text.split("/")[0].replace(/[^0-9]/g, "")
+  if(texiot.startsWith("0")) {
+  	texot = `62${texiot.slice(1)}`
+  	} else {
+  	texot = text.split("/")[0].replace(/[^0-9]/g, "")
+  	}
 	texit = text.split("/")[2]
 	nm = text.split("/")[1]
 	
 	if(nm === undefined) return m.reply(ret + "\n\n*Note*\nAnda belum memasukkan nama samaran\n\n*Perhatikan contoh!!!*")
+	if(nm.length < 1) return m.reply(ret + "\n\n*Note*\Isi nama inisial anda\n\n*Perhatikan contoh!!!*")
 	if(texit === undefined) return m.reply(ret + "\n\n*Note*\nAnda belum memasukkan pesan\n\n*Perhatikan contoh!!!*")
-	bi = `               *[ Pesan Rahasia ]*             
+	if(texit.length < 1) return m.reply(ret + "\n\n*Note*\nAnda belum memasukkan pesan\n\n*Perhatikan contoh!!!*")
+	bi = `               *[ Menfess Chat ]*             
 _______________________
 
 From: ${nm}
@@ -5546,7 +5585,7 @@ _______________________`
 let bunis = [
 { buttonId: `see ${quoted.sender}`, buttonText: { displayText: 'Telah dibaca' }, type: 1 }
 ]
-await conn.sendButtonText(`${texot}@s.whatsapp.net`, bunis, bi, '©P-Bot 2022\nThis is simple Bot WhatsApp')
+await conn.sendButtonMenf(`${texot}@s.whatsapp.net`, quoted.sender, bunis, bi, '©P-Bot 2022\nThis is simple Bot WhatsApp\nBalas pesan ini kepada pengirim dengan reply pesan dan command /balas isi pesan')
 } catch(err) {
 	m.reply("Error" + String(err))
 	}
@@ -5555,8 +5594,28 @@ await conn.sendButtonText(`${texot}@s.whatsapp.net`, bunis, bi, '©P-Bot 2022\nT
 	}
 	break
 
-case 'see': {
+
+
+case 'balas': {
+	if(m.isGroup) return m.reply("Tidak bisa digunakan didalam grup")
+	if(!m.quoted) return m.reply("Reply pesan Menfessnya")
+	if(!quoted.text.includes("[")) return m.reply("Bukan pesan Menfess")
+	luio = quoted.text.split("_______________________")[1].split("_______________________")[0]
+	texl = `*Menfess Chat*
 	
+Balasan pesan dari @${m.chat.split("@")[0]}
+Untuk pesan : 
+___________________${luio}
+____________________
+Balasan: ${text}`
+hopi = quoted.contextInfo.mentionedJid[0]
+if(text.length < 1) return m.reply("Masukkan pesan")
+	conn.sendMessage(hopi, {text: texl, mentions: [m.chat]})
+	}
+	break
+
+case 'see': {
+	if(m.isGroup) return m.reply("Tidak bisa digunakan didalam grup")
 	nom = text
 	gms = quoted.text.split("_______________________")[1].split("_______________________")[0]
 	conn.sendMessage(nom, {text: `*Pesan Menfess*\n_______________________${gms}_______________________\n\nTelah dibaca oleh @${m.chat.split("@")[0]}`, mentions: [m.chat]})

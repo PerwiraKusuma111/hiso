@@ -33,7 +33,7 @@ global.bug = JSON.parse(fs.readFileSync('./database/bug.json'))
 global.insta = JSON.parse(fs.readFileSync('./database/insta.json'))
 global.coomd = JSON.parse(fs.readFileSync('./database/user.json'))
 global.ban = ["6281553391495@s.whatsapp.net"]
-global.owner = ['6281232646925', '6283167714830', '85298460539', '6281546767920', '6282230819722']
+global.owner = ['6281232646925@s.whatsapp.net', '6283167714830@s.whatsapp.net', '85298460539@s.whatsapp.net', '6281546767920@s.whatsapp.net', '6282230819722']
 global.premium = ['6288292024190']
 global.packname = 'You'
 global.author = 'Perwira Bot WhatsApp free sticker maker'
@@ -292,6 +292,7 @@ thumbnail: thum}},
                     headerType: 4}, 
                    {quoted: pio})
                    }
+                   
     conn.sendVid = async (jid, uirl, options= {}) => {
     	let message = await prepareWAMessageMedia({video: {url: uirl}, caption: "Tiktok Downloader"}, { upload: conn.waUploadToServer })
         var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
@@ -392,6 +393,20 @@ thumbnail: img}
      conn.sendMessage(jid, buttonMessage, {quoted, ...options})
      	}
      
+  
+     
+    conn.sendButtonMenf = (jid, m, buttons = [], text, footer, quoted = '', options = {}) => {
+        let buttoniMessage = {
+            text,
+            mentions: [m],
+            footer,
+            buttons,
+            headerType: 2,
+            ...options
+        }
+        conn.sendMessage(jid, buttoniMessage, { quoted, ...options })
+    }
+     
     conn.sendButtonText = (jid, buttons = [], text, footer, quoted = '', options = {}) => {
         let buttonMessage = {
             text,
@@ -402,6 +417,7 @@ thumbnail: img}
         }
         conn.sendMessage(jid, buttonMessage, { quoted, ...options })
     }
+    
     
     /**
      * 
