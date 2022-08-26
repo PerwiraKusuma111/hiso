@@ -443,12 +443,37 @@ eval(fs.readFileSync('./commands/' + file,  'utf8'))
 if(!isCreator && m.sender(day)) return m.reply("Untuk sementara bot tidak bisa digunakan didalam private chat. Terimakasih")
 }*/
 if(!m.isGroup) {
-if(!isCreator && !m.sender.startsWith("62") && !m.sender.startsWith("60")) return m.reply("Bot has stopped operating for private message")
+if(!isCreator && !m.sender.startsWith("62") && !m.sender.startsWith("60")) return m.reply("Bot has stopped operating for private message in your number country")
 if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")
-if(!isCreator) {
-if(!command) return m.reply("Ini adalah *Bot WhatsApp* ketik /menu untuk menampilkan list menu yang tersedia")
+
 }
-}
+
+    this.spam = this.spam ? this.spam : {}
+    
+    if (quoted.sender in this.spam) {
+        this.spam[quoted.sender].count++
+        if (m.messageTimestamp * 1 - this.spam[quoted.sender].lastspam > 4) {
+            if (this.spam[quoted.sender].count > 4) {
+                //db.data.users[m.sender].banned = true
+                m.reply('*Jangan Spam!!*')
+                ytu = await conn.sendContact(quoted.sender, global.owner)
+                conn.sendMessage(quoted.sender, { text: `Sistem otomatis block!\nJangan spam bot!\nSilahkan Hubungi Owner Untuk Dibuka !`}, { quoted : ytu })
+                await sleep(5000)
+                await conn.updateBlockStatus(quoted.sender, "block")
+            }
+            this.spam[quoted.sender].count = 0
+            this.spam[quoted.sender].lastspam = m.messageTimestamp * 1
+        }
+    }
+    else
+        this.spam[m.sender] = {
+            jid: m.sender,
+            count: 0,
+            lastspam: 0
+        }
+        
+
+
 if(isCmd) {
 	if(!coomd.includes(m.sender)) {
 		coomd.push(m.sender)
@@ -1718,7 +1743,6 @@ await fs.unlinkSync(media)
 break
 	case 'tourl': {
 if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
-	if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 	if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 		let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
 let media = await conn.downloadAndSaveMediaMessage(quoted)
@@ -3782,7 +3806,7 @@ conn.sendMessage(m.chat, {document: {url: `${resioni.medias.audio.url}`}, ptt: f
 	conn.sendButtonText(m.chat, [{buttonId: `ttmp32 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
 	}
 } else {
-	m.reply(`Linknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)
+	m.reply(`Fitur untuk download audio dari video tiktok\nLinknya?\n*Contoh :* ${prefix+command} https://vt.tiktok.com/ZSextfjoX/`)
 }
 }
 break
@@ -5373,7 +5397,7 @@ Sauma          (Friend)
 
 *Note!*
 Dilarang menelfon (blokir otomatis)
-Dilarang spam command`
+Dilarang spam (blokir otomatis)`
 m.reply(butp)
 	} break
 /*case 'info':{
@@ -5482,7 +5506,7 @@ case 'help': {
 	
 	let buttonis = [
 { buttonId: 'owner', buttonText: { displayText: 'Owner' }, type: 1 },
-{ buttonId: 'info', buttonText: { displayText: 'Info' }, type: 1 }
+{ buttonId: 'info', buttonText: { displayText: 'Rules' }, type: 1 }
 ]
 
 	let ubtn = [{
@@ -5533,6 +5557,7 @@ annon = `*Stiker Menu*
 ≻ ${prefix}ttdl
 ≻ ${prefix}igdl
 ≻ ${prefix}fbdl (perbaikan)
+> ${prefix}ttmp3
 ≻ ${prefix}ytmp3
 ≻ ${prefix}ytmp4
 ≻ ${prefix}mediafire
