@@ -456,8 +456,16 @@ if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")
             if (this.spam[quoted.sender].count > 4) {
                 //db.data.users[m.sender].banned = true
                 m.reply('*Jangan Spam!!*')
-                ytu = await conn.sendContact(quoted.sender, global.owner)
-                conn.sendMessage(quoted.sender, { text: `Sistem otomatis block!\nJangan spam bot!\nSilahkan Hubungi Owner Untuk Dibuka !`}, { quoted : ytu })
+                let ytu = await conn.sendMessage(m.chat, {contacts: {displayName: '1',contacts:[{
+	"displayName": "Perwira Kusuma",
+	"vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;Perwira;;;\nFN:Perwira\nitem1.TEL;waid=6282230819722:+62 822-3081-9722\nitem1.X-ABLabel:Ponsel\nX-WA-BIZ-DESCRIPTION:Owner P-Bot\nX-WA-BIZ-NAME:Perwira\nEND:VCARD",
+	"contextInfo": {
+		externalAdReply:{title: 'Per144', body: 'Support me on YouTube - Click photo',mediaUrl: 'https://www.youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', sourceUrl: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true,thumbnail: fs.readFileSync('./image/beluga.png')}
+	}
+}]
+}
+})
+                await conn.sendMessage(quoted.sender, { text: `*Sistem otomatis block!*\n\nAnda melakukan spam hubungi owner untuk di unblock`}, { quoted : ytu })
                 await sleep(5000)
                 await conn.updateBlockStatus(quoted.sender, "block")
             }
@@ -979,7 +987,7 @@ await conn.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unl
 m.reply(mess.success)
 }
 break
-case 'setpp': case 'ppchange': case 'changepp': {
+/*case 'setpp': case 'ppchange': case 'changepp': {
 	if(!isCreator) return m.reply("Khusus Owner")
 if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
 if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
@@ -988,7 +996,33 @@ let media = await conn.downloadAndSaveMediaMessage(quoted)
 await conn.updateProfilePicture(`${text}`, { url: media }).catch((err) => fs.unlinkSync(media))
 m.reply(mess.success)
 }
-break
+break*/
+
+case 'setpp': {
+	
+	if(!isCreator) return m.reply("Khusus Owner")
+	if(m.isGroup) return m.reply("Hanya bisa di private chat")
+	if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+(async () => {
+var { img  } = await require('./lib/myfunc'). generateProfilePicture(fs.readFileSync('./g.jpg'))
+conn.query({
+            tag: 'iq',
+            attrs: {
+                to: 
+`${conn.user.id.split(':')[0]}@s.whatsapp.net`,
+                type: 'set',
+                xmlns: 'w:profile:picture'
+            },
+            content: [
+                {
+                    tag: 'picture',
+                    attrs: { type: 'image' },
+                    content: img
+                }
+            ]
+        });
+})()
+	} break
 case 'setppgrouup': case 'setppgrup': case 'setppgc': {
 if (!m.isGroup) return m.reply(mess.group)
 if (!isAdmins) return m.reply(mess.admin)
@@ -3819,8 +3853,8 @@ if (text.includes("tiktok.com")) {
 	try {
 tiktok = require('./lib/tiktok')
 resion = await tiktok(text)
-/*got_vid = await getBuffer(resion.medias.nowm.url).catch(e => m.reply("Error"))*/
-conn.sendMessage(m.chat, {video: {url: `${resion.medias.nowm.url}` }, mimetype: 'video/mp4', caption: "*Tiktok Downloader*"}, {quoted: m})
+ddi = [{ buttonId: `tiktokmp3 ${text}`, buttonText: { displayText: 'Audio' },type: 1}]
+conn.sendButVidc(m.chat, ddi, "*Tiktok Downloader*", '©P-Bot 2022\nThis is simple Bot WhatsApp', `${resion.medias.nowm.url}`)
 /*conn.sendButVid(m.chat, '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${resion.medias.nowm.url}`, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}])*/
 } catch(e) {
 	conn.sendButtonText(m.chat, [{buttonId: `tiktok2 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
@@ -5381,14 +5415,27 @@ case 'owner': case 'creator': {
 	tio = `Berikut adalah tag owner dari bot ini
 @6282230819722 (Owner utama)
 @6283167714830 (Owner kedua)`
-conn.sendMessage(m.chat, {text: tio, mentions: ['6282230819722@s.whatsapp.net', '6283167714830@s.whatsapp.net']},{quoted: m})
+conn.sendMessage(m.chat, {contacts: {displayName: '1',contacts:[{
+	"displayName": "Perwira Kusuma",
+	"vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;Perwira;;;\nFN:Perwira\nitem1.TEL;waid=6282230819722:+62 822-3081-9722\nitem1.X-ABLabel:Ponsel\nX-WA-BIZ-DESCRIPTION:Owner P-Bot\nX-WA-BIZ-NAME:Perwira\nEND:VCARD",
+	"contextInfo": {
+		externalAdReply:{title: 'Per144', body: 'Support me on YouTube - Click photo',mediaUrl: 'https://www.youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', sourceUrl: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true,thumbnail: fs.readFileSync('./image/beluga.png')}
+	}
+}]
+}
+})
 }
 break
-case 'info': {
-	butp = `*Info Bot*
-Ini adalah simpel bot di WhatsApp yang dapat mempermudah untuk mendownload, membuat sticker ataupun convert beberapa pesan.
-
-*Thanks to* :
+case 'mantap': {
+	m.reply("*Mantap, jangan melanggar rules!*")
+	}
+	break
+break
+case 'rules': {
+butts = [
+{ buttonId: 'mantap', buttonText: { displayText: 'Saya mengerti' }, type: 1 }
+]
+	butp = `*Thanks to* :
 Dika ardiant (Base.bot)
 Perwira         (Owner)
 Arul               (Kontributor)
@@ -5396,9 +5443,12 @@ Mr_Dark        (Python Script)
 Sauma          (Friend)
 
 *Note!*
-Dilarang menelfon (blokir otomatis)
-Dilarang spam (blokir otomatis)`
-m.reply(butp)
+Dilarang spam (blokir otomatis)
+Dilarang telfon (blokir otomatis)
+
+*Definition of this Bot*
+Ini adalah simpel bot di WhatsApp yang dapat mempermudah untuk mendownload, membuat sticker ataupun convert beberapa pesan.`
+await conn.sendButLocc(m.chat, butts, butp, '©P-Bot 2022\nThis is simple Bot WhatsApp', fs.readFileSync('./image/pbot.jpg'))
 	} break
 /*case 'info':{
 	let btn = [{
@@ -5506,7 +5556,7 @@ case 'help': {
 	
 	let buttonis = [
 { buttonId: 'owner', buttonText: { displayText: 'Owner' }, type: 1 },
-{ buttonId: 'info', buttonText: { displayText: 'Rules' }, type: 1 }
+{ buttonId: 'rules', buttonText: { displayText: 'Rules' }, type: 1 }
 ]
 
 	let ubtn = [{
@@ -5565,7 +5615,7 @@ annon = `*Stiker Menu*
 *Message Menu*
 ≻ ${prefix}menfess
 `
-await conn.sendButtonText(m.chat, buttonis, annon, '©P-Bot 2022\nThis is simple Bot WhatsApp')
+await conn.sendButLocc(m.chat, buttonis, annon, '©P-Bot 2022\nThis is simple Bot WhatsApp', fs.readFileSync('./image/pbot.jpg'))
 
 /*conn.sendMessage(m.chat, {image: { url: './image/p.png'}, jpegThumbnail: fs.readFileSync('./image/r.png'), caption: annon,  gifPlayback: false,fileLength: 10000000000000000, contextInfo: { externalAdReply: { body: 'Downloader, Stiker maker, and converter', mediaUrl: 'https://wa.me/qr/KFAP5CE6BZ24F1',
 renderLargerThumbnail: true, mediaType: 1, thumbnail: fs.readFileSync('./image/nam.jpg')}}})*/
@@ -6002,7 +6052,7 @@ conn.deleteMessage(from, mes.key)
 }, 30000)
 }
 break*/
-case 'rules':{
+/*case 'rules':{*/
 /*let term = {
 contextInfo: {
 participant: "0@s.whatsapp.net",
@@ -6013,10 +6063,10 @@ text: "Nama Bot"
 }
 }
 }*/
-anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
+/*anu = "*Rules Bot*\n\n/> Dilarang spam\n/> Dilarang menelfon\n\nFitur error? chat owner!\nMelanggar? block"
 let btnz = [{buttonId: 'ididiidjdjdhdhdhdg', buttonText: {displayText: 'Oke'}, type:1}]
 await conn.sendButtonText(m.chat, btnz, anu, `©Perwira Bot WhatsApp`, m)
-} break
+} break*/
 case 'get':{
 	if(!isCreator) return
 	if(!text) return m.reply(`Cara penggunaan\n*Contoh :* ${prefix+command} https://news.com`)
