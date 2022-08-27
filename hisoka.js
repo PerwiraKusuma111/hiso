@@ -67,7 +67,7 @@ let vote = db.data.others.vote = []
 */
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-module.exports = conn = async (conn, m, chatUpdate, store) => {
+module.exports = conn = async (conn, m, chatUpdate/*, store*/) => {
 try {
 var cmd = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
 var prefix = /^[!?#/.,]/.test(cmd) ? cmd.match(/^[!?#/.,]/gi) : "/"
@@ -84,7 +84,7 @@ const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '')
 const isBan = [...global.ban].includes(m.chat)
 const isSimi = [...global.simi].includes(m.chat)*/
 const itsMe = m.sender == botNumber ? true : false
-const text = q = args.join(" ")
+const text = q = args.join(" ").replace(/kontol|kontl|kntl|kotol|jmbt|jembut|memek|mmk|memk|mmek|bewok|bokep|bkep|anjing|ajeg|bagst|bangst|babi|bangsat|tolol|jancok|jnck|jancog|jancg|cok|asu|ngentot|ngent|ngntt|bajingan|bajing|hentai|bokep|blowjob|menstruasi|bugil|gay|xxx|xnxx|sodom|kondom|tetek|asw|ngewe|pelacur|pelcr|goblok|gblk|kanjut|anjg|idiot|bego|dick|pussy|telanjang|pusy|pixhentai|pornhub|porn|porno|pornografi|telanjangg|mendesah|montok|simontok/g, '(disensor)')
 /*const isOffline = !m.isGroup ? global.offline.includes("offline") : false
 const simo = budy.slice(0)*/
 const quoted = m.quoted ? m.quoted : m
@@ -190,7 +190,7 @@ timezone: "Asia/Jakarta"
   }*/
   
   //Akinator
-        this.akinator = this.akinator ? this.akinator : {}
+       /* this.akinator = this.akinator ? this.akinator : {}
         if(typeof this.akinator[m.sender] == 'object' && budy.length == 1 && ["1", "2", "3", "4", "5"].includes(budy)) {
         await this.akinator[m.sender].step(Number(budy) - 1)
         if (this.akinator[m.sender].progress >= 89 || this.akinator[m.sender].currentStep >= 78) {
@@ -216,7 +216,7 @@ return !0
 
 Ketik angka/teksnya!`
 conn.sendMessage(m.chat, {text: yuk}, {quoted: m})
-        }
+        }*/
 /*
 // Respon Cmd with media
 if (isMedia && m.msg.fileSha256 && (m.msg.fileSha256.toString('base64') in global.db.data.sticker)) {
@@ -444,12 +444,8 @@ if(!isCreator && m.sender(day)) return m.reply("Untuk sementara bot tidak bisa d
 }*/
 if(!m.isGroup) {
 if(!isCreator && !m.sender.startsWith("62") && !m.sender.startsWith("60")) return m.reply("Bot has stopped operating for private message in your number country")
-if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")
-
-}
-
-    this.spam = this.spam ? this.spam : {}
-    
+this.spam = this.spam ? this.spam : {}
+    if(command) {
     if (quoted.sender in this.spam) {
         this.spam[quoted.sender].count++
         if (m.messageTimestamp * 1 - this.spam[quoted.sender].lastspam > 4) {
@@ -479,15 +475,18 @@ if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")
             count: 0,
             lastspam: 0
         }
-        
+        }
+}
+
+    
 
 
-if(isCmd) {
+/*if(isCmd) {
 	if(!coomd.includes(m.sender)) {
 		coomd.push(m.sender)
 		fs.writeFileSync('./user.json', JSON.stringify(coomd))
 		}
-	}
+	}*/
 switch(command) {
 	 /*case 'afk': {
 let user = global.db.data.users[m.sender]
@@ -609,16 +608,16 @@ Chat owner untuk melanjutkan
 	}
 break
 
-case 'akinator': case 'aki': {
+/*case 'akinator': case 'aki': {
 	if(!isCreator && m.isGroup) return m.reply("Tidak bisa digunakan didalam grup")
             if(typeof this.akinator[m.sender] == 'object') return m.reply("Kamu Masih Berada Dalam Sesi Akinator")
             conn.sendMessage(m.chat, {text: "Pikirkan salah satu tokoh saya akan menebaknya\nWaktu 10 detik", contextInfo: {externalAdReply: {title: "Akinator", body: "©Perwira Bot WhatsApp", sourceUrl: `https://akinator.com/1`, mediaUrl: `https://akinator.com/1`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync(`./image/aki.jpeg`)}}})
-          /*  m.reply("Pikirkan salah satu tokoh saya akan menebak\nSaya tunggu 10 detik")*/
+          ///////// m.reply("Pikirkan salah satu tokoh saya akan menebak\nSaya tunggu 10 detik")
             await sleep(10000)
             let { Aki } = require("aki-api")
             this.akinator[m.sender] = new Aki({ region: "id" })
             await this.akinator[m.sender].start()
-          /*  console.log(this.akinator[m.sender])*/
+          ///// console.log(this.akinator[m.sender])
             akn = `*${this.akinator[m.sender].currentStep + 1}*. *${this.akinator[m.sender].question}*
 *Progress:* ${this.akinator[m.sender].progress}
 
@@ -631,7 +630,7 @@ case 'akinator': case 'aki': {
 Ketik angka/teksnya!`
 conn.sendMessage(m.chat, {text: akn}, {quoted: m})
             }
-            break
+            break*/
          /*   case 'delakinator': {
             if(m.isGroup) return m.reply("Tidak bisa digunakan didalam grup")
             if(typeof this.akinator[m.sender] !== 'object') return m.reply("Kamu Sedang Tidak Berada Dalam Sesi Akinator")
@@ -949,8 +948,15 @@ await conn.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(re
 break
 case 'unblock': {
 		if (!isCreator) return m.reply(mess.owner)
+		if(quoted) {
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 		await conn.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+		} else if(text) {
+			let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+		await conn.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+			} else {
+				m.reply("Reply pesan atau masukkan nomor")
+				}
 	}
 	break
 	case 'setname': case 'setsubject': {
@@ -1432,13 +1438,13 @@ case 'totag': {
               }
             }
             break
-case 'q': case 'quoted': {
+/*case 'q': case 'quoted': {
 		if (!m.quoted) return m.reply('Reply Pesannya!!')
 		let wokwol = await conn.serializeM(await m.getQuotedObj())
 		if (!wokwol.quoted) return m.reply('Pesan Yang anda reply tidak mengandung reply')
 		await wokwol.quoted.copyNForward(m.chat, false, {renderLargerThumbnail: true})
 }
-	break
+	break*/
 /*case 'listpcon':{
 let anu = Object.keys(store.contacts)
 let mes = `*Jumlah private chat :* ${anu.length}\n\n`
@@ -1488,7 +1494,7 @@ conn.sendText(m.chat, 'List Online:\n\n' + online.map(v => '@' + v.replace(/@.+/
 case 'sticker': case 'stiker': case 's': case 'stickergif': case 'sgif': {
 	wm = args.join(" ")
 	wm1 = "©P-Bot 2022" /*wm.split("/")[0]*/
-	wm2 = pushname /*wm.split("/")[1]*/
+	wm2 = "Sticker Maker" /*wm.split("/")[1]*/
 if (!quoted) return m.reply(`Balas Video/Image Dengan Caption ${prefix + command}`)
 if (/image/.test(mime)) {
 let media = await quoted.download()
@@ -5071,7 +5077,7 @@ if (kuyin.includes("/")) {
         } break
 case 'ttp': {
 	if(!text) return m.reply(`Cara menggunakan\n*Contoh :* ${prefix+command} Perwira`)
-conn.sendImageAsSticker(m.chat, `https://api.akuari.my.id/other/ttp?file&text=${encodeURI(text)}`, m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
+await conn.sendImageAsSticker(m.chat, `https://api.xteam.xyz/ttp?file&text=${encodeURI(text)}`, m, {packname: 'Sticker', author: 'Perwira Bot WhatsApp'})
 }
 break
 case 'attp':
@@ -5445,6 +5451,7 @@ Sauma          (Friend)
 *Note!*
 Dilarang spam (blokir otomatis)
 Dilarang telfon (blokir otomatis)
+Kata² toxic akan diubah otomatis
 
 *Definition of this Bot*
 Ini adalah simpel bot di WhatsApp yang dapat mempermudah untuk mendownload, membuat sticker ataupun convert beberapa pesan.`
@@ -5606,7 +5613,7 @@ annon = `*Stiker Menu*
 *Download Menu*
 ≻ ${prefix}ttdl
 ≻ ${prefix}igdl
-≻ ${prefix}fbdl (perbaikan)
+≻ ${prefix}fbdl
 > ${prefix}ttmp3
 ≻ ${prefix}ytmp3
 ≻ ${prefix}ytmp4
@@ -5914,7 +5921,7 @@ conn.sendMessage(m.chat, {audio: {url: tes.result[0].url}, mimetype: 'audio/mpeg
 	}
 	}
 	break*/
-	case 'fb': 
+	/*case 'fb': 
 	case 'fbdl':
 	case 'fbmp4':
 	case 'facebook': {
@@ -5927,7 +5934,29 @@ conn.sendMessage(m.chat, {audio: {url: tes.result[0].url}, mimetype: 'audio/mpeg
 			m.reply("Pastikan link yang anda masukkan benar" + String(err))
 			}
 		}
-		break
+		break*/
+		case 'fb':
+        case 'fbdl':
+        case 'facebook': {
+        	try {
+        	if(text.startsWith("@")) {
+let meedia = await getBuffer(text.split("@")[1])
+let { toAudio } = require('./lib/converter')
+let audiio = await toAudio(meedia, 'mp4')
+conn.sendMessage(m.chat, {document: audiio, mimetype: 'audio/mpeg', fileName: `Facebook Audio ${new Date() * 1}.mp3`}, { quoted : m })
+        	} else if(/facebook|fbl|permalink/.test(text)) {
+await axios.post('https://fbdownloader.live/api/analyze', `q=${text}`).then(({ data }) => {
+dodi = [{ buttonId: `fb @${data.resource.sd}`, buttonText: { displayText: 'Audio' },type: 1}]
+conn.sendButVidc(m.chat, dodi, "*Facebook Downloader*", '©P-Bot 2022\nThis is simple Bot WhatsApp', `${data.resource.hd}`)
+})
+} else {
+	m.reply("*Masukkan Link dengan benar!*")
+	}
+} catch(err) {
+	m.reply(String(err))
+	}
+} break
+		
 case 'anim':{
 	if(!text.includes("/")) return m.reply(`Masukkan teks!
 *Contoh :* ${prefix+command} gura/Text
@@ -6108,6 +6137,8 @@ m.reply(`Kirim pesan sambil reply chat yang dikirim oleh bot`)
 					}*/
 					/*break*/
 default:
+
+if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")
 /*
 
 */

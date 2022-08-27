@@ -64,7 +64,7 @@ fs.watchFile(file, () => {
 	require(file)
 })*/
 
-const { default: connConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+const { default: connConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage/*, makeInMemoryStore*/, jidDecode, proto } = require("@adiwajshing/baileys")
 const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
 const pino = require('pino')
 const { Boom } = require('@hapi/boom')
@@ -86,7 +86,7 @@ low = require('./lib/lowdb')
 const { Low, JSONFile } = low
 
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
-const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+/*const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })*/
 /*global.db = new Low(new JSONFile(`src/database.json`))
 global.db.data = {
     users: {},
@@ -113,7 +113,7 @@ async function startHisoka() {
         version
     })
 
-    store.bind(conn.ev)
+/*    store.bind(conn.ev)*/
 
    conn.ws.on('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
@@ -142,8 +142,8 @@ async function startHisoka() {
         if (mek.key && mek.key.remoteJid === 'status@broadcast') return
         if (!conn.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
-        m = smsg(conn, mek, store)
-        require("./hisoka")(conn, m, chatUpdate, store)
+        m = smsg(conn, mek/*, store*/)
+        require("./hisoka")(conn, m, chatUpdate/*, store*/)
         } catch (err) {
             console.log(err)
         }
@@ -159,14 +159,14 @@ async function startHisoka() {
         } else return jid
     }
     
-   conn.ev.on('contacts.update', update => {
+ /*  conn.ev.on('contacts.update', update => {
         for (let contact of update) {
             let id = conn.decodeJid(contact.id)
             if (store && store.contacts) store.contacts[id] = { id, name: contact.notify }
         }
-    })
+    })*/
 
-    conn.getName = (jid, withoutContact  = false) => {
+    /*conn.getName = (jid, withoutContact  = false) => {
         id = conn.decodeJid(jid)
         withoutContact = conn.withoutContact || withoutContact 
         let v
@@ -182,7 +182,7 @@ async function startHisoka() {
             conn.user :
             (store.contacts[id] || {})
             return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
-    }
+    }*/
     
   /*  conn.presenceSubscribe = async (jid) => {
     }*/
@@ -222,7 +222,7 @@ conn.sendContact = async (jid, kon, quoted = '', opts = {}) => {
 	
     conn.public = true
 
-  conn.serializeM = (m) => smsg(conn, m, store)
+  conn.serializeM = (m) => smsg(conn, m/*, store*/)
 
     conn.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update	    
