@@ -119,17 +119,25 @@ async function startHisoka() {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag == 'offer') {
     let pa7rick = await conn.sendMessage(callerId, {contacts: {displayName: '1',contacts:[{
-	"displayName": "Perwira Kusuma",
-	"vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;Perwira;;;\nFN:Perwira\nitem1.TEL;waid=6282230819722:+62 822-3081-9722\nitem1.X-ABLabel:Ponsel\nX-WA-BIZ-DESCRIPTION:Owner P-Bot\nX-WA-BIZ-NAME:Perwira\nEND:VCARD",
+	"displayName": "Perwira Kusuma - Owner",
+	"vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;Perwira Kusuma - Owner;;;\nFN:Perwira Kusuma - Owner\nitem1.TEL;waid=6282230819722:+62 822-3081-9722\nitem1.X-ABLabel:Ponsel\nX-WA-BIZ-DESCRIPTION:Kamu menelfon bot hubungi owner untuk di unblock\nX-WA-BIZ-NAME:Perwira Kusuma - Owner\nEND:VCARD",
 	"contextInfo": {
 		externalAdReply:{title: 'Per144', body: 'Support me on YouTube - Click photo',mediaUrl: 'https://www.youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', sourceUrl: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true,thumbnail: fs.readFileSync('./image/beluga.png')}
 	}
 }]
 }
 })
-    await conn.sendMessage(callerId, { text: `Sistem otomatis block!\nJangan menelpon bot!\nSilahkan Hubungi Owner Untuk Dibuka !`}, { quoted : pa7rick })
-    await sleep(5000)
+
+    
+    await sleep(10000)
     await conn.updateBlockStatus(callerId, "block")
+    try {
+                    ppuser = await conn.profilePictureUrl(callerId, 'image')
+                } catch {
+                    ppuser = './image/nothing.jpg'
+                }
+    conn.sendButGamc("6282230819722@s.whatsapp.net", [{ buttonId: `unblock ${callerId.split('@')[0]}`, buttonText: { displayText: 'Unblock' },type: 1}], `*Call Block User*\nhttps://wa.me/${callerId.split("@")[0]}`, '©P-Bot 2022\nThis is simple Bot WhatsApp', ppuser) 
+    
     }
     })
 
@@ -415,6 +423,13 @@ jpegThumbnail: img},
   
  conn.sendButVidc = async (jid, but = [], text1, foot, ul) => {
 conn.sendMessage(jid, {video: {url: ul},
+                    caption: text1,
+                    footer: foot,
+                    buttons: but,
+                    headerType: 4})
+                   }
+                   conn.sendButGamc = async (jid, but = [], text1, foot, ul) => {
+conn.sendMessage(jid, {image: {url: ul},
                     caption: text1,
                     footer: foot,
                     buttons: but,

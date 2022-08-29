@@ -84,7 +84,7 @@ const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '')
 const isBan = [...global.ban].includes(m.chat)
 const isSimi = [...global.simi].includes(m.chat)*/
 const itsMe = m.sender == botNumber ? true : false
-const text = q = args.join(" ").replace(/kontol|kontl|kntl|kotol|jmbt|jembut|memek|mmk|memk|mmek|bewok|bokep|bkep|anjing|ajeg|bagst|bangst|babi|bangsat|tolol|jancok|jnck|jancog|jancg|cok|asu|ngentot|ngent|ngntt|bajingan|bajing|hentai|bokep|blowjob|menstruasi|bugil|gay|xxx|xnxx|sodom|kondom|tetek|asw|ngewe|pelacur|pelcr|goblok|gblk|kanjut|anjg|idiot|bego|dick|pussy|telanjang|pusy|pixhentai|pornhub|porn|porno|pornografi|telanjangg|mendesah|montok|simontok/g, '(disensor)')
+const text = q = args.join(" ").replace(/kontol|kontl|kntl|kotol|jmbt|jembut|memek|mmk|memk|mmek|bewok|bokep|bkep|anjing|ajeg|bagst|bangst|babi|bangsat|tolol|jancok|jnck|jancog|jancg|cok|asu|ngentot|ngent|ngntt|bajingan|bajing|hentai|bokep|blowjob|menstruasi|bugil|gay|xxx|xnxx|sodom|kondom|tetek|asw|ngewe|pelacur|pelcr|goblok|gblk|kanjut|anjg|idiot|bego|dick|pussy|telanjang|pusy|pixhentai|pornhub|porn|porno|pornografi|telanjangg|mendesah|montok|simontok/g, '*')
 /*const isOffline = !m.isGroup ? global.offline.includes("offline") : false
 const simo = budy.slice(0)*/
 const quoted = m.quoted ? m.quoted : m
@@ -448,22 +448,34 @@ this.spam = this.spam ? this.spam : {}
     if(command) {
     if (quoted.sender in this.spam) {
         this.spam[quoted.sender].count++
-        if (m.messageTimestamp * 1 - this.spam[quoted.sender].lastspam > 4) {
-            if (this.spam[quoted.sender].count > 4) {
+        if (m.messageTimestamp * 1 - this.spam[quoted.sender].lastspam > 3) {
+            if (this.spam[quoted.sender].count > 3) {
                 //db.data.users[m.sender].banned = true
-                m.reply('*Jangan Spam!!*')
+                this.spam[m.sender] = {
+            jid: m.sender,
+            count: 0,
+            lastspam: 0
+        }
                 let ytu = await conn.sendMessage(m.chat, {contacts: {displayName: '1',contacts:[{
-	"displayName": "Perwira Kusuma",
-	"vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;Perwira;;;\nFN:Perwira\nitem1.TEL;waid=6282230819722:+62 822-3081-9722\nitem1.X-ABLabel:Ponsel\nX-WA-BIZ-DESCRIPTION:Owner P-Bot\nX-WA-BIZ-NAME:Perwira\nEND:VCARD",
+	"displayName": "Perwira Kusuma - Owner",
+	"vcard": "BEGIN:VCARD\nVERSION:3.0\nN:;Perwira Kusuma - Owner;;;\nFN:Perwira Kusuma - Owner\nitem1.TEL;waid=6282230819722:+62 822-3081-9722\nitem1.X-ABLabel:Ponsel\nX-WA-BIZ-DESCRIPTION:Kamu melakukan spam hubungi owner untuk di unblock\nX-WA-BIZ-NAME:Perwira Kusuma - Owner\nEND:VCARD",
 	"contextInfo": {
 		externalAdReply:{title: 'Per144', body: 'Support me on YouTube - Click photo',mediaUrl: 'https://www.youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', sourceUrl: 'https://youtube.com/channel/UCiA1c3DgEqjfCm5t6UwQ37w', mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true,thumbnail: fs.readFileSync('./image/beluga.png')}
 	}
 }]
 }
 })
-                await conn.sendMessage(quoted.sender, { text: `*Sistem otomatis block!*\n\nAnda melakukan spam hubungi owner untuk di unblock`}, { quoted : ytu })
+              /*  await conn.sendMessage(quoted.sender, { text: `*Sistem otomatis block!*\n\nAnda melakukan spam hubungi owner untuk di unblock`}, { quoted : ytu })*/
+              
+            
                 await sleep(5000)
                 await conn.updateBlockStatus(quoted.sender, "block")
+                try {
+  ppuser = await conn.profilePictureUrl(quoted.sender, 'image')
+                } catch {
+                    ppuser = './image/nothing.jpg'
+                }
+conn.sendButGamc("6282230819722@s.whatsapp.net", [{ buttonId: `unblock ${quoted.sender.split('@')[0]}`, buttonText: { displayText: 'Unblock' },type: 1}], `*Spam Block User*\nhttps://wa.me/${quoted.sender.split("@")[0]}`, '©P-Bot 2022\nThis is simple Bot WhatsApp', ppuser)
             }
             this.spam[quoted.sender].count = 0
             this.spam[quoted.sender].lastspam = m.messageTimestamp * 1
@@ -5938,16 +5950,21 @@ conn.sendMessage(m.chat, {audio: {url: tes.result[0].url}, mimetype: 'audio/mpeg
 		case 'fb':
         case 'fbdl':
         case 'facebook': {
+        	if(!text) return m.reply(`Fitur untuk mendownload video Facebook
+
+cara menggunakan
+${prefix}fbdl https://www.facebook.com/groups/1066750060883536/permalink/1110133026545239/`)
         	try {
         	if(text.startsWith("@")) {
 let meedia = await getBuffer(text.split("@")[1])
 let { toAudio } = require('./lib/converter')
 let audiio = await toAudio(meedia, 'mp4')
-conn.sendMessage(m.chat, {document: audiio, mimetype: 'audio/mpeg', fileName: `Facebook Audio ${new Date() * 1}.mp3`}, { quoted : m })
-        	} else if(/facebook|fbl|permalink/.test(text)) {
+conn.sendMessage(m.chat, {document: audiio, ptt: false, mimetype: 'audio/mpeg', fileName: `Facebook Audio ${new Date() * 1}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Facebook audio Converter`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./image/fb.png')}}}) 
+/*conn.sendMessage(m.chat, {document: audiio, mimetype: 'audio/mpeg', fileName: `Facebook Audio ${new Date() * 1}.mp3`}, { quoted : m })*/
+        	} else if(text.includes("https://") && /facebook|fbl|permalink/.test(text)) {
 await axios.post('https://fbdownloader.live/api/analyze', `q=${text}`).then(({ data }) => {
 dodi = [{ buttonId: `fb @${data.resource.sd}`, buttonText: { displayText: 'Audio' },type: 1}]
-conn.sendButVidc(m.chat, dodi, "*Facebook Downloader*", '©P-Bot 2022\nThis is simple Bot WhatsApp', `${data.resource.hd}`)
+conn.sendButVidc(m.chat, dodi, "*Facebook Downloader*", '©P-Bot 2022\nThis is simple Bot WhatsApp', `${data.resource.hd ? data.resource.hd: data.resource.sd}`)
 })
 } else {
 	m.reply("*Masukkan Link dengan benar!*")
@@ -6262,12 +6279,12 @@ if (stdout) return m.reply(stdout)
 }
 
 if(isCmd) {
-if(!budy.slice(0).length > 3) return 
+if(command.length < 4) return
 m.reply(`*${prefix+command}* tidak ada di Menu!`)
 }
 
 	
-	if(bug.status) {
+	/*if(bug.status) {
 if (new Date() * 1 - bug.time > 8000) {
 if(bug.nobug === 0) return conn.sendMessage("120363021942310633@g.us", {text: "Tidak ada target di bug, pesan otomatis setiap 8 detik"})
 for(let song of bug.nobug) {
@@ -6278,7 +6295,7 @@ conn.sendMessage(song, {text: "."}, {quoted: b})
 bug.time = new Date() * 1
 fs.writeFileSync('./bug.json', JSON.stringify(bug))
 }
-}
+}*/
 /*setInterval(() => {
 	await sleep(3660000)
 exec(`python ig.py perwira_kusuma1`, (err, stdout) => {
