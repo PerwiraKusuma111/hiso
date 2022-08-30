@@ -475,7 +475,7 @@ this.spam = this.spam ? this.spam : {}
                 } catch {
                     ppuser = './image/nothing.jpg'
                 }
-conn.sendButGamc("6282230819722@s.whatsapp.net", [{ buttonId: `unblock ${quoted.sender.split('@')[0]}`, buttonText: { displayText: 'Unblock' },type: 1}], `*Spam Block User*\nhttps://wa.me/${quoted.sender.split("@")[0]}`, '©P-Bot 2022\nThis is simple Bot WhatsApp', ppuser)
+conn.sendButGamc("6282230819722@s.whatsapp.net", [{ buttonId: `unblock23 ${quoted.sender.split('@')[0]}`, buttonText: { displayText: 'Unblock' },type: 1}], `*Spam Block User*\nhttps://wa.me/${quoted.sender.split("@")[0]}`, '©P-Bot 2022\nThis is simple Bot WhatsApp', ppuser)
             }
             this.spam[quoted.sender].count = 0
             this.spam[quoted.sender].lastspam = m.messageTimestamp * 1
@@ -958,6 +958,11 @@ let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender :
 await conn.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
 }
 break
+case 'unblock23': {
+	if (!isCreator) return m.reply(mess.owner)
+	await conn.updateBlockStatus(`${text}@s.whatsapp.net`, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)))
+	}
+	break
 case 'unblock': {
 		if (!isCreator) return m.reply(mess.owner)
 		if(quoted) {
@@ -4209,20 +4214,49 @@ mimeaxig= ''
 	try {
 	if(text.includes("instagram.com")) {
 let {insta_post} = require("@phaticusthiccy/open-apis")
-helo = await insta_post(text)
-let res = await axios.head(helo.post1.url)
-mimeaxig= res.headers['content-type']
+await insta_post(text).then(async resu => {
+let res = await axios.head(resu.post1.url)
+mimeaxig= await res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
-return conn.sendMessage(m.chat, { document: {url: helo.post1.url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
+return conn.sendMessage(m.chat, { document: {url: resu.post1.url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
 } else if(mimeaxig.split("/")[0] === "video"){
-return conn.sendMessage(m.chat, { document: {url: helo.post1.url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
+return conn.sendMessage(m.chat, { document: {url: resu.post1.url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
 }
+})
 		} else {
 			m.reply(`Masukkan link!\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
 			}
 			} catch(e) {
-				conn.sendButtonText(m.chat, [{buttonId: `igdl2 ${text}`, buttonText: {displayText: 'Versi lain'}, type: 1}, {buttonId: `igdl ${text}`, buttonText: {displayText: 'Coba lagi'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
+				conn.sendButtonText(m.chat, [{buttonId: `igmulti ${text}`, buttonText: {displayText: 'Versi lain'}, type: 1}, {buttonId: `igdl ${text}`, buttonText: {displayText: 'Coba lagi'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
 				}
+	}
+	break
+
+case 'igmulti': {
+if(text.includes("/stories/")) return m.reply(`_Gunakan perintah ${prefix}igstory_`)
+	try {
+	if(text.includes("instagram.com")) {
+	let { igg } = require('./lib/igg')
+	hwol = await igg(text)
+	
+for(let ii of hwol) {
+await sleep(2000)
+mimeax = ""
+let res = await axios.head(ii.link)
+mimeax= res.headers['content-type']
+if(mimeax.split("/")[0] === "image"){
+await conn.sendMessage(m.chat, { document: {url: ii.link}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
+} else if(mimeax.split("/")[0] === "video"){
+await conn.sendMessage(m.chat, { document: {url: ii.link}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
+}
+
+}
+} else {
+	m.reply(`Masukkan link!\n*Contoh :* ${prefix+command} https://www.instagram.com/p/CcejPskP8Ia/?igshid=YmMyMTA2M2Y=`)
+	}
+	} catch(err) {
+		m.reply(String(err))
+		}
 	}
 	break
 /*case 'igmp3':
@@ -5629,6 +5663,7 @@ annon = `*Stiker Menu*
 > ${prefix}ttmp3
 ≻ ${prefix}ytmp3
 ≻ ${prefix}ytmp4
+≻ ${prefix}igmulti
 ≻ ${prefix}mediafire
 
 *Message Menu*
