@@ -38,6 +38,7 @@ zenz: 'https://zenzapi.xyz',
   global.sessionName = 'hisoka'
   global.prefa = [',','!','.','?','#','/']
   global.sp = 'тнФ'
+  //global.pub = true
   global.mess = {
 success: 'Success',
 admin: 'Fitur Khusus Admin Group!',
@@ -101,7 +102,7 @@ low = require('./lib/lowdb')
   if (global.db.data) await global.db.write()
   }, 30 * 1000)*/
   
-  async function startHisoka() {
+async function startHisoka() {
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const conn = connConnect({
 logger: pino({ level: 'silent' }),
@@ -146,8 +147,11 @@ mek = chatUpdate.messages[0]
 if (!mek.message) return
 mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast') return
-if (!conn.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
-if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
+//if (!mek.key.fromMe && chatUpdate.type === 'notify') return
+/*if(!global.owner.includes(mek.sender)) {
+if(!conn.public) return a
+}*/
+//if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
 m = smsg(conn, mek/*, store*/)
 require("./hisoka")(conn, m, chatUpdate/*, store*/)
 } catch (err) {
@@ -226,7 +230,7 @@ content: Buffer.from(status, 'utf-8')
 return status
 }
 
-conn.public = true
+//conn.public = true
 
 conn.serializeM = (m) => smsg(conn, m/*, store*/)
 
@@ -826,6 +830,7 @@ for (let num of participants) {
 if (anu.action == 'add') {
 /*conn.sendMessage(anu.id, {text: "Selamat datang"})*/
  /* let namanya = conn.getName(num)*/
+ /*
 let capti = `*Selamat datang di grup*
 *${metadata.subject.replace(/[\n]/g, ' ')}*
 
@@ -844,13 +849,13 @@ ppuser = await conn.profilePictureUrl(num, 'image')
 } catch {
 ppuser = fs.readFileSync('./image/nothing.jpg')
 }
-
+*/
 // Get Profile Picture Group
+/*
 try {
 ppgroup = await conn.profilePictureUrl(anu.id, 'image')
 } catch {
 ppgroup = fs.readFileSync('./image/nothing.jpg')
-/*ppgroup = "https://i.ibb.co/Tk6rB7v/IMG-20211022-003703.jpg"*/
 }
 var pathw = 'ouuti.png'
 
@@ -869,6 +874,7 @@ await salma()
 let gon = gen(12345)
 await conn.linkUp(anu.id, `${capti}`, `https://whatsapp.com/${gon}`, fs.readFileSync('./ouuti.png'), `${metadata.subject.replace(/[\n]/g, ' ')}`, 'Sambutan untuk member baru', [`${num}`])
 await fs.unlinkSync('ouuti.png')
+*/
  /*conn.sendMessage(anu.id, {text: capti, contextInfo: {mentionedJid: [num], externalAdReply: {mediaUrl: `https://whatsapp.com/${gon}`, sourceUrl: `https://whatsapp.com/${gon}`, mediaType: 1, renderLargerThumbnail: true, thumbnail: fs.readFileSync('./ouuti.png')}}})*/
 } else if (anu.action == 'remove') {
 /*conn.relayMessage(anu.id, template.message)*/
@@ -902,14 +908,14 @@ return {
 return conn
   }
   
-  startHisoka().catch(err => {startHisoka()})
+startHisoka().catch(err => {startHisoka()})
   
   
-  let file = require.resolve(__filename)
+  /*let file = require.resolve(__filename)
   fs.watchFile(file, () => {
 fs.unwatchFile(file)
 console.log(chalk.redBright(`Update ${__filename}`))
 delete require.cache[file]
 require(file)
-  })
+  })*/
   

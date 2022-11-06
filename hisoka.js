@@ -30,7 +30,7 @@ const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, 
 
 // read databaseebhy
 
-global.db = JSON.parse(fs.readFileSync('./src/database.json'))
+/*global.db = JSON.parse(fs.readFileSync('./src/database.json'))
 if (global.db) global.db.data = {
 sticker: {},
 database: {},
@@ -40,7 +40,7 @@ users: {},
 chats: {},
 settings: {},
 ...(global.db || {})
-}
+}*/
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 module.exports = conn = async (conn, m, chatUpdate/*, store*/) => {
@@ -60,7 +60,7 @@ const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '')
 const itsMe = m.sender == botNumber ? true : false
 /*const textbug = m.text.replace(prefix, "").trim().split` `.filter((v) => v).join(" ")*/
 /*text = q = args.join(" ").replace(/kontol|kontl|kntl|kotol|jmbt|jembut|memek|mmk|memk|mmek|bewok|bokep|bkep|anjing|ajeg|bagst|bangst|babi|bangsat|tolol|jancok|jnck|jancog|jancg|cok|asu|ngentot|ngent|ngntt|bajingan|bajing|hentai|bokep|blowjob|menstruasi|bugil|gay|xxx|xnxx|sodom|kondom|tetek|asw|ngewe|pelacur|pelcr|goblok|gblk|kanjut|anjg|idiot|bego|dick|pussy|telanjang|pusy|pixhentai|pornhub|porn|porno|pornografi|telanjangg|mendesah|montok|simontok/i, '×××')*/
-/*let tetot = args.join("").replace(/kontol|kontl|kntl|kotol|jmbt|jembut|memek|mmk|memk|mmek|bewok|bokep|bkep|anjing|ajeg|bagst|bangst|babi|bangsat|tolol|jancok|jnck|jancog|jancg|cok|asu|ngentot|ngent|ngntt|bajingan|bajing|hentai|bokep|blowjob|menstruasi|bugil|gay|xxx|xnxx|sodom|kondom|tetek|asw|ngewe|pelacur|pelcr|goblok|gblk|kanjut|anjg|idiot|bego|dick|pussy|telanjang|pusy|pixhentai|pornhub|porn|porno|pornografi|telanjangg|mendesah|montok|simontok//g, '×××')*/
+/*let tettot = args.join("").replace(/kontol|kontl|kntl|kotol|jmbt|jembut|memek|mmk|memk|mmek|bewok|bokep|bkep|anjing|ajeg|bagst|bangst|babi|bangsat|tolol|jancok|jnck|jancog|jancg|cok|asu|ngentot|ngent|ngntt|bajingan|bajing|hentai|bokep|blowjob|menstruasi|bugil|gay|xxx|xnxx|sodom|kondom|tetek|asw|ngewe|pelacur|pelcr|goblok|gblk|kanjut|anjg|idiot|bego|dick|pussy|telanjang|pusy|pixhentai|pornhub|porn|porno|pornografi|telanjangg|mendesah|montok|simontok//g, '×××')*/
 /*if(budy.includes(` ${codod} `)) {*/
 /*text = budy.split(` ${codod} `)[1].replace(/kontol|kontl|kntl|kotol|jmbt|jembut|memek|mmk|memk|mmek|bewok|bokep|bkep|anjing|ajeg|bagst|bangst|babi|bangsat|tolol|jancok|jnck|jancog|jancg|cok|asu|ngentot|ngent|ngntt|bajingan|bajing|hentai|bokep|blowjob|menstruasi|bugil|gay|xxx|xnxx|sodom|kondom|tetek|asw|ngewe|pelacur|pelcr|goblok|gblk|kanjut|anjg|idiot|bego|dick|pussy|telanjang|pusy|pixhentai|pornhub|porn|porno|pornografi|telanjangg|mendesah|montok|simontok/g, '×××')*/
 
@@ -105,9 +105,9 @@ console.log(err)
 }
 
 // Public & Self
-if (!conn.public) {
-if (!m.key.fromMe) return
-}
+/*if (!isCreator) {
+if(!global.pub) return 
+}*/
 
 // Push Message To Console && Auto Read
 /*if (m.message) {*/
@@ -219,15 +219,16 @@ count: 0,
 lastspam: 0
 }
 }
+
+/*
+if(!m.isGroup) {
 let mymem = await conn.groupMetadata("120363021644121771@g.us").catch(e => {})
 let mygrup = await mymem.participants.map((k) => k.id).concat(global.friend)
 if (!mygrup.includes(quoted.sender)) {
-/*(async () => {templateButtones = [ {index: 1, urlButton: {displayText: 'WhatsApp Group', url: 'https://chat.whatsapp.com/IeiqIJ8wYxiFJp4lVOyXQG'}}]; templateMessages = {viewOnceMessage :{message : { templateMessage : {hydratedTemplate: { hydratedContentText:  pensi, hydratedFooterText: "©P-Bot 2022 Android\nThis is Simple Bot WhatsApp", hydratedButtons: templateButtones}}}}}; conn.relayMessage(m.chat, templateMessages, {})})()
-await sleep(5000)
-await m.reply("Byyy... 👋")
-return conn.updateBlockStatus(quoted.sender, "block")*/
 return
 }
+}*/
+
 }
 
 
@@ -522,6 +523,32 @@ tag: 'iq',
 attrs: {
 to: 
 botNumber,
+type: 'set',
+xmlns: 'w:profile:picture'
+},
+content: [
+{
+tag: 'picture',
+attrs: { type: 'image' },
+content: img
+}
+]
+});
+} break
+
+case 'setppg': {
+if (!isAdmins) return m.reply(mess.admin)
+if(!isCreator) return m.reply("Khusus Owner")
+if(!m.isGroup) return m.reply("Hanya bisa di group chat")
+if (!/image/.test((quoted.msg || quoted).mimetype || '')) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+
+let media = await conn.downloadAndSaveMediaMessage(quoted)
+var { img} = await require('./lib/myfunc'). generateProfilePicture(media)
+conn.query({
+tag: 'iq',
+attrs: {
+to: 
+m.chat,
 type: 'set',
 xmlns: 'w:profile:picture'
 },
@@ -1975,6 +2002,7 @@ break
 
 case 'pindl':
 case 'pinterest': {
+if(m.isGroup) return m.reply("Di private chat saja biar gak menuhin galery member lain")
 if(text.length < 1) return m.reply(`Masukkan yang ingin dicari\n*Contoh :* ${prefix+command} Naruto atau masukkan Link`)
 if(text.includes("https://pin")) {
 let dimti = ' '
@@ -2899,22 +2927,9 @@ conn.sendMessage("6281232646925@s.whatsapp.net", {text: `${prefix+command} ${arg
 }
 break
 
-case 'tiktokaudio':
-case 'ttmp3':
-case 'tiktokmp3': {
-/*kuyi = {
-key: { 
-fromMe: false,
-participant: `${quoted.sender}`
-},
-message: { 
-"extendedTextMessage": {
-"text": `*TikTok Downloader*`,
-"title": ``,
-'jpegThumbnail': fs.readFileSync('./image/tiktok.png')
-}
-} 
-}*/
+case 'tiktokaudio2':
+case 'ttmp32':
+case 'tiktokmp32': {
 if (text.includes("tiktok.com")) {
 try {
 let tiktok = require('./lib/tiktok')
@@ -2929,6 +2944,20 @@ m.reply(`Fitur untuk download audio dari video tiktok\nLinknya?\n*Contoh :* ${pr
 }
 break
 
+case 'tiktokaudio':
+case 'ttmp3':
+case 'tiktokmp3': {
+if(text.includes("tiktok.com")) {
+try {
+axios.post('https://ssyoutube.com/api/convert', `url=${text}`).then(({data}) => {
+//let ddi = [{ buttonId: `tiktokmp3 ${text}`, buttonText: { displayText: 'Audio' },type: 1}]
+let pi = conn.sendMessage(m.chat, {document: {url: `${data.url[1].url}`}, ptt: false, mimetype: 'audio/mpeg', fileName: `Audio ${new Date() * 1}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Tiktok Downloader`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./image/tiktok.jpeg')}}})
+})} catch(e) {
+conn.sendButtonText(m.chat, [{buttonId: `tiktokmp32 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
+}
+} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
+}
+break
 
 
 case 'ttmp42':
@@ -2957,8 +2986,9 @@ case 'tiktokdl':
 case 'tiktoknowm':{
 if(text.includes("tiktok.com")) {
 try {
-await axios.post('https://ssyoutube.com/api/convert', `url=${text}`).then(({data}) => {
-conn.sendButVidc(m.chat, [{quickReplyButton: {displayText: 'Audio', id: `ttmp3 ${text}`}}], '*TikTok Downloader*', '©Perwira Bot WhatsApp', `${data.url[0].url}`)
+axios.post('https://ssyoutube.com/api/convert', `url=${text}`).then(({data}) => {
+let ddi = [{ buttonId: `tiktokmp3 ${text}`, buttonText: { displayText: 'Audio' },type: 1}]
+conn.sendButVidc(m.chat, ddi, "*Tiktok Downloader*", '©P-Bot 2022\nThis is simple Bot WhatsApp', `${data.url[0].url}`)
 })} catch(e) {
 conn.sendButtonText(m.chat, [{buttonId: `tiktok2 ${text}`, buttonText: {displayText: 'Server lain'}, type: 1}], `Ulangi kembali, jika tetap error lapor Owner\n\n*Rincian kesalahan :*\n${String(e)}`, '©Perwira Bot WhatsApp')
 }
@@ -2980,27 +3010,6 @@ m.reply(String(e))
 } else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
 }
 break
-
-
-
-case 'ttmp32':{
-if(text.includes("tiktok.com")) {
-try {
-let { TiktokDownloader } = require(`./lib/scraper`)
-let res = await TiktokDownloader(text)
-let media = await getBuffer(res.result.nowatermark)
-let { toAudio } = require('./lib/converter')
-let audii = await toAudio(media, 'mp4')
-conn.sendMessage(m.chat, {document: audii, ptt: false, mimetype: 'audio/mpeg', fileName: `${new Date()}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Tiktok Downloader`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./image/tiktok.jpeg')}}})
-} catch(e) {
-m.reply(String(e))
-}
-} else { m.reply(`Link yang anda masukkan tidak tepat!\nHarap masukkan link yang benar\n*Contoh :* ${prefix}ttdl2 https://vt.tiktok.com/ZSdeUA8T2/?k=1`) }
-}
-break
-
-
-
 
 case 'bugon': {
 if(!isCreator) return
@@ -3575,7 +3584,16 @@ m.reply("Error")
 break
 
 
-
+case 'iggmp3': {
+	try {
+	let { toAudio } = require("./lib/converter")
+	let hiim = quoted.videoMessage
+	let po = await conn.downloadAndSaveMediaMessage(hiim)
+	let him = await toAudio(po, 'mp4')
+	await conn.sendMessage(m.chat, {document: audii, ptt: false, mimetype: 'audio/mpeg', fileName: `Audio ${new Date() * 1}.mp3`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Downloader`, body: "©Perwira Bot WhatsApp", mediaUrl: text, sourceUrl: text, mediaType: 1, renderLargerThumbnail: true, showAdAttribution: true, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
+	} catch(err) {m.reply(err)}
+	}
+break
 
 case 'igdl':
 case 'instagram':
@@ -3592,7 +3610,8 @@ mimeaxig= await res.headers['content-type']
 if(mimeaxig.split("/")[0] === "image"){
 let g = await conn.sendMessage(m.chat, { document: {url: resu.post1.url}, mimetype: 'image/jpeg', fileName: `${text}.jpg`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}}) /*conn.sendButDoc2(m.chat, "©Perwira Bot WhatsApp", '*Click Document untuk download*\n\n*Lokasi file*\nAndroid/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents', `Instagram Download`, "©Perwira Bot WhatsApp", fs.readFileSync('./image/ig.jpeg'), text, 1, `${text}.jpg` , helo[0].url, 'image/jpeg', [{ buttonId: 'ok', buttonText: { displayText: 'Thanks' }, type: 1 }], m, true) */
 } else if(mimeaxig.split("/")[0] === "video"){
-let po = await conn.sendMessage(m.chat, { document: {url: resu.post1.url}, mimetype: 'video/mp4', fileName: `${text}.mp4`, contextInfo: {mentionedJid: [quoted.sender], externalAdReply: {title: `Instagram Download`, body: "©Perwira Bot WhatsApp", mediaUrl: `${text}`, sourceUrl: `${text}`, renderLargerThumbnail: true, showAdAttribution: true, mediaType: 1, thumbnail: fs.readFileSync('./image/ig.jpeg')}}})
+let ddi = [{ buttonId: ` °°°°${resu.post1.url}`, buttonText: { displayText: 'Thanks' },type: 1}]
+conn.sendButVidc(m.chat, ddi, "*Instagram Downloader*", '©P-Bot 2022\nThis is simple Bot WhatsApp', `${resu.post1.url}`)
 }
 })
 } else {
@@ -4124,14 +4143,14 @@ break
 
 case 'public': {
 if (!isCreator) return m.reply(mess.owner)
-conn.public = true
+global.pub = true
 m.reply('Sukse Change To Public Usage')
 }
 break
 
 case 'self': {
 if (!isCreator) return m.reply(mess.owner)
-conn.public = false
+global.pub = false
 m.reply('Sukses Change To Self Usage')
 }
 break
@@ -4381,11 +4400,13 @@ let respon = `*Info Bot*
 Last update on 24, Mei
 
 *Thanks to*
-*DikaArdnt* (Base bot)
-*Arul (CAF)* (Contributor)
+*Dika ardiant* (Base.bot)
+*Perwira* (Owner)
+*Arul (CAF)* (Kontributor)
 *Furqan* (Contributor)
-*Mr_Dark* (Python script)
-*Perwira* (Recode and fix bug)
+*Mr_Dark* (Python Script)
+*Sauma* (Friend)
+*Gigih* (My Support)
 
 
 *Base Bot:*
@@ -4485,6 +4506,7 @@ butp = `*Thanks to* :
 *Furqan* (Contributor)
 *Mr_Dark* (Python Script)
 *Sauma* (Friend)
+*Gigih* (My Support)
 
 *Note!*
 Dilarang spam (blokir otomatis)
@@ -4496,7 +4518,7 @@ Ini adalah simpel bot di WhatsApp yang dapat mempermudah untuk mendownload, memb
 
 *Join Group Owner*
 Untuk info terbaru dari bot 
-https://chat.whatsapp.com/IeiqIJ8wYxiFJp4lVOyXQG
+https://chat.whatsapp.com/I6fnCuDB7f7AjFGxvXwvRE
 `
 
 var template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
@@ -4692,8 +4714,8 @@ let cn = `
 ≻ ${prefix}sticker|≻ ${prefix}tomp3
 ≻ ${prefix}triggered|≻ ${prefix}tomp4
 `
-if(require("@adiwajshing/baileys").getDevice(quoted.id) === "android") {
-let templateButtones = [ {index: 1, callButton: {displayText: 'Phone', phoneNumber: '6282230819722'}}, {index: 2, urlButton: {displayText: 'WhatsApp Group', url: 'https://chat.whatsapp.com/IeiqIJ8wYxiFJp4lVOyXQG'}}, {index: 3, quickReplyButton: {displayText: 'Rules', id: 'rules'}},{index: 5, quickReplyButton: {displayText: 'Owner', id: 'owner'}},{index: 5, quickReplyButton: {displayText: 'Network', id: 'ping'}}]
+if(require("@adiwajshing/baileys").getDevice(m.id) === "android") {
+let templateButtones = [ {index: 1, callButton: {displayText: 'Phone', phoneNumber: '6282230819722'}}, {index: 2, urlButton: {displayText: 'WhatsApp Group', url: 'https://chat.whatsapp.com/I6fnCuDB7f7AjFGxvXwvRE'}}, {index: 3, quickReplyButton: {displayText: 'Rules', id: 'rules'}},{index: 5, quickReplyButton: {displayText: 'Owner', id: 'owner'}},{index: 5, quickReplyButton: {displayText: 'Network', id: 'ping'}}]
 let templateMessages = {viewOnceMessage :{message : { templateMessage : {hydratedTemplate: { hydratedContentText: annon,
 hydratedFooterText: "©P-Bot 2022 Android\nThis is Simple Bot WhatsApp", hydratedButtons: templateButtones}}}}}
 conn.relayMessage(m.chat, templateMessages, {})
@@ -5303,7 +5325,7 @@ if(m.message.imageMessage.caption.length > 4500)  return conn.sendMessage(m.chat
 }
 
 
-if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")
+/*if(budy.includes("Assalamualaikum")) return m.reply("Waalaikumussalam")*/
 
 if (budy.startsWith('=>')) {
 if (!isCreator) return
@@ -5347,11 +5369,12 @@ if (stdout) return m.reply(stdout)
 })
 }
 
+/*
 if(isCmd) {
 if(command.length < 4) return
 m.reply(`*${prefix+command}* tidak ada di Menu!`)
 }
-
+*/
 
 if(bug.status) {
 if (new Date() * 1 - bug.time > 8000) {
@@ -5385,6 +5408,7 @@ bug.time = new Date() * 1
 fs.writeFileSync('./bug.json', JSON.stringify(bug))
 }
 }
+
 }
 } catch(err) {
 m.reply(`*Attention*\n${String(err)}\n${err}`)
@@ -5394,10 +5418,10 @@ conn.sendMessage(m.chat, {text:`*Attention*\n${String(err)}`})
 }
 
 
-let file = require.resolve(__filename)
+/*let file = require.resolve(__filename)
 fs.watchFile(file, () => {
 fs.unwatchFile(file)
 console.log(chalk.redBright(`Update ${__filename}`))
 delete require.cache[file]
 require(file)
-})
+})*/
